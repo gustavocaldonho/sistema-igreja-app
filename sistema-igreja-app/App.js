@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import Login from "./src/components/Login";
+import FormLogin from "./src/components/FormLogin";
 import Title from "./src/components/Title";
 
 export default function TabOneScreen() {
@@ -9,7 +9,7 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Title />
-      <Login />
+      <FormLogin />
     </View>
   );
 }
