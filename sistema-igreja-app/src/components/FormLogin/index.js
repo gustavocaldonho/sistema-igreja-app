@@ -5,7 +5,7 @@ import styles from "./style";
 export default function FormLogin() {
   return (
     <View>
-      <Text>Login</Text>
+      <Text>FormLogin</Text>
     </View>
   );
 }
