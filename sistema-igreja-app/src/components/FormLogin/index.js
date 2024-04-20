@@ -34,7 +34,7 @@ export default function FormLogin() {
 
   return (
     <View style={styles.formContext}>
-      <Pressable style={styles.form}>
+      <Pressable style={styles.form} onPress={Keyboard.dismiss}>
         <Text style={styles.formLabel}>CPF</Text>
         <Text style={styles.errorMessage}></Text>
         <MaskInput
