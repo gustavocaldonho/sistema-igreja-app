@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   textTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "gray",
+    color: "#52637a",
   },
 });
 
