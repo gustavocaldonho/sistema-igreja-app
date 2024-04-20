@@ -7,7 +7,7 @@ import Title from "./src/components/Title";
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar backgroundColor="#C1CAD6" />
       <Title />
       <FormLogin />
     </View>
