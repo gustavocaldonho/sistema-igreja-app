@@ -10,15 +10,15 @@ export default function Menu() {
           <Text>Avisos</Text>
         </View>
         <View style={styles.boxOption}>
-          <Text>Dizimo</Text>
+          <Text>Perfil</Text>
         </View>
       </View>
       <View style={styles.boxLine}>
         <View style={styles.boxOption}>
-          <Text>Caixa Mortuário</Text>
+          <Text>Dizimo</Text>
         </View>
         <View style={styles.boxOption}>
-          <Text>Perfil</Text>
+          <Text>Caixa Mortuário</Text>
         </View>
       </View>
       <View style={styles.boxLine}>

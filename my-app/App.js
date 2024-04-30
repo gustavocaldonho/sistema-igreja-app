@@ -7,12 +7,12 @@ import FormLogin from "./src/components/FormLogin";
 import Menu from "./src/components/Menu";
 
 export default function TabOneScreen() {
-  const [logado, setLogado] = useState(true);
+  const [logged, setLogged] = useState(true);
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#C1CAD6" />
-      {logado == false ? (
+      {logged == false ? (
         <View style={styles.boxLogin}>
           <Title />
           <FormLogin />
