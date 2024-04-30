@@ -1,6 +1,7 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+
 import FormLogin from "./src/components/FormLogin";
 import Title from "./src/components/Title";
 
