@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-around",
-    paddingBottom: 30,
+    paddingTop: 45,
     paddingHorizontal: 15,
 
     // borderColor: "green",

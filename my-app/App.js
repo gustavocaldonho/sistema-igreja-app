@@ -20,7 +20,11 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Menu" component={Menu} />
+      <Stack.Screen
+        name="Menu"
+        component={Menu}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Avisos" component={Avisos} />
       <Stack.Screen name="CaixaMortuario" component={CaixaMortuario} />
       <Stack.Screen name="Comunidades" component={Comunidades} />
@@ -55,7 +59,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
-    paddingTop: 80,
+    // paddingTop: 80,
   },
   boxLogin: {
     height: "100%",
