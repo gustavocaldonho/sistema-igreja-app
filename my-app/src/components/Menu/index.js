@@ -2,13 +2,6 @@ import React from "react";
 import { View, Text } from "react-native";
 import styles from "./style";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
-import Avisos from "../Avisos";
-
-const Stack = createStackNavigator();
-
 export default function Menu({ navigation }) {
   return (
     <View style={styles.boxMenu}>
@@ -19,32 +12,41 @@ export default function Menu({ navigation }) {
         >
           <Text>Avisos</Text>
         </View>
-        <View style={styles.boxOption}>
+        <View
+          style={styles.boxOption}
+          onPress={() => navigation.navigate("PerfilUser")}
+        >
           <Text>Perfil</Text>
         </View>
       </View>
       <View style={styles.boxLine}>
-        <View style={styles.boxOption}>
+        <View
+          style={styles.boxOption}
+          onPress={() => navigation.navigate("Dizimo")}
+        >
           <Text>Dizimo</Text>
         </View>
-        <View style={styles.boxOption}>
+        <View
+          style={styles.boxOption}
+          onPress={() => navigation.navigate("CaixaMortuario")}
+        >
           <Text>Caixa Mortuário</Text>
         </View>
       </View>
       <View style={styles.boxLine}>
-        <View style={styles.boxOption}>
+        <View
+          style={styles.boxOption}
+          onPress={() => navigation.navigate("Familias")}
+        >
           <Text>Famílias</Text>
         </View>
-        <View style={styles.boxOption}>
+        <View
+          style={styles.boxOption}
+          onPress={() => navigation.navigate("Comunidades")}
+        >
           <Text>Comunidades</Text>
         </View>
       </View>
-
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Avisos" component={Avisos} />
-        </Stack.Navigator>
-      </NavigationContainer>
     </View>
   );
 }
