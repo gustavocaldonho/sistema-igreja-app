@@ -2,11 +2,21 @@ import React from "react";
 import { View, Text } from "react-native";
 import styles from "./style";
 
-export default function Menu() {
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import Avisos from "../Avisos";
+
+const Stack = createStackNavigator();
+
+export default function Menu({ navigation }) {
   return (
     <View style={styles.boxMenu}>
       <View style={styles.boxLine}>
-        <View style={styles.boxOption}>
+        <View
+          style={styles.boxOption}
+          onPress={() => navigation.navigate("Avisos")}
+        >
           <Text>Avisos</Text>
         </View>
         <View style={styles.boxOption}>
@@ -29,6 +39,12 @@ export default function Menu() {
           <Text>Comunidades</Text>
         </View>
       </View>
+
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Avisos" component={Avisos} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
