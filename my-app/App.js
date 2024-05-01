@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import "react-native-gesture-handler";
 
 import Title from "./src/components/Title";
 import FormLogin from "./src/components/FormLogin";
 import Menu from "./src/components/Menu";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
 import Avisos from "./src/components/Avisos";
 import CaixaMortuario from "./src/components/CaixaMortuario";
 import Comunidades from "./src/components/Comunidades";
@@ -18,18 +17,17 @@ import PerfilUser from "./src/components/PerfilUser";
 
 const Stack = createStackNavigator();
 
-function myStack() {
+function MyStack() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Avisos" component={Avisos} />
-        <Stack.Screen name="CaixaMortuario" component={CaixaMortuario} />
-        <Stack.Screen name="Comunidades" component={Comunidades} />
-        <Stack.Screen name="Dizimo" component={Dizimo} />
-        <Stack.Screen name="Familias" component={Familias} />
-        <Stack.Screen name="PerfilUser" component={PerfilUser} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Menu" component={Menu} />
+      <Stack.Screen name="Avisos" component={Avisos} />
+      <Stack.Screen name="CaixaMortuario" component={CaixaMortuario} />
+      <Stack.Screen name="Comunidades" component={Comunidades} />
+      <Stack.Screen name="Dizimo" component={Dizimo} />
+      <Stack.Screen name="Familias" component={Familias} />
+      <Stack.Screen name="PerfilUser" component={PerfilUser} />
+    </Stack.Navigator>
   );
 }
 
@@ -45,7 +43,9 @@ export default function TabOneScreen() {
           <FormLogin />
         </View>
       ) : (
-        <Menu />
+        <NavigationContainer>
+          <MyStack />
+        </NavigationContainer>
       )}
     </View>
   );
