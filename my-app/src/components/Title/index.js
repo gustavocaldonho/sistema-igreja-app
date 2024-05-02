@@ -5,7 +5,8 @@ import styles from "./style.js";
 export default function Title() {
   return (
     <View style={styles.boxTitle}>
-      <Text style={styles.textTitle}>LOGIN</Text>
+      <View style={styles.boxLogo}></View>
+      <Text style={styles.textTitle}>SEJA BEM-VINDO!!</Text>
     </View>
   );
 }

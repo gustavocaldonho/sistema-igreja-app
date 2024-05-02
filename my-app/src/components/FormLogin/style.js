@@ -3,11 +3,22 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   formContext: {
     flex: 1,
+    display: "none",
     alignItems: "center",
-    backgroundColor: "#C1CAD6",
+    backgroundColor: "#ffffff",
+    marginTop: 180,
+    marginHorizontal: 20,
+    marginBottom: 100,
     paddingTop: 30,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    borderRadius: 30,
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.9,
+    shadowRadius: 3.05,
+    elevation: 5,
   },
   form: {
     width: "100%",
@@ -31,7 +42,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: "90%",
-    backgroundColor: "#91a1b6",
+    backgroundColor: "#339DD7",
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 14,

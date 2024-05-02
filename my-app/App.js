@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
@@ -36,14 +36,17 @@ function MyStack() {
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#C1CAD6" />
+      <StatusBar backgroundColor="#339DD7" />
+
+      <View style={styles.boxBackgroundTop}>
+        <Title />
+      </View>
       {logged == false ? (
         <View style={styles.boxLogin}>
-          <Title />
           <FormLogin />
         </View>
       ) : (
@@ -58,11 +61,24 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    zIndex: 0,
     backgroundColor: "#ffffff",
-    // paddingTop: 80,
   },
+  boxBackgroundTop: {
+    height: "50%",
+    width: "100%",
+    borderBottomLeftRadius: 35,
+    borderBottomRightRadius: 35,
+    backgroundColor: "#339DD7",
+    // zIndex: 1,
+  },
+
   boxLogin: {
     height: "100%",
     width: "100%",
+    display: "none",
+
+    borderColor: "red",
+    borderWidth: 2,
   },
 });
