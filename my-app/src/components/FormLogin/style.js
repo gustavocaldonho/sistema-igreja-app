@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     marginRight: "auto",
     marginLeft: "auto",
+    marginBottom: 10,
   },
   buttonLogin: {
     width: "90%",
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
   textButtonLogin: {
     fontSize: 20,
     color: "#ffffff",
+    fontWeight: "bold",
   },
   errorMessage: {
     fontSize: 14,
