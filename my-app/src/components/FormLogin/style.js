@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   formContext: {
     flex: 1,
+    justifyContent: "center",
     backgroundColor: "#ffffff",
-    paddingTop: 30,
     paddingHorizontal: 20,
     borderRadius: 30,
   },
@@ -30,15 +30,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonLogin: {
-    width: "90%",
+    width: "80%",
     backgroundColor: "#339DD7",
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 14,
     paddingBottom: 14,
-    marginLeft: 12,
     marginTop: 20,
     borderRadius: 50,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   textButtonLogin: {
     fontSize: 20,
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   errorMessage: {
     fontSize: 14,
     color: "red",
-    paddingLeft: 35,
+    paddingLeft: 25,
     marginBottom: 15,
     fontWeight: "bold",
   },

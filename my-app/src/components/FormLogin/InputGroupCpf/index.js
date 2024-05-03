@@ -25,7 +25,7 @@ const InputGroupCpf = ({ iconName, placeholder, value, onChangeText }) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxIcon}>
-        <Icon name={iconName} size={20} color="#000" style={styles.icon} />
+        <Icon name={iconName} size={20} color="#adadad" style={styles.icon} />
       </View>
       <MaskInput
         style={styles.input}
