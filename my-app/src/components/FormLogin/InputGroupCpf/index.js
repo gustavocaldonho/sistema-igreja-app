@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import MaskInput from "react-native-mask-input";
 import styles from "./style";

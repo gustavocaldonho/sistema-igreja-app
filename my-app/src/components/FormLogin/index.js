@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  TextInput,
   Pressable,
   TouchableOpacity,
   Vibration,
@@ -10,11 +9,9 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
-import MaskInput from "react-native-mask-input";
-
-import InputGroupCpf from "./InputGroupCpf";
-
 import styles from "./style";
+import InputGroupCpf from "./InputGroupCpf";
+import InputGroupPassword from "./InputGroupPassword";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
@@ -30,15 +27,13 @@ export default function FormLogin() {
           onChangeText={setCpf}
           style={styles.inputGroup}
         />
-
         <Text style={styles.errorMessage}></Text>
 
-        {/* <Text style={styles.formLabel}>Senha</Text> */}
-        <TextInput
+        <InputGroupPassword
+          iconName="key"
           style={styles.input}
           placeholder="Digite sua senha"
-          secureTextEntry={true}
-        ></TextInput>
+        />
         <Text style={styles.errorMessage}></Text>
 
         <TouchableOpacity style={styles.buttonLogin}>
