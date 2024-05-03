@@ -38,8 +38,7 @@ export default function FormLogin() {
     // usar <ScrollView></ScrollView>
     <View style={styles.formContext}>
       <Pressable style={styles.form} onPress={Keyboard.dismiss}>
-        <Text style={styles.formLabel}>CPF</Text>
-        <Text style={styles.errorMessage}></Text>
+        {/* <Text style={styles.formLabel}>CPF</Text> */}
         <MaskInput
           style={styles.input}
           placeholder="000.000.000-00"
@@ -54,14 +53,15 @@ export default function FormLogin() {
             }
           }}
         ></MaskInput>
+        <Text style={styles.errorMessage}>error message</Text>
 
-        <Text style={styles.formLabel}>Senha</Text>
-        <Text style={styles.errorMessage}></Text>
+        {/* <Text style={styles.formLabel}>Senha</Text> */}
         <TextInput
           style={styles.input}
           placeholder="Digite sua senha"
           secureTextEntry={true}
         ></TextInput>
+        <Text style={styles.errorMessage}>error message</Text>
 
         <TouchableOpacity style={styles.buttonLogin}>
           <Text style={styles.textButtonLogin}>Entrar</Text>
