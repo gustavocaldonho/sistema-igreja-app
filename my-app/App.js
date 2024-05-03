@@ -38,7 +38,7 @@ function MyStack() {
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState(true);
 
   return (
     <View style={styles.container}>
