@@ -4,9 +4,7 @@ const styles = StyleSheet.create({
   boxTitle: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     paddingTop: 80,
-    paddingBottom: 10,
   },
   boxLogo: {
     width: 120,

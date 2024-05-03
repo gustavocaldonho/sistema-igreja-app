@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
@@ -16,6 +22,7 @@ import Familias from "./src/components/Familias";
 import PerfilUser from "./src/components/PerfilUser";
 
 import { Dimensions } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Stack = createStackNavigator();
 
@@ -38,7 +45,7 @@ function MyStack() {
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -65,9 +72,10 @@ export default function TabOneScreen() {
 const screenWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
+  // Os campos 'height' de 'boxBackgroundTop' e de 'boxFormLogin' estão dimensionados numericamente. Dessa forma, talvez não fiquem responsivos, isto é, em outros dispositivos a formatação fique incorreta.
+
   container: {
     flex: 1,
-    zIndex: 0,
     backgroundColor: "#ffffff",
     position: "relative",
   },
@@ -76,9 +84,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   boxBackgroundTop: {
-    height: "60%",
+    height: 500,
     width: "100%",
-    paddingBottom: 180,
     borderBottomLeftRadius: 35,
     borderBottomRightRadius: 35,
     backgroundColor: "#339DD7",
@@ -86,12 +93,12 @@ const styles = StyleSheet.create({
 
   boxFormLogin: {
     display: "flex",
-    height: "50%",
+    height: 430,
     width: "85%",
     borderRadius: 35,
     position: "absolute",
     left: (screenWidth - screenWidth * 0.85) / 2, // Calcula a posição horizontal central
-    bottom: 70,
+    top: 300,
     backgroundColor: "#ffffff",
     shadowColor: "#000000",
     shadowOffset: {
@@ -101,5 +108,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3.05,
     elevation: 5,
+
+    // borderColor: "red",
+    // borderWidth: 2,
   },
 });

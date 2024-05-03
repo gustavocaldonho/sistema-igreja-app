@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Vibration,
   Keyboard,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import styles from "./style";
 
@@ -33,6 +35,7 @@ export default function FormLogin() {
   const [cpf, setCpf] = useState("");
 
   return (
+    // usar <ScrollView></ScrollView>
     <View style={styles.formContext}>
       <Pressable style={styles.form} onPress={Keyboard.dismiss}>
         <Text style={styles.formLabel}>CPF</Text>

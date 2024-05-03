@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-around",
+    backgroundColor: "#339DD7",
     paddingTop: 45,
     paddingHorizontal: 15,
 
@@ -26,9 +27,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#ffffff",
 
-    borderColor: "violet",
-    borderWidth: 2,
+    // borderColor: "violet",
+    // borderWidth: 2,
   },
 });
 
