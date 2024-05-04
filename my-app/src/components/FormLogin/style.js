@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#ffffff",
     paddingHorizontal: 20,
+    paddingBottom: 40,
     borderRadius: 30,
   },
   form: {
@@ -49,9 +50,16 @@ const styles = StyleSheet.create({
   errorMessage: {
     fontSize: 14,
     color: "red",
+    paddingTop: 20,
+    paddingBottom: 5,
     paddingLeft: 25,
-    marginBottom: 15,
     fontWeight: "bold",
+  },
+  forgotPassword: {
+    paddingTop: 5,
+    paddingLeft: 25,
+    fontStyle: "italic",
+    color: "#8F8F8F",
   },
 });
 

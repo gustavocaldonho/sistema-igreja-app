@@ -20,6 +20,7 @@ export default function FormLogin() {
     // usar <ScrollView></ScrollView>
     <View style={styles.formContext}>
       <Pressable style={styles.form} onPress={Keyboard.dismiss}>
+        <Text style={styles.errorMessage}></Text>
         <InputGroupCpf
           iconName="user"
           placeholder="000.000.000-00"
@@ -27,14 +28,17 @@ export default function FormLogin() {
           onChangeText={setCpf}
           style={styles.inputGroup}
         />
-        <Text style={styles.errorMessage}></Text>
 
+        <Text style={styles.errorMessage}></Text>
         <InputGroupPassword
           iconName="key"
           style={styles.input}
           placeholder="Digite sua senha"
         />
-        <Text style={styles.errorMessage}></Text>
+
+        <TouchableOpacity>
+          <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonLogin}>
           <Text style={styles.textButtonLogin}>Entrar</Text>
