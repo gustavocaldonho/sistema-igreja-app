@@ -46,6 +46,7 @@ function MyStack() {
 
 export default function TabOneScreen() {
   const [logged, setLogged] = useState(false);
+  const [cadastroEntry, setCadastroEntry] = useState(true);
 
   return (
     <View style={styles.container}>
@@ -54,11 +55,19 @@ export default function TabOneScreen() {
       {logged == false ? (
         <View style={styles.main}>
           <View style={styles.boxBackgroundTop}>
-            <Title />
+            {cadastroEntry == false ? (
+              <Title textTitle={"SEJA BEM-VINDO!!"} />
+            ) : (
+              <Title textTitle={"CADASTRAR"} />
+            )}
           </View>
-          <View style={styles.boxFormLogin}>
-            <FormLogin />
-          </View>
+          {cadastroEntry == false ? (
+            <View style={styles.boxFormLogin}>
+              <FormLogin />
+            </View>
+          ) : (
+            <View style={styles.boxFormCadastro}></View>
+          )}
         </View>
       ) : (
         <NavigationContainer>
@@ -108,8 +117,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3.05,
     elevation: 5,
-
-    // borderColor: "red",
-    // borderWidth: 2,
+  },
+  boxFormCadastro: {
+    display: "flex",
+    height: 500,
+    width: "85%",
+    borderRadius: 35,
+    position: "absolute",
+    left: (screenWidth - screenWidth * 0.85) / 2, // Calcula a posição horizontal central
+    top: 280,
+    backgroundColor: "#ffffff",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.9,
+    shadowRadius: 3.05,
+    elevation: 5,
   },
 });
