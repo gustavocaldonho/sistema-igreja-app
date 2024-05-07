@@ -22,7 +22,7 @@ export default function FormLogin() {
       <Pressable style={styles.form} onPress={Keyboard.dismiss}>
         <Text style={styles.errorMessage}></Text>
         <InputGroupCpf
-          iconName="user"
+          iconName="id-card"
           placeholder="000.000.000-00"
           value={cpf}
           onChangeText={setCpf}

@@ -15,6 +15,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 import Title from "./src/components/Title";
 import FormLogin from "./src/components/FormLogin";
+import FormCadastroUser from "./src/components/FormCadastroUser";
 import Menu from "./src/components/Menu";
 import Avisos from "./src/components/Avisos";
 import CaixaMortuario from "./src/components/CaixaMortuario";
@@ -68,7 +69,7 @@ export default function TabOneScreen() {
             {cadastroEntry == false ? (
               <Title textTitle={"SEJA BEM-VINDO!!"} />
             ) : (
-              <Title textTitle={"CADASTRAR"} />
+              <Title textTitle={"CADASTRO DE USUÁRIO"} />
             )}
           </View>
           {cadastroEntry == false ? (
@@ -84,8 +85,7 @@ export default function TabOneScreen() {
               </TouchableOpacity>
             </View>
           ) : (
-            <View style={styles.boxFormCadastro}>{/* <FormCadastro/> */}</View>
-            // Tirar os InputGroup de dentro de FormLogin e colocá-los numa pasta separada dentro de components
+            <View style={styles.boxFormCadastro}>{<FormCadastroUser />}</View>
           )}
           {cadastroEntry ? (
             <View style={styles.buttonBack}>
@@ -99,7 +99,7 @@ export default function TabOneScreen() {
               </TouchableOpacity>
             </View>
           ) : (
-            <Text></Text>
+            <Text />
           )}
         </View>
       ) : (
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
   main: {
     height: "100%",
     width: "100%",
-    // borderWidth: 2,
   },
   boxBackgroundTop: {
     height: 500,
