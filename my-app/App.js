@@ -46,7 +46,7 @@ function MyStack() {
 
 export default function TabOneScreen() {
   const [logged, setLogged] = useState(false);
-  const [cadastroEntry, setCadastroEntry] = useState(true);
+  const [cadastroEntry, setCadastroEntry] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -64,9 +64,11 @@ export default function TabOneScreen() {
           {cadastroEntry == false ? (
             <View style={styles.boxFormLogin}>
               <FormLogin />
+              {/* Botão Criar Conta */}
             </View>
           ) : (
-            <View style={styles.boxFormCadastro}></View>
+            <View style={styles.boxFormCadastro}>{/* <FormCadastro/> */}</View>
+            // Tirar os InputGroup de dentro de FormLogin e colocá-los numa pasta separada dentro de components
           )}
         </View>
       ) : (

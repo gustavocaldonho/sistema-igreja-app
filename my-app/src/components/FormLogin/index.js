@@ -10,8 +10,8 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import styles from "./style";
-import InputGroupCpf from "./InputGroupCpf";
-import InputGroupPassword from "./InputGroupPassword";
+import InputGroupCpf from "../InputGroup/InputGroupCpf";
+import InputGroupPassword from "../InputGroup/InputGroupPassword";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
@@ -45,7 +45,7 @@ export default function FormLogin() {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonLogin}>
-          <Text style={styles.textButtonLogin}>Cadastrar</Text>
+          <Text style={styles.textButtonLogin}>Criar Conta</Text>
         </TouchableOpacity>
       </Pressable>
     </View>
