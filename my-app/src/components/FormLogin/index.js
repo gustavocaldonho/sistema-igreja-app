@@ -43,10 +43,6 @@ export default function FormLogin() {
         <TouchableOpacity style={styles.buttonLogin}>
           <Text style={styles.textButtonLogin}>Entrar</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.buttonLogin}>
-          <Text style={styles.textButtonLogin}>Criar Conta</Text>
-        </TouchableOpacity>
       </Pressable>
     </View>
   );

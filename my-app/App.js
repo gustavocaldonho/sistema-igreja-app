@@ -4,12 +4,14 @@ import {
   StyleSheet,
   View,
   Text,
+  TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import Title from "./src/components/Title";
 import FormLogin from "./src/components/FormLogin";
@@ -48,6 +50,14 @@ export default function TabOneScreen() {
   const [logged, setLogged] = useState(false);
   const [cadastroEntry, setCadastroEntry] = useState(false);
 
+  function changeToRegister(signal) {
+    if (signal == true) {
+      setCadastroEntry(true);
+    } else {
+      setCadastroEntry(false);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#339DD7" />
@@ -64,11 +74,32 @@ export default function TabOneScreen() {
           {cadastroEntry == false ? (
             <View style={styles.boxFormLogin}>
               <FormLogin />
-              {/* Botão Criar Conta */}
+              <TouchableOpacity
+                style={styles.buttonAccount}
+                onPress={() => {
+                  changeToRegister(true);
+                }}
+              >
+                <Text style={styles.textButtonAccount}>Criar Conta</Text>
+              </TouchableOpacity>
             </View>
           ) : (
             <View style={styles.boxFormCadastro}>{/* <FormCadastro/> */}</View>
             // Tirar os InputGroup de dentro de FormLogin e colocá-los numa pasta separada dentro de components
+          )}
+          {cadastroEntry ? (
+            <View style={styles.buttonBack}>
+              <TouchableOpacity
+                style={styles.textButtonBack}
+                onPress={() => {
+                  changeToRegister(false);
+                }}
+              >
+                <Icon name={"chevron-left"} size={20} color="#339DD7" />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <Text></Text>
           )}
         </View>
       ) : (
@@ -93,6 +124,7 @@ const styles = StyleSheet.create({
   main: {
     height: "100%",
     width: "100%",
+    // borderWidth: 2,
   },
   boxBackgroundTop: {
     height: 500,
@@ -104,7 +136,7 @@ const styles = StyleSheet.create({
 
   boxFormLogin: {
     display: "flex",
-    height: 430,
+    height: 400,
     width: "85%",
     borderRadius: 35,
     position: "absolute",
@@ -137,5 +169,45 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3.05,
     elevation: 5,
+  },
+  buttonAccount: {
+    width: "70%",
+    backgroundColor: "#339DD7",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 14,
+    paddingBottom: 14,
+    marginTop: 20,
+    marginBottom: 40,
+    borderRadius: 50,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  textButtonAccount: {
+    fontSize: 20,
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+  buttonBack: {
+    display: "flex",
+    alignItems: "flex-end",
+    position: "absolute",
+    left: 0,
+    width: 60,
+    bottom: 10,
+    paddingRight: 5,
+    paddingVertical: 5,
+    borderTopRightRadius: 50,
+    borderBottomRightRadius: 50,
+    backgroundColor: "#339DD7",
+  },
+  textButtonBack: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    backgroundColor: "#ffffff",
   },
 });

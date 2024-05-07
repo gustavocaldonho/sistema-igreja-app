@@ -3,10 +3,9 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   formContext: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     backgroundColor: "#ffffff",
     paddingHorizontal: 20,
-    paddingBottom: 40,
     borderRadius: 30,
   },
   form: {
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
     width: "80%",
     backgroundColor: "#339DD7",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     paddingTop: 14,
     paddingBottom: 14,
     marginTop: 20,
