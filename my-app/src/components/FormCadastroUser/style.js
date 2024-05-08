@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
     borderRadius: 30,
+    overflow: "hidden",
   },
   form: {
     width: "100%",
@@ -59,9 +60,7 @@ const styles = StyleSheet.create({
     color: "#8F8F8F",
   },
   boxScrollView: {
-    // borderWidth: 1,
     paddingHorizontal: 20,
-    borderRadius: 30,
   },
 });
 
