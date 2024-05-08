@@ -153,12 +153,12 @@ const styles = StyleSheet.create({
   },
   boxFormCadastro: {
     display: "flex",
-    height: 500,
+    height: 530,
     width: "85%",
     borderRadius: 35,
     position: "absolute",
     left: (screenWidth - screenWidth * 0.85) / 2, // Calcula a posição horizontal central
-    top: 280,
+    top: 240,
     backgroundColor: "#ffffff",
     shadowColor: "#000000",
     shadowOffset: {
