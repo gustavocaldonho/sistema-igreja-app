@@ -18,7 +18,7 @@ const InputGroupSelect = ({ iconName, options }) => {
           style={styles.icon}
         />
       </View>
-      <View style={styles.input}>
+      <View style={[styles.input, styles.inputPicker]}>
         <Picker
           selectedValue={selectedComunity}
           onValueChange={(itemValue, itemIndex) =>

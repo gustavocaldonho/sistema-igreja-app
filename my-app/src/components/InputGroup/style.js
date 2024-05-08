@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
   },
+  inputPicker: {
+    paddingLeft: 5,
+  },
   boxIcon: {
     height: "100%",
     width: "15%",
