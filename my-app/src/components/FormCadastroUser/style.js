@@ -3,10 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   formContext: {
     flex: 1,
-    justifyContent: "center",
     backgroundColor: "#ffffff",
-    paddingHorizontal: 20,
-    paddingBottom: 30,
     borderRadius: 30,
   },
   form: {
@@ -60,6 +57,11 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     fontStyle: "italic",
     color: "#8F8F8F",
+  },
+  boxScrollView: {
+    // borderWidth: 1,
+    paddingHorizontal: 20,
+    borderRadius: 30,
   },
 });
 
