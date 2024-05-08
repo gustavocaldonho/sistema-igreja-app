@@ -15,10 +15,12 @@ import InputGroupName from "../InputGroup/InputGroupName";
 import InputGroupCpf from "../InputGroup/InputGroupCpf";
 import InputGroupEmail from "../InputGroup/InputGroupEmail";
 import InputGroupDN from "../InputGroup/InputGroupDN";
+import InputGroupSelect from "../InputGroup/InputGroupSelect";
 
 export default function FormCadastroUser() {
   const [cpf, setCpf] = useState("");
   const [dn, setDN] = useState("");
+  const [community, setCommunity] = useState("");
 
   return (
     // usar <ScrollView></ScrollView>
@@ -56,7 +58,17 @@ export default function FormCadastroUser() {
           onChangeText={setDN}
         />
 
-        {/* <InputComunidade/> */}
+        <Text style={styles.errorMessage}></Text>
+        <InputGroupSelect
+          iconName="church"
+          value={community}
+          options={[
+            { label: "Sua Comunidade", value: "" },
+            { label: "Comunidade A", value: "a" },
+            { label: "Comunidade B", value: "b" },
+            { label: "Comunidade C", value: "c" },
+          ]}
+        />
 
         <TouchableOpacity style={styles.buttonCadastro}>
           <Text style={styles.textButtonCadastro}>Cadastrar</Text>
