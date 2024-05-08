@@ -122,8 +122,9 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   main: {
-    height: "100%",
-    width: "100%",
+    flex: 1,
+    display: "flex",
+    justifyContent: "space-between",
   },
   boxBackgroundTop: {
     height: 500,
@@ -190,10 +191,8 @@ const styles = StyleSheet.create({
   buttonBack: {
     display: "flex",
     alignItems: "flex-end",
-    position: "absolute",
-    left: 0,
+    marginBottom: 10,
     width: 60,
-    bottom: 10,
     paddingRight: 5,
     paddingVertical: 5,
     borderTopRightRadius: 50,
