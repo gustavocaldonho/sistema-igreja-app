@@ -1,9 +1,9 @@
 import React from "react";
 import { View, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import styles from "./style";
+import styles from "../style";
 
-const InputGroupPassword = ({ iconName, placeholder, value }) => {
+const InputGroupEmail = ({ iconName, placeholder }) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxIcon}>
@@ -12,12 +12,11 @@ const InputGroupPassword = ({ iconName, placeholder, value }) => {
       <TextInput
         style={styles.input}
         placeholder={placeholder}
-        value={value}
+        keyboardType="default"
         placeholderTextColor="#ccc"
-        secureTextEntry={true}
       />
     </View>
   );
 };
 
-export default InputGroupPassword;
+export default InputGroupEmail;

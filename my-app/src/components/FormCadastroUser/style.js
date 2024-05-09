@@ -3,10 +3,9 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   formContext: {
     flex: 1,
-    justifyContent: "flex-end",
     backgroundColor: "#ffffff",
-    paddingHorizontal: 20,
     borderRadius: 30,
+    overflow: "hidden",
   },
   form: {
     width: "100%",
@@ -29,19 +28,19 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginBottom: 10,
   },
-  buttonLogin: {
+  buttonCadastro: {
     width: "80%",
     backgroundColor: "#339DD7",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     paddingTop: 14,
     paddingBottom: 14,
-    marginTop: 20,
+    marginTop: 30,
     borderRadius: 50,
     marginLeft: "auto",
     marginRight: "auto",
   },
-  textButtonLogin: {
+  textButtonCadastro: {
     fontSize: 20,
     color: "#ffffff",
     fontWeight: "bold",
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
   errorMessage: {
     fontSize: 14,
     color: "red",
-    paddingTop: 20,
+    paddingTop: 10,
     paddingBottom: 5,
     paddingLeft: 25,
     fontWeight: "bold",
@@ -59,6 +58,9 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     fontStyle: "italic",
     color: "#8F8F8F",
+  },
+  boxScrollView: {
+    paddingHorizontal: 20,
   },
 });
 

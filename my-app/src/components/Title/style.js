@@ -4,14 +4,14 @@ const styles = StyleSheet.create({
   boxTitle: {
     flex: 1,
     alignItems: "center",
-    paddingTop: 80,
+    paddingTop: 60,
   },
   boxLogo: {
     width: 120,
     height: 120,
     backgroundColor: "#ffffff",
     borderRadius: 100,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   textTitle: {
     fontSize: 24,

@@ -4,15 +4,18 @@ import {
   StyleSheet,
   View,
   Text,
+  TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import Title from "./src/components/Title";
 import FormLogin from "./src/components/FormLogin";
+import FormCadastroUser from "./src/components/FormCadastroUser";
 import Menu from "./src/components/Menu";
 import Avisos from "./src/components/Avisos";
 import CaixaMortuario from "./src/components/CaixaMortuario";
@@ -46,6 +49,15 @@ function MyStack() {
 
 export default function TabOneScreen() {
   const [logged, setLogged] = useState(false);
+  const [cadastroEntry, setCadastroEntry] = useState(false);
+
+  function changeToRegister(signal) {
+    if (signal == true) {
+      setCadastroEntry(true);
+    } else {
+      setCadastroEntry(false);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -54,11 +66,41 @@ export default function TabOneScreen() {
       {logged == false ? (
         <View style={styles.main}>
           <View style={styles.boxBackgroundTop}>
-            <Title />
+            {cadastroEntry == false ? (
+              <Title textTitle={"SEJA BEM-VINDO!!"} />
+            ) : (
+              <Title textTitle={"CADASTRO DE USUÁRIO"} />
+            )}
           </View>
-          <View style={styles.boxFormLogin}>
-            <FormLogin />
-          </View>
+          {cadastroEntry == false ? (
+            <View style={styles.boxFormLogin}>
+              <FormLogin />
+              <TouchableOpacity
+                style={styles.buttonAccount}
+                onPress={() => {
+                  changeToRegister(true);
+                }}
+              >
+                <Text style={styles.textButtonAccount}>Criar Conta</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.boxFormCadastro}>{<FormCadastroUser />}</View>
+          )}
+          {cadastroEntry ? (
+            <View style={styles.buttonBack}>
+              <TouchableOpacity
+                style={styles.textButtonBack}
+                onPress={() => {
+                  changeToRegister(false);
+                }}
+              >
+                <Icon name={"chevron-left"} size={20} color="#ffffff" />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <Text />
+          )}
         </View>
       ) : (
         <NavigationContainer>
@@ -80,8 +122,9 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   main: {
-    height: "100%",
-    width: "100%",
+    flex: 1,
+    display: "flex",
+    justifyContent: "space-between",
   },
   boxBackgroundTop: {
     height: 500,
@@ -93,7 +136,7 @@ const styles = StyleSheet.create({
 
   boxFormLogin: {
     display: "flex",
-    height: 430,
+    height: 400,
     width: "85%",
     borderRadius: 35,
     position: "absolute",
@@ -108,8 +151,65 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 3.05,
     elevation: 5,
-
-    // borderColor: "red",
-    // borderWidth: 2,
+  },
+  boxFormCadastro: {
+    display: "flex",
+    height: 530,
+    width: "85%",
+    borderRadius: 35,
+    position: "absolute",
+    left: (screenWidth - screenWidth * 0.85) / 2, // Calcula a posição horizontal central
+    top: 240,
+    backgroundColor: "#ffffff",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.9,
+    shadowRadius: 3.05,
+    elevation: 5,
+  },
+  buttonAccount: {
+    width: "70%",
+    backgroundColor: "#339DD7",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 14,
+    paddingBottom: 14,
+    marginTop: 20,
+    marginBottom: 40,
+    borderRadius: 50,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  textButtonAccount: {
+    fontSize: 20,
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+  buttonBack: {
+    alignItems: "flex-end",
+    position: "absolute",
+    top: 70,
+    left: 0,
+    width: 60,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    borderTopRightRadius: 50,
+    borderBottomRightRadius: 50,
+    backgroundColor: "#339DD7",
+  },
+  textButtonBack: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    paddingRight: 2,
+    backgroundColor: "#339DD7",
+    borderWidth: 2,
+    borderColor: "#ffffff",
   },
 });

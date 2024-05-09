@@ -10,8 +10,8 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import styles from "./style";
-import InputGroupCpf from "./InputGroupCpf";
-import InputGroupPassword from "./InputGroupPassword";
+import InputGroupCpf from "../InputGroup/InputGroupCpf";
+import InputGroupPassword from "../InputGroup/InputGroupPassword";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
@@ -22,7 +22,7 @@ export default function FormLogin() {
       <Pressable style={styles.form} onPress={Keyboard.dismiss}>
         <Text style={styles.errorMessage}></Text>
         <InputGroupCpf
-          iconName="user"
+          iconName="id-card"
           placeholder="000.000.000-00"
           value={cpf}
           onChangeText={setCpf}
@@ -42,10 +42,6 @@ export default function FormLogin() {
 
         <TouchableOpacity style={styles.buttonLogin}>
           <Text style={styles.textButtonLogin}>Entrar</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.buttonLogin}>
-          <Text style={styles.textButtonLogin}>Cadastrar</Text>
         </TouchableOpacity>
       </Pressable>
     </View>
