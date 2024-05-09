@@ -95,7 +95,7 @@ export default function TabOneScreen() {
                   changeToRegister(false);
                 }}
               >
-                <Icon name={"chevron-left"} size={20} color="#339DD7" />
+                <Icon name={"chevron-left"} size={20} color="#ffffff" />
               </TouchableOpacity>
             </View>
           ) : (
@@ -189,11 +189,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   buttonBack: {
-    display: "flex",
     alignItems: "flex-end",
-    marginBottom: 10,
+    position: "absolute",
+    top: 70,
+    left: 0,
     width: 60,
-    paddingRight: 5,
+    paddingHorizontal: 5,
     paddingVertical: 5,
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
@@ -206,6 +207,9 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 50,
-    backgroundColor: "#ffffff",
+    paddingRight: 2,
+    backgroundColor: "#339DD7",
+    borderWidth: 2,
+    borderColor: "#ffffff",
   },
 });
