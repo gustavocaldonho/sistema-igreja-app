@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#f094c0",
   },
   main: {
     width: "100%",
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     height: 100,
     padding: 15,
     borderRadius: 20,
-    backgroundColor: "#f094c0",
+    backgroundColor: "#fff",
     marginTop: 20,
   },
   boxTop: {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   textMonth: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#ffffff",
+    color: "#f094c0",
   },
   boxPayButton: {
     height: "100%",
@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 10,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#f094c0",
   },
   textPayButton: {
-    color: "#f094c0",
+    color: "#fff",
     fontWeight: "700",
   },
   boxObs: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     height: "30%",
   },
   textObs: {
-    color: "#ffffff",
+    color: "#f094c0",
   },
 });
 

@@ -43,11 +43,22 @@ function MyStack() {
       <Stack.Screen
         name="Dizimo"
         component={Dizimo}
-        options={{
+        options={({ navigation }) => ({
           title: "Dízimo",
+          headerStyle: styles.headerStyle,
           headerTitleStyle: styles.titleHeader,
           headerTitleAlign: "center",
-        }}
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon
+                name="chevron-left"
+                size={25}
+                color="#fff"
+                style={{ marginLeft: 15 }}
+              />
+            </TouchableOpacity>
+          ),
+        })}
       />
       <Stack.Screen name="Familias" component={Familias} />
       <Stack.Screen name="PerfilUser" component={PerfilUser} />
@@ -70,7 +81,8 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       {/* <StatusBar backgroundColor="#339DD7" /> */}
-      <StatusBar backgroundColor="#ffffff" />
+      <StatusBar backgroundColor="#f094c0" />
+      {/* <StatusBar backgroundColor="#fff" /> */}
 
       {logged == false ? (
         <View style={styles.main}>
@@ -223,7 +235,18 @@ const styles = StyleSheet.create({
   },
   titleHeader: {
     fontSize: 40,
-    color: "#f094c0",
-    marginRight: "auto",
+    color: "#fff",
+  },
+  headerStyle: {
+    height: 130,
+    backgroundColor: "#f094c0",
+    // shadowColor: "#fff",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 3,
+    // },
+    // shadowOpacity: 0.9,
+    // shadowRadius: 3.05,
+    // elevation: 20,
   },
 });
