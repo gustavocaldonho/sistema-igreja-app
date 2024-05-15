@@ -16,10 +16,18 @@ export default function Dizimo({ navigation }) {
               <TouchableOpacity style={styles.payButton}>
                 <Text style={styles.textPayButton}>Pagar</Text>
               </TouchableOpacity>
+              {/* <View style={styles.boxIconCheck}>
+                <Icon name="check" color={"#fff"} size={20} />
+              </View> */}
             </View>
           </View>
-          <View style={styles.boxObs}>
-            <Text style={styles.textObs}>Será Liberado em 01/06/2024</Text>
+          <View style={styles.boxBottom}>
+            <View style={styles.boxObs}>
+              <Text style={styles.textObs}>Será Liberado em 01/05/2024</Text>
+            </View>
+            <View style={styles.boxStatus}>
+              <Text style={styles.textStatus}>Status</Text>
+            </View>
           </View>
         </View>
       </ScrollView>

@@ -18,11 +18,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   boxTop: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
     width: "100%",
     height: "70%",
+    flexDirection: "row",
   },
   boxMonth: {
     height: "100%",
@@ -52,9 +50,30 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "700",
   },
-  boxObs: {
+  boxIconCheck: {
+    backgroundColor: "#f094c0",
+    padding: 10,
+    borderRadius: 10,
+  },
+  boxBottom: {
     width: "100%",
     height: "30%",
+    flexDirection: "row",
+  },
+  boxObs: {
+    width: "70%",
+    height: "100%",
+  },
+  boxStatus: {
+    height: "100%",
+    width: "30%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textStatus: {
+    color: "#f094c0",
+    fontWeight: "bold",
   },
   textObs: {
     color: "#f094c0",
