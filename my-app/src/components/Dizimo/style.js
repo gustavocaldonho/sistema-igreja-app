@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 20,
     backgroundColor: "#f094c0",
-    marginBottom: 20,
+    marginTop: 20,
   },
   boxTop: {
     display: "flex",

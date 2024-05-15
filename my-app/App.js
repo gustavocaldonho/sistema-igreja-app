@@ -43,7 +43,11 @@ function MyStack() {
       <Stack.Screen
         name="Dizimo"
         component={Dizimo}
-        options={{ title: "Dízimo", headerShown: true }}
+        options={{
+          title: "Dízimo",
+          headerTitleStyle: styles.titleHeader,
+          headerTitleAlign: "center",
+        }}
       />
       <Stack.Screen name="Familias" component={Familias} />
       <Stack.Screen name="PerfilUser" component={PerfilUser} />
@@ -216,5 +220,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#339DD7",
     borderWidth: 2,
     borderColor: "#ffffff",
+  },
+  titleHeader: {
+    fontSize: 40,
+    color: "#f094c0",
+    marginRight: "auto",
   },
 });
