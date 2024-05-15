@@ -40,7 +40,11 @@ function MyStack() {
       <Stack.Screen name="Avisos" component={Avisos} />
       <Stack.Screen name="CaixaMortuario" component={CaixaMortuario} />
       <Stack.Screen name="Comunidades" component={Comunidades} />
-      <Stack.Screen name="Dizimo" component={Dizimo} />
+      <Stack.Screen
+        name="Dizimo"
+        component={Dizimo}
+        options={{ title: "Dízimo", headerShown: true }}
+      />
       <Stack.Screen name="Familias" component={Familias} />
       <Stack.Screen name="PerfilUser" component={PerfilUser} />
     </Stack.Navigator>
@@ -48,7 +52,7 @@ function MyStack() {
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState(true);
   const [cadastroEntry, setCadastroEntry] = useState(false);
 
   function changeToRegister(signal) {
@@ -61,7 +65,8 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#339DD7" />
+      {/* <StatusBar backgroundColor="#339DD7" /> */}
+      <StatusBar backgroundColor="#ffffff" />
 
       {logged == false ? (
         <View style={styles.main}>
