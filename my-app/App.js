@@ -81,7 +81,7 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       {/* <StatusBar backgroundColor="#339DD7" /> */}
-      <StatusBar backgroundColor="#f094c0" />
+      <StatusBar backgroundColor="#f7c7de" />
       {/* <StatusBar backgroundColor="#fff" /> */}
 
       {logged == false ? (
@@ -239,14 +239,6 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     height: 130,
-    backgroundColor: "#f094c0",
-    // shadowColor: "#fff",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.9,
-    // shadowRadius: 3.05,
-    // elevation: 20,
+    backgroundColor: "#f7c7de",
   },
 });
