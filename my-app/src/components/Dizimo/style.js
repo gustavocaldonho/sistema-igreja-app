@@ -78,6 +78,78 @@ const styles = StyleSheet.create({
   textObs: {
     color: "#f094c0",
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: 85,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    borderRadius: 20,
+    padding: 5,
+    position: "absolute",
+    end: 5,
+    top: 5,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  boxButtonPix: {
+    backgroundColor: "#5cc25f",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginTop: 10,
+    borderRadius: 20,
+  },
+  textButtonPix: {
+    color: "white",
+    fontSize: 18,
+    alignSelf: "center",
+    fontWeight: "500",
+  },
+  errorMessage: {
+    fontSize: 14,
+    color: "red",
+    paddingLeft: 20,
+    fontWeight: "bold",
+  },
+  boxButtonCopyCode: {
+    backgroundColor: "#f094c0",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginTop: 20,
+    borderRadius: 20,
+  },
+  textButtonCode: {
+    color: "white",
+    fontSize: 18,
+    alignSelf: "center",
+    fontWeight: "500",
+  },
 });
 
 export default styles;
