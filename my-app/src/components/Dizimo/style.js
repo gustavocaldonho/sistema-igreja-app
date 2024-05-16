@@ -82,10 +82,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 85,
+    backgroundColor: "#f7c7de",
   },
   modalView: {
     margin: 20,
+    marginTop: 85,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
