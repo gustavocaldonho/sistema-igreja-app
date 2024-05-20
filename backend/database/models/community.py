@@ -1,15 +1,15 @@
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, Boolean, LargeBinary
+from sqlalchemy.orm import relationship
+from sqlalchemy import String, Boolean, LargeBinary, Column
 from db import Base
 
 class Community(Base):
-    __tablename__ = "communities"
+    __tablename__ = 'communities'
 
-    id: Mapped[str] = mapped_column(String, primary_key=True)
-    active: Mapped[bool] = mapped_column(Boolean, nullable=False)
-    patron: Mapped[str] = mapped_column(String(45), nullable=False)
-    location: Mapped[str] = mapped_column(String(45), nullable=False)
-    community_image: Mapped[str] = mapped_column(LargeBinary, nullable=True)
+    id: str = Column(String, primary_key=True)
+    active: bool = Column(Boolean, nullable=False)
+    patron: str = Column(String(45), nullable=False)
+    location: str = Column(String(45), nullable=False)
+    community_image: str = Column(LargeBinary, nullable=True)
 
-    warnings = relationship("Warning", back_populates="community")
-    users = relationship("User", back_populates="community")
+    warnings = relationship("Warning", backref='warnings', cascade="all, delete")
+    users = relationship("User", backref='users', cascade="all, delete")
