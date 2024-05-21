@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7c7de",
   },
   modalView: {
+    width: "90%",
     margin: 20,
     marginTop: 85,
     backgroundColor: "white",
@@ -137,6 +138,9 @@ const styles = StyleSheet.create({
     color: "red",
     paddingLeft: 20,
     fontWeight: "bold",
+  },
+  qrcode: {
+    alignSelf: "center",
   },
   boxButtonCopyCode: {
     backgroundColor: "#f094c0",
