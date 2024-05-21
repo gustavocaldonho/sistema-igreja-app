@@ -18,7 +18,7 @@ import FormLogin from "./src/components/FormLogin";
 import FormCadastroUser from "./src/components/FormCadastroUser";
 import Menu from "./src/components/Menu";
 import Avisos from "./src/components/Avisos";
-import CaixaMortuario from "./src/components/CaixaMortuario";
+import CaixaMortuario from "./src/components/CaixaMortuaria";
 import Comunidades from "./src/components/Comunidades";
 import Dizimo from "./src/components/Dizimo";
 import Familias from "./src/components/Familias";
@@ -38,8 +38,27 @@ function MyStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Avisos" component={Avisos} />
-      <Stack.Screen name="CaixaMortuario" component={CaixaMortuario} />
       <Stack.Screen name="Comunidades" component={Comunidades} />
+      <Stack.Screen
+        name="CaixaMortuario"
+        component={CaixaMortuario}
+        options={({ navigation }) => ({
+          title: "Caixa Mortuária",
+          headerStyle: styles.headerStyle,
+          headerTitleStyle: styles.titleHeader,
+          headerTitleAlign: "center",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon
+                name="chevron-left"
+                size={25}
+                color="#fff"
+                style={{ marginLeft: 15 }}
+              />
+            </TouchableOpacity>
+          ),
+        })}
+      />
       <Stack.Screen
         name="Dizimo"
         component={Dizimo}
