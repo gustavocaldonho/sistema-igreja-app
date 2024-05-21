@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
   inputPicker: {
     paddingLeft: 5,
   },
+  labelPicker: {
+    // color: "#adadad",
+  },
   boxIcon: {
     height: "100%",
     width: "15%",
@@ -33,6 +36,9 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderBottomLeftRadius: 50,
     paddingLeft: 20,
+  },
+  icon: {
+    color: "#adadad",
   },
 });
 

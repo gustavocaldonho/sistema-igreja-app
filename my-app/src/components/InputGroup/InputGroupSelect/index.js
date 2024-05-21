@@ -11,15 +11,11 @@ const InputGroupSelect = ({ iconName, options }) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxIcon}>
-        <FontAwesome5
-          name={iconName}
-          size={20}
-          color="#adadad"
-          style={styles.icon}
-        />
+        <FontAwesome5 name={iconName} size={20} style={styles.icon} />
       </View>
       <View style={[styles.input, styles.inputPicker]}>
         <Picker
+          style={styles.labelPicker}
           selectedValue={selectedComunity}
           onValueChange={(itemValue, itemIndex) =>
             setSelectedComunity(itemValue)
@@ -27,6 +23,7 @@ const InputGroupSelect = ({ iconName, options }) => {
         >
           {options.map((option, index) => (
             <Picker.Item
+              style={styles.labelPicker}
               key={index}
               label={option.label}
               value={option.value}

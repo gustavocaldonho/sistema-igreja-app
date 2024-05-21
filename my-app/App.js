@@ -86,7 +86,7 @@ function MyStack() {
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
   const [cadastroEntry, setCadastroEntry] = useState(false);
 
   function changeToRegister(signal) {
@@ -99,8 +99,8 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      {/* <StatusBar backgroundColor="#339DD7" /> */}
-      <StatusBar backgroundColor="#f7c7de" />
+      <StatusBar backgroundColor="#339DD7" />
+      {/* <StatusBar backgroundColor="#f7c7de" /> */}
       {/* <StatusBar backgroundColor="#fff" /> */}
 
       {logged == false ? (

@@ -7,7 +7,7 @@ const InputGroupEmail = ({ iconName, placeholder }) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxIcon}>
-        <Icon name={iconName} size={20} color="#adadad" style={styles.icon} />
+        <Icon name={iconName} size={20} style={styles.icon} />
       </View>
       <TextInput
         style={styles.input}

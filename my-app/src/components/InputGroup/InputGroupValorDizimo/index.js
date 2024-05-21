@@ -26,7 +26,7 @@ const InputGroupValorDizimo = ({
   return (
     <View style={styles.container}>
       <View style={styles.boxIcon}>
-        {/* <Icon name={iconName} size={20} color="#adadad" style={styles.icon} /> */}
+        {/* <Icon name={iconName} size={20} style={styles.icon} /> */}
         <Text style={{ fontSize: 20 }}>R$</Text>
       </View>
       <MaskInput
