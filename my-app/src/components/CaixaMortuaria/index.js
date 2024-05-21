@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
-import InputGroupValorDizimo from "../InputGroup/InputGroupValorDizimo";
 
 export default function CaixaMortuaria({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
