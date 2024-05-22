@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7c7de",
+    backgroundColor: "#339dd7",
   },
   main: {
     width: "100%",
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#f094c0",
+    // color: "#339dd7",
   },
   boxPayButton: {
     height: "100%",
@@ -44,14 +45,14 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 10,
-    backgroundColor: "#f094c0",
+    backgroundColor: "#339dd7",
   },
   textPayButton: {
     color: "#fff",
     fontWeight: "700",
   },
   boxIconCheck: {
-    backgroundColor: "#f094c0",
+    backgroundColor: "#339dd7",
     padding: 10,
     borderRadius: 10,
   },
@@ -72,17 +73,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textStatus: {
-    color: "#f094c0",
+    color: "#339dd7",
     fontWeight: "bold",
   },
   textObs: {
-    color: "#f094c0",
+    color: "#339dd7",
   },
   centeredView: {
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#f7c7de",
+    backgroundColor: "#339dd7",
   },
   modalView: {
     width: "90%",
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   boxButtonCopyCode: {
-    backgroundColor: "#f094c0",
+    backgroundColor: "#339dd7",
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginTop: 20,

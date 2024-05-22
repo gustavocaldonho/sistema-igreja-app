@@ -102,6 +102,7 @@ export default function TabOneScreen() {
     <View style={styles.container}>
       <StatusBar backgroundColor="#339DD7" />
       {/* <StatusBar backgroundColor="#f7c7de" /> */}
+      {/* <StatusBar backgroundColor="#f094c0" /> */}
       {/* <StatusBar backgroundColor="#fff" /> */}
 
       {logged == false ? (

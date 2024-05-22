@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7c7de",
+    backgroundColor: "#339dd7",
   },
   main: {
     width: "100%",
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   textStatus: {
     width: "100%",
-    color: "#f094c0",
+    color: "#339dd7",
     fontWeight: "bold",
     alignSelf: "center",
   },
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   textYear: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#f094c0",
+    color: "#339dd7",
   },
   boxMiddle: {
     width: "100%",
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   textValue: {
     fontSize: 50,
     fontWeight: "bold",
+    // color: "#339dd7",
     color: "#f094c0",
   },
   boxBottom: {
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textObs: {
-    color: "#f094c0",
+    color: "#339dd7",
   },
   boxPayButton: {
     height: "100%",
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 10,
-    backgroundColor: "#f094c0",
+    backgroundColor: "#339dd7",
     alignItems: "center",
   },
   textPayButton: {

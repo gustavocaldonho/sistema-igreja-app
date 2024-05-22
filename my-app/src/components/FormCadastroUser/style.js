@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   buttonCadastro: {
     width: "80%",
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 14,

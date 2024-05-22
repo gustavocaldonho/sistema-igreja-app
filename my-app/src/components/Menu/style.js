@@ -7,13 +7,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
     height: "100%",
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
     position: "relative",
   },
   boxBackgroundTop: {
     width: "100%",
     height: "30%",
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
     borderBottomEndRadius: 35,
     borderBottomStartRadius: 35,
   },
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     bottom: 200,
     alignSelf: "center",
     borderRadius: 35,
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
   },
   boxLine: {
     width: "100%",
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   textOption: {
-    color: "#f094c0",
+    color: "#339dd7",
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 15,

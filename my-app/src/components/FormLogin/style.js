@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: "80%",
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
     alignItems: "center",
     justifyContent: "flex-end",
     paddingTop: 14,

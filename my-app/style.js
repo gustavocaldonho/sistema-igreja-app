@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomLeftRadius: 35,
     borderBottomRightRadius: 35,
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
   },
   boxFormLogin: {
     height: 400,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   buttonAccount: {
     width: "70%",
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 14,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderTopRightRadius: 50,
     borderBottomRightRadius: 50,
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
   },
   textButtonBack: {
     display: "flex",
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 50,
     paddingRight: 2,
-    backgroundColor: "#339DD7",
+    backgroundColor: "#339dd7",
     borderWidth: 2,
     borderColor: "#ffffff",
   },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     height: 130,
-    backgroundColor: "#f7c7de",
+    backgroundColor: "#339dd7",
   },
 });
 
