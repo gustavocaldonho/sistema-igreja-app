@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -7,6 +8,8 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 export default function Menu({ navigation }) {
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#fff" />
+
       <View style={styles.boxBackgroundTop}>
         <Text style={styles.textMenu}>MENU</Text>
       </View>

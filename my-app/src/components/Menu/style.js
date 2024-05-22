@@ -13,19 +13,20 @@ const styles = StyleSheet.create({
   boxBackgroundTop: {
     width: "100%",
     height: "30%",
-    backgroundColor: "#339dd7",
+    // backgroundColor: "#339dd7",
+    backgroundColor: "#fff",
     borderBottomEndRadius: 35,
     borderBottomStartRadius: 35,
   },
   textMenu: {
-    color: "#fff",
+    color: "#339dd7",
     marginTop: 50,
     fontWeight: "500",
     alignSelf: "center",
     fontSize: 40,
   },
   main: {
-    width: "90%",
+    width: "100%",
     height: "80%",
     display: "flex",
     flexDirection: "column",
