@@ -98,11 +98,12 @@ const styles = StyleSheet.create({
   },
   titleHeader: {
     fontSize: 40,
-    color: "#fff",
+    color: "#339dd7",
   },
   headerStyle: {
     height: 130,
-    backgroundColor: "#339dd7",
+    // backgroundColor: "#339dd7",
+    backgroundColor: "#fff",
   },
 });
 

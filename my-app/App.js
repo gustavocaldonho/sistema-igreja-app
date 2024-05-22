@@ -53,7 +53,7 @@ function MyStack() {
               <Icon
                 name="chevron-left"
                 size={25}
-                color="#fff"
+                color="#339dd7"
                 style={{ marginLeft: 15 }}
               />
             </TouchableOpacity>
@@ -73,7 +73,7 @@ function MyStack() {
               <Icon
                 name="chevron-left"
                 size={25}
-                color="#fff"
+                color="#339dd7"
                 style={{ marginLeft: 15 }}
               />
             </TouchableOpacity>
