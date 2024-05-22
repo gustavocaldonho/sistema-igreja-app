@@ -1,36 +1,65 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  boxMenu: {
+  container: {
     flex: 1,
+    display: "flex",
     flexDirection: "column",
-    justifyContent: "space-around",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#339DD7",
-    paddingTop: 45,
-    paddingHorizontal: 15,
-
-    // borderColor: "green",
-    // borderWidth: 5,
+    position: "relative",
+  },
+  boxBackgroundTop: {
+    width: "100%",
+    height: "30%",
+    backgroundColor: "#339DD7",
+    borderBottomEndRadius: 35,
+    borderBottomStartRadius: 35,
+  },
+  textMenu: {
+    color: "#fff",
+    marginTop: 80,
+    fontWeight: "500",
+    alignSelf: "center",
+    fontSize: 40,
+  },
+  main: {
+    width: "85%",
+    height: "70%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    top: 170,
+    position: "absolute",
+    bottom: 200,
+    alignSelf: "center",
+    borderRadius: 35,
+    backgroundColor: "#339DD7",
   },
   boxLine: {
     width: "100%",
     height: "30%",
     flexDirection: "row",
-    justifyContent: "space-between",
-
-    // borderColor: "red",
-    // borderWidth: 2,
+    justifyContent: "space-around",
   },
   boxOption: {
-    width: "48%",
+    width: "45%",
     height: "100%",
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ffffff",
-
-    // borderColor: "violet",
-    // borderWidth: 2,
+    backgroundColor: "#fff",
+  },
+  textOption: {
+    color: "#f094c0",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 15,
+  },
+  icon: {
+    color: "#f094c0",
+    fontSize: 75,
   },
 });
 

@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text } from "react-native";
 import styles from "./style";
 
-export default function Familias({ navigation }) {
+export default function Users({ navigation }) {
   return (
     <View>
-      <Text>Familias</Text>
+      <Text>Usuários</Text>
     </View>
   );
 }
