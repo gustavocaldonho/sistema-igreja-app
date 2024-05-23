@@ -87,7 +87,7 @@ function MyStack() {
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
   const [cadastroEntry, setCadastroEntry] = useState(false);
 
   function changeToRegister(signal) {
