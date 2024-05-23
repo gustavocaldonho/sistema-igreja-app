@@ -8,6 +8,7 @@ import {
   Platform,
 } from "react-native";
 import styles from "./style";
+import { LinearGradient } from "expo-linear-gradient";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
@@ -100,54 +101,64 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#339DD7" />
-      {/* <StatusBar backgroundColor="#f7c7de" /> */}
-      {/* <StatusBar backgroundColor="#f094c0" /> */}
-      {/* <StatusBar backgroundColor="#fff" /> */}
+      <LinearGradient
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 0, y: 0.1 }}
+        colors={["#f094c0", "#339dd7"]}
+      >
+        {/* <StatusBar backgroundColor="#f7c7de" /> */}
+        {/* <StatusBar backgroundColor="#f094c0" /> */}
+        {/* <StatusBar backgroundColor="#fff" /> */}
 
-      {logged == false ? (
-        <View style={styles.main}>
-          <View style={styles.boxBackgroundTop}>
+        {logged == false ? (
+          <View style={styles.main}>
+            <View style={styles.boxBackgroundTop}>
+              {cadastroEntry == false ? (
+                <Title textTitle={"SEJA BEM-VINDO!!"} />
+              ) : (
+                <Title textTitle={"CADASTRO DE USUÁRIO"} />
+              )}
+            </View>
             {cadastroEntry == false ? (
-              <Title textTitle={"SEJA BEM-VINDO!!"} />
+              <View style={styles.boxFormLogin}>
+                <FormLogin />
+                <TouchableOpacity
+                  style={styles.buttonAccount}
+                  onPress={() => {
+                    changeToRegister(true);
+                  }}
+                >
+                  <Text style={styles.textButtonAccount}>Criar Conta</Text>
+                </TouchableOpacity>
+              </View>
             ) : (
-              <Title textTitle={"CADASTRO DE USUÁRIO"} />
+              <View style={styles.boxFormCadastro}>{<FormCadastroUser />}</View>
+            )}
+            {cadastroEntry ? (
+              <View style={styles.buttonBack}>
+                <TouchableOpacity
+                  style={styles.textButtonBack}
+                  onPress={() => {
+                    changeToRegister(false);
+                  }}
+                >
+                  <Icon name={"chevron-left"} size={20} color="#ffffff" />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <Text />
             )}
           </View>
-          {cadastroEntry == false ? (
-            <View style={styles.boxFormLogin}>
-              <FormLogin />
-              <TouchableOpacity
-                style={styles.buttonAccount}
-                onPress={() => {
-                  changeToRegister(true);
-                }}
-              >
-                <Text style={styles.textButtonAccount}>Criar Conta</Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <View style={styles.boxFormCadastro}>{<FormCadastroUser />}</View>
-          )}
-          {cadastroEntry ? (
-            <View style={styles.buttonBack}>
-              <TouchableOpacity
-                style={styles.textButtonBack}
-                onPress={() => {
-                  changeToRegister(false);
-                }}
-              >
-                <Icon name={"chevron-left"} size={20} color="#ffffff" />
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <Text />
-          )}
-        </View>
-      ) : (
-        <NavigationContainer>
-          <MyStack />
-        </NavigationContainer>
-      )}
+        ) : (
+          <NavigationContainer>
+            <MyStack />
+          </NavigationContainer>
+        )}
+      </LinearGradient>
     </View>
   );
 }

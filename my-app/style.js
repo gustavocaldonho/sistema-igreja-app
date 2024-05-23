@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomLeftRadius: 35,
     borderBottomRightRadius: 35,
-    backgroundColor: "#339dd7",
+    // backgroundColor: "#339dd7",
   },
   boxFormLogin: {
     height: 400,
