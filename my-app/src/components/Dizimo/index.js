@@ -8,6 +8,8 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import InputGroupValorDizimo from "../InputGroup/InputGroupValorDizimo";
@@ -19,6 +21,7 @@ export default function Dizimo({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#fff" />
       <ScrollView style={styles.main}>
         <Modal
           animationType="fade"

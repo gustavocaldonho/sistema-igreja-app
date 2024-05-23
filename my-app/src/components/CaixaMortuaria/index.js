@@ -8,6 +8,7 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -18,6 +19,7 @@ export default function CaixaMortuaria({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#fff" />
       <ScrollView style={styles.main}>
         <View style={styles.boxItem}>
           <View style={styles.boxTop}>
