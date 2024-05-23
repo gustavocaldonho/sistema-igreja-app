@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#339dd7",
     overflow: "hidden",
-    paddingBottom: 5,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    borderWidth: 2,
+    borderTopWidth: 2,
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
     borderColor: "#339dd7",
   },
   main: {
