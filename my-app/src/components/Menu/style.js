@@ -49,6 +49,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
+    shadowColor: "#171717",
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.21,
+    shadowRadius: 7.68,
+    elevation: 10,
   },
   textOption: {
     color: "#339dd7",

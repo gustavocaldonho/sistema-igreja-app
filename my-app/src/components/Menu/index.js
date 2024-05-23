@@ -16,7 +16,7 @@ export default function Menu({ navigation }) {
           height: "100%",
         }}
         start={{ x: 0, y: 1 }}
-        end={{ x: 1, y: 0 }}
+        end={{ x: 0, y: 0.1 }}
         colors={["#f094c0", "#339dd7"]}
       >
         <View style={styles.boxBackgroundTop}>
