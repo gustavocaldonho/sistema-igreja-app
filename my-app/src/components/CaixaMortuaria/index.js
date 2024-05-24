@@ -14,7 +14,6 @@ import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function CaixaMortuaria({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(false);
   const [valorCaixaMortuaria, setValorCaixaMortuaria] = useState("");
   const [codPix, setCodePix] = useState(null);
 

@@ -38,7 +38,26 @@ function MyStack() {
         component={Menu}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Avisos" component={Avisos} />
+      <Stack.Screen
+        name="Avisos"
+        component={Avisos}
+        options={({ navigation }) => ({
+          title: "Avisos",
+          headerStyle: styles.headerStyle,
+          headerTitleStyle: styles.titleHeader,
+          headerTitleAlign: "center",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon
+                name="chevron-left"
+                size={25}
+                color="#339dd7"
+                style={{ marginLeft: 15 }}
+              />
+            </TouchableOpacity>
+          ),
+        })}
+      />
       <Stack.Screen name="Comunidades" component={Comunidades} />
       <Stack.Screen
         name="CaixaMortuario"
@@ -87,7 +106,7 @@ function MyStack() {
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState(true);
   const [cadastroEntry, setCadastroEntry] = useState(false);
 
   function changeToRegister(signal) {
