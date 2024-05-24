@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
   },
   boxTitle: {
     width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   textTitle: {
     fontSize: 20,
@@ -38,6 +40,18 @@ const styles = StyleSheet.create({
   textBody: {
     fontSize: 17,
     color: "#339dd7",
+  },
+  titleNotDisplayed: {
+    fontWeight: "bold",
+  },
+  notRead: {
+    borderWidth: 3,
+    borderColor: "#f094c0",
+  },
+  iconNotDisplayed: {
+    color: "#f094c0",
+    fontSize: 20,
+    alignSelf: "center",
   },
 });
 
