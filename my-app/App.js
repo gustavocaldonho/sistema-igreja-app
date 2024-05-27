@@ -99,8 +99,14 @@ function MyStack() {
           ),
         })}
       />
+      <Stack.Screen
+        name="PerfilUser"
+        component={PerfilUser}
+        options={({ navigation }) => ({
+          headerShown: false,
+        })}
+      />
       <Stack.Screen name="Users" component={Users} />
-      <Stack.Screen name="PerfilUser" component={PerfilUser} />
     </Stack.Navigator>
   );
 }
