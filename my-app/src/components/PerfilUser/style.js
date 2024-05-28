@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   line: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 15,
@@ -80,7 +81,21 @@ const styles = StyleSheet.create({
     color: "#339DD7",
     fontSize: 15,
     fontWeight: "400",
+    textAlign: "right",
   },
+  textLabelEmail: {
+    width: "25%",
+  },
+  textDataEmail: {
+    width: "75%",
+  },
+  textLabelComunity: {
+    width: "40%",
+  },
+  textDataComunity: {
+    width: "60%",
+  },
+
   buttonChangeDatas: {
     width: "70%",
     alignSelf: "center",

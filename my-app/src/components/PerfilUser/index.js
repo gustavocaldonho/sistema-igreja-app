@@ -52,12 +52,20 @@ export default function PerfilUser({ navigation }) {
               <Text style={styles.textData}>12/09/2000</Text>
             </View>
             <View style={styles.line}>
-              <Text style={styles.textLabel}>EMAIL:</Text>
-              <Text style={styles.textData}>nomesobrenome@gmail.com</Text>
+              <Text style={[styles.textLabel, styles.textLabelEmail]}>
+                EMAIL:
+              </Text>
+              <Text style={[styles.textData, styles.textDataEmail]}>
+                nomesobrenome@gmail.com
+              </Text>
             </View>
             <View style={styles.line}>
-              <Text style={styles.textLabel}>COMUNIDADE:</Text>
-              <Text style={styles.textData}>São Geraldo - Sapucaia</Text>
+              <Text style={[styles.textLabel, styles.textLabelComunity]}>
+                COMUNIDADE:
+              </Text>
+              <Text style={[styles.textData, styles.textDataComunity]}>
+                São Geraldo Magela - Sapucaia
+              </Text>
             </View>
 
             <TouchableOpacity style={styles.buttonChangeDatas}>
