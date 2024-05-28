@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   },
   boxIconCamera: {
     position: "absolute",
-    bottom: 5,
-    right: 5,
+    bottom: 0,
+    right: 0,
     padding: 8,
     borderRadius: 40,
     backgroundColor: "#fff",
@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     color: "#339DD7",
   },
   boxImageProfile: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     marginTop: 15,
     alignSelf: "center",
     justifyContent: "center",
@@ -47,14 +47,15 @@ const styles = StyleSheet.create({
     borderRadius: 120,
   },
   boxNameUser: {
+    width: "85%",
+    alignSelf: "center",
     paddingVertical: 10,
     marginBottom: 10,
   },
   textNameUser: {
     color: "#fff",
     fontSize: 30,
-    alignSelf: "center",
-    writingDirection: "rtl",
+    textAlign: "center",
   },
   boxInformationsUser: {
     width: "85%",
@@ -102,14 +103,14 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingVertical: 10,
+    paddingTop: 10,
   },
   boxLineListMortuary: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",
     gap: 12,
-    paddingVertical: 10,
+    paddingTop: 10,
     flexWrap: "wrap",
   },
   itemLineList: {
