@@ -19,7 +19,7 @@ export default function PerfilUser({ navigation }) {
       >
         <View style={styles.boxIconLeft}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="chevron-left" size={25} style={styles.iconLeft} />
+            <Icon name="chevron-left" style={styles.iconLeft} />
           </TouchableOpacity>
         </View>
         <View style={styles.boxTop}>
@@ -27,7 +27,12 @@ export default function PerfilUser({ navigation }) {
             <Image
               style={styles.imageProfile}
               source={require("../../images/imageprofile.jpeg")}
-            ></Image>
+            />
+            <View style={styles.boxIconCamera}>
+              <TouchableOpacity onPress={() => {}}>
+                <Icon name="camera" style={styles.iconCamera} />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
         <View style={styles.boxNameUser}>

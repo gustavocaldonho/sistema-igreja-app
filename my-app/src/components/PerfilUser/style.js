@@ -16,6 +16,19 @@ const styles = StyleSheet.create({
   },
   iconLeft: {
     color: "#fff",
+    fontSize: 25,
+  },
+  boxIconCamera: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    padding: 8,
+    borderRadius: 40,
+    backgroundColor: "#fff",
+  },
+  iconCamera: {
+    fontSize: 25,
+    color: "#339DD7",
   },
   boxImageProfile: {
     width: 200,
