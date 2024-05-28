@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 20,
     borderRadius: 35,
+    marginBottom: 20,
   },
   line: {
     flexDirection: "row",
@@ -76,6 +77,47 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
+  textTitleBox: {
+    alignSelf: "center",
+    color: "#f094c0",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  boxLineList: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 10,
+  },
+  itemLineList: {
+    width: "22%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 6,
+    borderRadius: 10,
+    backgroundColor: "#f094c0",
+    gap: 5,
+    borderWidth: 3,
+    borderColor: "#f094c0",
+  },
+  textMonth: {
+    color: "#fff",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  iconStatusMonth: {
+    fontSize: 15,
+    color: "#fff",
+  },
+  currentMonth: {
+    borderColor: "#339DD7",
+  },
+  blockedMonth: {
+    opacity: 0.7,
+    // borderColor: "#fff",
+  },
+
   boxShadowLight: {
     shadowColor: "#ffffff",
     shadowOffset: {

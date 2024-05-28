@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -36,28 +36,90 @@ export default function PerfilUser({ navigation }) {
           Gustavo Caldonho de Souza Magnago
         </Text> */}
         </View>
-        <View style={[styles.boxInformationsUser, styles.boxShadow]}>
-          <View style={styles.line}>
-            <Text style={styles.textLabel}>CPF:</Text>
-            <Text style={styles.textData}>232.454.606-90</Text>
-          </View>
-          <View style={styles.line}>
-            <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>
-            <Text style={styles.textData}>12/09/2000</Text>
-          </View>
-          <View style={styles.line}>
-            <Text style={styles.textLabel}>EMAIL:</Text>
-            <Text style={styles.textData}>nomesobrenome@gmail.com</Text>
-          </View>
-          <View style={styles.line}>
-            <Text style={styles.textLabel}>COMUNIDADE:</Text>
-            <Text style={styles.textData}>São Geraldo - Sapucaia</Text>
-          </View>
+        <ScrollView>
+          <View style={[styles.boxInformationsUser, styles.boxShadow]}>
+            <View style={styles.line}>
+              <Text style={styles.textLabel}>CPF:</Text>
+              <Text style={styles.textData}>232.454.606-90</Text>
+            </View>
+            <View style={styles.line}>
+              <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>
+              <Text style={styles.textData}>12/09/2000</Text>
+            </View>
+            <View style={styles.line}>
+              <Text style={styles.textLabel}>EMAIL:</Text>
+              <Text style={styles.textData}>nomesobrenome@gmail.com</Text>
+            </View>
+            <View style={styles.line}>
+              <Text style={styles.textLabel}>COMUNIDADE:</Text>
+              <Text style={styles.textData}>São Geraldo - Sapucaia</Text>
+            </View>
 
-          <TouchableOpacity style={styles.buttonChangeDatas}>
-            <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity style={styles.buttonChangeDatas}>
+              <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={[styles.boxInformationsUser, styles.boxShadow]}>
+            <Text style={styles.textTitleBox}>DÍZIMO</Text>
+            <View style={styles.boxLineList}>
+              <View style={styles.itemLineList}>
+                <Text style={styles.textMonth}>JAN</Text>
+                <Icon name="heart" style={styles.iconStatusMonth} />
+              </View>
+              <View style={styles.itemLineList}>
+                <Text style={styles.textMonth}>FEV</Text>
+                <Icon name="heart" style={styles.iconStatusMonth} />
+              </View>
+              <View style={styles.itemLineList}>
+                <Text style={styles.textMonth}>MAR</Text>
+                <Icon name="heart" style={styles.iconStatusMonth} />
+              </View>
+              <View style={styles.itemLineList}>
+                <Text style={styles.textMonth}>ABR</Text>
+                <Icon name="remove" style={styles.iconStatusMonth} />
+              </View>
+            </View>
+            <View style={styles.boxLineList}>
+              <View style={styles.itemLineList}>
+                <Text style={styles.textMonth}>MAI</Text>
+                <Icon name="remove" style={styles.iconStatusMonth} />
+              </View>
+              <View style={[styles.itemLineList, styles.currentMonth]}>
+                <Text style={styles.textMonth}>JUN</Text>
+                <Icon name="exclamation" style={styles.iconStatusMonth} />
+              </View>
+              <View style={[styles.itemLineList, styles.blockedMonth]}>
+                <Text style={styles.textMonth}>JUL</Text>
+                <Icon name="minus" style={styles.iconStatusMonth} />
+              </View>
+              <View style={[styles.itemLineList, styles.blockedMonth]}>
+                <Text style={styles.textMonth}>AGO</Text>
+                <Icon name="minus" style={styles.iconStatusMonth} />
+              </View>
+            </View>
+            <View style={styles.boxLineList}>
+              <View style={[styles.itemLineList, styles.blockedMonth]}>
+                <Text style={styles.textMonth}>SET</Text>
+                <Icon name="minus" style={styles.iconStatusMonth} />
+              </View>
+              <View style={[styles.itemLineList, styles.blockedMonth]}>
+                <Text style={styles.textMonth}>OUT</Text>
+                <Icon name="minus" style={styles.iconStatusMonth} />
+              </View>
+              <View style={[styles.itemLineList, styles.blockedMonth]}>
+                <Text style={styles.textMonth}>NOV</Text>
+                <Icon name="minus" style={styles.iconStatusMonth} />
+              </View>
+              <View style={[styles.itemLineList, styles.blockedMonth]}>
+                <Text style={styles.textMonth}>DEZ</Text>
+                <Icon name="minus" style={styles.iconStatusMonth} />
+              </View>
+            </View>
+          </View>
+          <View style={[styles.boxInformationsUser, styles.boxShadow]}>
+            <Text style={styles.textTitleBox}>CAIXA MORTUÁRIA</Text>
+          </View>
+        </ScrollView>
       </LinearGradient>
     </View>
   );
