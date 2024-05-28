@@ -83,34 +83,50 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  boxLineList: {
+  boxLineListDizimo: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingVertical: 10,
   },
+  boxLineListMortuary: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 12,
+    paddingVertical: 10,
+    flexWrap: "wrap",
+  },
   itemLineList: {
-    width: "22%",
+    width: "23%",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 6,
-    borderRadius: 10,
+    paddingVertical: 8,
+    borderRadius: 12,
     backgroundColor: "#f094c0",
     gap: 5,
     borderWidth: 3,
-    borderColor: "#f094c0",
+    borderColor: "#fff",
   },
   textMonth: {
     color: "#fff",
     fontSize: 15,
     fontWeight: "600",
   },
+  textYear: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "900",
+  },
   iconStatusMonth: {
     fontSize: 15,
     color: "#fff",
   },
   currentMonth: {
+    borderColor: "#339DD7",
+  },
+  currentYear: {
     borderColor: "#339DD7",
   },
   blockedMonth: {

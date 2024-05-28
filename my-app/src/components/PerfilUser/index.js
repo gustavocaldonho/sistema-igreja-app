@@ -61,7 +61,7 @@ export default function PerfilUser({ navigation }) {
           </View>
           <View style={[styles.boxInformationsUser, styles.boxShadow]}>
             <Text style={styles.textTitleBox}>DÍZIMO</Text>
-            <View style={styles.boxLineList}>
+            <View style={styles.boxLineListDizimo}>
               <View style={styles.itemLineList}>
                 <Text style={styles.textMonth}>JAN</Text>
                 <Icon name="heart" style={styles.iconStatusMonth} />
@@ -79,7 +79,7 @@ export default function PerfilUser({ navigation }) {
                 <Icon name="remove" style={styles.iconStatusMonth} />
               </View>
             </View>
-            <View style={styles.boxLineList}>
+            <View style={styles.boxLineListDizimo}>
               <View style={styles.itemLineList}>
                 <Text style={styles.textMonth}>MAI</Text>
                 <Icon name="remove" style={styles.iconStatusMonth} />
@@ -97,7 +97,7 @@ export default function PerfilUser({ navigation }) {
                 <Icon name="minus" style={styles.iconStatusMonth} />
               </View>
             </View>
-            <View style={styles.boxLineList}>
+            <View style={styles.boxLineListDizimo}>
               <View style={[styles.itemLineList, styles.blockedMonth]}>
                 <Text style={styles.textMonth}>SET</Text>
                 <Icon name="minus" style={styles.iconStatusMonth} />
@@ -118,6 +118,16 @@ export default function PerfilUser({ navigation }) {
           </View>
           <View style={[styles.boxInformationsUser, styles.boxShadow]}>
             <Text style={styles.textTitleBox}>CAIXA MORTUÁRIA</Text>
+            <View style={styles.boxLineListMortuary}>
+              <View style={styles.itemLineList}>
+                <Text style={styles.textYear}>2023</Text>
+                <Icon name="heart" style={styles.iconStatusMonth} />
+              </View>
+              <View style={[styles.itemLineList, styles.currentYear]}>
+                <Text style={styles.textYear}>2024</Text>
+                <Icon name="heart" style={styles.iconStatusMonth} />
+              </View>
+            </View>
           </View>
         </ScrollView>
       </LinearGradient>
