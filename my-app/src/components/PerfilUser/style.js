@@ -4,13 +4,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#339DD7",
+    paddingTop: 60,
   },
   boxTop: {
     width: "100%",
   },
   boxIconLeft: {
-    marginTop: 70,
-    paddingLeft: 15,
+    position: "absolute",
+    top: 15,
+    left: 20,
   },
   iconLeft: {
     color: "#fff",
@@ -24,7 +26,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 120,
     borderColor: "#fff",
-    // borderWidth: 3,
   },
   imageProfile: {
     width: "100%",

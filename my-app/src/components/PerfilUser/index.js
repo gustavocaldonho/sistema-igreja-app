@@ -17,12 +17,12 @@ export default function PerfilUser({ navigation }) {
         end={{ x: 0, y: 0.1 }}
         colors={["#f094c0", "#339dd7"]}
       >
+        <View style={styles.boxIconLeft}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="chevron-left" size={25} style={styles.iconLeft} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.boxTop}>
-          <View style={styles.boxIconLeft}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="chevron-left" size={25} style={styles.iconLeft} />
-            </TouchableOpacity>
-          </View>
           <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
             <Image
               style={styles.imageProfile}
