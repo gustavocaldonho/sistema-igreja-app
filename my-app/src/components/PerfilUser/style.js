@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   },
   boxIconCamera: {
     position: "absolute",
-    bottom: 0,
-    right: 0,
+    bottom: 5,
+    right: 5,
     padding: 8,
     borderRadius: 40,
     backgroundColor: "#fff",
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   boxImageProfile: {
     width: 200,
     height: 200,
+    marginTop: 15,
     alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
@@ -145,7 +146,6 @@ const styles = StyleSheet.create({
   },
   blockedMonth: {
     opacity: 0.7,
-    // borderColor: "#fff",
   },
 
   boxShadowLight: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.9,
     shadowRadius: 3.05,
-    elevation: 50,
+    elevation: 20,
   },
   boxShadow: {
     shadowColor: "#000000",
