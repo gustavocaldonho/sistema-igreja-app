@@ -1,18 +1,8 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Modal,
-  Pressable,
-  Image,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
-// import Icon from "react-native-vector-icons/FontAwesome";
-// import InputGroupValorDizimo from "../InputGroup/InputGroupValorDizimo";
 import ModalPagamentoDizimo from "./modalPagamento/";
 
 export default function Dizimo({ navigation }) {

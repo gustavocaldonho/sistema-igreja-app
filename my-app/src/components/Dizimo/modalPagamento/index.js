@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-import {
-  Modal,
-  View,
-  Text,
-  Pressable,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
-import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/FontAwesome";
 import InputGroupValorDizimo from "../../InputGroup/InputGroupValorDizimo";
 
