@@ -11,13 +11,12 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
-import Icon from "react-native-vector-icons/FontAwesome";
-import InputGroupValorDizimo from "../InputGroup/InputGroupValorDizimo";
+// import Icon from "react-native-vector-icons/FontAwesome";
+// import InputGroupValorDizimo from "../InputGroup/InputGroupValorDizimo";
+import ModalPagamentoDizimo from "./modalPagamento/";
 
 export default function Dizimo({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [valorDizimo, setValorDizimo] = useState("");
-  const [codPix, setCodePix] = useState(null);
 
   return (
     <View style={styles.container}>
@@ -32,66 +31,14 @@ export default function Dizimo({ navigation }) {
         colors={["#f094c0", "#339dd7"]}
       >
         <ScrollView style={styles.main}>
-          <Modal
-            animationType="fade"
-            transparent={false}
-            visible={modalVisible}
-            onRequestClose={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Pressable
-                  style={styles.buttonClose}
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                    setValorDizimo(0);
-                    setCodePix(null);
-                  }}
-                >
-                  <Text style={styles.textStyle}>
-                    <Icon name="close" size={25} color="red" />
-                  </Text>
-                </Pressable>
-                {codPix == null ? (
-                  <View>
-                    <Text style={styles.modalText}>Qual Valor?</Text>
-                    <InputGroupValorDizimo
-                      placeholder="10 (10 reais)"
-                      value={valorDizimo}
-                      onChangeText={setValorDizimo}
-                    />
-                    <Text style={styles.errorMessage}></Text>
-                    <TouchableOpacity
-                      style={styles.boxButtonPix}
-                      onPress={() => {
-                        setCodePix(10);
-                      }}
-                    >
-                      <Text style={styles.textButtonPix}>Gerar Pix</Text>
-                    </TouchableOpacity>
-                  </View>
-                ) : (
-                  <View>
-                    <Text style={styles.modalText}>Código Pix</Text>
-                    <Image
-                      style={styles.qrcode}
-                      source={require("../../images/qrcode.png")}
-                    />
-                    <TouchableOpacity
-                      style={styles.boxButtonCopyCode}
-                      onPress={() => {
-                        setCodePix(null);
-                      }}
-                    >
-                      <Text style={styles.textButtonCode}>Copiar Código</Text>
-                    </TouchableOpacity>
-                  </View>
-                )}
-              </View>
-            </View>
-          </Modal>
+          {modalVisible ? (
+            <ModalPagamentoDizimo
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+            />
+          ) : (
+            <View />
+          )}
 
           <View style={styles.boxItem}>
             <View style={styles.boxTop}>
