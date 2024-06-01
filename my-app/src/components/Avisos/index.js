@@ -10,17 +10,10 @@ export default function Avisos({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#fff" />
-
-      <View style={styles.boxHeader}>
-        <Text style={styles.textHeader}>Avisos</Text>
-      </View>
-
       <LinearGradient
         style={{
           width: "100%",
           height: "100%",
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
         }}
         start={{ x: 0, y: 1 }}
         end={{ x: 0, y: 0.1 }}

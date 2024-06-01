@@ -4,11 +4,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     overflow: "hidden",
-    borderTopWidth: 2,
-    borderRightWidth: 1,
-    borderLeftWidth: 1,
-    borderColor: "#339dd7",
-    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: "red",
   },
   main: {
     width: "100%",
