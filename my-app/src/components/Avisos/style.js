@@ -6,7 +6,10 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    backgroundColor: "red",
+    borderTopWidth: 2,
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+    borderColor: "#339dd7",
   },
   main: {
     width: "100%",
