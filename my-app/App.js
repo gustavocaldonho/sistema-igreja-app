@@ -39,14 +39,7 @@ function MyStack() {
           headerTitleStyle: styles.titleHeader,
           headerTitleAlign: "center",
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon
-                name="chevron-left"
-                size={25}
-                color="#339dd7"
-                style={{ marginLeft: 15 }}
-              />
-            </TouchableOpacity>
+            <ButtonBack navigation={navigation} color={"#339dd7"} />
           ),
         })}
       />
