@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import { LinearGradient } from "expo-linear-gradient";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
+import ButtonBack from "./src/components/ButtonBack";
 
 import Title from "./src/components/Title";
 import FormLogin from "./src/components/FormLogin";
@@ -24,9 +19,6 @@ import Comunidades from "./src/components/Comunidades";
 import Dizimo from "./src/components/Dizimo";
 import Users from "./src/components/Users";
 import PerfilUser from "./src/components/PerfilUser";
-
-import { Dimensions } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 
 const Stack = createStackNavigator();
 
@@ -42,29 +34,7 @@ function MyStack() {
         name="Avisos"
         component={Avisos}
         options={({ navigation }) => ({
-          headerShown: false,
-          // title: "Avisos",
-          // headerStyle: styles.headerStyle,
-          // headerTitleStyle: styles.titleHeader,
-          // headerTitleAlign: "center",
-          // headerLeft: () => (
-          //   <TouchableOpacity onPress={() => navigation.goBack()}>
-          //     <Icon
-          //       name="chevron-left"
-          //       size={25}
-          //       color="#339dd7"
-          //       style={{ marginLeft: 15 }}
-          //     />
-          //   </TouchableOpacity>
-          // ),
-        })}
-      />
-      <Stack.Screen name="Comunidades" component={Comunidades} />
-      <Stack.Screen
-        name="CaixaMortuario"
-        component={CaixaMortuario}
-        options={({ navigation }) => ({
-          title: "Caixa Mortuária",
+          title: "Avisos",
           headerStyle: styles.headerStyle,
           headerTitleStyle: styles.titleHeader,
           headerTitleAlign: "center",
@@ -80,6 +50,20 @@ function MyStack() {
           ),
         })}
       />
+      <Stack.Screen name="Comunidades" component={Comunidades} />
+      <Stack.Screen
+        name="CaixaMortuario"
+        component={CaixaMortuario}
+        options={({ navigation }) => ({
+          title: "Caixa Mortuária",
+          headerStyle: styles.headerStyle,
+          headerTitleStyle: [styles.titleHeader, styles.sizeSmallHeader],
+          headerTitleAlign: "center",
+          headerLeft: () => (
+            <ButtonBack navigation={navigation} color={"#339dd7"} />
+          ),
+        })}
+      />
       <Stack.Screen
         name="Dizimo"
         component={Dizimo}
@@ -89,14 +73,7 @@ function MyStack() {
           headerTitleStyle: styles.titleHeader,
           headerTitleAlign: "center",
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon
-                name="chevron-left"
-                size={25}
-                color="#339dd7"
-                style={{ marginLeft: 15 }}
-              />
-            </TouchableOpacity>
+            <ButtonBack navigation={navigation} color={"#339dd7"} />
           ),
         })}
       />
@@ -172,7 +149,7 @@ export default function TabOneScreen() {
                     changeToRegister(false);
                   }}
                 >
-                  <Icon name={"chevron-left"} size={20} color="#ffffff" />
+                  <Icon name={"chevron-left"} size={25} color="#ffffff" />
                 </TouchableOpacity>
               </View>
             ) : (

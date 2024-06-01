@@ -9,14 +9,9 @@ const styles = StyleSheet.create({
   boxTop: {
     width: "100%",
   },
-  boxIconLeft: {
+  boxButtonBack: {
     position: "absolute",
-    top: 15,
-    left: 20,
-  },
-  iconLeft: {
-    color: "#fff",
-    fontSize: 25,
+    top: 0,
   },
   boxIconCamera: {
     position: "absolute",
