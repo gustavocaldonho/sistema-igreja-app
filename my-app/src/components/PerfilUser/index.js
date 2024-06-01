@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { LinearGradient } from "expo-linear-gradient";
+import ButtonBack from "../ButtonBack";
 
 import styles from "./style";
 
@@ -17,10 +18,8 @@ export default function PerfilUser({ navigation }) {
         end={{ x: 0, y: 0.1 }}
         colors={["#f094c0", "#339dd7"]}
       >
-        <View style={styles.boxIconLeft}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="chevron-left" style={styles.iconLeft} />
-          </TouchableOpacity>
+        <View style={styles.boxButtonBack}>
+          <ButtonBack navigation={navigation} color={"#fff"} />
         </View>
         <View style={styles.boxTop}>
           <View style={[styles.boxImageProfile, styles.boxShadowLight]}>

@@ -73,37 +73,23 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   buttonBack: {
-    alignItems: "flex-end",
     position: "absolute",
     top: 70,
     left: 0,
-    width: 60,
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
-    backgroundColor: "#339dd7",
   },
   textButtonBack: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: 40,
-    height: 40,
-    borderRadius: 50,
-    paddingRight: 2,
-    backgroundColor: "#339dd7",
-    borderWidth: 2,
-    borderColor: "#ffffff",
+    padding: 20,
+  },
+  headerStyle: {
+    height: 130,
+    backgroundColor: "#fff",
   },
   titleHeader: {
     fontSize: 40,
     color: "#339dd7",
   },
-  headerStyle: {
-    height: 130,
-    // backgroundColor: "#339dd7",
-    backgroundColor: "#fff",
+  sizeSmallHeader: {
+    fontSize: 37,
   },
 });
 
