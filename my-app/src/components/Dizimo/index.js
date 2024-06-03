@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { LinearGradient } from "expo-linear-gradient";
 import styles from "./style";
 import ModalPagamentoDizimo from "./modalPagamento/";
+import ScreenBase from "../ScreenBase";
 
 export default function Dizimo({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -11,17 +10,8 @@ export default function Dizimo({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <StatusBar backgroundColor="#fff" />
-        <LinearGradient
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          start={{ x: 0, y: 1 }}
-          end={{ x: 0, y: 0.1 }}
-          colors={["#f094c0", "#339dd7"]}
-        >
-          <ScrollView style={styles.main}>
+        <ScreenBase colorStatusBar={"#fff"} style={{ flex: 1 }}>
+          <View style={styles.main}>
             {modalVisible ? (
               <ModalPagamentoDizimo
                 modalVisible={modalVisible}
@@ -59,8 +49,8 @@ export default function Dizimo({ navigation }) {
                 </View>
               </View>
             </View>
-          </ScrollView>
-        </LinearGradient>
+          </View>
+        </ScreenBase>
       </View>
     </View>
   );
