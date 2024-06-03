@@ -1,27 +1,15 @@
 import React from "react";
 import { View, Text } from "react-native";
 import styles from "./style";
-import { StatusBar } from "expo-status-bar";
-import { LinearGradient } from "expo-linear-gradient";
-import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
+import ScreenBase from "../ScreenBase";
 
 export default function Avisos({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <StatusBar backgroundColor="#fff" />
-        <LinearGradient
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          start={{ x: 0, y: 1 }}
-          end={{ x: 0, y: 0.1 }}
-          colors={["#f094c0", "#339dd7"]}
-        >
-          <ScrollView style={styles.main}>
+        <ScreenBase colorStatusBar={"#fff"} style={{ flex: 1 }}>
+          <View style={styles.main}>
             <View style={[styles.boxItem, styles.notRead]}>
               <View style={styles.boxTitle}>
                 <Text style={[styles.textTitle, styles.titleNotDisplayed]}>
@@ -52,8 +40,10 @@ export default function Avisos({ navigation }) {
                 </Text>
               </View>
             </View>
-          </ScrollView>
-        </LinearGradient>
+          </View>
+        </ScreenBase>
+        {/* </ScrollView>
+        </LinearGradient> */}
       </View>
     </View>
   );
