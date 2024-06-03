@@ -49,7 +49,7 @@ export default function Menu({ navigation }) {
         <View style={styles.boxLine}>
           <TouchableOpacity
             style={styles.boxOption}
-            onPress={() => navigation.navigate("Familias")}
+            onPress={() => navigation.navigate("Users")}
           >
             <Icon name="users" style={styles.icon} />
             <Text style={styles.textOption}>Usuários</Text>

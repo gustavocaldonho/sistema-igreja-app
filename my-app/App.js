@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ButtonBack from "./src/components/ButtonBack";
+import BoxLinearGradient from "./src/components/ScreenBase/BoxLinearGradient";
 
 import Title from "./src/components/Title";
 import FormLogin from "./src/components/FormLogin";
@@ -43,7 +44,6 @@ function MyStack() {
           ),
         })}
       />
-      <Stack.Screen name="Comunidades" component={Comunidades} />
       <Stack.Screen
         name="CaixaMortuario"
         component={CaixaMortuario}
@@ -77,13 +77,26 @@ function MyStack() {
           headerShown: false,
         })}
       />
-      <Stack.Screen name="Users" component={Users} />
+      <Stack.Screen name="Comunidades" component={Comunidades} />
+      <Stack.Screen
+        name="Users"
+        component={Users}
+        options={({ navigation }) => ({
+          title: "Usuários",
+          headerStyle: styles.headerStyle,
+          headerTitleStyle: styles.titleHeader,
+          headerTitleAlign: "center",
+          headerLeft: () => (
+            <ButtonBack navigation={navigation} color={"#339dd7"} />
+          ),
+        })}
+      />
     </Stack.Navigator>
   );
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
   const [cadastroEntry, setCadastroEntry] = useState(false);
 
   function changeToRegister(signal) {
@@ -97,19 +110,11 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#339DD7" />
-      <LinearGradient
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 0, y: 0.1 }}
-        colors={["#f094c0", "#339dd7"]}
-      >
-        {/* <StatusBar backgroundColor="#f7c7de" /> */}
-        {/* <StatusBar backgroundColor="#f094c0" /> */}
-        {/* <StatusBar backgroundColor="#fff" /> */}
+      {/* <StatusBar backgroundColor="#f7c7de" /> */}
+      {/* <StatusBar backgroundColor="#f094c0" /> */}
+      {/* <StatusBar backgroundColor="#fff" /> */}
 
+      <BoxLinearGradient>
         {logged == false ? (
           <View style={styles.main}>
             <View style={styles.boxBackgroundTop}>
@@ -154,7 +159,7 @@ export default function TabOneScreen() {
             <MyStack />
           </NavigationContainer>
         )}
-      </LinearGradient>
+      </BoxLinearGradient>
     </View>
   );
 }
