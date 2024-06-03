@@ -1,17 +1,7 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Modal,
-  Pressable,
-  Image,
-} from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
-import Icon from "react-native-vector-icons/FontAwesome";
+import ScreenBase from "../ScreenBase";
 
 export default function CaixaMortuaria({ navigation }) {
   const [valorCaixaMortuaria, setValorCaixaMortuaria] = useState("");
@@ -20,17 +10,8 @@ export default function CaixaMortuaria({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <StatusBar backgroundColor="#fff" />
-        <LinearGradient
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          start={{ x: 0, y: 1 }}
-          end={{ x: 0, y: 0.1 }}
-          colors={["#f094c0", "#339dd7"]}
-        >
-          <ScrollView style={styles.main}>
+        <ScreenBase colorStatusBar={"#fff"} style={{ flex: 1 }}>
+          <View style={styles.main}>
             <View style={styles.boxItem}>
               <View style={styles.boxTop}>
                 <View style={styles.boxStatus}>
@@ -54,8 +35,8 @@ export default function CaixaMortuaria({ navigation }) {
                 </View>
               </View>
             </View>
-          </ScrollView>
-        </LinearGradient>
+          </View>
+        </ScreenBase>
       </View>
     </View>
   );
