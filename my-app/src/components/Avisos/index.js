@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
+import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 
 export default function Avisos({ navigation }) {
   return (
