@@ -1,23 +1,15 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { LinearGradient } from "expo-linear-gradient";
 import ButtonBack from "../ButtonBack";
+import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 
 import styles from "./style";
 
 export default function PerfilUser({ navigation }) {
   return (
     <View style={styles.container}>
-      <LinearGradient
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
-        start={{ x: 0, y: 1 }}
-        end={{ x: 0, y: 0.1 }}
-        colors={["#f094c0", "#339dd7"]}
-      >
+      <BoxLinearGradient>
         <View style={styles.boxButtonBack}>
           <ButtonBack navigation={navigation} color={"#fff"} />
         </View>
@@ -142,7 +134,7 @@ export default function PerfilUser({ navigation }) {
             </View>
           </View>
         </ScrollView>
-      </LinearGradient>
+      </BoxLinearGradient>
     </View>
   );
 }
