@@ -8,7 +8,7 @@ export default function Avisos({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <ScreenBase colorStatusBar={"#fff"} style={{ flex: 1 }}>
+        <ScreenBase colorStatusBar={"#fff"}>
           <View style={styles.main}>
             <View style={[styles.boxItem, styles.notRead]}>
               <View style={styles.boxTitle}>

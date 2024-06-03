@@ -9,7 +9,7 @@ import styles from "./style";
 export default function PerfilUser({ navigation }) {
   return (
     <View style={styles.container}>
-      <BoxLinearGradient>
+      <BoxLinearGradient style={{ flex: 1 }}>
         <View style={styles.boxButtonBack}>
           <ButtonBack navigation={navigation} color={"#fff"} />
         </View>
