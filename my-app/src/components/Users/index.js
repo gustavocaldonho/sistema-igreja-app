@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View } from "react-native";
 import styles from "./style";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { TextInput } from "react-native-gesture-handler";
 
 import ScreenBase from "../ScreenBase";
 import PerfilUser from "../PerfilUser";
 import BoxSearch from "../BoxSearch";
+import ItemUser from "./ItemUser";
 
 export default function Users({ navigation }) {
   return (
@@ -15,19 +14,9 @@ export default function Users({ navigation }) {
         <BoxSearch />
         <ScreenBase colorStatusBar={"#fff"}>
           <View style={styles.main}>
-            <Pressable>
-              <View style={styles.boxItem}>
-                <View style={styles.boxIconLeft}>
-                  <Icon name="user" style={styles.iconUser} />
-                </View>
-                <View style={styles.boxName}>
-                  <Text style={styles.textName}>Gustavo Caldonho</Text>
-                </View>
-                <View style={styles.boxIconRight}>
-                  <Icon name="chevron-right" style={styles.iconRight} />
-                </View>
-              </View>
-            </Pressable>
+            <ItemUser nameUser={"Gustavo Caldonho"} />
+            <ItemUser nameUser={"Maria José das Dores"} />
+            <ItemUser nameUser={"Antônio Carlos"} />
           </View>
         </ScreenBase>
       </View>
