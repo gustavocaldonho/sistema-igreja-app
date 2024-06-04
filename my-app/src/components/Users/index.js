@@ -14,6 +14,7 @@ export default function Users({ navigation }) {
         <BoxSearch />
         <ScreenBase colorStatusBar={"#fff"}>
           <View style={styles.main}>
+            <ItemUser nameUser={"Fábio Antonio Astori"} />
             <ItemUser nameUser={"Gustavo Caldonho"} />
             <ItemUser nameUser={"Maria José das Dores"} />
             <ItemUser nameUser={"Antônio Carlos"} />
