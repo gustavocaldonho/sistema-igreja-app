@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, TouchableHighlight } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ItemUser(props) {
   return (
-    <Pressable>
+    <TouchableOpacity activeOpacity={0.7}>
       <View style={styles.boxItem}>
         <View style={styles.boxIconLeft}>
           <Icon name="user" style={styles.iconUser} />
@@ -17,6 +18,6 @@ export default function ItemUser(props) {
           <Icon name="chevron-right" style={styles.iconRight} />
         </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
