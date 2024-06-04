@@ -22,6 +22,160 @@ export default function Users({ navigation }) {
                 <Icon name="chevron-right" style={styles.iconRight} />
               </View>
             </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
+            <View style={styles.boxItem}>
+              <View style={styles.boxIconLeft}>
+                <Icon name="user" style={styles.iconUser} />
+              </View>
+              <View style={styles.boxName}>
+                <Text style={styles.textName}>Gustavo Caldonho</Text>
+              </View>
+              <View style={styles.boxIconRight}>
+                <Icon name="chevron-right" style={styles.iconRight} />
+              </View>
+            </View>
           </View>
         </ScreenBase>
       </View>
