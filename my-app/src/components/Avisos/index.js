@@ -42,8 +42,6 @@ export default function Avisos({ navigation }) {
             </View>
           </View>
         </ScreenBase>
-        {/* </ScrollView>
-        </LinearGradient> */}
       </View>
     </View>
   );
