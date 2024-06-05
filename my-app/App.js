@@ -76,12 +76,24 @@ function MyStack() {
           headerShown: false,
         })}
       />
-      <Stack.Screen name="Comunidades" component={Comunidades} />
       <Stack.Screen
         name="Users"
         component={Users}
         options={({ navigation }) => ({
           title: "Usuários",
+          headerStyle: styles.headerStyle,
+          headerTitleStyle: styles.titleHeader,
+          headerTitleAlign: "center",
+          headerLeft: () => (
+            <ButtonBack navigation={navigation} color={"#339dd7"} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Comunidades"
+        component={Comunidades}
+        options={({ navigation }) => ({
+          title: "Comunidades",
           headerStyle: styles.headerStyle,
           headerTitleStyle: styles.titleHeader,
           headerTitleAlign: "center",
