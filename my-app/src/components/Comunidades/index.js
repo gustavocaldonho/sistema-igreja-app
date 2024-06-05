@@ -17,8 +17,14 @@ export default function Comunidades({ navigation }) {
               patron={"São Geraldo Magela"}
               location={"Sapucaia"}
             />
-            {/* <ItemCommunity nameCommunity={"Santo Antônio"} /> */}
-            {/* <ItemCommunity nameCommunity={"Nossa Senhora das Graças"} /> */}
+            <ItemCommunity
+              patron={"Nossa Senhora das Graças"}
+              location={"Paul de Graça Aranha"}
+            />
+            <ItemCommunity
+              patron={"Nossa Senhora Auxiliadora"}
+              location={"Marilândia-ES"}
+            />
           </View>
         </ScreenBase>
       </View>

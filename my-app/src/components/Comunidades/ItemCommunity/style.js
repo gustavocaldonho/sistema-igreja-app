@@ -7,29 +7,28 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: "#fff",
     flexDirection: "row",
+    paddingHorizontal: 20,
   },
   boxIconLeft: {
     height: "100%",
-    width: "20%",
+    width: "10%",
     justifyContent: "center",
     alignItems: "flex-start",
-    paddingLeft: 20,
   },
   icon: {
-    fontSize: 25,
+    fontSize: 20,
     color: "#f094c0",
   },
   boxInformation: {
     height: "100%",
-    width: "70%",
+    width: "80%",
     justifyContent: "center",
+    paddingLeft: 10,
   },
   boxPatron: {
     width: "100%",
-    height: "55%",
     justifyContent: "flex-end",
     alignItems: "flex-start",
-    borderColor: "orange",
   },
   textPatron: {
     fontSize: 20,
@@ -38,10 +37,8 @@ const styles = StyleSheet.create({
   },
   boxLocation: {
     width: "100%",
-    height: "45%",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    borderColor: "green",
   },
   textLocation: {
     fontSize: 15,
@@ -53,7 +50,6 @@ const styles = StyleSheet.create({
     width: "10%",
     justifyContent: "center",
     alignItems: "flex-end",
-    paddingRight: 20,
   },
   iconRight: {
     fontSize: 17,
