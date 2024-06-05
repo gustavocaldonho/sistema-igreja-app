@@ -13,9 +13,12 @@ export default function Comunidades({ navigation }) {
         <BoxSearch />
         <ScreenBase colorStatusBar={"#fff"}>
           <View style={styles.main}>
-            <ItemCommunity nameCommunity={"São Geraldo"} />
-            <ItemCommunity nameCommunity={"Santo Antônio"} />
-            <ItemCommunity nameCommunity={"Nossa Senhora das Graças"} />
+            <ItemCommunity
+              patron={"São Geraldo Magela"}
+              location={"Sapucaia"}
+            />
+            {/* <ItemCommunity nameCommunity={"Santo Antônio"} /> */}
+            {/* <ItemCommunity nameCommunity={"Nossa Senhora das Graças"} /> */}
           </View>
         </ScreenBase>
       </View>
