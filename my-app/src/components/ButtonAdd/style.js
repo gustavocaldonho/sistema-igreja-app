@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#339dd7",
+    backgroundColor: "#287BBF",
   },
 
   iconAdd: {
