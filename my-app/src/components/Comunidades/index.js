@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import styles from "./style";
 
 import ScreenBase from "../ScreenBase";
+import ButtonAdd from "../ButtonAdd";
 import BoxSearch from "../BoxSearch";
 import ItemCommunity from "./ItemCommunity";
 
@@ -27,6 +28,7 @@ export default function Comunidades({ navigation }) {
             />
           </View>
         </ScreenBase>
+        <ButtonAdd />
       </View>
     </View>
   );

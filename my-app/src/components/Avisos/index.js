@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ScreenBase from "../ScreenBase";
+import ButtonAdd from "../ButtonAdd";
 
 export default function Avisos({ navigation }) {
   return (
@@ -43,6 +44,7 @@ export default function Avisos({ navigation }) {
           </View>
         </ScreenBase>
       </View>
+      <ButtonAdd />
     </View>
   );
 }

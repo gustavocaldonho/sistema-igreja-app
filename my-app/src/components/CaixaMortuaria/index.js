@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import ScreenBase from "../ScreenBase";
+import ButtonAdd from "../ButtonAdd";
 
 export default function CaixaMortuaria({ navigation }) {
   const [valorCaixaMortuaria, setValorCaixaMortuaria] = useState("");
@@ -37,6 +38,7 @@ export default function CaixaMortuaria({ navigation }) {
             </View>
           </View>
         </ScreenBase>
+        <ButtonAdd />
       </View>
     </View>
   );
