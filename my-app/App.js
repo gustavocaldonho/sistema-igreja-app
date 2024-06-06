@@ -23,6 +23,7 @@ import PerfilUser from "./src/components/PerfilUser";
 const Stack = createStackNavigator();
 
 function MyStack() {
+  // Todos os componentes definindos abaixo têm acesso a props "navigation"
   return (
     <Stack.Navigator>
       <Stack.Screen

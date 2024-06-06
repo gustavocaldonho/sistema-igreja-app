@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ButtonBack from "../ButtonBack";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 
 import styles from "./style";
 
-export default function PerfilUser({ navigation }) {
+export default function PerfilUser({ navigation, route }) {
+  const { nameUser } = route.params;
+  const { cpf } = route.params;
+  // console.log(route.params);
+
   return (
     <View style={styles.container}>
+      <StatusBar color="#339DD7" />
       <BoxLinearGradient style={{ flex: 1 }}>
         <View style={styles.boxButtonBack}>
           <ButtonBack navigation={navigation} color={"#fff"} />
@@ -27,7 +33,7 @@ export default function PerfilUser({ navigation }) {
           </View>
         </View>
         <View style={styles.boxNameUser}>
-          <Text style={styles.textNameUser}>Gustavo Caldonho</Text>
+          <Text style={styles.textNameUser}>{nameUser}</Text>
           {/* <Text style={styles.textNameUser}>
           Gustavo Caldonho de Souza Magnago
         </Text> */}
@@ -36,7 +42,7 @@ export default function PerfilUser({ navigation }) {
           <View style={[styles.boxInformationsUser, styles.boxShadow]}>
             <View style={styles.line}>
               <Text style={styles.textLabel}>CPF:</Text>
-              <Text style={styles.textData}>232.454.606-90</Text>
+              <Text style={styles.textData}>{cpf}</Text>
             </View>
             <View style={styles.line}>
               <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>

@@ -22,7 +22,12 @@ export default function Menu({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.boxOption}
-            onPress={() => navigation.navigate("PerfilUser")}
+            onPress={() =>
+              navigation.navigate("PerfilUser", {
+                nameUser: "Gustavo Caldonho",
+                cpf: "111.111.111-11",
+              })
+            }
           >
             <Icon name="user" style={styles.icon} />
             <Text style={styles.textOption}>Perfil</Text>
@@ -47,7 +52,7 @@ export default function Menu({ navigation }) {
         <View style={styles.boxLine}>
           <TouchableOpacity
             style={styles.boxOption}
-            onPress={() => navigation.navigate("Users")}
+            onPress={() => navigation.navigate("Users", {})}
           >
             <Icon name="users" style={styles.icon} />
             <Text style={styles.textOption}>Usuários</Text>
