@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#287BBF",
-    // backgroundColor: "#227BAA",
   },
 
   iconAdd: {
