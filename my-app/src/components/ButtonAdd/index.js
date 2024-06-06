@@ -1,12 +1,16 @@
 import React from "react";
+import { TouchableHighlight } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import styles from "./style";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ButtonAdd() {
   return (
-    <TouchableOpacity style={styles.boxButtonAdd} activeOpacity={0.7}>
+    <TouchableHighlight
+      style={styles.boxButtonAdd}
+      underlayColor={"#2893CC"}
+      onPress={() => console.log("+")}
+    >
       <FontAwesome5 name="plus" style={styles.iconAdd} />
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 }
