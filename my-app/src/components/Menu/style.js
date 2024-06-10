@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#339dd7",
   },
+  boxBackgroundTop: {
+    width: "100%",
+    height: "30%",
+    borderBottomEndRadius: 35,
+    borderBottomStartRadius: 35,
+  },
   textMenu: {
     color: "#fff",
     marginTop: 60,
