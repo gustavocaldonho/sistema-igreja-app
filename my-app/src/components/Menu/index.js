@@ -13,12 +13,23 @@ export default function Menu({ navigation }) {
       </View>
       <View style={styles.main}>
         <View style={styles.boxLine}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.boxOption}
             onPress={() => navigation.navigate("Avisos")}
           >
             <Icon name="info" style={styles.icon} />
             <Text style={styles.textOption}>Avisos</Text>
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            style={styles.boxOption}
+            onPress={() =>
+              navigation.navigate("PerfilCommunity", {
+                patron: "São Geraldo Magela",
+              })
+            }
+          >
+            <FontAwesome5 name="church" style={styles.icon} />
+            <Text style={styles.textOption}>Minha Comunidade</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.boxOption}
