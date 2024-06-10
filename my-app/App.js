@@ -19,6 +19,7 @@ import Comunidades from "./src/components/Comunidades";
 import Dizimo from "./src/components/Dizimo";
 import Users from "./src/components/Users";
 import PerfilUser from "./src/components/PerfilUser";
+import PerfilCommunity from "./src/components/PerfilCommunity";
 
 const Stack = createStackNavigator();
 
@@ -73,6 +74,13 @@ function MyStack() {
       <Stack.Screen
         name="PerfilUser"
         component={PerfilUser}
+        options={({ navigation }) => ({
+          headerShown: false,
+        })}
+      />
+      <Stack.Screen
+        name="PerfilCommunity"
+        component={PerfilCommunity}
         options={({ navigation }) => ({
           headerShown: false,
         })}

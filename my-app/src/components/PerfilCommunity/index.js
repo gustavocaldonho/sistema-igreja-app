@@ -9,9 +9,6 @@ import styles from "./style";
 
 export default function PerfilCommunity({ navigation, route }) {
   const { patron } = route.params;
-  //   const { nameUser } = route.params;
-  //   const { cpf } = route.params;
-  // console.log(route.params);
 
   return (
     <View style={styles.container}>
@@ -24,7 +21,7 @@ export default function PerfilCommunity({ navigation, route }) {
           <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
             <Image
               style={styles.imageProfile}
-              source={require("../../images/imageprofile.jpeg")}
+              source={require("../../images/church-icon.png")}
             />
             <View style={styles.boxIconCamera}>
               <TouchableOpacity onPress={() => {}}>
@@ -33,43 +30,12 @@ export default function PerfilCommunity({ navigation, route }) {
             </View>
           </View>
         </View>
-        <View style={styles.boxNameUser}>
-          <Text style={styles.textNameUser}>Banana Banana</Text>
-          {/* <Text style={styles.textNameUser}>
-          Gustavo Caldonho de Souza Magnago
-        </Text> */}
+        <View style={styles.boxNamePatron}>
+          <Text style={styles.textNamePatron}>{patron}</Text>
+          <Text style={styles.textLocation}>Sapucaia</Text>
         </View>
         <ScrollView>
-          <View style={[styles.boxInformationsUser, styles.boxShadow]}>
-            <View style={styles.line}>
-              <Text style={styles.textLabel}>CPF:</Text>
-              <Text style={styles.textData}>oioioio</Text>
-            </View>
-            <View style={styles.line}>
-              <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>
-              <Text style={styles.textData}>12/09/2000</Text>
-            </View>
-            <View style={styles.line}>
-              <Text style={[styles.textLabel, styles.textLabelEmail]}>
-                EMAIL:
-              </Text>
-              <Text style={[styles.textData, styles.textDataEmail]}>
-                nomesobrenome@gmail.com
-              </Text>
-            </View>
-            <View style={styles.line}>
-              <Text style={[styles.textLabel, styles.textLabelComunity]}>
-                COMUNIDADE:
-              </Text>
-              <Text style={[styles.textData, styles.textDataComunity]}>
-                São Geraldo Magela - Sapucaia
-              </Text>
-            </View>
-
-            <TouchableOpacity style={styles.buttonChangeDatas}>
-              <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
-            </TouchableOpacity>
-          </View>
+          {/* <View style={[styles.boxInformations, styles.boxShadow]}></View> */}
         </ScrollView>
       </BoxLinearGradient>
     </View>
