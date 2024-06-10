@@ -4,15 +4,21 @@ import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
+import ItemMenu from "./ItemMenu";
 
 export default function Menu({ navigation }) {
   return (
     <BoxLinearGradient style={styles.container}>
-      <View style={styles.boxBackgroundTop}>
-        <Text style={styles.textMenu}>MENU</Text>
-      </View>
+      <Text style={styles.textMenu}>MENU</Text>
       <View style={styles.main}>
         <View style={styles.boxLine}>
+          {/* <ItemMenu
+            navigation={navigation}
+            screenName={"Avisos"}
+            nameIcon={"info"}
+            screenNavigate={"Avisos"}
+            style={styles.boxOption}
+          /> */}
           <TouchableOpacity
             style={styles.boxOption}
             onPress={() => navigation.navigate("Avisos")}
@@ -20,6 +26,7 @@ export default function Menu({ navigation }) {
             <Icon name="info" style={styles.icon} />
             <Text style={styles.textOption}>Avisos</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.boxOption}
             onPress={() =>
