@@ -9,6 +9,7 @@ import styles from "./style";
 
 export default function PerfilCommunity({ navigation, route }) {
   const { patron } = route.params;
+  const { location } = route.params;
 
   return (
     <View style={styles.container}>
@@ -32,7 +33,7 @@ export default function PerfilCommunity({ navigation, route }) {
         </View>
         <View style={styles.boxNamePatron}>
           <Text style={styles.textNamePatron}>{patron}</Text>
-          <Text style={styles.textLocation}>Sapucaia</Text>
+          <Text style={styles.textLocation}>{location}</Text>
         </View>
         <ScrollView>
           {/* <View style={[styles.boxInformations, styles.boxShadow]}></View> */}

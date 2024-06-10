@@ -7,7 +7,7 @@ import ButtonAdd from "../ButtonAdd";
 import BoxSearch from "../BoxSearch";
 import ItemCommunity from "./ItemCommunity";
 
-export default function Comunidades({ navigation }) {
+export default function Comunidades(props) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -17,14 +17,17 @@ export default function Comunidades({ navigation }) {
             <ItemCommunity
               patron={"São Geraldo Magela"}
               location={"Sapucaia"}
+              navigation={props.navigation}
             />
             <ItemCommunity
               patron={"Nossa Senhora das Graças"}
               location={"Paul de Graça Aranha"}
+              navigation={props.navigation}
             />
             <ItemCommunity
               patron={"Nossa Senhora Auxiliadora"}
               location={"Marilândia-ES"}
+              navigation={props.navigation}
             />
           </View>
         </ScreenBase>

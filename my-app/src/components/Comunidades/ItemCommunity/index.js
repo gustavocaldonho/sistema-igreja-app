@@ -7,7 +7,15 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function ItemCommunity(props) {
   return (
-    <TouchableOpacity activeOpacity={0.7}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={() =>
+        props.navigation.navigate("PerfilCommunity", {
+          patron: props.patron,
+          location: props.location,
+        })
+      }
+    >
       <View style={styles.boxItem}>
         <View style={styles.boxIconLeft}>
           <FontAwesome5 name="church" style={styles.icon} />

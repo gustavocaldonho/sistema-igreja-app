@@ -25,6 +25,7 @@ export default function Menu({ navigation }) {
             onPress={() =>
               navigation.navigate("PerfilCommunity", {
                 patron: "São Geraldo Magela",
+                location: "Sapucaia",
               })
             }
           >
