@@ -13,24 +13,12 @@ export default function Menu({ navigation }) {
       </View>
       <View style={styles.main}>
         <View style={styles.boxLine}>
-          {/* <TouchableOpacity
+          <TouchableOpacity
             style={styles.boxOption}
             onPress={() => navigation.navigate("Avisos")}
           >
             <Icon name="info" style={styles.icon} />
             <Text style={styles.textOption}>Avisos</Text>
-          </TouchableOpacity> */}
-          <TouchableOpacity
-            style={styles.boxOption}
-            onPress={() =>
-              navigation.navigate("PerfilCommunity", {
-                patron: "São Geraldo Magela",
-                location: "Sapucaia",
-              })
-            }
-          >
-            <FontAwesome5 name="church" style={styles.icon} />
-            <Text style={styles.textOption}>Minha Comunidade</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.boxOption}
@@ -75,6 +63,20 @@ export default function Menu({ navigation }) {
           >
             <FontAwesome5 name="church" style={styles.icon} />
             <Text style={styles.textOption}>Comunidades</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.boxLine}>
+          <TouchableOpacity
+            style={styles.boxOption}
+            onPress={() =>
+              navigation.navigate("PerfilCommunity", {
+                patron: "São Geraldo Magela",
+                location: "Sapucaia",
+              })
+            }
+          >
+            <FontAwesome5 name="church" style={styles.icon} />
+            <Text style={styles.textOption}>Minha Comunidade</Text>
           </TouchableOpacity>
         </View>
       </View>
