@@ -63,23 +63,26 @@ const styles = StyleSheet.create({
     width: "85%",
     alignSelf: "center",
     marginBottom: 20,
+    borderRadius: 20,
+  },
+  boxHighlightInformations: {
     gap: 12,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
-  boxHighlightInformation: {
+  itemHighlightInformation: {
     width: "48%",
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingHorizontal: 12,
+    paddingVertical: 20,
     borderRadius: 20,
   },
   numberHighlight: {
     color: "#f094c0",
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "900",
   },
   textHighlight: {
@@ -93,6 +96,35 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
   },
+  titleBoxAdvidors: {
+    alignSelf: "center",
+    color: "#fff",
+    fontWeight: "500",
+    fontSize: 15,
+    marginBottom: 15,
+  },
+  itemAdvisor: {
+    width: "100%",
+    backgroundColor: "#fff",
+    borderRadius: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+    // borderWidth: 1,
+  },
+  textNameAdvisor: {
+    textAlign: "center",
+    color: "#f094c0",
+    fontSize: 18,
+    fontWeight: "500",
+  },
+  positionAdvisor: {
+    color: "#339DD7",
+    fontSize: 15,
+  },
+
   boxShadowLight: {
     shadowColor: "#ffffff",
     shadowOffset: {

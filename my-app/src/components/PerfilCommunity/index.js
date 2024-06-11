@@ -36,22 +36,55 @@ export default function PerfilCommunity({ navigation, route }) {
           <Text style={styles.textLocation}>{location}</Text>
         </View>
         <ScrollView>
-          <View style={[styles.boxInformations]}>
-            <View style={styles.boxHighlightInformation}>
+          <View
+            style={[styles.boxInformations, styles.boxHighlightInformations]}
+          >
+            <View style={styles.itemHighlightInformation}>
               <Text style={styles.numberHighlight}>647</Text>
               <Text style={styles.textHighlight}>Fiéis</Text>
             </View>
-            <View style={styles.boxHighlightInformation}>
+            <View style={styles.itemHighlightInformation}>
               <Text style={styles.numberHighlight}>470</Text>
               <Text style={styles.textHighlight}>Pagantes</Text>
             </View>
-            <View style={styles.boxHighlightInformation}>
+            <View style={styles.itemHighlightInformation}>
               <Text style={styles.numberHighlight}>3.460,00</Text>
               <Text style={styles.textHighlight}>Dízimo</Text>
             </View>
-            <View style={styles.boxHighlightInformation}>
+            <View style={styles.itemHighlightInformation}>
               <Text style={styles.numberHighlight}>23.500,00</Text>
               <Text style={styles.textHighlight}>Caixa Mortuária</Text>
+            </View>
+          </View>
+          <View style={[styles.boxInformations]}>
+            <Text style={styles.titleBoxAdvidors}>MEMBROS DO CONSELHO</Text>
+
+            {/* ícone de edição e exclusão dos conselheiros */}
+            {/* botão de adição de novos conselheiros */}
+            {/* "Componentizar" os itens abaixo */}
+            <View style={styles.itemAdvisor}>
+              <Text style={styles.textNameAdvisor}>Elizabeth Suann</Text>
+              <Text style={styles.positionAdvisor}>Diretor Geral</Text>
+            </View>
+            <View style={styles.itemAdvisor}>
+              <Text style={styles.textNameAdvisor}>
+                Marcos Antônio da Silva
+              </Text>
+              <Text style={styles.positionAdvisor}>Tesoureiro</Text>
+            </View>
+            <View style={styles.itemAdvisor}>
+              <Text style={styles.textNameAdvisor}>Rubinho Barrichelo</Text>
+              <Text style={styles.positionAdvisor}>Liturgia</Text>
+            </View>
+            <View style={styles.itemAdvisor}>
+              <Text style={styles.textNameAdvisor}>
+                Estevão Soares de Souza
+              </Text>
+              <Text style={styles.positionAdvisor}>Catecismo</Text>
+            </View>
+            <View style={styles.itemAdvisor}>
+              <Text style={styles.textNameAdvisor}>Milena Gomes Araújo</Text>
+              <Text style={styles.positionAdvisor}>Cemitério</Text>
             </View>
           </View>
         </ScrollView>
