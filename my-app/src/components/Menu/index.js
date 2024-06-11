@@ -4,14 +4,13 @@ import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function Menu({ navigation }) {
   return (
     <BoxLinearGradient style={styles.container}>
-      <View style={styles.boxBackgroundTop}>
-        <Text style={styles.textMenu}>MENU</Text>
-      </View>
-      <View style={styles.main}>
+      <Text style={styles.textMenu}>MENU</Text>
+      <ScrollView style={styles.main}>
         <View style={styles.boxLine}>
           <TouchableOpacity
             style={styles.boxOption}
@@ -79,7 +78,7 @@ export default function Menu({ navigation }) {
             <Text style={styles.textOption}>Minha Comunidade</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     </BoxLinearGradient>
   );
 }
