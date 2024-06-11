@@ -36,7 +36,24 @@ export default function PerfilCommunity({ navigation, route }) {
           <Text style={styles.textLocation}>{location}</Text>
         </View>
         <ScrollView>
-          {/* <View style={[styles.boxInformations, styles.boxShadow]}></View> */}
+          <View style={[styles.boxInformations]}>
+            <View style={styles.boxHighlightInformation}>
+              <Text style={styles.numberHighlight}>647</Text>
+              <Text style={styles.textHighlight}>Fiéis</Text>
+            </View>
+            <View style={styles.boxHighlightInformation}>
+              <Text style={styles.numberHighlight}>470</Text>
+              <Text style={styles.textHighlight}>Pagantes</Text>
+            </View>
+            <View style={styles.boxHighlightInformation}>
+              <Text style={styles.numberHighlight}>3.460,00</Text>
+              <Text style={styles.textHighlight}>Dízimo</Text>
+            </View>
+            <View style={styles.boxHighlightInformation}>
+              <Text style={styles.numberHighlight}>23.500,00</Text>
+              <Text style={styles.textHighlight}>Caixa Mortuária</Text>
+            </View>
+          </View>
         </ScrollView>
       </BoxLinearGradient>
     </View>
