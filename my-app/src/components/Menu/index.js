@@ -4,7 +4,6 @@ import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
-import { ScrollView } from "react-native-gesture-handler";
 
 export default function Menu({ navigation }) {
   return (
@@ -15,14 +14,14 @@ export default function Menu({ navigation }) {
         </View>
         <View style={styles.main}>
           <TouchableOpacity
-            style={styles.boxOption}
+            style={[styles.boxOption, styles.boxShadow]}
             onPress={() => navigation.navigate("Avisos")}
           >
             <Icon name="info" style={styles.icon} />
             <Text style={styles.textOption}>Avisos</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.boxOption}
+            style={[styles.boxOption, styles.boxShadow]}
             onPress={() =>
               navigation.navigate("PerfilUser", {
                 nameUser: "Gustavo Caldonho",
@@ -34,35 +33,35 @@ export default function Menu({ navigation }) {
             <Text style={styles.textOption}>Perfil</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.boxOption}
+            style={[styles.boxOption, styles.boxShadow]}
             onPress={() => navigation.navigate("Dizimo")}
           >
             <Icon name="heart" style={styles.icon} />
             <Text style={styles.textOption}>Dízimo</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.boxOption}
+            style={[styles.boxOption, styles.boxShadow]}
             onPress={() => navigation.navigate("CaixaMortuario")}
           >
             <FontAwesome5 name="cross" style={styles.icon} />
             <Text style={styles.textOption}>Caixa Mortuária</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.boxOption}
+            style={[styles.boxOption, styles.boxShadow]}
             onPress={() => navigation.navigate("Users", {})}
           >
             <Icon name="users" style={styles.icon} />
             <Text style={styles.textOption}>Usuários</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.boxOption}
+            style={[styles.boxOption, styles.boxShadow]}
             onPress={() => navigation.navigate("Comunidades")}
           >
             <FontAwesome5 name="church" style={styles.icon} />
             <Text style={styles.textOption}>Comunidades</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity
-            style={styles.boxOption}
+            style={[styles.boxOption, styles.boxShadow]}
             onPress={() =>
               navigation.navigate("PerfilCommunity", {
                 patron: "São Geraldo Magela",
