@@ -23,7 +23,7 @@ export default function PerfilUser({ navigation, route }) {
           <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
             <Image
               style={styles.imageProfile}
-              source={require("../../images/imageprofile.jpeg")}
+              source={require("../../images/img-perfil-user.png")}
             />
             <View style={styles.boxIconCamera}>
               <TouchableOpacity onPress={() => {}}>
