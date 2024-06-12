@@ -9,9 +9,11 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function Menu({ navigation }) {
   return (
     <BoxLinearGradient style={styles.container}>
-      <Text style={styles.textMenu}>MENU</Text>
-      <ScrollView style={styles.main}>
-        <View style={styles.boxLine}>
+      <View style={styles.innerContainer}>
+        <View style={styles.boxTitleMenu}>
+          <Text style={styles.textMenu}>MENU</Text>
+        </View>
+        <View style={styles.main}>
           <TouchableOpacity
             style={styles.boxOption}
             onPress={() => navigation.navigate("Avisos")}
@@ -31,8 +33,6 @@ export default function Menu({ navigation }) {
             <Icon name="user" style={styles.icon} />
             <Text style={styles.textOption}>Perfil</Text>
           </TouchableOpacity>
-        </View>
-        <View style={styles.boxLine}>
           <TouchableOpacity
             style={styles.boxOption}
             onPress={() => navigation.navigate("Dizimo")}
@@ -47,8 +47,6 @@ export default function Menu({ navigation }) {
             <FontAwesome5 name="cross" style={styles.icon} />
             <Text style={styles.textOption}>Caixa Mortuária</Text>
           </TouchableOpacity>
-        </View>
-        <View style={styles.boxLine}>
           <TouchableOpacity
             style={styles.boxOption}
             onPress={() => navigation.navigate("Users", {})}
@@ -63,9 +61,7 @@ export default function Menu({ navigation }) {
             <FontAwesome5 name="church" style={styles.icon} />
             <Text style={styles.textOption}>Comunidades</Text>
           </TouchableOpacity>
-        </View>
-        <View style={styles.boxLine}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.boxOption}
             onPress={() =>
               navigation.navigate("PerfilCommunity", {
@@ -75,10 +71,10 @@ export default function Menu({ navigation }) {
             }
           >
             <FontAwesome5 name="church" style={styles.icon} />
-            <Text style={styles.textOption}>Minha Comunidade</Text>
-          </TouchableOpacity>
+            <Text style={styles.textOption}>Comunidade</Text>
+          </TouchableOpacity> */}
         </View>
-      </ScrollView>
+      </View>
     </BoxLinearGradient>
   );
 }
