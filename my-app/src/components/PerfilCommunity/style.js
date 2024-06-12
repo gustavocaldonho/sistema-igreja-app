@@ -105,14 +105,12 @@ const styles = StyleSheet.create({
   },
   itemAdvisor: {
     width: "100%",
+    height: 55,
     backgroundColor: "#fff",
     borderRadius: 15,
-    paddingHorizontal: 20,
-    paddingVertical: 5,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
-    // borderWidth: 1,
   },
   textNameAdvisor: {
     textAlign: "center",
@@ -123,6 +121,26 @@ const styles = StyleSheet.create({
   positionAdvisor: {
     color: "#339DD7",
     fontSize: 15,
+  },
+  boxAddMembro: {
+    width: "100%",
+    height: 55,
+    borderRadius: 15,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+    borderWidth: 2,
+    borderColor: "#fff",
+  },
+  textAddMembro: {
+    fontSize: 15,
+    color: "#fff",
+    fontWeight: "500",
+  },
+  iconPlusMembro: {
+    fontSize: 18,
+    color: "#fff",
   },
 
   boxShadowLight: {

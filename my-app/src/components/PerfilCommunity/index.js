@@ -86,6 +86,11 @@ export default function PerfilCommunity({ navigation, route }) {
               <Text style={styles.textNameAdvisor}>Milena Gomes Araújo</Text>
               <Text style={styles.positionAdvisor}>Cemitério</Text>
             </View>
+
+            <TouchableOpacity style={styles.boxAddMembro}>
+              <Icon name="plus" style={styles.iconPlusMembro} />
+              <Text style={styles.textAddMembro}>ADICIONAR MEMBRO</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </BoxLinearGradient>
