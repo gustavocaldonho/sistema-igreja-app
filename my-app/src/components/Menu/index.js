@@ -1,9 +1,8 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import styles from "./style";
-import Icon from "react-native-vector-icons/FontAwesome";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
+import ItemMenu from "./ItemMenu";
 
 export default function Menu({ navigation }) {
   return (
@@ -13,65 +12,51 @@ export default function Menu({ navigation }) {
           <Text style={styles.textMenu}>MENU</Text>
         </View>
         <View style={styles.main}>
-          <TouchableOpacity
-            style={[styles.boxOption, styles.boxShadow]}
+          <ItemMenu
+            screenName={"Avisos"}
+            icon={"info"}
             onPress={() => navigation.navigate("Avisos")}
-          >
-            <Icon name="info" style={styles.icon} />
-            <Text style={styles.textOption}>Avisos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.boxOption, styles.boxShadow]}
+          />
+          <ItemMenu
+            screenName={"Perfil"}
+            icon={"user"}
             onPress={() =>
               navigation.navigate("PerfilUser", {
                 nameUser: "Gustavo Caldonho",
                 cpf: "111.111.111-11",
               })
             }
-          >
-            <Icon name="user" style={styles.icon} />
-            <Text style={styles.textOption}>Perfil</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.boxOption, styles.boxShadow]}
+          />
+          <ItemMenu
+            screenName={"Dízimo"}
+            icon={"heart"}
             onPress={() => navigation.navigate("Dizimo")}
-          >
-            <Icon name="heart" style={styles.icon} />
-            <Text style={styles.textOption}>Dízimo</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.boxOption, styles.boxShadow]}
+          />
+          <ItemMenu
+            screenName={"Caixa Mortuária"}
+            icon={"cross"}
             onPress={() => navigation.navigate("CaixaMortuario")}
-          >
-            <FontAwesome5 name="cross" style={styles.icon} />
-            <Text style={styles.textOption}>Caixa Mortuária</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.boxOption, styles.boxShadow]}
+          />
+          <ItemMenu
+            screenName={"Usuários"}
+            icon={"users"}
             onPress={() => navigation.navigate("Users", {})}
-          >
-            <Icon name="users" style={styles.icon} />
-            <Text style={styles.textOption}>Usuários</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.boxOption, styles.boxShadow]}
+          />
+          <ItemMenu
+            screenName={"Comunidades"}
+            icon={"church"}
             onPress={() => navigation.navigate("Comunidades")}
-          >
-            <FontAwesome5 name="church" style={styles.icon} />
-            <Text style={styles.textOption}>Comunidades</Text>
-          </TouchableOpacity>
-          {/* <TouchableOpacity
-            style={[styles.boxOption, styles.boxShadow]}
+          />
+          {/* <ItemMenu
+            screenName={"Comunidade"}
+            icon={"church"}
             onPress={() =>
               navigation.navigate("PerfilCommunity", {
                 patron: "São Geraldo Magela",
                 location: "Sapucaia",
               })
             }
-          >
-            <FontAwesome5 name="church" style={styles.icon} />
-            <Text style={styles.textOption}>Comunidade</Text>
-          </TouchableOpacity> */}
+          /> */}
         </View>
       </View>
     </BoxLinearGradient>

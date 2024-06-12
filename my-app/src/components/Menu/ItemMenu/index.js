@@ -1,23 +1,22 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import styles from "./style";
 
-export default function ItemMenu({
-  navigation,
-  nameIcon,
-  screenName,
-  screenNavigate,
-  style,
-}) {
+export default function ItemMenu({ screenName, onPress, icon }) {
   return (
     <TouchableOpacity
-      style={style}
-      onPress={() => navigation.navigate({ screenNavigate })}
+      activeOpacity={0.7}
+      onPress={onPress}
+      style={[styles.boxOption, styles.boxShadow]}
     >
-      <Icon name={nameIcon} style={styles.icon} />
+      {["cross", "church"].includes(icon) ? (
+        <FontAwesome5 name={icon} style={styles.icon} />
+      ) : (
+        <Icon name={icon} style={styles.icon} />
+      )}
       <Text style={styles.textOption}>{screenName}</Text>
     </TouchableOpacity>
   );
