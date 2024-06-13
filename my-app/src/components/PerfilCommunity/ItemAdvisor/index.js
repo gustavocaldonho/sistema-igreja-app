@@ -5,7 +5,7 @@ import styles from "./style";
 
 export default function itemAdvisor(props) {
   return (
-    <View style={[styles.itemAdvisor, styles.boxShadow]}>
+    <View style={[props.style, styles.itemAdvisor]}>
       <View style={styles.itemAdvisorLeft}>
         <TouchableOpacity>
           <Icon

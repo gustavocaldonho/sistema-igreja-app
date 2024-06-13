@@ -15,21 +15,18 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    // borderWidth: 1,
   },
   itemAdvisorLeft: {
     width: "10%",
     height: "100%",
     alignItems: "flex-start",
     justifyContent: "center",
-    // borderWidth: 1,
   },
   itemAdvisorRight: {
     width: "10%",
     height: "100%",
     alignItems: "flex-end",
     justifyContent: "center",
-    // borderWidth: 1,
   },
   textNameAdvisor: {
     textAlign: "center",

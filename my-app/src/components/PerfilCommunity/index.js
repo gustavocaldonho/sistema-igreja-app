@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import ButtonBack from "../ButtonBack";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 import ItemAdvisor from "./ItemAdvisor";
+import ItemHighlight from "./ItemHighlight";
 
 import styles from "./style";
 
@@ -40,35 +41,49 @@ export default function PerfilCommunity({ navigation, route }) {
           <View
             style={[styles.boxInformations, styles.boxHighlightInformations]}
           >
-            <View style={[styles.itemHighlightInformation, styles.boxShadow]}>
-              <Text style={styles.numberHighlight}>647</Text>
-              <Text style={styles.textHighlight}>Fiéis</Text>
-            </View>
-            <View style={[styles.itemHighlightInformation, styles.boxShadow]}>
-              <Text style={styles.numberHighlight}>470</Text>
-              <Text style={styles.textHighlight}>Pagantes</Text>
-            </View>
-            <View style={[styles.itemHighlightInformation, styles.boxShadow]}>
-              <Text style={styles.numberHighlight}>3.460,00</Text>
-              <Text style={styles.textHighlight}>Dízimo</Text>
-            </View>
-            <View style={[styles.itemHighlightInformation, styles.boxShadow]}>
-              <Text style={styles.numberHighlight}>23.500,00</Text>
-              <Text style={styles.textHighlight}>Caixa Mortuária</Text>
-            </View>
+            <ItemHighlight
+              style={styles.boxShadow}
+              number={647}
+              label={"Fiéis"}
+            />
+            <ItemHighlight
+              style={styles.boxShadow}
+              number={470}
+              label={"Pagantes"}
+            />
+            <ItemHighlight
+              style={styles.boxShadow}
+              number={"3.460,00"}
+              label={"Dízimo"}
+            />
+            <ItemHighlight
+              style={styles.boxShadow}
+              number={"23.500,00"}
+              label={"Caixa Mortuária"}
+            />
           </View>
           <View style={[styles.boxInformations]}>
             <Text style={styles.titleBoxAdvidors}>MEMBROS DO CONSELHO</Text>
-            <ItemAdvisor name={"Elizabeth Suann"} position={"Diretor Geral"} />
             <ItemAdvisor
+              style={styles.boxShadow}
+              name={"Elizabeth Suann"}
+              position={"Diretor Geral"}
+            />
+            <ItemAdvisor
+              style={styles.boxShadow}
               name={"Marcos Antônio da Silva"}
               position={"Tesoureiro"}
             />
             <ItemAdvisor
+              style={styles.boxShadow}
               name={"Estevão Soares de Souza"}
               position={"Catecismo"}
             />
-            <ItemAdvisor name={"Milena Gomes Araújo"} position={"Cemitério"} />
+            <ItemAdvisor
+              style={styles.boxShadow}
+              name={"Milena Gomes Araújo"}
+              position={"Cemitério"}
+            />
             <TouchableOpacity style={styles.boxAddMembro}>
               <Icon name="plus" style={styles.iconPlusMembro} />
               <Text style={styles.textAddMembro}>ADICIONAR MEMBRO</Text>
