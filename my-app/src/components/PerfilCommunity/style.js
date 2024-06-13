@@ -103,25 +103,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 15,
   },
-  itemAdvisor: {
-    width: "100%",
-    height: 55,
-    backgroundColor: "#fff",
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  textNameAdvisor: {
-    textAlign: "center",
-    color: "#f094c0",
-    fontSize: 18,
-    fontWeight: "500",
-  },
-  positionAdvisor: {
-    color: "#339DD7",
-    fontSize: 15,
-  },
   boxAddMembro: {
     width: "100%",
     height: 55,

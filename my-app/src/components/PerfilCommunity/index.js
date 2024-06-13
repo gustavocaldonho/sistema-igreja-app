@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ButtonBack from "../ButtonBack";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
+import ItemAdvisor from "./ItemAdvisor";
 
 import styles from "./style";
 
@@ -58,35 +59,16 @@ export default function PerfilCommunity({ navigation, route }) {
           </View>
           <View style={[styles.boxInformations]}>
             <Text style={styles.titleBoxAdvidors}>MEMBROS DO CONSELHO</Text>
-
-            {/* ícone de edição e exclusão dos conselheiros */}
-            {/* botão de adição de novos conselheiros */}
-            {/* "Componentizar" os itens abaixo */}
-            <View style={[styles.itemAdvisor, styles.boxShadow]}>
-              <Text style={styles.textNameAdvisor}>Elizabeth Suann</Text>
-              <Text style={styles.positionAdvisor}>Diretor Geral</Text>
-            </View>
-            <View style={[styles.itemAdvisor, styles.boxShadow]}>
-              <Text style={styles.textNameAdvisor}>
-                Marcos Antônio da Silva
-              </Text>
-              <Text style={styles.positionAdvisor}>Tesoureiro</Text>
-            </View>
-            <View style={[styles.itemAdvisor, styles.boxShadow]}>
-              <Text style={styles.textNameAdvisor}>Rubinho Barrichelo</Text>
-              <Text style={styles.positionAdvisor}>Liturgia</Text>
-            </View>
-            <View style={[styles.itemAdvisor, styles.boxShadow]}>
-              <Text style={styles.textNameAdvisor}>
-                Estevão Soares de Souza
-              </Text>
-              <Text style={styles.positionAdvisor}>Catecismo</Text>
-            </View>
-            <View style={[styles.itemAdvisor, styles.boxShadow]}>
-              <Text style={styles.textNameAdvisor}>Milena Gomes Araújo</Text>
-              <Text style={styles.positionAdvisor}>Cemitério</Text>
-            </View>
-
+            <ItemAdvisor name={"Elizabeth Suann"} position={"Diretor Geral"} />
+            <ItemAdvisor
+              name={"Marcos Antônio da Silva"}
+              position={"Tesoureiro"}
+            />
+            <ItemAdvisor
+              name={"Estevão Soares de Souza"}
+              position={"Catecismo"}
+            />
+            <ItemAdvisor name={"Milena Gomes Araújo"} position={"Cemitério"} />
             <TouchableOpacity style={styles.boxAddMembro}>
               <Icon name="plus" style={styles.iconPlusMembro} />
               <Text style={styles.textAddMembro}>ADICIONAR MEMBRO</Text>
