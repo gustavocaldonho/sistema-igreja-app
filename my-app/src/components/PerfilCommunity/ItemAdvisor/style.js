@@ -11,22 +11,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   itemAdvisorMiddle: {
-    width: "70%",
+    width: "76%",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
   itemAdvisorLeft: {
-    width: "10%",
+    width: "12%",
     height: "100%",
     alignItems: "flex-start",
     justifyContent: "center",
+    paddingLeft: 15,
   },
   itemAdvisorRight: {
-    width: "10%",
+    width: "12%",
     height: "100%",
     alignItems: "flex-end",
     justifyContent: "center",
+    paddingRight: 15,
   },
   textNameAdvisor: {
     textAlign: "center",
