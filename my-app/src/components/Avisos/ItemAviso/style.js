@@ -3,15 +3,17 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   boxItem: {
     width: "100%",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    padding: 15,
     borderRadius: 20,
     backgroundColor: "#fff",
     marginTop: 20,
     gap: 5,
   },
+  boxTop: {
+    flexDirection: "row",
+  },
   boxTitle: {
-    width: "100%",
+    width: "80%",
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -19,6 +21,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#f094c0",
     fontWeight: "500",
+  },
+  boxIcons: {
+    width: "20%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    paddingLeft: 5,
+  },
+  icon: {
+    fontSize: 25,
   },
   boxBody: {
     width: "100%",
