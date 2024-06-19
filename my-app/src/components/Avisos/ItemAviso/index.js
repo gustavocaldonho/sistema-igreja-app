@@ -5,7 +5,8 @@ import styles from "./style";
 
 export default function ItemAviso({ title, message, viewed }) {
   return (
-    <View style={[styles.boxItem, styles.notRead]}>
+    // <View style={[styles.boxItem, styles.notRead]}>
+    <View style={[styles.boxItem]}>
       <View style={styles.boxTitle}>
         <Text style={[styles.textTitle, styles.titleNotDisplayed]}>
           {title}
