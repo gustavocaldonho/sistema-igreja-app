@@ -4,6 +4,7 @@ import styles from "./style";
 import ScreenBase from "../ScreenBase";
 import ButtonAdd from "../ButtonAdd";
 import ItemAvisoContent from "./ItemAvisoContent";
+import ModalWarning from "./ModalWarning";
 
 export default function Avisos({ navigation }) {
   const [warningList, setWarningList] = useState([
@@ -11,17 +12,29 @@ export default function Avisos({ navigation }) {
     { id: 1, title: "Título 1", message: "Mensagem" },
     { id: 2, title: "Título 2", message: "Mensagem" },
   ]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <ScreenBase colorStatusBar={"#fff"}>
           <View style={styles.main}>
-            <ItemAvisoContent warningList={warningList} />
+            {modalVisible ? (
+              <ModalWarning
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+              />
+            ) : (
+              <ItemAvisoContent warningList={warningList} />
+            )}
           </View>
         </ScreenBase>
       </View>
-      <ButtonAdd />
+      {!modalVisible ? (
+        <ButtonAdd onPress={() => setModalVisible(!modalVisible)} />
+      ) : (
+        ""
+      )}
     </View>
   );
 }
