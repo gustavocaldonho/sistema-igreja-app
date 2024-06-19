@@ -23,6 +23,8 @@ export default function Avisos({ navigation }) {
               <ModalWarning
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
+                warningList={warningList}
+                setWarningList={setWarningList}
               />
             ) : (
               <ItemAvisoContent warningList={warningList} />
@@ -31,7 +33,11 @@ export default function Avisos({ navigation }) {
         </ScreenBase>
       </View>
       {!modalVisible ? (
-        <ButtonAdd onPress={() => setModalVisible(!modalVisible)} />
+        <ButtonAdd
+          onPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        />
       ) : (
         ""
       )}
