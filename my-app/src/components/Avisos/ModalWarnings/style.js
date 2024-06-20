@@ -48,6 +48,12 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "500",
   },
+  title: {
+    marginBottom: 10,
+    fontSize: 17,
+    fontWeight: "500",
+    color: "#f094c0",
+  },
 });
 
 export default styles;

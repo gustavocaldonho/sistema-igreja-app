@@ -9,6 +9,7 @@ export default function ItemAvisoContent({
   modalVisible,
   setModalVisible,
   setItemClicked,
+  setFormModalDefaultVisible,
 }) {
   return (
     <View>
@@ -23,6 +24,7 @@ export default function ItemAvisoContent({
           viewed={false}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
+          setFormModalDefaultVisible={setFormModalDefaultVisible}
           key={`warning-item-${idx}`}
         />
       ))}

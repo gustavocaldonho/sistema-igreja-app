@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormDefault from "./FormDefault";
+import FormConfirmation from "./FormConfirmation";
 
 export default function ModalWarning({
   modalVisible,
@@ -11,6 +12,7 @@ export default function ModalWarning({
   setWarningList,
   itemClicked,
   setItemClicked,
+  formModalDefaultVisible,
 }) {
   return (
     <Modal
@@ -34,27 +36,24 @@ export default function ModalWarning({
             </TouchableOpacity>
           </View>
 
-          <FormDefault
-            warningList={warningList}
-            setWarningList={setWarningList}
-            itemClicked={itemClicked}
-            setModalVisible={setModalVisible}
-            modalVisible={modalVisible}
-          />
-
-          {/* <View>
-            <Text style={[styles.title, { textAlign: "center", fontSize: 20 }]}>
-              Deseja excluir o aviso?
-            </Text>
-            <View style={styles.boxButtonsConfirmation}>
-              <TouchableOpacity style={styles.boxButton}>
-                <Text style={styles.textButton}>Sim</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.boxButton}>
-                <Text style={styles.textButton}>Não</Text>
-              </TouchableOpacity>
-            </View>
-          </View> */}
+          {formModalDefaultVisible ? (
+            <FormDefault
+              warningList={warningList}
+              setWarningList={setWarningList}
+              itemClicked={itemClicked}
+              setModalVisible={setModalVisible}
+              modalVisible={modalVisible}
+            />
+          ) : (
+            <FormConfirmation
+              itemClicked={itemClicked}
+              setItemClicked={setItemClicked}
+              warningList={warningList}
+              setWarningList={setWarningList}
+              setModalVisible={setModalVisible}
+              modalVisible={modalVisible}
+            />
+          )}
         </View>
       </View>
     </Modal>

@@ -3,31 +3,17 @@ import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import { TouchableOpacity } from "react-native-gesture-handler";
-// import ModalConfirmation from "../ModalConfirmation";
 
 export default function ItemAviso({
   id,
   title,
   message,
-  warningList,
-  setWarningList,
   setItemClicked,
   viewed,
   modalVisible,
   setModalVisible,
+  setFormModalDefaultVisible,
 }) {
-  function removeItemFromList(id) {
-    const newList = [...warningList];
-    let itemIndex = "";
-    for (let i = 0; i < newList.length; i++) {
-      if (newList[i].id === id) {
-        itemIndex = newList.indexOf(newList[i]);
-      }
-    }
-    newList.splice(itemIndex, 1);
-    setWarningList(newList);
-  }
-
   return (
     // <View style={[styles.boxItem, styles.notRead]}>
     <View style={[styles.boxItem]}>
@@ -42,6 +28,7 @@ export default function ItemAviso({
           <TouchableOpacity
             onPress={() => {
               setModalVisible(!modalVisible);
+              setFormModalDefaultVisible(true);
               setItemClicked({ id, title, message });
             }}
           >
@@ -50,7 +37,13 @@ export default function ItemAviso({
               style={[styles.icon, { color: "#339dd7" }]}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => removeItemFromList(id)}>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              setFormModalDefaultVisible(false);
+              setItemClicked({ id, title, message });
+            }}
+          >
             <Icon name="trash-o" style={[styles.icon, { color: "#f094c0" }]} />
           </TouchableOpacity>
         </View>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
@@ -36,7 +36,7 @@ export default function FormDefault({
   }
   return (
     <View>
-      <Text style={styles.title}>Título</Text>
+      <Text style={stylesModal.title}>Título</Text>
       <TextInput
         style={styles.input}
         placeholder="Digite um título..."
@@ -46,7 +46,7 @@ export default function FormDefault({
         }}
         defaultValue={itemClicked.title}
       />
-      <Text style={styles.title}>Mensagem</Text>
+      <Text style={stylesModal.title}>Mensagem</Text>
       <TextInput
         style={[styles.input, styles.areaInput]}
         placeholder="Digite uma mensagem..."

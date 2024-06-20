@@ -12,10 +12,9 @@ export default function Avisos({ navigation }) {
     { id: 1, title: "Título 1", message: "Mensagem" },
     { id: 2, title: "Título 2", message: "Mensagem" },
   ]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalConfirmationVisible, setModalConfirmationVisible] =
-    useState(false);
   const [itemClicked, setItemClicked] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
+  const [formModalDefaultVisible, setFormModalDefaultVisible] = useState(true);
 
   return (
     <View style={styles.container}>
@@ -30,6 +29,7 @@ export default function Avisos({ navigation }) {
                 setWarningList={setWarningList}
                 itemClicked={itemClicked}
                 setItemClicked={setItemClicked}
+                formModalDefaultVisible={formModalDefaultVisible}
               />
             ) : (
               <ItemAvisoContent
@@ -38,6 +38,7 @@ export default function Avisos({ navigation }) {
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 setItemClicked={setItemClicked}
+                setFormModalDefaultVisible={setFormModalDefaultVisible}
               />
             )}
           </View>
@@ -47,6 +48,7 @@ export default function Avisos({ navigation }) {
         <ButtonAdd
           onPress={() => {
             setModalVisible(!modalVisible);
+            setFormModalDefaultVisible(true);
             setItemClicked("");
           }}
         />
