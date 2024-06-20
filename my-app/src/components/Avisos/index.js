@@ -4,7 +4,7 @@ import styles from "./style";
 import ScreenBase from "../ScreenBase";
 import ButtonAdd from "../ButtonAdd";
 import ItemAvisoContent from "./ItemAvisoContent";
-import ModalEdition from "./ModalEdition";
+import ModalWarnings from "./ModalWarnings";
 
 export default function Avisos({ navigation }) {
   const [warningList, setWarningList] = useState([
@@ -13,6 +13,8 @@ export default function Avisos({ navigation }) {
     { id: 2, title: "Título 2", message: "Mensagem" },
   ]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalConfirmationVisible, setModalConfirmationVisible] =
+    useState(false);
   const [itemClicked, setItemClicked] = useState({});
 
   return (
@@ -21,7 +23,7 @@ export default function Avisos({ navigation }) {
         <ScreenBase colorStatusBar={"#fff"}>
           <View style={styles.main}>
             {modalVisible ? (
-              <ModalEdition
+              <ModalWarnings
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 warningList={warningList}
@@ -32,6 +34,7 @@ export default function Avisos({ navigation }) {
             ) : (
               <ItemAvisoContent
                 warningList={warningList}
+                setWarningList={setWarningList}
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 setItemClicked={setItemClicked}

@@ -4,7 +4,7 @@ import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { TextInput } from "react-native-gesture-handler";
 
-export default function ModalEdition({
+export default function ModalWarning({
   modalVisible,
   setModalVisible,
   warningList,
@@ -82,7 +82,7 @@ export default function ModalEdition({
               defaultValue={itemClicked.message}
             />
             <TouchableOpacity
-              style={styles.boxButtonAdd}
+              style={styles.boxButton}
               activeOpacity={0.7}
               onPress={() => {
                 if (
@@ -106,11 +106,25 @@ export default function ModalEdition({
                 }
               }}
             >
-              <Text style={styles.textButtonAdd}>
+              <Text style={styles.textButton}>
                 {itemClicked.id === undefined ? "Adicionar" : "Alterar"}
               </Text>
             </TouchableOpacity>
           </View>
+
+          {/* <View>
+            <Text style={[styles.title, { textAlign: "center", fontSize: 20 }]}>
+              Deseja excluir o aviso?
+            </Text>
+            <View style={styles.boxButtonsConfirmation}>
+              <TouchableOpacity style={styles.boxButton}>
+                <Text style={styles.textButton}>Sim</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.boxButton}>
+                <Text style={styles.textButton}>Não</Text>
+              </TouchableOpacity>
+            </View>
+          </View> */}
         </View>
       </View>
     </Modal>

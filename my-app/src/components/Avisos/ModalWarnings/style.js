@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   areaInput: {
     height: 120,
   },
-  boxButtonAdd: {
+  boxButton: {
     backgroundColor: "#339dd7",
     justifyContent: "center",
     alignItems: "center",
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 10,
   },
-  textButtonAdd: {
+  textButton: {
     color: "#fff",
     fontSize: 17,
     fontWeight: "500",

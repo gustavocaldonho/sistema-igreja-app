@@ -5,6 +5,7 @@ import ItemAviso from "../ItemAviso";
 
 export default function ItemAvisoContent({
   warningList,
+  setWarningList,
   modalVisible,
   setModalVisible,
   setItemClicked,
@@ -16,6 +17,8 @@ export default function ItemAvisoContent({
           id={w.id}
           title={w.title}
           message={w.message}
+          warningList={warningList}
+          setWarningList={setWarningList}
           setItemClicked={setItemClicked}
           viewed={false}
           modalVisible={modalVisible}
