@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import ModalConfirmation from "../ModalConfirmation";
+// import ModalConfirmation from "../ModalConfirmation";
 
 export default function ItemAviso({
   id,
