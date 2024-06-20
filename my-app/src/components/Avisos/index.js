@@ -13,6 +13,7 @@ export default function Avisos({ navigation }) {
     { id: 2, title: "Título 2", message: "Mensagem" },
   ]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [itemClicked, setItemClicked] = useState({});
 
   return (
     <View style={styles.container}>
@@ -25,9 +26,16 @@ export default function Avisos({ navigation }) {
                 setModalVisible={setModalVisible}
                 warningList={warningList}
                 setWarningList={setWarningList}
+                itemClicked={itemClicked}
+                setItemClicked={setItemClicked}
               />
             ) : (
-              <ItemAvisoContent warningList={warningList} />
+              <ItemAvisoContent
+                warningList={warningList}
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                setItemClicked={setItemClicked}
+              />
             )}
           </View>
         </ScreenBase>
@@ -36,6 +44,7 @@ export default function Avisos({ navigation }) {
         <ButtonAdd
           onPress={() => {
             setModalVisible(!modalVisible);
+            // console.log(warningList);
           }}
         />
       ) : (

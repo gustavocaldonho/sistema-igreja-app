@@ -4,7 +4,15 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function ItemAviso({ title, message, viewed }) {
+export default function ItemAviso({
+  id,
+  title,
+  message,
+  setItemClicked,
+  viewed,
+  modalVisible,
+  setModalVisible,
+}) {
   return (
     // <View style={[styles.boxItem, styles.notRead]}>
     <View style={[styles.boxItem]}>
@@ -16,7 +24,14 @@ export default function ItemAviso({ title, message, viewed }) {
           {viewed ? <Icon name="circle" style={styles.iconNotDisplayed} /> : ""}
         </View>
         <View style={styles.boxIcons}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible(!modalVisible);
+              setItemClicked({ id, title, message });
+              // console.log(`id: ${id}, title: ${title}, message: ${message}`);
+              // console.log({ id, title, message });
+            }}
+          >
             <Icon
               name="pencil-square-o"
               style={[styles.icon, { color: "#339dd7" }]}

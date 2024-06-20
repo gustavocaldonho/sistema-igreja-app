@@ -9,15 +9,29 @@ export default function ModalWarning({
   setModalVisible,
   warningList,
   setWarningList,
+  itemClicked,
+  setItemClicked,
 }) {
-  let title = "";
-  let message = "";
+  let title = itemClicked ? itemClicked.title : "";
+  let message = itemClicked ? itemClicked.message : "";
 
   function addToList(item) {
     const newList = [...warningList];
     newList.push(item);
     setWarningList(newList);
+    setModalVisible(!modalVisible);
+  }
 
+  function editItemFromList(item) {
+    const newList = [...warningList];
+
+    for (let i = 0; i < newList.length; i++) {
+      if (newList[i].id === item.id) {
+        newList[i].title = item.title;
+        newList[i].message = item.message;
+      }
+    }
+    setWarningList(newList);
     setModalVisible(!modalVisible);
   }
 
@@ -36,6 +50,7 @@ export default function ModalWarning({
             <TouchableOpacity
               onPress={() => {
                 setModalVisible(!modalVisible);
+                setItemClicked({});
               }}
             >
               <Icon name="close" style={styles.iconClose} />
@@ -51,6 +66,7 @@ export default function ModalWarning({
               onChangeText={(text) => {
                 title = text;
               }}
+              defaultValue={itemClicked.title}
             />
             <Text style={styles.title}>Mensagem</Text>
             <TextInput
@@ -62,16 +78,36 @@ export default function ModalWarning({
               onChangeText={(text) => {
                 message = text;
               }}
+              defaultValue={itemClicked.message}
             />
             <TouchableOpacity
               style={styles.boxButtonAdd}
               activeOpacity={0.7}
               onPress={() => {
-                if (title.length > 0 && message.length > 0)
-                  addToList({ title, message });
+                if (
+                  title.length > 0 &&
+                  message.length > 0 &&
+                  itemClicked.id === undefined
+                ) {
+                  id = warningList.length;
+                  addToList({ id, title, message });
+                }
+                if (
+                  title.length > 0 &&
+                  message.length > 0 &&
+                  itemClicked.id !== undefined
+                ) {
+                  editItemFromList({
+                    id: itemClicked.id,
+                    title,
+                    message,
+                  });
+                }
               }}
             >
-              <Text style={styles.textButtonAdd}>Adicionar</Text>
+              <Text style={styles.textButtonAdd}>
+                {itemClicked.id === undefined ? "Adicionar" : "Alterar"}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
