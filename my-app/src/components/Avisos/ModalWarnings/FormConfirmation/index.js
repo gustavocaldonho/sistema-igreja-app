@@ -29,12 +29,14 @@ export default function FormConfirmation({
       <Text style={styles.titleConfirmation}>Deseja excluir este aviso?</Text>
       <View>
         <TouchableOpacity
+          activeOpacity={0.7}
           style={stylesModal.boxButton}
           onPress={() => removeItemFromList(itemClicked.id)}
         >
           <Text style={stylesModal.textButton}>Sim</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.7}
           style={stylesModal.boxButton}
           onPress={() => {
             setModalVisible(!modalVisible);
