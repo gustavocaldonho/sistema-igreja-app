@@ -4,7 +4,7 @@ import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { TextInput } from "react-native-gesture-handler";
 
-export default function ModalWarning({
+export default function ModalEdition({
   modalVisible,
   setModalVisible,
   warningList,
@@ -33,6 +33,7 @@ export default function ModalWarning({
     }
     setWarningList(newList);
     setModalVisible(!modalVisible);
+    itemClicked = undefined;
   }
 
   return (
