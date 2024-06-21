@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
@@ -11,8 +11,12 @@ export default function FormDefault({
   setModalVisible,
   modalVisible,
 }) {
-  let title = itemClicked ? itemClicked.title : "";
-  let message = itemClicked ? itemClicked.message : "";
+  const [errorTitle, setErrorTitle] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [title, setTitle] = useState(itemClicked ? itemClicked.title : "");
+  const [message, setMessage] = useState(
+    itemClicked ? itemClicked.message : ""
+  );
 
   function addToList(item) {
     const newList = [...warningList];
@@ -23,7 +27,6 @@ export default function FormDefault({
 
   function editItemFromList(item) {
     const newList = [...warningList];
-
     for (let i = 0; i < newList.length; i++) {
       if (newList[i].id === item.id) {
         newList[i].title = item.title;
@@ -34,27 +37,60 @@ export default function FormDefault({
     setModalVisible(!modalVisible);
     itemClicked = undefined;
   }
+
+  function checkTitle(text) {
+    if (text === "") {
+      setErrorTitle(true);
+      return true;
+    } else {
+      setErrorTitle(false);
+      return false;
+    }
+  }
+
+  function checkMessage(text) {
+    if (text === "") {
+      setErrorMessage(true);
+      return true;
+    } else {
+      setErrorMessage(false);
+      return false;
+    }
+  }
+
   return (
     <View>
-      <Text style={stylesModal.title}>Título</Text>
+      <View style={stylesModal.boxTitle}>
+        <Text style={stylesModal.title}>Título</Text>
+        <Text style={stylesModal.textError}>{errorTitle ? "*" : ""}</Text>
+      </View>
       <TextInput
-        style={styles.input}
+        style={[styles.input, errorTitle ? styles.error : null]}
         placeholder="Digite um título..."
         placeholderTextColor={"#88C6E7"}
         onChangeText={(text) => {
-          title = text;
+          setTitle(text);
+          checkTitle(text);
         }}
         defaultValue={itemClicked.title}
       />
-      <Text style={stylesModal.title}>Mensagem</Text>
+      <View style={stylesModal.boxTitle}>
+        <Text style={stylesModal.title}>Mensagem</Text>
+        <Text style={stylesModal.textError}>{errorMessage ? "*" : ""}</Text>
+      </View>
       <TextInput
-        style={[styles.input, styles.areaInput]}
+        style={[
+          styles.input,
+          styles.areaInput,
+          errorMessage ? styles.error : null,
+        ]}
         placeholder="Digite uma mensagem..."
         placeholderTextColor={"#88C6E7"}
         multiline={true}
         numberOfLines={5}
         onChangeText={(text) => {
-          message = text;
+          setMessage(text);
+          checkMessage(text);
         }}
         defaultValue={itemClicked.message}
       />
@@ -62,24 +98,20 @@ export default function FormDefault({
         style={stylesModal.boxButton}
         activeOpacity={0.7}
         onPress={() => {
-          if (
-            title.length > 0 &&
-            message.length > 0 &&
-            itemClicked.id === undefined
-          ) {
-            id = warningList.length;
-            addToList({ id, title, message });
-          }
-          if (
-            title.length > 0 &&
-            message.length > 0 &&
-            itemClicked.id !== undefined
-          ) {
-            editItemFromList({
-              id: itemClicked.id,
-              title,
-              message,
-            });
+          const errorT = checkTitle(title);
+          const errorM = checkMessage(message);
+
+          if (!errorT && !errorM) {
+            if (itemClicked.id === undefined) {
+              id = warningList.length;
+              addToList({ id, title, message });
+            } else {
+              editItemFromList({
+                id: itemClicked.id,
+                title,
+                message,
+              });
+            }
           }
         }}
       >

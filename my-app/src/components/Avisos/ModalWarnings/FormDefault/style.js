@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
   areaInput: {
     height: 120,
   },
+  error: {
+    borderColor: "red",
+  },
 });
 
 export default styles;

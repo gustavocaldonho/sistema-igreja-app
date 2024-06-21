@@ -48,11 +48,19 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "500",
   },
+  boxTitle: {
+    flexDirection: "row",
+  },
   title: {
     marginBottom: 10,
     fontSize: 17,
     fontWeight: "500",
     color: "#f094c0",
+  },
+  textError: {
+    color: "red",
+    fontSize: 18,
+    paddingLeft: 3,
   },
 });
 
