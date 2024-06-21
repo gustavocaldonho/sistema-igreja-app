@@ -22,6 +22,7 @@ export default function ItemAviso({
         <View style={styles.boxTitle}>
           <Text style={[styles.textTitle, styles.titleNotDisplayed]}>
             {title}
+            {visibleToParish ? " (Paróquia)" : ""}
           </Text>
           {viewed ? <Icon name="circle" style={styles.iconNotDisplayed} /> : ""}
         </View>
