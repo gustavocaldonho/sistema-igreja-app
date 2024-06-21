@@ -30,7 +30,7 @@ export default function ItemAviso({
             onPress={() => {
               setModalVisible(!modalVisible);
               setFormModalDefaultVisible(true);
-              setItemClicked({ id, title, message });
+              setItemClicked({ id, title, message, visibleToParish });
             }}
           >
             <Icon
@@ -42,7 +42,7 @@ export default function ItemAviso({
             onPress={() => {
               setModalVisible(!modalVisible);
               setFormModalDefaultVisible(false);
-              setItemClicked({ id, title, message });
+              setItemClicked({ id, title, message, visibleToParish });
             }}
           >
             <Icon name="trash-o" style={[styles.icon, { color: "#f094c0" }]} />

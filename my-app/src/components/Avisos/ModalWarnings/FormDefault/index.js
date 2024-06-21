@@ -34,6 +34,7 @@ export default function FormDefault({
       if (newList[i].id === item.id) {
         newList[i].title = item.title;
         newList[i].message = item.message;
+        newList[i].visibleToParish = item.visibleToParish;
       }
     }
     setWarningList(newList);
@@ -60,6 +61,8 @@ export default function FormDefault({
       return false;
     }
   }
+
+  // console.log(visibleToParish);
 
   return (
     <View>
