@@ -18,6 +18,7 @@ export default function ItemAvisoContent({
           id={w.id}
           title={w.title}
           message={w.message}
+          visibleToParish={w.visibleToParish}
           warningList={warningList}
           setWarningList={setWarningList}
           setItemClicked={setItemClicked}

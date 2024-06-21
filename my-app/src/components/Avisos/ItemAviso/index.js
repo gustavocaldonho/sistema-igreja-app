@@ -8,6 +8,7 @@ export default function ItemAviso({
   id,
   title,
   message,
+  visibleToParish,
   setItemClicked,
   viewed,
   modalVisible,

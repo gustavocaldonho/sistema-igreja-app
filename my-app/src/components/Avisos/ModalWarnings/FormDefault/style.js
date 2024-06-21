@@ -18,6 +18,16 @@ const styles = StyleSheet.create({
   error: {
     borderColor: "red",
   },
+  boxSwitch: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: 10,
+  },
+  textSwitch: {
+    fontSize: 15,
+    color: "#f094c0",
+  },
 });
 
 export default styles;

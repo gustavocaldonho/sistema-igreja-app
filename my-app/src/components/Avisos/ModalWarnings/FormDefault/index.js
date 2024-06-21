@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Switch } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
 import stylesModal from "../style";
@@ -16,6 +16,9 @@ export default function FormDefault({
   const [title, setTitle] = useState(itemClicked ? itemClicked.title : "");
   const [message, setMessage] = useState(
     itemClicked ? itemClicked.message : ""
+  );
+  const [visibleToParish, setVisibleToParish] = useState(
+    itemClicked ? itemClicked.visibleToParish : false
   );
 
   function addToList(item) {
@@ -94,6 +97,18 @@ export default function FormDefault({
         }}
         defaultValue={itemClicked.message}
       />
+
+      <View style={styles.boxSwitch}>
+        <Text style={styles.textSwitch}>Visível para toda a Paróquia</Text>
+        <Switch
+          trackColor={{ false: "#767577", true: "#E1E0E1" }}
+          thumbColor={visibleToParish ? "#339dd7" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={() => setVisibleToParish(!visibleToParish)}
+          value={visibleToParish}
+        />
+      </View>
+
       <TouchableOpacity
         style={stylesModal.boxButton}
         activeOpacity={0.7}
@@ -104,12 +119,13 @@ export default function FormDefault({
           if (!errorT && !errorM) {
             if (itemClicked.id === undefined) {
               id = warningList.length;
-              addToList({ id, title, message });
+              addToList({ id, title, message, visibleToParish });
             } else {
               editItemFromList({
                 id: itemClicked.id,
                 title,
                 message,
+                visibleToParish,
               });
             }
           }
