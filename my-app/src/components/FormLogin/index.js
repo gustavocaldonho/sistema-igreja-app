@@ -17,14 +17,14 @@ export default function FormLogin({ userList }) {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
 
-  const [login, setlogin] = useState(true);
+  const [showError, setShowError] = useState(false);
 
   return (
     // usar <ScrollView></ScrollView>
     <View style={styles.formContext}>
       <Pressable style={styles.form} onPress={Keyboard.dismiss}>
         <Text style={styles.errorMessage}>
-          {login ? "Credenciais Inválidas!" : ""}
+          {showError ? "Credenciais Inválidas!" : ""}
         </Text>
         <InputGroupCpf
           iconName="id-card"
@@ -53,17 +53,19 @@ export default function FormLogin({ userList }) {
         <TouchableOpacity
           style={styles.buttonLogin}
           onPress={() => {
+            let logar = false;
+
             for (let i = 0; i < userList.length; i++) {
               if (
                 userList[i].cpf === cpf &&
                 userList[i].password === password
               ) {
-                setlogin(true);
+                logar = true;
                 break;
               }
             }
-
-            console.log(logar);
+            setShowError(!logar);
+            console.log("Logar: ", logar);
           }}
         >
           <Text style={styles.textButtonLogin}>Entrar</Text>

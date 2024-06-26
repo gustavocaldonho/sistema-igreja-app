@@ -158,10 +158,6 @@ export default function FormCadastroUser({ userList, setUserList }) {
                 setDataNasc("");
                 setCommunity("");
                 setShowErrors(false);
-
-                console.log(userList);
-              } else {
-                console.log("error");
               }
             }}
           >
