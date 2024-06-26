@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     overflow: "hidden",
   },
+  boxScrollView: {
+    paddingHorizontal: 20,
+  },
   form: {
     width: "100%",
   },
@@ -17,17 +20,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 20,
   },
-  input: {
-    width: "90%",
-    fontSize: 20,
-    borderRadius: 50,
-    backgroundColor: "#f6f6f6",
-    height: 50,
-    paddingLeft: 20,
-    marginRight: "auto",
-    marginLeft: "auto",
-    marginBottom: 10,
-  },
   buttonCadastro: {
     width: "80%",
     backgroundColor: "#339dd7",
@@ -35,7 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 14,
     paddingBottom: 14,
-    marginTop: 30,
+    // marginTop: 30,
     borderRadius: 50,
     marginLeft: "auto",
     marginRight: "auto",
@@ -48,8 +40,8 @@ const styles = StyleSheet.create({
   errorMessage: {
     fontSize: 14,
     color: "red",
-    paddingTop: 10,
-    paddingBottom: 5,
+    paddingTop: 5,
+    paddingBottom: 10,
     paddingLeft: 25,
     fontWeight: "bold",
   },
@@ -58,9 +50,6 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     fontStyle: "italic",
     color: "#8F8F8F",
-  },
-  boxScrollView: {
-    paddingHorizontal: 20,
   },
 });
 

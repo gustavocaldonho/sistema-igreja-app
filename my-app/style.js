@@ -38,10 +38,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   boxFormCadastro: {
-    display: "flex",
-    height: 530,
     width: "85%",
     borderRadius: 35,
+    paddingVertical: 20,
     position: "absolute",
     alignSelf: "center",
     top: 240,

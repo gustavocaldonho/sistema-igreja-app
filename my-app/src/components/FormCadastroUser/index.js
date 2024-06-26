@@ -57,67 +57,58 @@ export default function FormCadastroUser({ userList, setUserList }) {
     >
       <ScrollView style={styles.boxScrollView}>
         <Pressable style={styles.form} onPress={Keyboard.dismiss}>
-          <Text style={styles.errorMessage}>
-            {checkText(name) && showErrors ? "Nome Inválido!" : ""}
-          </Text>
           <InputGroupName
             iconName="user"
             placeholder="Digite seu Nome"
-            style={styles.input}
             defaultValue={name}
             onChangeText={(text) => {
               setName(text);
             }}
           />
-
           <Text style={styles.errorMessage}>
-            {checkCpf(cpf) && showErrors ? "CPF Inválido!" : ""}
+            {checkText(name) && showErrors ? "Nome Inválido!" : ""}
           </Text>
+
           <InputGroupCpf
             iconName="id-card"
             placeholder="000.000.000-00"
-            style={styles.input}
             value={cpf}
             // defaultValue={cpf}
             onChangeText={(text) => {
               setCpf(text);
             }}
           />
-
           <Text style={styles.errorMessage}>
-            {checkEmail(email) && showErrors ? "Email Inválido" : ""}
+            {checkCpf(cpf) && showErrors ? "CPF Inválido!" : ""}
           </Text>
+
           <InputGroupEmail
             iconName="envelope"
             placeholder="Digite seu E-mail"
-            style={styles.input}
             defaultValue={email}
             onChangeText={(text) => {
               setEmail(text);
             }}
           />
-
           <Text style={styles.errorMessage}>
-            {checkDataNasc(dataNasc) && showErrors
-              ? "Data de Nascimento Inválida!"
-              : ""}
+            {checkEmail(email) && showErrors ? "Email Inválido" : ""}
           </Text>
+
           <InputGroupDN
             iconName="birthday-cake"
             placeholder="DD/MM/AAAA"
-            style={styles.input}
             value={dataNasc}
             // defaultValue={dataNasc}
             onChangeText={(text) => {
               setDataNasc(text);
             }}
           />
-
           <Text style={styles.errorMessage}>
-            {checkText(community) && showErrors
-              ? "Selecione uma Comunidade!"
+            {checkDataNasc(dataNasc) && showErrors
+              ? "Data de Nascimento Inválida!"
               : ""}
           </Text>
+
           <InputGroupSelect
             iconName="church"
             options={[
@@ -131,6 +122,11 @@ export default function FormCadastroUser({ userList, setUserList }) {
               setCommunity(text);
             }}
           />
+          <Text style={styles.errorMessage}>
+            {checkText(community) && showErrors
+              ? "Selecione uma Comunidade!"
+              : ""}
+          </Text>
 
           <TouchableOpacity
             style={styles.buttonCadastro}
