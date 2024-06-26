@@ -136,15 +136,15 @@ export default function TabOneScreen() {
       comunidade: "a",
       password: "1234",
     },
+    {
+      name: "João",
+      cpf: "2",
+      email: "miguel@gmail.com",
+      dataNasc: "23/12/1980",
+      comunidade: "a",
+      password: "1234",
+    },
   ]);
-
-  function changeToRegister(signal) {
-    if (signal == true) {
-      setCadastroEntry(true);
-    } else {
-      setCadastroEntry(false);
-    }
-  }
 
   return (
     <View style={styles.container}>
@@ -165,11 +165,11 @@ export default function TabOneScreen() {
             </View>
             {cadastroEntry == false ? (
               <View style={styles.boxFormLogin}>
-                <FormLogin userList={userList} />
+                <FormLogin userList={userList} setLogged={setLogged} />
                 <TouchableOpacity
                   style={styles.buttonAccount}
                   onPress={() => {
-                    changeToRegister(true);
+                    setCadastroEntry(true);
                   }}
                 >
                   <Text style={styles.textButtonAccount}>Criar Conta</Text>
@@ -190,7 +190,7 @@ export default function TabOneScreen() {
                 <TouchableOpacity
                   style={styles.textButtonBack}
                   onPress={() => {
-                    changeToRegister(false);
+                    setCadastroEntry(false);
                   }}
                 >
                   <Icon name={"chevron-left"} size={25} color="#ffffff" />

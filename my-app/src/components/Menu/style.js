@@ -27,6 +27,25 @@ const styles = StyleSheet.create({
     alignContent: "center",
     paddingHorizontal: 10,
   },
+  buttonSignOut: {
+    // width: 100,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    gap: 5,
+    borderRadius: 20,
+    alignItems: "center",
+    backgroundColor: "#fff",
+    alignSelf: "center",
+    flexDirection: "row",
+  },
+  textSignOut: {
+    fontSize: 20,
+    color: "#f094c0",
+  },
+  iconSignOut: {
+    fontSize: 25,
+    color: "#f094c0",
+  },
 });
 
 export default styles;
