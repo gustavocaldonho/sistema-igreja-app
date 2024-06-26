@@ -21,9 +21,15 @@ const CPF_MASK = [
   /\d/,
 ];
 
-const InputGroupCpf = ({ iconName, placeholder, value, onChangeText }) => {
+const InputGroupCpf = ({
+  iconName,
+  placeholder,
+  value,
+  onChangeText,
+  style,
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       <View style={styles.boxIcon}>
         <Icon name={iconName} size={20} style={styles.icon} />
       </View>

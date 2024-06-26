@@ -2,11 +2,10 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   formContext: {
-    flex: 1,
-    justifyContent: "flex-end",
     backgroundColor: "#ffffff",
     paddingHorizontal: 20,
     borderRadius: 30,
+    paddingBottom: 10,
   },
   form: {
     width: "100%",
@@ -19,15 +18,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   input: {
-    width: "90%",
-    fontSize: 20,
-    borderRadius: 50,
-    backgroundColor: "#f6f6f6",
-    height: 50,
-    paddingLeft: 20,
-    marginRight: "auto",
-    marginLeft: "auto",
-    marginBottom: 10,
+    marginBottom: 15,
   },
   buttonLogin: {
     width: "80%",
@@ -49,9 +40,8 @@ const styles = StyleSheet.create({
   errorMessage: {
     fontSize: 14,
     color: "red",
-    paddingTop: 20,
+    alignSelf: "center",
     paddingBottom: 5,
-    paddingLeft: 25,
     fontWeight: "bold",
   },
   forgotPassword: {

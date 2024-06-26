@@ -20,12 +20,13 @@ const styles = StyleSheet.create({
     // backgroundColor: "#339dd7",
   },
   boxFormLogin: {
-    height: 400,
     width: "85%",
     borderRadius: 35,
     position: "absolute",
     alignSelf: "center",
     top: 280,
+    paddingTop: 20,
+    paddingBottom: 40,
     backgroundColor: "#ffffff",
     shadowColor: "#000000",
     shadowOffset: {
@@ -61,8 +62,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 14,
     paddingBottom: 14,
-    marginTop: 20,
-    marginBottom: 40,
     borderRadius: 50,
     marginLeft: "auto",
     marginRight: "auto",

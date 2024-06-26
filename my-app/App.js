@@ -120,7 +120,22 @@ export default function TabOneScreen() {
   const [cadastroEntry, setCadastroEntry] = useState(false);
 
   const [userList, setUserList] = useState([
-    { name: "", cpf: "", email: "", dataNasc: "", comunidade: "" },
+    {
+      name: "José",
+      cpf: "222.222.222-22",
+      email: "jose@gmail.com",
+      dataNasc: "23/12/1980",
+      comunidade: "a",
+      password: "1234",
+    },
+    {
+      name: "Miguel",
+      cpf: "333.333.333-33",
+      email: "miguel@gmail.com",
+      dataNasc: "23/12/1980",
+      comunidade: "a",
+      password: "1234",
+    },
   ]);
 
   function changeToRegister(signal) {

@@ -24,6 +24,7 @@ export default function FormCadastroUser({ userList, setUserList }) {
   const [email, setEmail] = useState("");
   const [dataNasc, setDataNasc] = useState("");
   const [community, setCommunity] = useState("");
+  const [password, setPassword] = useState("1234");
   const [showErrors, setShowErrors] = useState(false);
 
   function checkText(text) {
@@ -149,6 +150,7 @@ export default function FormCadastroUser({ userList, setUserList }) {
                   email,
                   dataNasc,
                   community,
+                  password,
                 });
                 setName("");
                 setCpf("");
@@ -157,7 +159,7 @@ export default function FormCadastroUser({ userList, setUserList }) {
                 setCommunity("");
                 setShowErrors(false);
 
-                // console.log(userList);
+                console.log(userList);
               } else {
                 console.log("error");
               }
