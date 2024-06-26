@@ -10,7 +10,7 @@ export default function ItemMenu({ screenName, onPress, icon }) {
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
-      style={[styles.boxOption, styles.boxShadow]}
+      style={styles.boxOption}
     >
       {["cross", "church"].includes(icon) ? (
         <FontAwesome5 name={icon} style={styles.icon} />
