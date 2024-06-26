@@ -5,9 +5,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import styles from "../style";
 
-const InputGroupSelect = ({ iconName, options }) => {
-  const [selectedComunity, setSelectedComunity] = useState();
-
+const InputGroupSelect = ({
+  iconName,
+  options,
+  selectedValue,
+  onValueChange,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxIcon}>
@@ -16,10 +19,8 @@ const InputGroupSelect = ({ iconName, options }) => {
       <View style={[styles.input, styles.inputPicker]}>
         <Picker
           style={styles.labelPicker}
-          selectedValue={selectedComunity}
-          onValueChange={(itemValue, itemIndex) =>
-            setSelectedComunity(itemValue)
-          }
+          selectedValue={selectedValue}
+          onValueChange={onValueChange}
         >
           {options.map((option, index) => (
             <Picker.Item

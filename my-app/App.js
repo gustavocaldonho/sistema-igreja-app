@@ -116,8 +116,12 @@ function MyStack() {
 }
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
   const [cadastroEntry, setCadastroEntry] = useState(false);
+
+  const [userList, setUserList] = useState([
+    { name: "", cpf: "", email: "", dataNasc: "", comunidade: "" },
+  ]);
 
   function changeToRegister(signal) {
     if (signal == true) {
@@ -146,7 +150,7 @@ export default function TabOneScreen() {
             </View>
             {cadastroEntry == false ? (
               <View style={styles.boxFormLogin}>
-                <FormLogin />
+                <FormLogin userList={userList} />
                 <TouchableOpacity
                   style={styles.buttonAccount}
                   onPress={() => {
@@ -157,7 +161,14 @@ export default function TabOneScreen() {
                 </TouchableOpacity>
               </View>
             ) : (
-              <View style={styles.boxFormCadastro}>{<FormCadastroUser />}</View>
+              <View style={styles.boxFormCadastro}>
+                {
+                  <FormCadastroUser
+                    userList={userList}
+                    setUserList={setUserList}
+                  />
+                }
+              </View>
             )}
             {cadastroEntry ? (
               <View style={styles.buttonBack}>

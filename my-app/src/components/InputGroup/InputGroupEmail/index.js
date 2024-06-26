@@ -3,7 +3,12 @@ import { View, TextInput } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "../style";
 
-const InputGroupEmail = ({ iconName, placeholder }) => {
+const InputGroupEmail = ({
+  iconName,
+  placeholder,
+  defaultValue,
+  onChangeText,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxIcon}>
@@ -14,6 +19,8 @@ const InputGroupEmail = ({ iconName, placeholder }) => {
         placeholder={placeholder}
         keyboardType="default"
         placeholderTextColor="#ccc"
+        defaultValue={defaultValue}
+        onChangeText={onChangeText}
       />
     </View>
   );
