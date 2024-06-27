@@ -14,7 +14,12 @@ import PerfilCommunity from "./src/components/PerfilCommunity";
 
 const Stack = createStackNavigator();
 
-export default function MyStack({ setLogged, userList, setUserList }) {
+export default function MyStack({
+  setLogged,
+  userLogged,
+  userList,
+  setUserList,
+}) {
   // Todos os componentes definindos abaixo têm acesso a props "navigation"
   return (
     <Stack.Navigator>
@@ -66,6 +71,7 @@ export default function MyStack({ setLogged, userList, setUserList }) {
       <Stack.Screen
         name="PerfilUser"
         component={PerfilUser}
+        initialParams={{ userLogged }}
         options={({ navigation }) => ({
           headerShown: false,
         })}

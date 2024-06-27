@@ -10,6 +10,12 @@ import styles from "./style";
 export default function PerfilUser({ navigation, route }) {
   const { name, cpf, dataNasc, email, comunidade } = route.params;
 
+  // if (route.params.cpf === route.params.userLogged) {
+  //   console.log("Mesmo Usuário");
+  // } else {
+  //   console.log("Usuários Distintos");
+  // }
+
   return (
     <View style={styles.container}>
       <StatusBar color="#339DD7" />

@@ -13,7 +13,7 @@ import styles from "./style";
 import InputGroupCpf from "../InputGroup/InputGroupCpf";
 import InputGroupPassword from "../InputGroup/InputGroupPassword";
 
-export default function FormLogin({ userList, setLogged }) {
+export default function FormLogin({ userList, setLogged, setUserLogged }) {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
 
@@ -66,6 +66,7 @@ export default function FormLogin({ userList, setLogged }) {
             }
             setShowError(!logar);
             setLogged(logar);
+            logar ? setUserLogged(cpf) : "";
             console.log("Logar: ", logar);
           }}
         >

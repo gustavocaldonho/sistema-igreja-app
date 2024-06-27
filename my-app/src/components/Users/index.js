@@ -9,8 +9,6 @@ import ItemUserContent from "./ItemUserContent";
 export default function Users({ navigation, route }) {
   const { userList } = route.params;
 
-  // console.log(userList);
-
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>

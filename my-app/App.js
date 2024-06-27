@@ -13,22 +13,15 @@ import FormCadastroUser from "./src/components/FormCadastroUser";
 import MyStack from "./MyStack";
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(true);
   const [cadastroEntry, setCadastroEntry] = useState(false);
+  const [logged, setLogged] = useState(true);
+  const [userLogged, setUserLogged] = useState(null);
 
   const [userList, setUserList] = useState([
     {
       name: "José",
       cpf: "222.222.222-22",
       email: "jose@gmail.com",
-      dataNasc: "23/12/1980",
-      comunidade: "a",
-      password: "1234",
-    },
-    {
-      name: "Miguel",
-      cpf: "333.333.333-33",
-      email: "miguel@gmail.com",
       dataNasc: "23/12/1980",
       comunidade: "a",
       password: "1234",
@@ -42,6 +35,8 @@ export default function TabOneScreen() {
       password: "1234",
     },
   ]);
+
+  // function getDataUserLogged(){}
 
   return (
     <View style={styles.container}>
@@ -62,7 +57,11 @@ export default function TabOneScreen() {
             </View>
             {cadastroEntry == false ? (
               <View style={styles.boxFormLogin}>
-                <FormLogin userList={userList} setLogged={setLogged} />
+                <FormLogin
+                  userList={userList}
+                  setLogged={setLogged}
+                  setUserLogged={setUserLogged}
+                />
                 <TouchableOpacity
                   style={styles.buttonAccount}
                   onPress={() => {
@@ -101,6 +100,7 @@ export default function TabOneScreen() {
           <NavigationContainer>
             <MyStack
               setLogged={setLogged}
+              userLogged={userLogged}
               userList={userList}
               setUserList={setUserList}
             />
