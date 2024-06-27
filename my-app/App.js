@@ -3,117 +3,14 @@ import { StatusBar } from "expo-status-bar";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
-import ButtonBack from "./src/components/ButtonBack";
 import BoxLinearGradient from "./src/components/ScreenBase/BoxLinearGradient";
 
 import Title from "./src/components/Title";
 import FormLogin from "./src/components/FormLogin";
 import FormCadastroUser from "./src/components/FormCadastroUser";
-import Menu from "./src/components/Menu";
-import Avisos from "./src/components/Avisos";
-import CaixaMortuario from "./src/components/CaixaMortuaria";
-import Comunidades from "./src/components/Comunidades";
-import Dizimo from "./src/components/Dizimo";
-import Users from "./src/components/Users";
-import PerfilUser from "./src/components/PerfilUser";
-import PerfilCommunity from "./src/components/PerfilCommunity";
-
-const Stack = createStackNavigator();
-
-function MyStack() {
-  // Todos os componentes definindos abaixo têm acesso a props "navigation"
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Menu"
-        component={Menu}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Avisos"
-        component={Avisos}
-        options={({ navigation }) => ({
-          title: "Avisos",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.titleHeader,
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
-      />
-      <Stack.Screen
-        name="CaixaMortuario"
-        component={CaixaMortuario}
-        options={({ navigation }) => ({
-          title: "Caixa Mortuária",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: [styles.titleHeader, styles.sizeSmallHeader],
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
-      />
-      <Stack.Screen
-        name="Dizimo"
-        component={Dizimo}
-        options={({ navigation }) => ({
-          title: "Dízimo",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.titleHeader,
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
-      />
-      <Stack.Screen
-        name="PerfilUser"
-        component={PerfilUser}
-        options={({ navigation }) => ({
-          headerShown: false,
-        })}
-      />
-      <Stack.Screen
-        name="PerfilCommunity"
-        component={PerfilCommunity}
-        options={({ navigation }) => ({
-          headerShown: false,
-        })}
-      />
-      <Stack.Screen
-        name="Users"
-        component={Users}
-        options={({ navigation }) => ({
-          title: "Usuários",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.titleHeader,
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
-      />
-      <Stack.Screen
-        name="Comunidades"
-        component={Comunidades}
-        options={({ navigation }) => ({
-          title: "Comunidades",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.titleHeader,
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
-      />
-    </Stack.Navigator>
-  );
-}
+import MyStack from "./MyStack";
 
 export default function TabOneScreen() {
   const [logged, setLogged] = useState(false);
