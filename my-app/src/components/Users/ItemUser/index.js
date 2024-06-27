@@ -10,8 +10,11 @@ export default function ItemUser(props) {
       activeOpacity={0.7}
       onPress={() =>
         props.navigation.navigate("PerfilUser", {
-          nameUser: props.nameUser,
+          name: props.name,
           cpf: props.cpf,
+          dataNasc: props.dataNasc,
+          email: props.email,
+          comunidade: props.comunidade,
         })
       }
     >
@@ -20,7 +23,7 @@ export default function ItemUser(props) {
           <Icon name="user" style={styles.iconUser} />
         </View>
         <View style={styles.boxName}>
-          <Text style={styles.textName}>{props.nameUser}</Text>
+          <Text style={styles.textName}>{props.name}</Text>
         </View>
         <View style={styles.boxIconRight}>
           <Icon name="chevron-right" style={styles.iconRight} />

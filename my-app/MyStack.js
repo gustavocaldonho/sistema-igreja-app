@@ -80,7 +80,7 @@ export default function MyStack({ setLogged, userList, setUserList }) {
       <Stack.Screen
         name="Users"
         component={Users}
-        initialParams={{ userList, setUserList }}
+        initialParams={{ userList }}
         options={({ navigation }) => ({
           title: "Usuários",
           headerStyle: styles.headerStyle,

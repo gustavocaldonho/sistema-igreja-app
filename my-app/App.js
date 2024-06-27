@@ -13,7 +13,7 @@ import FormCadastroUser from "./src/components/FormCadastroUser";
 import MyStack from "./MyStack";
 
 export default function TabOneScreen() {
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState(true);
   const [cadastroEntry, setCadastroEntry] = useState(false);
 
   const [userList, setUserList] = useState([

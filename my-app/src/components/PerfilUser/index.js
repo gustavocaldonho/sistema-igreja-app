@@ -8,9 +8,7 @@ import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 import styles from "./style";
 
 export default function PerfilUser({ navigation, route }) {
-  const { nameUser } = route.params;
-  const { cpf } = route.params;
-  // console.log(route.params);
+  const { name, cpf, dataNasc, email, comunidade } = route.params;
 
   return (
     <View style={styles.container}>
@@ -33,7 +31,7 @@ export default function PerfilUser({ navigation, route }) {
           </View>
         </View>
         <View style={styles.boxNameUser}>
-          <Text style={styles.textNameUser}>{nameUser}</Text>
+          <Text style={styles.textNameUser}>{name}</Text>
           {/* <Text style={styles.textNameUser}>
           Gustavo Caldonho de Souza Magnago
         </Text> */}
@@ -46,14 +44,14 @@ export default function PerfilUser({ navigation, route }) {
             </View>
             <View style={styles.line}>
               <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>
-              <Text style={styles.textData}>12/09/2000</Text>
+              <Text style={styles.textData}>{dataNasc}</Text>
             </View>
             <View style={styles.line}>
               <Text style={[styles.textLabel, styles.textLabelEmail]}>
                 EMAIL:
               </Text>
               <Text style={[styles.textData, styles.textDataEmail]}>
-                nomesobrenome@gmail.com
+                {email}
               </Text>
             </View>
             <View style={styles.line}>
@@ -61,7 +59,7 @@ export default function PerfilUser({ navigation, route }) {
                 COMUNIDADE:
               </Text>
               <Text style={[styles.textData, styles.textDataComunity]}>
-                São Geraldo Magela - Sapucaia
+                {comunidade}
               </Text>
             </View>
 
