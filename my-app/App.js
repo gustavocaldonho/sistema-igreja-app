@@ -99,7 +99,11 @@ export default function TabOneScreen() {
           </View>
         ) : (
           <NavigationContainer>
-            <MyStack />
+            <MyStack
+              setLogged={setLogged}
+              userList={userList}
+              setUserList={setUserList}
+            />
           </NavigationContainer>
         )}
       </BoxLinearGradient>

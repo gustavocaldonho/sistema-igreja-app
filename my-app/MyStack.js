@@ -14,13 +14,14 @@ import PerfilCommunity from "./src/components/PerfilCommunity";
 
 const Stack = createStackNavigator();
 
-export default function MyStack() {
+export default function MyStack({ setLogged, userList, setUserList }) {
   // Todos os componentes definindos abaixo têm acesso a props "navigation"
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Menu"
         component={Menu}
+        initialParams={{ setLogged }}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -79,6 +80,7 @@ export default function MyStack() {
       <Stack.Screen
         name="Users"
         component={Users}
+        initialParams={{ userList, setUserList }}
         options={({ navigation }) => ({
           title: "Usuários",
           headerStyle: styles.headerStyle,

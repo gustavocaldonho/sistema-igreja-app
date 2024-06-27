@@ -6,7 +6,9 @@ import styles from "./style";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
 
-export default function Menu({ navigation }) {
+export default function Menu({ navigation, route }) {
+  const { setLogged } = route.params;
+
   return (
     <BoxLinearGradient style={styles.container}>
       <View style={styles.innerContainer}>
@@ -63,7 +65,7 @@ export default function Menu({ navigation }) {
         <TouchableOpacity
           activeOpacity={0.7}
           style={styles.buttonSignOut}
-          // onPress={setLogged(false)}
+          onPress={() => setLogged(false)}
         >
           <Text style={styles.textSignOut}>Sair</Text>
           <Icon name="sign-out" style={styles.iconSignOut} />
