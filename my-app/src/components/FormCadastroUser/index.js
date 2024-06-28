@@ -145,7 +145,7 @@ export default function FormCadastroUser({ userList, setUserList }) {
                   cpf,
                   email,
                   dataNasc,
-                  community,
+                  comunidade: community,
                   password,
                 });
                 setName("");
