@@ -36,7 +36,13 @@ export default function TabOneScreen() {
     },
   ]);
 
-  // function getDataUserLogged(){}
+  // function getDataUserLogged(userLogged, userList) {
+  //   for (let i = 0; i < userList.length; i++) {
+  //     console.log(userList[i]);
+  //   }
+  // }
+
+  // getDataUserLogged(userLogged, userList);
 
   return (
     <View style={styles.container}>
