@@ -78,14 +78,6 @@ const styles = StyleSheet.create({
   textButtonBack: {
     padding: 20,
   },
-  headerStyle: {
-    height: 130,
-    backgroundColor: "#fff",
-  },
-  titleHeader: {
-    fontSize: 40,
-    color: "#339dd7",
-  },
   sizeSmallHeader: {
     fontSize: 37,
   },
