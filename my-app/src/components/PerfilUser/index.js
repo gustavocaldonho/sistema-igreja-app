@@ -8,7 +8,7 @@ import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 import styles from "./style";
 
 export default function PerfilUser({ navigation, route }) {
-  const { name, cpf, dataNasc, email, comunidade } = route.params;
+  const { name, cpf, dataNasc, email, community } = route.params;
 
   // if (route.params.cpf === route.params.userLogged) {
   //   console.log("Mesmo Usuário");
@@ -65,7 +65,7 @@ export default function PerfilUser({ navigation, route }) {
                 COMUNIDADE:
               </Text>
               <Text style={[styles.textData, styles.textDataComunity]}>
-                {comunidade}
+                {community}
               </Text>
             </View>
 

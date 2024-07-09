@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable, TouchableHighlight } from "react-native";
+import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -14,7 +14,7 @@ export default function ItemUser(props) {
           cpf: props.cpf,
           dataNasc: props.dataNasc,
           email: props.email,
-          comunidade: props.comunidade,
+          community: props.community,
         })
       }
     >

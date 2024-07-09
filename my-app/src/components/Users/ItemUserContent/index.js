@@ -11,7 +11,7 @@ export default function ItemUserContent({ navigation, userList }) {
           cpf={user.cpf}
           dataNasc={user.dataNasc}
           email={user.email}
-          comunidade={user.comunidade}
+          community={user.community}
           navigation={navigation}
           key={`item-user-${idx}`}
         />

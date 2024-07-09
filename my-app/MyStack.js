@@ -27,7 +27,6 @@ export default function MyStack() {
       <Stack.Screen
         name="Menu"
         component={Menu}
-        // initialParams={{ setLogged }}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -72,7 +71,6 @@ export default function MyStack() {
       <Stack.Screen
         name="PerfilUser"
         component={PerfilUser}
-        // initialParams={{ userLogged }}
         options={({ navigation }) => ({
           headerShown: false,
         })}
@@ -87,7 +85,6 @@ export default function MyStack() {
       <Stack.Screen
         name="Users"
         component={Users}
-        // initialParams={{ userList }}
         options={({ navigation }) => ({
           title: "Usuários",
           headerStyle: styles.headerStyle,

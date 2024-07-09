@@ -148,7 +148,7 @@ export default function FormCadastroUser() {
                   cpf,
                   email,
                   dataNasc,
-                  comunidade: community,
+                  community,
                   password,
                 });
                 setName("");

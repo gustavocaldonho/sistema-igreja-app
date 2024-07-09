@@ -15,7 +15,7 @@ function AuthProvider({ children }) {
       cpf: "222.222.222-22",
       email: "jose@gmail.com",
       dataNasc: "23/12/1980",
-      comunidade: "a",
+      community: "a",
       password: "1234",
     },
     {
@@ -23,7 +23,7 @@ function AuthProvider({ children }) {
       cpf: "2",
       email: "miguel@gmail.com",
       dataNasc: "23/12/1980",
-      comunidade: "a",
+      community: "a",
       password: "1234",
     },
   ]);

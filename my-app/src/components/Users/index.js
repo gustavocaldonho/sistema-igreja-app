@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { View } from "react-native";
 import styles from "./style";
 
 import ScreenBase from "../ScreenBase";
 import BoxSearch from "../BoxSearch";
 import ItemUserContent from "./ItemUserContent";
+import { AuthContext } from "../../contexts/auth";
 
-export default function Users({ navigation, route }) {
-  const { userList } = route.params;
+export default function Users({ navigation }) {
+  const { userList } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
