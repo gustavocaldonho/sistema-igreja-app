@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -13,11 +13,13 @@ import styles from "./style";
 import InputGroupCpf from "../InputGroup/InputGroupCpf";
 import InputGroupPassword from "../InputGroup/InputGroupPassword";
 
-export default function FormLogin({ userList, setLogged, setUserLogged }) {
+import { AuthContext } from "../../contexts/auth";
+
+export default function FormLogin() {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
-
   const [showError, setShowError] = useState(false);
+  const { userList, setLogged, setUserLogged } = useContext(AuthContext);
 
   return (
     // usar <ScrollView></ScrollView>
@@ -55,6 +57,7 @@ export default function FormLogin({ userList, setLogged, setUserLogged }) {
           onPress={() => {
             let logar = false;
 
+            // Criar uma função para envelopar o loop abaixo
             for (let i = 0; i < userList.length; i++) {
               if (
                 userList[i].cpf === cpf &&

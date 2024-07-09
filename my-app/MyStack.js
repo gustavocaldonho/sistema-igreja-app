@@ -3,6 +3,7 @@ import styles from "./style";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import ButtonBack from "./src/components/ButtonBack";
+import Login from "./src/components/Login";
 import Menu from "./src/components/Menu";
 import Avisos from "./src/components/Avisos";
 import CaixaMortuario from "./src/components/CaixaMortuaria";
@@ -14,19 +15,19 @@ import PerfilCommunity from "./src/components/PerfilCommunity";
 
 const Stack = createStackNavigator();
 
-export default function MyStack({
-  setLogged,
-  userLogged,
-  userList,
-  setUserList,
-}) {
+export default function MyStack() {
   // Todos os componentes definindos abaixo têm acesso a props "navigation"
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Menu"
         component={Menu}
-        initialParams={{ setLogged }}
+        // initialParams={{ setLogged }}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -71,7 +72,7 @@ export default function MyStack({
       <Stack.Screen
         name="PerfilUser"
         component={PerfilUser}
-        initialParams={{ userLogged }}
+        // initialParams={{ userLogged }}
         options={({ navigation }) => ({
           headerShown: false,
         })}
@@ -86,7 +87,7 @@ export default function MyStack({
       <Stack.Screen
         name="Users"
         component={Users}
-        initialParams={{ userList }}
+        // initialParams={{ userList }}
         options={({ navigation }) => ({
           title: "Usuários",
           headerStyle: styles.headerStyle,

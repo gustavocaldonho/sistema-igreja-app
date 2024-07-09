@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View } from "react-native";
 import styles from "./style";
 import ScreenBase from "../ScreenBase";
 import ButtonAdd from "../ButtonAdd";
 import ItemAvisoContent from "./ItemAvisoContent";
 import ModalWarnings from "./ModalWarnings";
+
+import { AuthContext } from "../../contexts/auth";
 
 export default function Avisos({ navigation }) {
   const [warningList, setWarningList] = useState([
@@ -15,6 +17,9 @@ export default function Avisos({ navigation }) {
   const [itemClicked, setItemClicked] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const [formModalDefaultVisible, setFormModalDefaultVisible] = useState(true);
+
+  const { nome } = useContext(AuthContext);
+  console.log(nome);
 
   return (
     <View style={styles.container}>

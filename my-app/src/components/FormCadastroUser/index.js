@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
   Platform,
 } from "react-native";
 import styles from "./style";
+import { AuthContext } from "../../contexts/auth";
 
 import InputGroupName from "../InputGroup/InputGroupName";
 import InputGroupCpf from "../InputGroup/InputGroupCpf";
@@ -18,7 +19,7 @@ import InputGroupEmail from "../InputGroup/InputGroupEmail";
 import InputGroupDN from "../InputGroup/InputGroupDN";
 import InputGroupSelect from "../InputGroup/InputGroupSelect";
 
-export default function FormCadastroUser({ userList, setUserList }) {
+export default function FormCadastroUser() {
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
@@ -26,6 +27,8 @@ export default function FormCadastroUser({ userList, setUserList }) {
   const [community, setCommunity] = useState("");
   const [password, setPassword] = useState("1234");
   const [showErrors, setShowErrors] = useState(false);
+
+  const { userList, setUserList } = useContext(AuthContext);
 
   function checkText(text) {
     return text === "" ? true : false;
