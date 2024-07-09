@@ -49,7 +49,7 @@ function AuthProvider({ children }) {
 
   function signOut() {
     setUser({});
-    navigation.navigate("Login");
+    navigation.navigate("Initial");
   }
 
   return (

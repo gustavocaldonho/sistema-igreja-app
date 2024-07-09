@@ -3,7 +3,7 @@ import styles from "./style";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import ButtonBack from "./src/components/ButtonBack";
-import Login from "./src/components/Login";
+import Initial from "./src/components/Initial";
 import Menu from "./src/components/Menu";
 import Avisos from "./src/components/Avisos";
 import CaixaMortuario from "./src/components/CaixaMortuaria";
@@ -20,8 +20,8 @@ export default function MyStack() {
   return (
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
-        name="Login"
-        component={Login}
+        name="Initial"
+        component={Initial}
         options={{ headerShown: false }}
       />
       <Stack.Screen

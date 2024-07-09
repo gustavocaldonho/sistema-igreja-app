@@ -19,7 +19,7 @@ export default function FormLogin() {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
-  const { signIn } = useContext(AuthContext);
+  const { signIn, setRegistryEntry } = useContext(AuthContext);
 
   return (
     // usar <ScrollView></ScrollView>
@@ -37,7 +37,6 @@ export default function FormLogin() {
             setCpf(text);
           }}
         />
-
         <InputGroupPassword
           iconName="key"
           // style={styles.input}
@@ -47,13 +46,12 @@ export default function FormLogin() {
             setPassword(text);
           }}
         />
-
         <TouchableOpacity>
           <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.buttonLogin}
+          style={styles.button}
           onPress={() => {
             // retorna true ou false
             const error = signIn(cpf, password);
@@ -65,7 +63,16 @@ export default function FormLogin() {
             }
           }}
         >
-          <Text style={styles.textButtonLogin}>Entrar</Text>
+          <Text style={styles.textButton}>Entrar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            setRegistryEntry(true);
+          }}
+        >
+          <Text style={styles.textButton}>Criar Conta</Text>
         </TouchableOpacity>
       </Pressable>
     </View>

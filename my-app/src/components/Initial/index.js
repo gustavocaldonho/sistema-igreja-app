@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text, View, TouchableOpacity, StatusBar } from "react-native";
+import { View, TouchableOpacity, StatusBar } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
@@ -8,38 +8,22 @@ import FormLogin from "../FormLogin";
 import FormCadastroUser from "../FormCadastroUser";
 import { AuthContext } from "../../contexts/auth";
 
-export default function Login() {
+export default function Initial() {
   const { registryEntry, setRegistryEntry } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#339DD7" />
-
       <BoxLinearGradient>
-        <View style={styles.main}>
-          <View style={styles.boxBackgroundTop}>
-            {registryEntry == false ? (
-              <Title textTitle={"SEJA BEM-VINDO!!"} />
-            ) : (
-              <Title textTitle={"CADASTRO DE USUÁRIO"} />
-            )}
-          </View>
-          {registryEntry == false ? (
-            <View style={styles.boxFormLogin}>
+        {registryEntry == false ? (
+          <View style={styles.main}>
+            <Title textTitle="SEJA BEM-VINDO!!" />
+            <View style={[styles.boxFormLogin, styles.boxShadow]}>
               <FormLogin />
-              <TouchableOpacity
-                style={styles.buttonAccount}
-                onPress={() => {
-                  setRegistryEntry(true);
-                }}
-              >
-                <Text style={styles.textButtonAccount}>Criar Conta</Text>
-              </TouchableOpacity>
             </View>
-          ) : (
-            <View style={styles.boxFormCadastro}>{<FormCadastroUser />}</View>
-          )}
-          {registryEntry ? (
+          </View>
+        ) : (
+          <View style={styles.main}>
             <View style={styles.buttonBack}>
               <TouchableOpacity
                 style={styles.textButtonBack}
@@ -50,10 +34,13 @@ export default function Login() {
                 <Icon name={"chevron-left"} size={25} color="#ffffff" />
               </TouchableOpacity>
             </View>
-          ) : (
-            ""
-          )}
-        </View>
+
+            <Title textTitle="CADASTRO DE USUÁRIO" />
+            <View style={[styles.boxFormCadastro, styles.boxShadow]}>
+              <FormCadastroUser />
+            </View>
+          </View>
+        )}
       </BoxLinearGradient>
     </View>
   );

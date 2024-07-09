@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   formContext: {
-    flex: 1,
     backgroundColor: "#ffffff",
     borderRadius: 30,
     overflow: "hidden",

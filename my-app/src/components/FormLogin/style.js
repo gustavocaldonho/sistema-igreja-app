@@ -20,19 +20,19 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 15,
   },
-  buttonLogin: {
+  button: {
     width: "80%",
     backgroundColor: "#339dd7",
     alignItems: "center",
     justifyContent: "flex-end",
     paddingTop: 14,
     paddingBottom: 14,
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 50,
     marginLeft: "auto",
     marginRight: "auto",
   },
-  textButtonLogin: {
+  textButton: {
     fontSize: 20,
     color: "#ffffff",
     fontWeight: "bold",
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     fontStyle: "italic",
     color: "#8F8F8F",
+    marginBottom: 10,
   },
 });
 

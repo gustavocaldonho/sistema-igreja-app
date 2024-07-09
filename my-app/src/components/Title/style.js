@@ -2,9 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   boxTitle: {
-    flex: 1,
     alignItems: "center",
-    paddingTop: 60,
   },
   boxLogo: {
     width: 120,
