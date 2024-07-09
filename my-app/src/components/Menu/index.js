@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
+import { AuthContext } from "../../contexts/auth";
 
-export default function Menu({ navigation, route }) {
-  const { setLogged } = route.params;
+export default function Menu({ navigation }) {
+  const { signOut } = useContext(AuthContext);
 
   return (
     <BoxLinearGradient style={styles.container}>
@@ -65,7 +66,9 @@ export default function Menu({ navigation, route }) {
         <TouchableOpacity
           activeOpacity={0.7}
           style={styles.buttonSignOut}
-          onPress={() => setLogged(false)}
+          onPress={() => {
+            signOut();
+          }}
         >
           <Text style={styles.textSignOut}>Sair</Text>
           <Icon name="sign-out" style={styles.iconSignOut} />

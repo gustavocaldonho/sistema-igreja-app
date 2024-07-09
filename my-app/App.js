@@ -5,7 +5,7 @@ import "react-native-gesture-handler";
 import AuthProvider from "./src/contexts/auth";
 import MyStack from "./MyStack";
 
-export default function TabOneScreen() {
+export default function App() {
   return (
     <NavigationContainer>
       <AuthProvider>

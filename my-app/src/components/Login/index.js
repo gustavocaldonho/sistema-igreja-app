@@ -2,12 +2,10 @@ import React, { useContext } from "react";
 import { Text, View, TouchableOpacity, StatusBar } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
 import Title from "../Title";
 import FormLogin from "../FormLogin";
 import FormCadastroUser from "../FormCadastroUser";
-
 import { AuthContext } from "../../contexts/auth";
 
 export default function Login() {
@@ -16,9 +14,6 @@ export default function Login() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#339DD7" />
-      {/* <StatusBar backgroundColor="#f7c7de" /> */}
-      {/* <StatusBar backgroundColor="#f094c0" /> */}
-      {/* <StatusBar backgroundColor="#fff" /> */}
 
       <BoxLinearGradient>
         <View style={styles.main}>

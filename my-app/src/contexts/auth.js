@@ -1,12 +1,13 @@
 import React, { createContext, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
   const [registryEntry, setRegistryEntry] = useState(false);
-  const [logged, setLogged] = useState(true);
   const [user, setUser] = useState({});
-  const [userLogged, setUserLogged] = useState(null);
+
+  const navigation = useNavigation();
 
   const [userList, setUserList] = useState([
     {
@@ -27,25 +28,40 @@ function AuthProvider({ children }) {
     },
   ]);
 
-  function getDataUserLogged(userLogged, userList) {
+  function signIn(cpf, password) {
     for (let i = 0; i < userList.length; i++) {
-      console.log(userList[i]);
+      if (userList[i].cpf === cpf && userList[i].password === password) {
+        setUser({
+          name: userList[i].name,
+          cpf: userList[i].cpf,
+          email: userList[i].email,
+          dataNasc: userList[i].dataNasc,
+          comunidade: userList[i].comunidade,
+          password: userList[i].password,
+        });
+        navigation.navigate("Menu");
+        return false; // não mostrar msg de erro
+      }
     }
+    setUser({});
+    return true; // mostrar msg de erro
   }
 
-  //   getDataUserLogged(userLogged, userList);
+  function signOut() {
+    setUser({});
+    navigation.navigate("Login");
+  }
 
   return (
     <AuthContext.Provider
       value={{
         registryEntry,
         setRegistryEntry,
-        logged,
-        setLogged,
-        userLogged,
-        setUserLogged,
         userList,
         setUserList,
+        user,
+        signIn,
+        signOut,
       }}
     >
       {children}

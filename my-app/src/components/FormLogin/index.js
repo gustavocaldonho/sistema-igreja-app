@@ -19,7 +19,7 @@ export default function FormLogin() {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
-  const { userList, setLogged, setUserLogged } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
   return (
     // usar <ScrollView></ScrollView>
@@ -55,22 +55,14 @@ export default function FormLogin() {
         <TouchableOpacity
           style={styles.buttonLogin}
           onPress={() => {
-            let logar = false;
+            // retorna true ou false
+            const error = signIn(cpf, password);
+            setShowError(error);
 
-            // Criar uma função para envelopar o loop abaixo
-            for (let i = 0; i < userList.length; i++) {
-              if (
-                userList[i].cpf === cpf &&
-                userList[i].password === password
-              ) {
-                logar = true;
-                break;
-              }
+            if (!error) {
+              setCpf("");
+              setPassword("");
             }
-            setShowError(!logar);
-            setLogged(logar);
-            logar ? setUserLogged(cpf) : "";
-            console.log("Logar: ", logar);
           }}
         >
           <Text style={styles.textButtonLogin}>Entrar</Text>
