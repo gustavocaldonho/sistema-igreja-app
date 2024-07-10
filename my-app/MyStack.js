@@ -39,15 +39,7 @@ export default function MyStack() {
       <Stack.Screen
         name="CaixaMortuario"
         component={CaixaMortuario}
-        options={({ navigation }) => ({
-          title: "Caixa Mortuária",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: [styles.titleHeader, styles.sizeSmallHeader],
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Dizimo"

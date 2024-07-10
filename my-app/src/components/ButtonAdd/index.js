@@ -1,7 +1,6 @@
 import React from "react";
-import { TouchableHighlight } from "react-native";
+import { TouchableHighlight, StyleSheet } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import styles from "./style";
 
 export default function ButtonAdd({ onPress }) {
   return (
@@ -14,3 +13,23 @@ export default function ButtonAdd({ onPress }) {
     </TouchableHighlight>
   );
 }
+
+const styles = StyleSheet.create({
+  boxButtonAdd: {
+    width: 60,
+    height: 60,
+    position: "absolute",
+    bottom: 20,
+    right: 30,
+    alignSelf: "center",
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#287BBF",
+  },
+
+  iconAdd: {
+    fontSize: 20,
+    color: "#fff",
+  },
+});
