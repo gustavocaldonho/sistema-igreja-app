@@ -49,29 +49,26 @@ export default function MyStack() {
       <Stack.Screen
         name="PerfilUser"
         component={PerfilUser}
-        options={({ navigation }) => ({
-          headerShown: false,
-        })}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="PerfilCommunity"
         component={PerfilCommunity}
-        options={({ navigation }) => ({
-          headerShown: false,
-        })}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Users"
         component={Users}
-        options={({ navigation }) => ({
-          title: "Usuários",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.titleHeader,
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
+        options={{ headerShown: false }}
+        // options={({ navigation }) => ({
+        //   title: "Usuários",
+        //   headerStyle: styles.headerStyle,
+        //   headerTitleStyle: styles.titleHeader,
+        //   headerTitleAlign: "center",
+        //   headerLeft: () => (
+        //     <ButtonBack navigation={navigation} color={"#339dd7"} />
+        //   ),
+        // })}
       />
       <Stack.Screen
         name="Comunidades"
