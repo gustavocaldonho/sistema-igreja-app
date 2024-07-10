@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView } from "react-native-gesture-handler";
-import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
+import BoxLinearGradient from "./BoxLinearGradient";
 import styles from "./style";
-import ButtonAdd from "../ButtonAdd";
-import ButtonBack from "../ButtonBack";
+import ButtonAdd from "../../auxiliary/ButtonAdd";
+import ButtonBack from "../../auxiliary/ButtonBack";
 
 export default function PageBase({
   children,

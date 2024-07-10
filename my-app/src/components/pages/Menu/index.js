@@ -3,9 +3,9 @@ import { View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
-import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
+import BoxLinearGradient from "../../pages/PageBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
-import { AuthContext } from "../../contexts/auth";
+import { AuthContext } from "../../../contexts/auth";
 
 export default function Menu({ navigation }) {
   const { signOut } = useContext(AuthContext);

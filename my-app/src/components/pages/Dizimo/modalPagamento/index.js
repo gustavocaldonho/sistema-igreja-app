@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
-import InputGroupValorDizimo from "../../InputGroup/InputGroupValorDizimo";
+import InputGroupValorDizimo from "../../../auxiliary/InputGroup/InputGroupValorDizimo";
 
 export default function ModalPagamentoDizimo({
   modalVisible,
@@ -56,7 +56,7 @@ export default function ModalPagamentoDizimo({
               <Text style={styles.modalText}>Código Pix</Text>
               <Image
                 style={styles.qrcode}
-                source={require("../../../images/qrcode.png")}
+                source={require("../../../../images/qrcode.png")}
               />
               <TouchableOpacity
                 style={styles.boxButtonCopyCode}

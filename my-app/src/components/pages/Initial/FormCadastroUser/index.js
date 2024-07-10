@@ -11,13 +11,13 @@ import {
   Platform,
 } from "react-native";
 import styles from "./style";
-import { AuthContext } from "../../contexts/auth";
+import { AuthContext } from "../../../../contexts/auth";
 
-import InputGroupName from "../InputGroup/InputGroupName";
-import InputGroupCpf from "../InputGroup/InputGroupCpf";
-import InputGroupEmail from "../InputGroup/InputGroupEmail";
-import InputGroupDN from "../InputGroup/InputGroupDN";
-import InputGroupSelect from "../InputGroup/InputGroupSelect";
+import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
+import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
+import InputGroupEmail from "../../../auxiliary/InputGroup/InputGroupEmail";
+import InputGroupDN from "../../../auxiliary/InputGroup/InputGroupDN";
+import InputGroupSelect from "../../../auxiliary/InputGroup/InputGroupSelect";
 
 export default function FormCadastroUser() {
   const [name, setName] = useState("");

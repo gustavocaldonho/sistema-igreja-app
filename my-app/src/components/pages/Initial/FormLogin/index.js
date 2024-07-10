@@ -10,10 +10,10 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import styles from "./style";
-import InputGroupCpf from "../InputGroup/InputGroupCpf";
-import InputGroupPassword from "../InputGroup/InputGroupPassword";
+import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
+import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
 
-import { AuthContext } from "../../contexts/auth";
+import { AuthContext } from "../../../../contexts/auth";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");

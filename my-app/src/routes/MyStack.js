@@ -1,15 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Initial from "../components/Initial";
-import Menu from "../components/Menu";
-import Avisos from "../components/Avisos";
-import CaixaMortuario from "../components/CaixaMortuaria";
-import Comunidades from "../components/Comunidades";
-import Dizimo from "../components/Dizimo";
-import Users from "../components/Users";
-import PerfilUser from "../components/PerfilUser";
-import PerfilCommunity from "../components/PerfilCommunity";
+import Initial from "../components/pages/Initial";
+import Menu from "../components/pages/Menu";
+import Avisos from "../components/pages/Avisos";
+import CaixaMortuario from "../components/pages/CaixaMortuaria";
+import Comunidades from "../components/pages/Comunidades";
+import Dizimo from "../components/pages/Dizimo";
+import Users from "../components/pages/Users";
+import PerfilUser from "../components/pages/PerfilUser";
+import PerfilCommunity from "../components/pages/PerfilCommunity";
 
 const Stack = createStackNavigator();
 

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
-import ButtonBack from "../ButtonBack";
-import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
+import ButtonBack from "../../auxiliary/ButtonBack";
+import BoxLinearGradient from "../../pages/PageBase/BoxLinearGradient";
 import ItemAdvisor from "./ItemAdvisor";
 import ItemHighlight from "./ItemHighlight";
 
@@ -24,7 +24,7 @@ export default function PerfilCommunity({ navigation, route }) {
           <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
             <Image
               style={styles.imageProfile}
-              source={require("../../images/church-icon.png")}
+              source={require("../../../images/church-icon.png")}
             />
             <View style={styles.boxIconCamera}>
               <TouchableOpacity onPress={() => {}}>

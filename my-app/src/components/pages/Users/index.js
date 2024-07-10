@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import PageBase from "../PageBase";
-import BoxSearch from "../BoxSearch";
+import BoxSearch from "../../auxiliary/BoxSearch";
 import ItemUserContent from "./ItemUserContent";
-import { AuthContext } from "../../contexts/auth";
+import { AuthContext } from "../../../contexts/auth";
 
 export default function Users({ navigation }) {
   const { userList } = useContext(AuthContext);

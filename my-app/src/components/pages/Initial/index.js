@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { View, TouchableOpacity, StatusBar } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
-import BoxLinearGradient from "../ScreenBase/BoxLinearGradient";
-import Title from "../Title";
-import FormLogin from "../FormLogin";
-import FormCadastroUser from "../FormCadastroUser";
-import { AuthContext } from "../../contexts/auth";
+import BoxLinearGradient from "../../pages/PageBase/BoxLinearGradient";
+import Title from "./Title";
+import FormLogin from "./FormLogin";
+import FormCadastroUser from "./FormCadastroUser";
+import { AuthContext } from "../../../contexts/auth";
 
 export default function Initial() {
   const { registryEntry, setRegistryEntry } = useContext(AuthContext);

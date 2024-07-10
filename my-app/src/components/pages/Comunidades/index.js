@@ -1,6 +1,6 @@
 import React from "react";
 import PageBase from "../PageBase";
-import BoxSearch from "../BoxSearch";
+import BoxSearch from "../../auxiliary/BoxSearch";
 import ItemCommunity from "./ItemCommunity";
 
 export default function Comunidades(props) {
