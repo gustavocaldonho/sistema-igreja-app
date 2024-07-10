@@ -4,12 +4,10 @@ const styles = StyleSheet.create({
   // Os campos 'height' de 'boxBackgroundTop' e de 'boxFormLogin' estão dimensionados numericamente. Dessa forma, talvez não fiquem responsivos, isto é, em outros dispositivos a formatação fique incorreta.
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
   },
   main: {
-    flex: 1,
-    paddingTop: 20,
     gap: 40,
+    paddingTop: 60,
   },
   boxFormLogin: {
     width: "85%",
@@ -28,7 +26,7 @@ const styles = StyleSheet.create({
   },
   buttonBack: {
     position: "absolute",
-    top: 20,
+    top: 50,
     left: 0,
   },
   textButtonBack: {

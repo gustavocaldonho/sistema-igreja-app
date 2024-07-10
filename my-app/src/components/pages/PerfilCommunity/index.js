@@ -15,7 +15,7 @@ export default function PerfilCommunity({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <StatusBar color="#339DD7" />
+      <StatusBar backgroundColor="#339DD7" />
       <BoxLinearGradient style={{ flex: 1 }}>
         <View style={styles.boxButtonBack}>
           <ButtonBack color={"#fff"} />
