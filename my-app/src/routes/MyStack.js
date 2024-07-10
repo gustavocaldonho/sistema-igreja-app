@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 export default function MyStack() {
   // Todos os componentes definindos abaixo têm acesso a props "navigation"
   return (
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Initial">
       <Stack.Screen
         name="Initial"
         component={Initial}
