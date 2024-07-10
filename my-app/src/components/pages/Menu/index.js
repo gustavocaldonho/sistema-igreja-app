@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text } from "react-native";
+import { StatusBar, View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
@@ -12,6 +12,7 @@ export default function Menu({ navigation }) {
 
   return (
     <BoxLinearGradient style={styles.container}>
+      <StatusBar translucent />
       <View style={styles.innerContainer}>
         <View style={styles.boxTitleMenu}>
           <Text style={styles.textMenu}>MENU</Text>

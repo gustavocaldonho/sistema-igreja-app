@@ -8,7 +8,7 @@ export default function Dizimo({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <PageBase title={"Dízimo"} statusBarColor={"#fff"}>
+    <PageBase title={"Dízimo"}>
       {modalVisible ? (
         <ModalPagamentoDizimo
           modalVisible={modalVisible}

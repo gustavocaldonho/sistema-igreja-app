@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function BoxLinearGradient({ children }) {
+export default function BoxLinearGradient({ style, children }) {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={style}>
       <LinearGradient
         style={{ ...StyleSheet.absoluteFillObject }} //preenche todo o container pai
         start={{ x: 0, y: 1 }}

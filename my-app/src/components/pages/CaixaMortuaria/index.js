@@ -8,11 +8,7 @@ export default function CaixaMortuaria({ navigation }) {
   const [codPix, setCodePix] = useState(null);
 
   return (
-    <PageBase
-      title={"Caixa Mortuária"}
-      signButtonAdd={true}
-      statusBarColor={"#fff"}
-    >
+    <PageBase title={"Caixa Mortuária"} signButtonAdd={true}>
       <View style={styles.boxItem}>
         <View style={styles.boxTop}>
           <View style={styles.boxStatus}>

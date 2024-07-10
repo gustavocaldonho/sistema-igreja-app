@@ -22,7 +22,6 @@ export default function Avisos({ navigation }) {
   return (
     <PageBase
       title={"Avisos"}
-      statusBarColor={"#fff"}
       signButtonAdd={true}
       onPressAdd={onPressButtonAdd}
     >

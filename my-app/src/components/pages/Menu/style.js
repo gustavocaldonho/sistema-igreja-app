@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   },
   boxTitleMenu: {
     width: "100%",
-    paddingVertical: 20,
+    marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     justifyContent: "center",
+    paddingBottom: 10,
   },
   main: {
-    width: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   buttonSignOut: {
+    marginTop: 15,
     paddingVertical: 5,
     paddingHorizontal: 20,
     gap: 5,

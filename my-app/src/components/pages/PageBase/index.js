@@ -9,20 +9,19 @@ import ButtonBack from "../../auxiliary/ButtonBack";
 
 export default function PageBase({
   children,
-  statusBarColor,
   title,
   signButtonAdd,
   onPressAdd,
 }) {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor={statusBarColor} />
+      <StatusBar backgroundColor={"#fff"} />
       <View style={styles.boxHeader}>
         <ButtonBack color={"#339dd7"} />
         <Text style={styles.textTitle}>{title}</Text>
       </View>
       <View style={styles.innerContainer}>
-        <BoxLinearGradient>
+        <BoxLinearGradient style={{ flex: 1 }}>
           <ScrollView>
             <View style={styles.main}>{children}</View>
           </ScrollView>
