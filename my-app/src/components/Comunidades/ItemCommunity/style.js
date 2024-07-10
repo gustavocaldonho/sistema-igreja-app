@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     paddingHorizontal: 20,
+    marginBottom: 10,
   },
   boxIconLeft: {
     height: "100%",

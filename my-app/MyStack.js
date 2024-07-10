@@ -60,32 +60,10 @@ export default function MyStack() {
         name="Users"
         component={Users}
         options={{ headerShown: false }}
-        // options={({ navigation }) => ({
-        //   title: "Usuários",
-        //   headerStyle: styles.headerStyle,
-        //   headerTitleStyle: styles.titleHeader,
-        //   headerTitleAlign: "center",
-        //   headerLeft: () => (
-        //     <ButtonBack navigation={navigation} color={"#339dd7"} />
-        //   ),
-        // })}
       />
       <Stack.Screen
         name="Comunidades"
         component={Comunidades}
-        options={({ navigation }) => ({
-          title: "Comunidades",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.titleHeader,
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
-      />
-      <Stack.Screen
-        name="PageBase"
-        component={PageBase}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
