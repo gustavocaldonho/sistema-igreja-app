@@ -36,7 +36,7 @@ function AuthProvider({ children }) {
           cpf: userList[i].cpf,
           email: userList[i].email,
           dataNasc: userList[i].dataNasc,
-          comunidade: userList[i].comunidade,
+          community: userList[i].community,
           password: userList[i].password,
         });
         navigation.navigate("Menu");

@@ -8,7 +8,7 @@ import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
 
 export default function Menu({ navigation }) {
-  const { signOut } = useContext(AuthContext);
+  const { signOut, user } = useContext(AuthContext);
 
   return (
     <BoxLinearGradient style={styles.container}>
@@ -27,8 +27,11 @@ export default function Menu({ navigation }) {
             icon={"user"}
             onPress={() =>
               navigation.navigate("PerfilUser", {
-                nameUser: "Gustavo Caldonho",
-                cpf: "111.111.111-11",
+                name: user.name,
+                cpf: user.cpf,
+                dataNasc: user.dataNasc,
+                email: user.email,
+                community: user.community,
               })
             }
           />
