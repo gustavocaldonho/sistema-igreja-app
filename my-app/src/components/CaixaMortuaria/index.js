@@ -10,8 +10,8 @@ export default function CaixaMortuaria({ navigation }) {
   return (
     <PageBase
       title={"Caixa Mortuária"}
-      navigation={navigation}
       signButtonAdd={true}
+      statusBarColor={"#fff"}
     >
       <View style={styles.boxItem}>
         <View style={styles.boxTop}>

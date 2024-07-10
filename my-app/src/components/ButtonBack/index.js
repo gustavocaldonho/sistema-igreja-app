@@ -1,8 +1,10 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function ButtonBack({ navigation, color }) {
+export default function ButtonBack({ color }) {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
       onPress={() => navigation.goBack()}

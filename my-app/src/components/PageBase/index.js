@@ -8,7 +8,6 @@ import ButtonAdd from "../ButtonAdd";
 import ButtonBack from "../ButtonBack";
 
 export default function PageBase({
-  navigation,
   children,
   statusBarColor,
   title,
@@ -19,7 +18,7 @@ export default function PageBase({
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={statusBarColor} />
       <View style={styles.boxHeader}>
-        <ButtonBack color={"#339dd7"} navigation={navigation} />
+        <ButtonBack color={"#339dd7"} />
         <Text style={styles.textTitle}>{title}</Text>
       </View>
       <View style={styles.innerContainer}>

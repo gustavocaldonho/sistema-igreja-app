@@ -44,15 +44,7 @@ export default function MyStack() {
       <Stack.Screen
         name="Dizimo"
         component={Dizimo}
-        options={({ navigation }) => ({
-          title: "Dízimo",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.titleHeader,
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="PerfilUser"
