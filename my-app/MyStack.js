@@ -13,6 +13,8 @@ import Users from "./src/components/Users";
 import PerfilUser from "./src/components/PerfilUser";
 import PerfilCommunity from "./src/components/PerfilCommunity";
 
+import PageBase from "./src/components/PageBase";
+
 const Stack = createStackNavigator();
 
 export default function MyStack() {
@@ -32,15 +34,7 @@ export default function MyStack() {
       <Stack.Screen
         name="Avisos"
         component={Avisos}
-        options={({ navigation }) => ({
-          title: "Avisos",
-          headerStyle: styles.headerStyle,
-          headerTitleStyle: styles.titleHeader,
-          headerTitleAlign: "center",
-          headerLeft: () => (
-            <ButtonBack navigation={navigation} color={"#339dd7"} />
-          ),
-        })}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="CaixaMortuario"
@@ -107,6 +101,11 @@ export default function MyStack() {
             <ButtonBack navigation={navigation} color={"#339dd7"} />
           ),
         })}
+      />
+      <Stack.Screen
+        name="PageBase"
+        component={PageBase}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

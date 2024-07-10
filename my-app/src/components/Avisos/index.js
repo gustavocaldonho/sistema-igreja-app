@@ -1,12 +1,7 @@
-import React, { useState, useContext } from "react";
-import { View } from "react-native";
-import styles from "./style";
-import ScreenBase from "../ScreenBase";
-import ButtonAdd from "../ButtonAdd";
+import React, { useState } from "react";
 import ItemAvisoContent from "./ItemAvisoContent";
 import ModalWarnings from "./ModalWarnings";
-
-import { AuthContext } from "../../contexts/auth";
+import PageBase from "../PageBase";
 
 export default function Avisos({ navigation }) {
   const [warningList, setWarningList] = useState([
@@ -18,48 +13,40 @@ export default function Avisos({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [formModalDefaultVisible, setFormModalDefaultVisible] = useState(true);
 
-  const { nome } = useContext(AuthContext);
-  console.log(nome);
+  function onPressButtonAdd() {
+    setModalVisible(!modalVisible);
+    setFormModalDefaultVisible(true);
+    setItemClicked("");
+  }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <ScreenBase colorStatusBar={"#fff"}>
-          <View style={styles.main}>
-            {modalVisible ? (
-              <ModalWarnings
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                warningList={warningList}
-                setWarningList={setWarningList}
-                itemClicked={itemClicked}
-                setItemClicked={setItemClicked}
-                formModalDefaultVisible={formModalDefaultVisible}
-              />
-            ) : (
-              <ItemAvisoContent
-                warningList={warningList}
-                setWarningList={setWarningList}
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                setItemClicked={setItemClicked}
-                setFormModalDefaultVisible={setFormModalDefaultVisible}
-              />
-            )}
-          </View>
-        </ScreenBase>
-      </View>
-      {!modalVisible ? (
-        <ButtonAdd
-          onPress={() => {
-            setModalVisible(!modalVisible);
-            setFormModalDefaultVisible(true);
-            setItemClicked("");
-          }}
+    <PageBase
+      title={"Avisos"}
+      navigation={navigation}
+      statusBarColor={"#fff"}
+      signButtonAdd={true}
+      onPressAdd={onPressButtonAdd}
+    >
+      {modalVisible ? (
+        <ModalWarnings
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          warningList={warningList}
+          setWarningList={setWarningList}
+          itemClicked={itemClicked}
+          setItemClicked={setItemClicked}
+          formModalDefaultVisible={formModalDefaultVisible}
         />
       ) : (
-        ""
+        <ItemAvisoContent
+          warningList={warningList}
+          setWarningList={setWarningList}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          setItemClicked={setItemClicked}
+          setFormModalDefaultVisible={setFormModalDefaultVisible}
+        />
       )}
-    </View>
+    </PageBase>
   );
 }

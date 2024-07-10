@@ -47,10 +47,15 @@ export default function Menu({ navigation }) {
             icon={"users"}
             onPress={() => navigation.navigate("Users", {})}
           />
-          <ItemMenu
+          {/* <ItemMenu
             screenName={"Comunidades"}
             icon={"church"}
             onPress={() => navigation.navigate("Comunidades")}
+          /> */}
+          <ItemMenu
+            screenName={"PageBase"}
+            icon={"user"}
+            onPress={() => navigation.navigate("PageBase")}
           />
           {/* <ItemMenu
             screenName={"Comunidade"}
