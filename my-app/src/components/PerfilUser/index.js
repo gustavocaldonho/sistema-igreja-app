@@ -21,7 +21,7 @@ export default function PerfilUser({ navigation, route }) {
       <StatusBar color="#339DD7" />
       <BoxLinearGradient style={{ flex: 1 }}>
         <View style={styles.boxButtonBack}>
-          <ButtonBack navigation={navigation} color={"#fff"} />
+          <ButtonBack color={"#fff"} />
         </View>
         <View style={styles.boxTop}>
           <View style={[styles.boxImageProfile, styles.boxShadowLight]}>

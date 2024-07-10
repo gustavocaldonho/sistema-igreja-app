@@ -1,8 +1,6 @@
 import React from "react";
-import styles from "./style";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import ButtonBack from "./src/components/ButtonBack";
 import Initial from "./src/components/Initial";
 import Menu from "./src/components/Menu";
 import Avisos from "./src/components/Avisos";
@@ -12,8 +10,6 @@ import Dizimo from "./src/components/Dizimo";
 import Users from "./src/components/Users";
 import PerfilUser from "./src/components/PerfilUser";
 import PerfilCommunity from "./src/components/PerfilCommunity";
-
-import PageBase from "./src/components/PageBase";
 
 const Stack = createStackNavigator();
 
