@@ -7,6 +7,7 @@ import BoxLinearGradient from "../../pages/PageBase/BoxLinearGradient";
 import styles from "./style";
 import PersonalDataContainer from "./PersonalDataContainer";
 import DizimoContainer from "./DizimoContainer";
+import MortuaryContainer from "./MortuaryContainer";
 
 export default function PerfilUser({ navigation, route }) {
   const { name, cpf, dataNasc, email, community } = route.params;
@@ -47,19 +48,11 @@ export default function PerfilUser({ navigation, route }) {
             styleTitleBox={styles.textTitleBox}
           />
 
-          <View style={[styles.boxInformationsUser, styles.boxShadow]}>
-            <Text style={styles.textTitleBox}>CAIXA MORTUÁRIA</Text>
-            <View style={styles.boxLineListMortuary}>
-              <View style={styles.itemLineList}>
-                <Text style={styles.textYear}>2023</Text>
-                <Icon name="heart" style={styles.iconStatusMonth} />
-              </View>
-              <View style={[styles.itemLineList, styles.currentYear]}>
-                <Text style={styles.textYear}>2024</Text>
-                <Icon name="heart" style={styles.iconStatusMonth} />
-              </View>
-            </View>
-          </View>
+          <MortuaryContainer
+            years={{}}
+            style={[styles.boxInformationsUser, styles.boxShadow]}
+            styleTitleBox={styles.textTitleBox}
+          />
         </ScrollView>
       </BoxLinearGradient>
     </View>
