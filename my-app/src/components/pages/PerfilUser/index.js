@@ -4,8 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ButtonBack from "../../auxiliary/ButtonBack";
 import BoxLinearGradient from "../../pages/PageBase/BoxLinearGradient";
-
 import styles from "./style";
+import PersonalDataContainer from "./PersonalDataContainer";
 
 export default function PerfilUser({ navigation, route }) {
   const { name, cpf, dataNasc, email, community } = route.params;
@@ -32,41 +32,14 @@ export default function PerfilUser({ navigation, route }) {
         </View>
         <View style={styles.boxNameUser}>
           <Text style={styles.textNameUser}>{name}</Text>
-          {/* <Text style={styles.textNameUser}>
-          Gustavo Caldonho de Souza Magnago
-        </Text> */}
         </View>
-        <ScrollView>
-          <View style={[styles.boxInformationsUser, styles.boxShadow]}>
-            <View style={styles.line}>
-              <Text style={styles.textLabel}>CPF:</Text>
-              <Text style={styles.textData}>{cpf}</Text>
-            </View>
-            <View style={styles.line}>
-              <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>
-              <Text style={styles.textData}>{dataNasc}</Text>
-            </View>
-            <View style={styles.line}>
-              <Text style={[styles.textLabel, styles.textLabelEmail]}>
-                EMAIL:
-              </Text>
-              <Text style={[styles.textData, styles.textDataEmail]}>
-                {email}
-              </Text>
-            </View>
-            <View style={styles.line}>
-              <Text style={[styles.textLabel, styles.textLabelComunity]}>
-                COMUNIDADE:
-              </Text>
-              <Text style={[styles.textData, styles.textDataComunity]}>
-                {community}
-              </Text>
-            </View>
 
-            <TouchableOpacity style={styles.buttonChangeDatas}>
-              <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
-            </TouchableOpacity>
-          </View>
+        <ScrollView>
+          <PersonalDataContainer
+            user={{ name, cpf, dataNasc, email, community }}
+            style={[styles.boxInformationsUser, styles.boxShadow]}
+          />
+
           <View style={[styles.boxInformationsUser, styles.boxShadow]}>
             <Text style={styles.textTitleBox}>DÍZIMO</Text>
             <View style={styles.boxLineListDizimo}>
@@ -124,6 +97,7 @@ export default function PerfilUser({ navigation, route }) {
               </View>
             </View>
           </View>
+
           <View style={[styles.boxInformationsUser, styles.boxShadow]}>
             <Text style={styles.textTitleBox}>CAIXA MORTUÁRIA</Text>
             <View style={styles.boxLineListMortuary}>
