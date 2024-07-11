@@ -66,12 +66,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  boxLineListDizimo: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingTop: 10,
-  },
   boxLineListMortuary: {
     width: "100%",
     flexDirection: "row",
@@ -92,28 +86,13 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "#fff",
   },
-  textMonth: {
-    color: "#fff",
-    fontSize: 15,
-    fontWeight: "600",
-  },
   textYear: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "900",
   },
-  iconStatusMonth: {
-    fontSize: 15,
-    color: "#fff",
-  },
-  currentMonth: {
-    borderColor: "#339DD7",
-  },
   currentYear: {
     borderColor: "#339DD7",
-  },
-  blockedMonth: {
-    opacity: 0.7,
   },
 
   boxShadowLight: {
