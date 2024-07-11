@@ -6,7 +6,6 @@ export const AuthContext = createContext({});
 function AuthProvider({ children }) {
   const [registryEntry, setRegistryEntry] = useState(false);
   const [user, setUser] = useState({});
-
   const navigation = useNavigation();
 
   const [userList, setUserList] = useState([
@@ -26,6 +25,12 @@ function AuthProvider({ children }) {
       community: "a",
       password: "1234",
     },
+  ]);
+
+  const [warningList, setWarningList] = useState([
+    { id: 0, title: "Título 0", message: "Mensagem", visibleToParish: false },
+    { id: 1, title: "Título 1", message: "Mensagem", visibleToParish: false },
+    { id: 2, title: "Título 2", message: "Mensagem", visibleToParish: false },
   ]);
 
   function signIn(cpf, password) {
@@ -59,6 +64,8 @@ function AuthProvider({ children }) {
         setRegistryEntry,
         userList,
         setUserList,
+        warningList,
+        setWarningList,
         user,
         signIn,
         signOut,

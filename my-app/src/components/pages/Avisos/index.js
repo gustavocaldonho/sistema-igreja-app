@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ItemAvisoContent from "./ItemAvisoContent";
 import ModalWarnings from "./ModalWarnings";
 import PageBase from "../PageBase";
+import { AuthContext } from "../../../contexts/auth";
 
 export default function Avisos({ navigation }) {
-  const [warningList, setWarningList] = useState([
-    { id: 0, title: "Título 0", message: "Mensagem", visibleToParish: false },
-    { id: 1, title: "Título 1", message: "Mensagem", visibleToParish: false },
-    { id: 2, title: "Título 2", message: "Mensagem", visibleToParish: false },
-  ]);
+  // const [warningList, setWarningList] = useState([
+  //   { id: 0, title: "Título 0", message: "Mensagem", visibleToParish: false },
+  //   { id: 1, title: "Título 1", message: "Mensagem", visibleToParish: false },
+  //   { id: 2, title: "Título 2", message: "Mensagem", visibleToParish: false },
+  // ]);
   const [itemClicked, setItemClicked] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const [formModalDefaultVisible, setFormModalDefaultVisible] = useState(true);
+  const { warningList, setWarningList } = useContext(AuthContext);
 
   function onPressButtonAdd() {
     setModalVisible(!modalVisible);
