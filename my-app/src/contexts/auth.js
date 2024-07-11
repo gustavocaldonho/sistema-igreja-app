@@ -67,6 +67,7 @@ function AuthProvider({ children }) {
         warningList,
         setWarningList,
         user,
+        setUser,
         signIn,
         signOut,
       }}

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 
-const PersonalDataContainer = ({ user, style }) => {
+const PersonalDataContainer = ({ user, style, setModalVisible }) => {
   return (
     <View style={style}>
       <View style={styles.line}>
@@ -27,7 +27,12 @@ const PersonalDataContainer = ({ user, style }) => {
           {user.community}
         </Text>
       </View>
-      <TouchableOpacity style={styles.buttonChangeDatas}>
+      <TouchableOpacity
+        style={styles.buttonChangeDatas}
+        onPress={() => {
+          setModalVisible(true);
+        }}
+      >
         <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
       </TouchableOpacity>
     </View>

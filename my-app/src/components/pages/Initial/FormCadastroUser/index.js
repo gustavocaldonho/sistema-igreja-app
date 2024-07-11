@@ -19,12 +19,12 @@ import InputGroupEmail from "../../../auxiliary/InputGroup/InputGroupEmail";
 import InputGroupDN from "../../../auxiliary/InputGroup/InputGroupDN";
 import InputGroupSelect from "../../../auxiliary/InputGroup/InputGroupSelect";
 
-export default function FormCadastroUser() {
-  const [name, setName] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [email, setEmail] = useState("");
-  const [dataNasc, setDataNasc] = useState("");
-  const [community, setCommunity] = useState("");
+export default function FormCadastroUser({ user, setModalVisible }) {
+  const [name, setName] = useState(user ? user.name : "");
+  const [cpf, setCpf] = useState(user ? user.cpf : "");
+  const [email, setEmail] = useState(user ? user.email : "");
+  const [dataNasc, setDataNasc] = useState(user ? user.dataNasc : "");
+  const [community, setCommunity] = useState(user ? user.community : "");
   const [password, setPassword] = useState("1234");
   const [showErrors, setShowErrors] = useState(false);
 
@@ -46,12 +46,68 @@ export default function FormCadastroUser() {
     return dataNasc.length !== 10 ? true : false;
   }
 
-  function addUser(userList, setUserList, item) {
+  function addUser(item) {
     const newList = [...userList];
     newList.push(item);
     setUserList(newList);
   }
 
+  function updateUser(oldDatas, newDatas) {
+    const newList = [...userList];
+
+    for (let i = 0; i < userList.length; i++) {
+      if (userList[i].cpf === oldDatas.cpf) {
+        newList.splice(i, 1);
+      }
+    }
+
+    addUser(newList, setUserList, newDatas);
+    resetInputs();
+    setModalVisible(false);
+  }
+
+  function resetInputs() {
+    setName("");
+    setCpf("");
+    setEmail("");
+    setDataNasc("");
+    setCommunity("");
+    setShowErrors(false);
+  }
+
+  function sendDatas() {
+    if (
+      !checkText(name) &&
+      !checkCpf(cpf) &&
+      !checkEmail(email) &&
+      !checkDataNasc(dataNasc) &&
+      !checkText(community)
+    ) {
+      if (!user) {
+        addUser({
+          name,
+          cpf,
+          email,
+          dataNasc,
+          community,
+          password,
+        });
+        resetInputs();
+      } else {
+        updateUser(user, {
+          name,
+          cpf,
+          email,
+          dataNasc,
+          community,
+          password,
+        });
+        // mostrar msg de sucesso e fechar modal
+      }
+    } else {
+      setShowErrors(true);
+    }
+  }
   return (
     <KeyboardAvoidingView
       style={styles.formContext}
@@ -132,36 +188,25 @@ export default function FormCadastroUser() {
           </Text>
 
           <TouchableOpacity
-            style={styles.buttonCadastro}
+            style={styles.button}
             onPress={() => {
-              setShowErrors(true);
-
-              if (
-                !checkText(name) &&
-                !checkCpf(cpf) &&
-                !checkEmail(email) &&
-                !checkDataNasc(dataNasc) &&
-                !checkText(community)
-              ) {
-                addUser(userList, setUserList, {
-                  name,
-                  cpf,
-                  email,
-                  dataNasc,
-                  community,
-                  password,
-                });
-                setName("");
-                setCpf("");
-                setEmail("");
-                setDataNasc("");
-                setCommunity("");
-                setShowErrors(false);
-              }
+              sendDatas();
             }}
           >
-            <Text style={styles.textButtonCadastro}>Cadastrar</Text>
+            <Text style={styles.textButton}>
+              {user ? "Atualizar" : "Cadastrar"}
+            </Text>
           </TouchableOpacity>
+          {user ? (
+            <TouchableOpacity
+              style={[styles.button, styles.buttonCancel]}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.textButton}>Cancelar</Text>
+            </TouchableOpacity>
+          ) : (
+            ""
+          )}
         </Pressable>
       </ScrollView>
     </KeyboardAvoidingView>

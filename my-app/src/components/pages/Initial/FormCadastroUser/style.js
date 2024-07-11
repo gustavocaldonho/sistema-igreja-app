@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 20,
   },
-  buttonCadastro: {
+  button: {
     width: "80%",
     backgroundColor: "#339dd7",
     alignItems: "center",
@@ -30,7 +30,11 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
   },
-  textButtonCadastro: {
+  buttonCancel: {
+    backgroundColor: "#f094c0",
+    marginTop: 10,
+  },
+  textButton: {
     fontSize: 20,
     color: "#ffffff",
     fontWeight: "bold",
