@@ -48,7 +48,7 @@ export default function PerfilUser({ navigation, route }) {
 
           <ScrollView>
             <PersonalDataContainer
-              user={{ name, cpf, dataNasc, email, community }}
+              sentUser={{ name, cpf, dataNasc, email, community }}
               style={[styles.boxInformationsUser, styles.boxShadow]}
               setModalVisible={setModalVisible}
             />

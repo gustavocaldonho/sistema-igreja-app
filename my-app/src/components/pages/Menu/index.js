@@ -10,9 +10,6 @@ import { AuthContext } from "../../../contexts/auth";
 export default function Menu({ navigation }) {
   const { signOut, user } = useContext(AuthContext);
 
-  // menu não está re renderizando ao atualizar o user no modal, logo, ele sempre mostra o primeiro user carregado
-  console.log("user (MENU): ", user);
-
   return (
     <BoxLinearGradient style={styles.container}>
       <StatusBar translucent />

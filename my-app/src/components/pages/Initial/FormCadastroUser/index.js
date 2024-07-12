@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import styles from "./style";
 import { AuthContext } from "../../../../contexts/auth";
+import { useNavigation } from "@react-navigation/native";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -27,8 +28,8 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const [community, setCommunity] = useState(user ? user.community : "");
   const [password, setPassword] = useState("1234");
   const [showErrors, setShowErrors] = useState(false);
-
-  const { userList, setUserList } = useContext(AuthContext);
+  const { userList, setUserList, setUser } = useContext(AuthContext);
+  const navigation = useNavigation();
 
   function checkText(text) {
     return text === "" ? true : false;
@@ -53,17 +54,19 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   }
 
   function updateUser(oldDatas, newDatas) {
-    const newList = [...userList];
-
     for (let i = 0; i < userList.length; i++) {
       if (userList[i].cpf === oldDatas.cpf) {
-        newList.splice(i, 1);
+        userList[i].cpf = newDatas.cpf;
+        userList[i].name = newDatas.name;
+        userList[i].dataNasc = newDatas.dataNasc;
+        userList[i].email = newDatas.email;
+        userList[i].community = newDatas.community;
+        // userList[i].password = newDatas.password;
       }
     }
-
-    addUser(newList, setUserList, newDatas);
-    resetInputs();
+    setUser({ cpf, name, dataNasc, email, community });
     setModalVisible(false);
+    navigation.goBack();
   }
 
   function resetInputs() {

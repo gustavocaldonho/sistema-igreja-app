@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
+import { AuthContext } from "../../../../contexts/auth";
 
-const PersonalDataContainer = ({ user, style, setModalVisible }) => {
+const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
+  const { user } = useContext(AuthContext);
+
   return (
     <View style={style}>
       <View style={styles.line}>
         <Text style={styles.textLabel}>CPF:</Text>
-        <Text style={styles.textData}>{user.cpf}</Text>
+        <Text style={styles.textData}>{sentUser.cpf}</Text>
       </View>
       <View style={styles.line}>
         <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>
-        <Text style={styles.textData}>{user.dataNasc}</Text>
+        <Text style={styles.textData}>{sentUser.dataNasc}</Text>
       </View>
       <View style={styles.line}>
         <Text style={[styles.textLabel, styles.textLabelEmail]}>EMAIL:</Text>
         <Text style={[styles.textData, styles.textDataEmail]}>
-          {user.email}
+          {sentUser.email}
         </Text>
       </View>
       <View style={styles.line}>
@@ -24,17 +27,22 @@ const PersonalDataContainer = ({ user, style, setModalVisible }) => {
           COMUNIDADE:
         </Text>
         <Text style={[styles.textData, styles.textDataComunity]}>
-          {user.community}
+          {sentUser.community}
         </Text>
       </View>
-      <TouchableOpacity
-        style={styles.buttonChangeDatas}
-        onPress={() => {
-          setModalVisible(true);
-        }}
-      >
-        <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
-      </TouchableOpacity>
+      {/* Só podem ser alterados os dados de perfil da conta do usuário logado  */}
+      {user.cpf === sentUser.cpf ? (
+        <TouchableOpacity
+          style={styles.buttonChangeDatas}
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
+        </TouchableOpacity>
+      ) : (
+        ""
+      )}
     </View>
   );
 };
