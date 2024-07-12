@@ -66,6 +66,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  buttonDisable: {
+    alignSelf: "center",
+    backgroundColor: "#E64C96",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "#fff",
+  },
+  textDisable: {
+    fontSize: 10,
+    color: "#fff",
+  },
 
   boxShadowLight: {
     shadowColor: "#ffffff",

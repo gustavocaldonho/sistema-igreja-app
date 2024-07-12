@@ -64,6 +64,10 @@ export default function PerfilUser({ navigation, route }) {
               style={[styles.boxInformationsUser, styles.boxShadow]}
               styleTitleBox={styles.textTitleBox}
             />
+
+            <TouchableOpacity style={styles.buttonDisable}>
+              <Text style={styles.textDisable}>DESATIVAR CONTA</Text>
+            </TouchableOpacity>
           </ScrollView>
         </BoxLinearGradient>
       )}
