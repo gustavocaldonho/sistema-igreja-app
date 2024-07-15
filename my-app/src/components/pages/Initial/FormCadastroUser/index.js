@@ -28,7 +28,8 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const [community, setCommunity] = useState(user ? user.community : "");
   const [password, setPassword] = useState("1234");
   const [showErrors, setShowErrors] = useState(false);
-  const { userList, setUserList, setUser } = useContext(AuthContext);
+  const { userList, setUserList, setUser, communityList } =
+    useContext(AuthContext);
   const navigation = useNavigation();
 
   function checkText(text) {
@@ -67,6 +68,12 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     setUser({ cpf, name, dataNasc, email, community });
     setModalVisible(false);
     navigation.goBack();
+  }
+
+  function getCommunities() {
+    let list = [{ label: "Sua Comunidade", value: "" }];
+    communityList.map((c, idx) => list.push({ label: c.patron, value: c.id }));
+    return list;
   }
 
   function resetInputs() {
@@ -173,12 +180,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
 
           <InputGroupSelect
             iconName="church"
-            options={[
-              { label: "Sua Comunidade", value: "" },
-              { label: "Comunidade A", value: "a" },
-              { label: "Comunidade B", value: "b" },
-              { label: "Comunidade C", value: "c" },
-            ]}
+            options={getCommunities()}
             selectedValue={community}
             onValueChange={(text) => {
               setCommunity(text);

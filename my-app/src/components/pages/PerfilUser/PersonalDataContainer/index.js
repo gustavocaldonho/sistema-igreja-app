@@ -4,7 +4,15 @@ import styles from "./style";
 import { AuthContext } from "../../../../contexts/auth";
 
 const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
-  const { user } = useContext(AuthContext);
+  const { user, communityList } = useContext(AuthContext);
+
+  function getCommunity(id) {
+    for (let i = 0; i < communityList.length; i++) {
+      if (communityList[i].id === id) {
+        return [communityList[i].patron, " - ", communityList[i].location];
+      }
+    }
+  }
 
   return (
     <View style={style}>
@@ -27,7 +35,7 @@ const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
           COMUNIDADE:
         </Text>
         <Text style={[styles.textData, styles.textDataComunity]}>
-          {sentUser.community}
+          {getCommunity(sentUser.community)}
         </Text>
       </View>
       {/* Só podem ser alterados os dados de perfil da conta do usuário logado  */}
