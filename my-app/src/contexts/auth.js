@@ -44,8 +44,6 @@ function AuthProvider({ children }) {
     { id: 3, patron: "Santo Antônio", location: "Graça Aranha" },
   ]);
 
-  // console.log(communityList);
-
   function signIn(cpf, password) {
     for (let i = 0; i < userList.length; i++) {
       if (userList[i].cpf === cpf && userList[i].password === password) {

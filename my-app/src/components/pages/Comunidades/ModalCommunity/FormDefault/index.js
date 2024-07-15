@@ -1,22 +1,39 @@
 import React, { useState, useContext } from "react";
-import { View, Text, TouchableOpacity, Switch } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
 import stylesModal from "../style";
 import { AuthContext } from "../../../../../contexts/auth";
+import { useNavigation } from "@react-navigation/native";
 
-export default function FormDefault({ setModalVisible, modalVisible }) {
+export default function FormDefault({
+  setModalVisible,
+  modalVisible,
+  community,
+}) {
   const [errorPatron, setErrorPatron] = useState(false);
   const [errorLocation, setErrorLocation] = useState(false);
-  const [patron, setPatron] = useState("");
-  const [location, setLocation] = useState("");
+  const [patron, setPatron] = useState(community ? community.patron : "");
+  const [location, setLocation] = useState(community ? community.location : "");
   const { communityList, setCommunityList } = useContext(AuthContext);
+  const navigation = useNavigation();
 
   function addToList(item) {
     const newList = [...communityList];
     newList.push(item);
     setCommunityList(newList);
     setModalVisible(!modalVisible);
+  }
+
+  function updateCommunity(oldDatas, newDatas) {
+    for (let i = 0; i < communityList.length; i++) {
+      if (communityList[i].id === oldDatas.id) {
+        communityList[i].patron = newDatas.patron;
+        communityList[i].location = newDatas.location;
+      }
+    }
+    setModalVisible(false);
+    navigation.navigate("Menu");
   }
 
   function checkPatron(text) {
@@ -78,13 +95,18 @@ export default function FormDefault({ setModalVisible, modalVisible }) {
           const errorL = checkLocation(location);
 
           if (!errorP && !errorL) {
-            id = communityList.length;
-            addToList({ id, patron, location });
-            // console.log("cadastrar");
+            if (!community) {
+              id = communityList.length;
+              addToList({ id, patron, location });
+            } else {
+              updateCommunity(community, { patron, location });
+            }
           }
         }}
       >
-        <Text style={stylesModal.textButton}>Adicionar</Text>
+        <Text style={stylesModal.textButton}>
+          {community ? "Atualizar" : "Adicionar"}
+        </Text>
       </TouchableOpacity>
     </View>
   );

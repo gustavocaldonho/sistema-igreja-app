@@ -13,6 +13,7 @@ export default function ItemCommunity({ id, patron, location }) {
       activeOpacity={0.7}
       onPress={() =>
         navigation.navigate("PerfilCommunity", {
+          id: id,
           patron: patron,
           location: location,
         })

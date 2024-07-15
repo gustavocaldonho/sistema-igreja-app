@@ -98,6 +98,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#fff",
   },
+  buttonChangeDatas: {
+    alignSelf: "center",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    marginTop: 10,
+    backgroundColor: "#339DD7",
+    borderWidth: 1,
+    borderColor: "#fff",
+  },
+  textChangeDatas: {
+    alignSelf: "center",
+    color: "#fff",
+    fontWeight: "bold",
+  },
   boxShadowLight: {
     shadowColor: "#ffffff",
     shadowOffset: {

@@ -4,7 +4,11 @@ import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormDefault from "./FormDefault";
 
-export default function ModalCommunity({ modalVisible, setModalVisible }) {
+export default function ModalCommunity({
+  modalVisible,
+  setModalVisible,
+  community,
+}) {
   return (
     <Modal
       animationType="fade"
@@ -29,6 +33,7 @@ export default function ModalCommunity({ modalVisible, setModalVisible }) {
           <FormDefault
             setModalVisible={setModalVisible}
             modalVisible={modalVisible}
+            community={community}
           />
         </View>
       </View>
