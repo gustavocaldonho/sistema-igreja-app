@@ -33,6 +33,17 @@ function AuthProvider({ children }) {
     { id: 2, title: "Título 2", message: "Mensagem", visibleToParish: false },
   ]);
 
+  const [communityList, setCommunityList] = useState([
+    { id: 0, patron: "São Geraldo Magela", location: "Sapucaia" },
+    {
+      id: 1,
+      patron: "Nossa Senhora das Graças",
+      location: "Paul de Graça Aranha",
+    },
+    { id: 2, patron: "Nossa Senhora Auxiliadora", location: "Marilândia-ES" },
+    { id: 3, patron: "Santo Antônio", location: "Graça Aranha" },
+  ]);
+
   function signIn(cpf, password) {
     for (let i = 0; i < userList.length; i++) {
       if (userList[i].cpf === cpf && userList[i].password === password) {
@@ -66,6 +77,8 @@ function AuthProvider({ children }) {
         setUserList,
         warningList,
         setWarningList,
+        communityList,
+        setCommunityList,
         user,
         setUser,
         signIn,

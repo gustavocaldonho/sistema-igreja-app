@@ -1,18 +1,20 @@
 import React from "react";
-import { View, Text, Pressable, TouchableHighlight } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import styles from "./style";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
-export default function ItemCommunity(props) {
+export default function ItemCommunity({ id, patron, location }) {
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={() =>
-        props.navigation.navigate("PerfilCommunity", {
-          patron: props.patron,
-          location: props.location,
+        navigation.navigate("PerfilCommunity", {
+          patron: patron,
+          location: location,
         })
       }
     >
@@ -22,10 +24,10 @@ export default function ItemCommunity(props) {
         </View>
         <View style={styles.boxInformation}>
           <View style={styles.boxPatron}>
-            <Text style={styles.textPatron}>{props.patron}</Text>
+            <Text style={styles.textPatron}>{patron}</Text>
           </View>
           <View style={styles.boxLocation}>
-            <Text style={styles.textLocation}>{props.location}</Text>
+            <Text style={styles.textLocation}>{location}</Text>
           </View>
         </View>
         <View style={styles.boxIconRight}>
