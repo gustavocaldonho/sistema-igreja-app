@@ -26,7 +26,7 @@ export default function PerfilCommunity({ navigation, route }) {
             community={{ id, patron, location }}
           />
         ) : (
-          <View>
+          <View style={{ flex: 1 }}>
             <View style={styles.boxButtonBack}>
               <ButtonBack color={"#fff"} />
             </View>
