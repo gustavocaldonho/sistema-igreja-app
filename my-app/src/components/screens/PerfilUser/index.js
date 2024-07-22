@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ButtonBack from "../../auxiliary/ButtonBack";
-import BoxLinearGradient from "../../pages/PageBase/BoxLinearGradient";
+import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import styles from "./style";
 import PersonalDataContainer from "./PersonalDataContainer";
 import DizimoContainer from "./DizimoContainer";

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, TouchableOpacity, StatusBar } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
-import BoxLinearGradient from "../../pages/PageBase/BoxLinearGradient";
+import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import Title from "./Title";
 import FormLogin from "./FormLogin";
 import FormCadastroUser from "./FormCadastroUser";

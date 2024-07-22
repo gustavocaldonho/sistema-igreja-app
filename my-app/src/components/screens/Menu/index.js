@@ -3,7 +3,7 @@ import { StatusBar, View, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
-import BoxLinearGradient from "../../pages/PageBase/BoxLinearGradient";
+import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
 
