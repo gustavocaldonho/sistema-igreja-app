@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,12 +14,35 @@ import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
 
 import { AuthContext } from "../../../../contexts/auth";
+import user_api from "../../../../services/user_api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
   const { signIn, setRegistryEntry } = useContext(AuthContext);
+
+  function logar() {
+    user_api({
+      cpf: "69594471000",
+      password: "#Aldkl1234567",
+    });
+    // user_api({
+    //   cpf: cpf,
+    //   password: password,
+    // })
+    //   .then((result) => {
+    //     console.log(result);
+    //     // if (result.status == 200) {
+    //     // AsyncStorage.setItem("AccessToken", result.data);
+    //     // }
+    //   })
+    //   .catch((err) => {
+    //     console.log("Erro: ", err);
+    //   });
+    // user_api({});
+  }
 
   return (
     // usar <ScrollView></ScrollView>
@@ -54,13 +77,15 @@ export default function FormLogin() {
           style={styles.button}
           onPress={() => {
             // retorna true ou false
-            const error = signIn(cpf, password);
-            setShowError(error);
+            // const error = signIn(cpf, password);
+            // setShowError(error);
 
-            if (!error) {
-              setCpf("");
-              setPassword("");
-            }
+            // if (!error) {
+            //   setCpf("");
+            //   setPassword("");
+            // }
+
+            logar();
           }}
         >
           <Text style={styles.textButton}>Entrar</Text>
