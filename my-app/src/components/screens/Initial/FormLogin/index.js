@@ -14,8 +14,8 @@ import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
 
 import { AuthContext } from "../../../../contexts/auth";
-import user_api from "../../../../services/user_api";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import user_api from "../../../../services/user_api";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
