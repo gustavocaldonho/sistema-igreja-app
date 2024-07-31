@@ -23,26 +23,26 @@ export default function FormLogin() {
   const [showError, setShowError] = useState(false);
   const { signIn, setRegistryEntry } = useContext(AuthContext);
 
-  function logar() {
-    user_api({
-      cpf: "69594471000",
-      password: "#Aldkl1234567",
-    });
-    // user_api({
-    //   cpf: cpf,
-    //   password: password,
-    // })
-    //   .then((result) => {
-    //     console.log(result);
-    //     // if (result.status == 200) {
-    //     // AsyncStorage.setItem("AccessToken", result.data);
-    //     // }
-    //   })
-    //   .catch((err) => {
-    //     console.log("Erro: ", err);
-    //   });
-    // user_api({});
-  }
+  // function logar() {
+  // user_api({
+  //   cpf: "69594471000",
+  //   password: "#Aldkl1234567",
+  // });
+  // user_api({
+  //   cpf: cpf,
+  //   password: password,
+  // })
+  //   .then((result) => {
+  //     console.log(result);
+  //     // if (result.status == 200) {
+  //     // AsyncStorage.setItem("AccessToken", result.data);
+  //     // }
+  //   })
+  //   .catch((err) => {
+  //     console.log("Erro: ", err);
+  //   });
+  // user_api({});
+  // }
 
   return (
     // usar <ScrollView></ScrollView>
@@ -77,15 +77,15 @@ export default function FormLogin() {
           style={styles.button}
           onPress={() => {
             // retorna true ou false
-            // const error = signIn(cpf, password);
-            // setShowError(error);
+            const error = signIn(cpf, password);
+            setShowError(error);
 
-            // if (!error) {
-            //   setCpf("");
-            //   setPassword("");
-            // }
+            if (!error) {
+              setCpf("");
+              setPassword("");
+            }
 
-            logar();
+            // logar();
           }}
         >
           <Text style={styles.textButton}>Entrar</Text>
