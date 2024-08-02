@@ -24,11 +24,11 @@ export default function FormLogin() {
   const { signIn, setRegistryEntry } = useContext(AuthContext);
 
   // function logar() {
-  // user_api({
+  // login_user({
   //   cpf: "69594471000",
   //   password: "#Aldkl1234567",
   // });
-  // user_api({
+  // login_user({
   //   cpf: cpf,
   //   password: password,
   // })

@@ -1,13 +1,10 @@
 import api from "./api";
 
-export const login_user = (data) => {
+export const getCommunitiesWithoutToken = (data) => {
   api
-    .post(
-      "/signin",
-      {
-        cpf: data.cpf,
-        password: data.password,
-      },
+    .get(
+      "/endpoint",
+      {},
       {
         headers: {
           "Content-Type": "application/json",
@@ -23,16 +20,11 @@ export const login_user = (data) => {
     });
 };
 
-export const logout_user = () => {
-  // destruir o token de acesso;
-};
-
-export const getUsers = (data) => {
+export const getCommunitiesWithToken = (data) => {
   api
     .get(
       "/endpoint",
       {
-        id_community: data.id_community,
         token: data.token,
       },
       {
@@ -50,17 +42,14 @@ export const getUsers = (data) => {
     });
 };
 
-export const cadastryUser = (data) => {
+export const cadastryCommunity = (data) => {
   api
     .post(
       "/endpoint",
       {
-        cpf: data.cpf,
-        name: data.name,
-        email: data.email,
-        birthday: data.birthday,
-        community: data.community,
-        password: data.password,
+        patron: data.patron,
+        location: data.location,
+        token: data.token,
         active: data.active,
       },
       {
@@ -77,17 +66,15 @@ export const cadastryUser = (data) => {
       console.log(error);
     });
 };
-export const updateUser = (data) => {
+
+export const updateCommunity = (data) => {
   api
     .post(
       "/endpoint",
       {
-        cpf: data.cpf,
-        name: data.name,
-        email: data.email,
-        birthday: data.birthday,
-        community: data.community,
-        password: data.password,
+        id_community: data.id_community,
+        patron: data.patron,
+        location: data.location,
         token: data.token,
       },
       {
@@ -105,12 +92,13 @@ export const updateUser = (data) => {
     });
 };
 
-export const disableUser = (data) => {
+export const disableCommunity = (data) => {
   api
     .post(
       "/endpoint",
       {
-        cpf: data.cpf,
+        id_community: data.id_community,
+        active: data.active,
         token: data.token,
       },
       {
@@ -127,25 +115,3 @@ export const disableUser = (data) => {
       console.log(error);
     });
 };
-
-// Authorization: `Bearer ${token}`,
-
-// const user_api = async (data) => {
-//   try {
-//     const response = await fetch("http://127.0.0.1:8000/signin", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         cpf: data.cpf,
-//         password: data.password,
-//       }),
-//     });
-
-//     const responseData = await response.json();
-//     console.log("Response received:", responseData);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
