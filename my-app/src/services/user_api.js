@@ -77,6 +77,7 @@ export const cadastryUser = (data) => {
       console.log(error);
     });
 };
+
 export const updateUser = (data) => {
   api
     .post(
@@ -86,7 +87,7 @@ export const updateUser = (data) => {
         name: data.name,
         email: data.email,
         birthday: data.birthday,
-        community: data.community,
+        id_community: data.id_community,
         password: data.password,
         token: data.token,
       },
