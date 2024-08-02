@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import InputGroupValorDizimo from "../../../auxiliary/InputGroup/InputGroupValorDizimo";
+import { AuthContext } from "../../../../contexts/auth";
+import * as Notifications from "expo-notifications";
 
 export default function ModalPagamentoDizimo({
   modalVisible,
@@ -10,6 +12,20 @@ export default function ModalPagamentoDizimo({
 }) {
   const [valorDizimo, setValorDizimo] = useState("");
   const [codPix, setCodePix] = useState(null);
+  const { user } = useContext(AuthContext);
+
+  const sendNotification = async () => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: `Olá, ${user.name}!`,
+        body: "Sua chave Pix Copia e Cola já foi gerada, aguardamos seu pagamento ;)",
+      },
+      trigger: {
+        seconds: 1,
+      },
+    });
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -61,7 +77,8 @@ export default function ModalPagamentoDizimo({
               <TouchableOpacity
                 style={styles.boxButtonCopyCode}
                 onPress={() => {
-                  setCodePix(null);
+                  // setCodePix(null);
+                  sendNotification();
                 }}
               >
                 <Text style={styles.textButtonCode}>Copiar Código</Text>
