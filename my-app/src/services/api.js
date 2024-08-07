@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://172.16.42.151:8000",
+  baseURL: "https://church-app-backend-ajbu.onrender.com",
   responseType: "json",
 });
 

@@ -1,23 +1,16 @@
 import api from "./api";
 
-export const getCommunitiesWithoutToken = (data) => {
-  api
-    .get(
-      "/endpoint",
-      {},
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
+export const getCommunitiesWithoutToken = async () => {
+  try {
+    const response = await api.get("/patrons", {
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const getCommunitiesWithToken = (data) => {

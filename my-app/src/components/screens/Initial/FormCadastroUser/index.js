@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,13 @@ import {
 import styles from "./style";
 import { AuthContext } from "../../../../contexts/auth";
 import { useNavigation } from "@react-navigation/native";
+import {
+  checkCpf,
+  checkEmail,
+  checkText,
+  checkDataNasc,
+} from "./functionsCheck";
+import { getCommunitiesWithoutToken } from "../../../../services/community_api";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -32,21 +39,31 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     useContext(AuthContext);
   const navigation = useNavigation();
 
-  function checkText(text) {
-    return text === "" ? true : false;
+  const [patronList, setPatronList] = useState([]);
+
+  async function getPatrons() {
+    try {
+      const response = await getCommunitiesWithoutToken();
+      setPatronList(response);
+      // console.log(`Patrons: ${response}`);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  function checkCpf(cpf) {
-    return cpf.length !== 14 ? true : false;
+  function getItemsSelectCommunity(dataList) {
+    if (!dataList || dataList.length === 0) {
+      return [{ label: "Sua Comunidade", value: "" }];
+    }
+
+    return [{ label: "Sua Comunidade", value: "" }].concat(
+      dataList.map((d) => ({ label: d, value: d }))
+    );
   }
 
-  function checkEmail(email) {
-    return !email.includes("@") || !email.includes(".com") ? true : false;
-  }
-
-  function checkDataNasc(dataNasc) {
-    return dataNasc.length !== 10 ? true : false;
-  }
+  useEffect(() => {
+    getPatrons();
+  }, []);
 
   function addUser(item) {
     const newList = [...userList];
@@ -68,12 +85,6 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     setUser({ cpf, name, dataNasc, email, community });
     setModalVisible(false);
     navigation.goBack();
-  }
-
-  function getCommunities() {
-    let list = [{ label: "Sua Comunidade", value: "" }];
-    communityList.map((c, idx) => list.push({ label: c.patron, value: c.id }));
-    return list;
   }
 
   function resetInputs() {
@@ -180,7 +191,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
 
           <InputGroupSelect
             iconName="church"
-            options={getCommunities()}
+            options={getItemsSelectCommunity(patronList)}
             selectedValue={community}
             onValueChange={(text) => {
               setCommunity(text);
