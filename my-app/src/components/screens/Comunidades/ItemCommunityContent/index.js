@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { View } from "react-native";
 import ItemCommunity from "../ItemCommunity";
 import { AuthContext } from "../../../../contexts/auth";
 
 export default function ItemCommunityContent({}) {
   const { communityList } = useContext(AuthContext);
+  // const [communityList, setCommunityList] = useState([]);
+
+  // async function getCommunities() {}
+
+  // useContext(() => {}, []);
 
   return (
     <View>
