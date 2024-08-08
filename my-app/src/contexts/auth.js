@@ -1,5 +1,7 @@
 import React, { createContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getMe, signinUser } from "../services/user_api";
 
 export const AuthContext = createContext({});
 
@@ -44,23 +46,37 @@ function AuthProvider({ children }) {
     { id: 3, patron: "Santo Antônio", location: "Graça Aranha" },
   ]);
 
-  function signIn(cpf, password) {
-    for (let i = 0; i < userList.length; i++) {
-      if (userList[i].cpf === cpf && userList[i].password === password) {
-        setUser({
-          name: userList[i].name,
-          cpf: userList[i].cpf,
-          email: userList[i].email,
-          dataNasc: userList[i].dataNasc,
-          community: userList[i].community,
-          password: userList[i].password,
-        });
-        navigation.navigate("Menu");
-        return false; // não mostrar msg de erro
-      }
+  async function setDatasUser(token) {
+    try {
+      const response = await getMe(token);
+      setUser({
+        name: response.name,
+        cpf: response.cpf,
+        email: response.email,
+        birthday: response.birthday,
+        community: response.community,
+        position: response.position,
+      });
+    } catch (error) {
+      console.log(error);
     }
-    setUser({});
-    return true; // mostrar msg de erro
+  }
+
+  async function signIn(data) {
+    try {
+      const response = await signinUser(data);
+      const token = response.data.access_token;
+      if (token !== undefined) {
+        setDatasUser(token);
+        await AsyncStorage.setItem(
+          "AccessToken",
+          String(response.data.access_token)
+        );
+      }
+      return response;
+    } catch (error) {
+      return error;
+    }
   }
 
   function signOut() {

@@ -13,3 +13,12 @@ export function checkEmail(email) {
 export function checkDataNasc(dataNasc) {
   return dataNasc.length !== 10 ? true : false;
 }
+
+export function formatDate(data) {
+  const [day, month, year] = data.split("/");
+  return `${year}-${month}-${day}`;
+}
+
+export function formatCpf(data) {
+  return data.replace(/\D/g, "");
+}

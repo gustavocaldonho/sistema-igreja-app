@@ -18,8 +18,11 @@ import {
   checkEmail,
   checkText,
   checkDataNasc,
-} from "./functionsCheck";
+  formatDate,
+  formatCpf,
+} from "./functions";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
+import { signupUser } from "../../../../services/user_api";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -33,19 +36,17 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const [email, setEmail] = useState(user ? user.email : "");
   const [dataNasc, setDataNasc] = useState(user ? user.dataNasc : "");
   const [community, setCommunity] = useState(user ? user.community : "");
-  const [password, setPassword] = useState("1234");
+  const [password, setPassword] = useState("sEnha12345##");
   const [showErrors, setShowErrors] = useState(false);
   const { userList, setUserList, setUser, communityList } =
     useContext(AuthContext);
   const navigation = useNavigation();
-
   const [patronList, setPatronList] = useState([]);
 
   async function getPatrons() {
     try {
       const response = await getCommunitiesWithoutToken();
       setPatronList(response);
-      // console.log(`Patrons: ${response}`);
     } catch (error) {
       console.log(error);
     }
@@ -65,10 +66,15 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     getPatrons();
   }, []);
 
-  function addUser(item) {
-    const newList = [...userList];
-    newList.push(item);
-    setUserList(newList);
+  async function addUser(item) {
+    try {
+      const response = await signupUser(item);
+      // resetInputs();
+      console.log(response);
+      console.log(item);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function updateUser(oldDatas, newDatas) {
@@ -107,13 +113,12 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       if (!user) {
         addUser({
           name,
-          cpf,
+          cpf: formatCpf(cpf),
           email,
-          dataNasc,
+          birthday: formatDate(dataNasc),
           community,
           password,
         });
-        resetInputs();
       } else {
         updateUser(user, {
           name,

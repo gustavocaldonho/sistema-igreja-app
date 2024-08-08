@@ -1,8 +1,33 @@
 import api from "./api";
 
-export const login_user = (data) => {
-  api
-    .post(
+export const signupUser = async (data) => {
+  try {
+    const response = await api.post(
+      "/signup",
+      {
+        birthday: data.birthday,
+        community: data.community,
+        cpf: data.cpf,
+        email: data.email,
+        name: data.name,
+        password: data.password,
+        // active: data.active,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const signinUser = async (data) => {
+  try {
+    const response = await api.post(
       "/signin",
       {
         cpf: data.cpf,
@@ -13,14 +38,25 @@ export const login_user = (data) => {
           "Content-Type": "application/json",
         },
       }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getMe = async (token) => {
+  try {
+    const response = await api.get("/me", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
     });
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const logout_user = () => {
@@ -34,34 +70,6 @@ export const getUsers = (data) => {
       {
         id_community: data.id_community,
         token: data.token,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
-
-export const cadastryUser = (data) => {
-  api
-    .post(
-      "/endpoint",
-      {
-        cpf: data.cpf,
-        name: data.name,
-        email: data.email,
-        birthday: data.birthday,
-        community: data.community,
-        password: data.password,
-        active: data.active,
       },
       {
         headers: {

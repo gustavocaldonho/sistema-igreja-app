@@ -12,37 +12,35 @@ import {
 import styles from "./style";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
-
+import { useNavigation } from "@react-navigation/native";
+import { formatCpf } from "../FormCadastroUser/functions";
 import { AuthContext } from "../../../../contexts/auth";
-// import user_api from "../../../../services/user_api";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [showError, setShowError] = useState(false);
+  const navigation = useNavigation();
   const { signIn, setRegistryEntry } = useContext(AuthContext);
 
-  // function logar() {
-  // login_user({
-  //   cpf: "69594471000",
-  //   password: "#Aldkl1234567",
-  // });
-  // login_user({
-  //   cpf: cpf,
-  //   password: password,
-  // })
-  //   .then((result) => {
-  //     console.log(result);
-  //     // if (result.status == 200) {
-  //     // AsyncStorage.setItem("AccessToken", result.data);
-  //     // }
-  //   })
-  //   .catch((err) => {
-  //     console.log("Erro: ", err);
-  //   });
-  // user_api({});
-  // }
+  async function login(data) {
+    try {
+      const response = await signIn(data);
+      if (response.data.access_token !== undefined) {
+        resetInputs();
+        setShowError(false);
+        navigation.navigate("Menu");
+      }
+    } catch (error) {
+      setShowError(true);
+      console.log("error (login): ", error);
+    }
+  }
+
+  function resetInputs() {
+    setCpf("");
+    setPassword("");
+  }
 
   return (
     // usar <ScrollView></ScrollView>
@@ -76,16 +74,8 @@ export default function FormLogin() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            // retorna true ou false
-            const error = signIn(cpf, password);
-            setShowError(error);
-
-            if (!error) {
-              setCpf("");
-              setPassword("");
-            }
-
-            // logar();
+            login({ cpf: "14734570760", password: "sEnha1234##" });
+            // login({ cpf: formatCpf(cpf), password });
           }}
         >
           <Text style={styles.textButton}>Entrar</Text>
