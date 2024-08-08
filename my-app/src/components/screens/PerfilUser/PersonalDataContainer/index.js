@@ -2,6 +2,10 @@ import React, { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import { AuthContext } from "../../../../contexts/auth";
+import {
+  formatDate,
+  formatCpf,
+} from "../../Initial/FormCadastroUser/functions";
 
 const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
   const { user } = useContext(AuthContext);
@@ -10,11 +14,11 @@ const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
     <View style={style}>
       <View style={styles.line}>
         <Text style={styles.textLabel}>CPF:</Text>
-        <Text style={styles.textData}>{sentUser.cpf}</Text>
+        <Text style={styles.textData}>{formatCpf(sentUser.cpf)}</Text>
       </View>
       <View style={styles.line}>
         <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>
-        <Text style={styles.textData}>{sentUser.birthday}</Text>
+        <Text style={styles.textData}>{formatDate(sentUser.birthday)}</Text>
       </View>
       <View style={styles.line}>
         <Text style={[styles.textLabel, styles.textLabelEmail]}>EMAIL:</Text>

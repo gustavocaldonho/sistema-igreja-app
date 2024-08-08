@@ -3,7 +3,7 @@ export function checkText(text) {
 }
 
 export function checkCpf(cpf) {
-  return cpf.length !== 14 ? true : false;
+  return cpf.length !== 11 ? true : false;
 }
 
 export function checkEmail(email) {
@@ -15,10 +15,22 @@ export function checkDataNasc(dataNasc) {
 }
 
 export function formatDate(data) {
-  const [day, month, year] = data.split("/");
-  return `${year}-${month}-${day}`;
+  if (data.includes("/")) {
+    const [day, month, year] = data.split("/");
+    return `${year}-${month}-${day}`;
+  } else {
+    const [year, month, day] = data.split("-");
+    return `${day}/${month}/${year}`;
+  }
 }
 
 export function formatCpf(data) {
-  return data.replace(/\D/g, "");
+  if (data.length === 14) {
+    return data.replace(/\D/g, "");
+  } else {
+    const badchars = /[^\d]/g;
+    const mask = /(\d{3})(\d{3})(\d{3})(\d{2})/;
+    const cpf = new String(data).replace(badchars, "");
+    return cpf.replace(mask, "$1.$2.$3-$4");
+  }
 }

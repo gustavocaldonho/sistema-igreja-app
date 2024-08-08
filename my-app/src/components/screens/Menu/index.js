@@ -6,7 +6,6 @@ import styles from "./style";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Menu({ navigation }) {
   const { signOut, user } = useContext(AuthContext);

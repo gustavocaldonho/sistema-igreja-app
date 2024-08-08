@@ -59,6 +59,32 @@ export const getMe = async (token) => {
   }
 };
 
+export const updateUser = async (data) => {
+  try {
+    const response = await api.put(
+      "/me",
+      {
+        cpf: data.cpf,
+        email: data.email,
+        name: data.name,
+        community_patron: data.community,
+        password: data.password,
+        birthday: data.birthday,
+        image: "",
+        // token: data.token,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const logout_user = () => {
   // destruir o token de acesso;
 };
@@ -69,34 +95,6 @@ export const getUsers = (data) => {
       "/endpoint",
       {
         id_community: data.id_community,
-        token: data.token,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
-
-export const updateUser = (data) => {
-  api
-    .post(
-      "/endpoint",
-      {
-        cpf: data.cpf,
-        name: data.name,
-        email: data.email,
-        birthday: data.birthday,
-        id_community: data.id_community,
-        password: data.password,
         token: data.token,
       },
       {

@@ -22,7 +22,7 @@ import {
   formatCpf,
 } from "./functions";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
-import { signupUser } from "../../../../services/user_api";
+import { signupUser, updateUser } from "../../../../services/user_api";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -34,7 +34,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const [name, setName] = useState(user ? user.name : "");
   const [cpf, setCpf] = useState(user ? user.cpf : "");
   const [email, setEmail] = useState(user ? user.email : "");
-  const [dataNasc, setDataNasc] = useState(user ? user.dataNasc : "");
+  const [dataNasc, setDataNasc] = useState(user ? user.birthday : "");
   const [community, setCommunity] = useState(user ? user.community : "");
   const [password, setPassword] = useState("sEnha12345##");
   const [showErrors, setShowErrors] = useState(false);
@@ -77,20 +77,32 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     }
   }
 
-  function updateUser(oldDatas, newDatas) {
-    for (let i = 0; i < userList.length; i++) {
-      if (userList[i].cpf === oldDatas.cpf) {
-        userList[i].cpf = newDatas.cpf;
-        userList[i].name = newDatas.name;
-        userList[i].dataNasc = newDatas.dataNasc;
-        userList[i].email = newDatas.email;
-        userList[i].community = newDatas.community;
-        // userList[i].password = newDatas.password;
-      }
+  // function updateUser(oldDatas, newDatas) {
+  //   for (let i = 0; i < userList.length; i++) {
+  //     if (userList[i].cpf === oldDatas.cpf) {
+  //       userList[i].cpf = newDatas.cpf;
+  //       userList[i].name = newDatas.name;
+  //       userList[i].dataNasc = newDatas.dataNasc;
+  //       userList[i].email = newDatas.email;
+  //       userList[i].community = newDatas.community;
+  //       // userList[i].password = newDatas.password;
+  //     }
+  //   }
+  //   setUser({ cpf, name, dataNasc, email, community });
+  //   setModalVisible(false);
+  //   navigation.goBack();
+  // }
+
+  async function updateUser(oldDatas, newDatas) {
+    try {
+      const response = await updateUser(newDatas);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
-    setUser({ cpf, name, dataNasc, email, community });
-    setModalVisible(false);
-    navigation.goBack();
+
+    // console.log("user old: ", oldDatas);
+    // console.log("user new: ", newDatas);
   }
 
   function resetInputs() {
@@ -105,7 +117,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   function sendDatas() {
     if (
       !checkText(name) &&
-      !checkCpf(cpf) &&
+      !checkCpf(formatCpf(cpf)) &&
       !checkEmail(email) &&
       !checkDataNasc(dataNasc) &&
       !checkText(community)
@@ -122,13 +134,14 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       } else {
         updateUser(user, {
           name,
-          cpf,
+          cpf: formatCpf(cpf),
           email,
-          dataNasc,
+          birthday: formatDate(dataNasc),
           community,
           password,
         });
         // mostrar msg de sucesso e fechar modal
+        // console.log("atualizar");
       }
     } else {
       setShowErrors(true);
@@ -164,7 +177,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
             }}
           />
           <Text style={styles.errorMessage}>
-            {checkCpf(cpf) && showErrors ? "CPF Inválido!" : ""}
+            {checkCpf(formatCpf(cpf)) && showErrors ? "CPF Inválido!" : ""}
           </Text>
 
           <InputGroupEmail
@@ -182,7 +195,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           <InputGroupDN
             iconName="birthday-cake"
             placeholder="DD/MM/AAAA"
-            value={dataNasc}
+            value={formatDate(dataNasc)}
             // defaultValue={dataNasc}
             onChangeText={(text) => {
               setDataNasc(text);
