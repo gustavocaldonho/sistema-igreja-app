@@ -50,12 +50,12 @@ function AuthProvider({ children }) {
     try {
       const response = await getMe(token);
       setUser({
-        name: response.name,
-        cpf: response.cpf,
-        email: response.email,
-        birthday: response.birthday,
-        community: response.community,
-        position: response.position,
+        name: response.data.name,
+        cpf: response.data.cpf,
+        email: response.data.email,
+        birthday: response.data.birthday,
+        community: response.data.community,
+        position: response.data.position,
       });
     } catch (error) {
       console.log(error);
