@@ -18,8 +18,10 @@ import {
   checkEmail,
   checkText,
   checkDataNasc,
-  formatDate,
+  formatDateBR,
+  formatDateUSA,
   formatCpf,
+  desformatCpf,
 } from "./functions";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
 import { signupUser, updateUser } from "../../../../services/user_api";
@@ -29,17 +31,19 @@ import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
 import InputGroupEmail from "../../../auxiliary/InputGroup/InputGroupEmail";
 import InputGroupDN from "../../../auxiliary/InputGroup/InputGroupDN";
 import InputGroupSelect from "../../../auxiliary/InputGroup/InputGroupSelect";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FormCadastroUser({ user, setModalVisible }) {
   const [name, setName] = useState(user ? user.name : "");
   const [cpf, setCpf] = useState(user ? user.cpf : "");
   const [email, setEmail] = useState(user ? user.email : "");
-  const [dataNasc, setDataNasc] = useState(user ? user.birthday : "");
+  const [dataNasc, setDataNasc] = useState(
+    user ? formatDateBR(user.birthday) : ""
+  );
   const [community, setCommunity] = useState(user ? user.community : "");
-  const [password, setPassword] = useState("sEnha12345##");
+  const [password, setPassword] = useState("sEnha123456##");
   const [showErrors, setShowErrors] = useState(false);
-  const { userList, setUserList, setUser, communityList } =
-    useContext(AuthContext);
+  const { setDatasUser, setRegistryEntry } = useContext(AuthContext);
   const navigation = useNavigation();
   const [patronList, setPatronList] = useState([]);
 
@@ -69,40 +73,31 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   async function addUser(item) {
     try {
       const response = await signupUser(item);
-      // resetInputs();
-      console.log(response);
-      console.log(item);
+      setRegistryEntry(false);
+      resetInputs();
+      console.log("(add): ", response);
+      console.log("(add): ", item);
     } catch (error) {
       console.log(error);
     }
   }
 
-  // function updateUser(oldDatas, newDatas) {
-  //   for (let i = 0; i < userList.length; i++) {
-  //     if (userList[i].cpf === oldDatas.cpf) {
-  //       userList[i].cpf = newDatas.cpf;
-  //       userList[i].name = newDatas.name;
-  //       userList[i].dataNasc = newDatas.dataNasc;
-  //       userList[i].email = newDatas.email;
-  //       userList[i].community = newDatas.community;
-  //       // userList[i].password = newDatas.password;
-  //     }
-  //   }
-  //   setUser({ cpf, name, dataNasc, email, community });
-  //   setModalVisible(false);
-  //   navigation.goBack();
-  // }
-
-  async function updateUser(oldDatas, newDatas) {
+  async function updateDatasUser(newDatas) {
     try {
-      const response = await updateUser(newDatas);
-      console.log(response);
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await updateUser(newDatas, token);
+      if (response.status === 200) {
+        await AsyncStorage.setItem(
+          "AccessToken",
+          String(response.data.access_token)
+        );
+        await setDatasUser(response.data.access_token);
+        setModalVisible(false);
+        navigation.goBack();
+      }
     } catch (error) {
       console.log(error);
     }
-
-    // console.log("user old: ", oldDatas);
-    // console.log("user new: ", newDatas);
   }
 
   function resetInputs() {
@@ -117,7 +112,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   function sendDatas() {
     if (
       !checkText(name) &&
-      !checkCpf(formatCpf(cpf)) &&
+      !checkCpf(cpf) &&
       !checkEmail(email) &&
       !checkDataNasc(dataNasc) &&
       !checkText(community)
@@ -125,23 +120,21 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       if (!user) {
         addUser({
           name,
-          cpf: formatCpf(cpf),
+          cpf: desformatCpf(cpf),
           email,
-          birthday: formatDate(dataNasc),
+          birthday: formatDateUSA(dataNasc),
           community,
           password,
         });
       } else {
-        updateUser(user, {
+        updateDatasUser({
           name,
-          cpf: formatCpf(cpf),
+          cpf: desformatCpf(cpf),
           email,
-          birthday: formatDate(dataNasc),
+          birthday: formatDateUSA(dataNasc),
           community,
           password,
         });
-        // mostrar msg de sucesso e fechar modal
-        // console.log("atualizar");
       }
     } else {
       setShowErrors(true);
@@ -177,7 +170,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
             }}
           />
           <Text style={styles.errorMessage}>
-            {checkCpf(formatCpf(cpf)) && showErrors ? "CPF Inválido!" : ""}
+            {checkCpf(cpf) && showErrors ? "CPF Inválido!" : ""}
           </Text>
 
           <InputGroupEmail
@@ -195,7 +188,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           <InputGroupDN
             iconName="birthday-cake"
             placeholder="DD/MM/AAAA"
-            value={formatDate(dataNasc)}
+            value={dataNasc}
             // defaultValue={dataNasc}
             onChangeText={(text) => {
               setDataNasc(text);

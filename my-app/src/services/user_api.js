@@ -59,7 +59,9 @@ export const getMe = async (token) => {
   }
 };
 
-export const updateUser = async (data) => {
+export const updateUser = async (data, token) => {
+  console.log("data: ", data);
+
   try {
     const response = await api.put(
       "/me",
@@ -71,11 +73,11 @@ export const updateUser = async (data) => {
         password: data.password,
         birthday: data.birthday,
         image: "",
-        // token: data.token,
       },
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: token,
         },
       }
     );

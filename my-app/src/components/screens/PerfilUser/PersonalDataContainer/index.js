@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import { AuthContext } from "../../../../contexts/auth";
 import {
-  formatDate,
+  formatDateBR,
   formatCpf,
 } from "../../Initial/FormCadastroUser/functions";
 
@@ -18,7 +18,7 @@ const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
       </View>
       <View style={styles.line}>
         <Text style={styles.textLabel}>DATA DE NASCIMENTO:</Text>
-        <Text style={styles.textData}>{formatDate(sentUser.birthday)}</Text>
+        <Text style={styles.textData}>{formatDateBR(sentUser.birthday)}</Text>
       </View>
       <View style={styles.line}>
         <Text style={[styles.textLabel, styles.textLabelEmail]}>EMAIL:</Text>

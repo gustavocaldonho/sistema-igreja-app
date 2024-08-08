@@ -57,6 +57,7 @@ function AuthProvider({ children }) {
         community: response.data.community,
         position: response.data.position,
       });
+      console.log("setDatasUser (auth):", response.data);
     } catch (error) {
       console.log(error);
     }
@@ -99,6 +100,7 @@ function AuthProvider({ children }) {
         setUser,
         signIn,
         signOut,
+        setDatasUser,
       }}
     >
       {children}

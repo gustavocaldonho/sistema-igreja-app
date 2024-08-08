@@ -13,7 +13,7 @@ import styles from "./style";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
 import { useNavigation } from "@react-navigation/native";
-import { formatCpf } from "../FormCadastroUser/functions";
+import { desformatCpf, formatCpf } from "../FormCadastroUser/functions";
 import { AuthContext } from "../../../../contexts/auth";
 
 export default function FormLogin() {
@@ -74,9 +74,11 @@ export default function FormLogin() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            login({ cpf: "14734570760", password: "sEnha1234##" });
+            // login({ cpf: "14734570760", password: "sEnha123456##" });
+            // login({ cpf: "76903821007", password: "sEnha123456##" });
             // login({ cpf: "91314128078", password: "sEnha123456##" });
-            // login({ cpf: formatCpf(cpf), password });
+            // login({ cpf: "76903821007", password: "sEnha123456##" });
+            login({ cpf: desformatCpf(cpf), password });
           }}
         >
           <Text style={styles.textButton}>Entrar</Text>
