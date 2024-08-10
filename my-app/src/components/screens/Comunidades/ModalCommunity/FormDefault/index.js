@@ -5,6 +5,9 @@ import styles from "./style";
 import stylesModal from "../style";
 import { AuthContext } from "../../../../../contexts/auth";
 import { useNavigation } from "@react-navigation/native";
+import { checkEmail } from "../../../Initial/FormCadastroUser/functions";
+import { cadastryCommunity } from "../../../../../services/community_api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FormDefault({
   setModalVisible,
@@ -13,16 +16,22 @@ export default function FormDefault({
 }) {
   const [errorPatron, setErrorPatron] = useState(false);
   const [errorLocation, setErrorLocation] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(false);
   const [patron, setPatron] = useState(community ? community.patron : "");
   const [location, setLocation] = useState(community ? community.location : "");
+  const [email, setEmail] = useState(community ? community.email : "");
   const { communityList, setCommunityList } = useContext(AuthContext);
   const navigation = useNavigation();
 
-  function addToList(item) {
-    const newList = [...communityList];
-    newList.push(item);
-    setCommunityList(newList);
-    setModalVisible(!modalVisible);
+  async function createCommunity(data) {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await cadastryCommunity(data, token);
+    if (response.status === 201) {
+      setModalVisible(!modalVisible);
+    } else {
+      // exibir uma msg de erro
+      console.log(response);
+    }
   }
 
   function updateCommunity(oldDatas, newDatas) {
@@ -56,6 +65,12 @@ export default function FormDefault({
     }
   }
 
+  function checkEmailForm(text) {
+    const error = checkEmail(text);
+    setErrorEmail(error);
+    return error;
+  }
+
   return (
     <View>
       <View style={stylesModal.boxTitle}>
@@ -86,6 +101,20 @@ export default function FormDefault({
         }}
         defaultValue={location}
       />
+      <View style={stylesModal.boxTitle}>
+        <Text style={stylesModal.title}>Email</Text>
+        <Text style={stylesModal.textError}>{errorEmail ? "*" : ""}</Text>
+      </View>
+      <TextInput
+        style={[styles.input, errorEmail ? styles.error : null]}
+        placeholder="ex.: saogeraldosapucaia@gmail.com"
+        placeholderTextColor={"#88C6E7"}
+        onChangeText={(text) => {
+          setEmail(text);
+          checkEmailForm(text);
+        }}
+        defaultValue={email}
+      />
 
       <TouchableOpacity
         style={stylesModal.boxButton}
@@ -93,13 +122,22 @@ export default function FormDefault({
         onPress={() => {
           const errorP = checkPatron(patron);
           const errorL = checkLocation(location);
+          const errorE = checkEmailForm(email);
 
-          if (!errorP && !errorL) {
+          // if (!errorP && !errorL && errorE) {
+          //   if (!community) {
+          //     id = communityList.length;
+          //     addToList({ id, patron, location });
+          //   } else {
+          //     updateCommunity(community, { patron, location });
+          //   }
+          // }
+
+          if (!errorP && !errorL && !errorE) {
             if (!community) {
-              id = communityList.length;
-              addToList({ id, patron, location });
+              createCommunity({ patron, location, email, image: "" });
             } else {
-              updateCommunity(community, { patron, location });
+              // updateCommunity(community, { patron, location });
             }
           }
         }}

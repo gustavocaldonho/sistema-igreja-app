@@ -13,37 +13,37 @@ export const getCommunitiesWithoutToken = async () => {
   }
 };
 
+export const cadastryCommunity = async (data, token) => {
+  // console.log("data: ", data);
+  // console.log("token: ", token);
+  try {
+    const response = await api.post(
+      "/community",
+      {
+        patron: data.patron,
+        location: data.location,
+        email: data.email,
+        // image: data.image,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getCommunitiesWithToken = (data) => {
   api
     .get(
       "/endpoint",
       {
         token: data.token,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
-
-export const cadastryCommunity = (data) => {
-  api
-    .post(
-      "/endpoint",
-      {
-        patron: data.patron,
-        location: data.location,
-        token: data.token,
-        active: data.active,
       },
       {
         headers: {
