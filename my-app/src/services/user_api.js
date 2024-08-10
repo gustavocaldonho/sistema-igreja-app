@@ -87,24 +87,14 @@ export const updateUser = async (data, token) => {
   }
 };
 
-export const logout_user = () => {
-  // destruir o token de acesso;
-};
-
-export const getUsers = (data) => {
+export const getUsers = (data, token) => {
   api
-    .get(
-      "/endpoint",
-      {
-        id_community: data.id_community,
-        token: data.token,
+    .get(`/community/${data.patron}/users`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    })
     .then(function (response) {
       // console.log(response);
       return response;
@@ -112,6 +102,10 @@ export const getUsers = (data) => {
     .catch(function (error) {
       console.log(error);
     });
+};
+
+export const logout_user = () => {
+  // destruir o token de acesso;
 };
 
 export const disableUser = (data) => {

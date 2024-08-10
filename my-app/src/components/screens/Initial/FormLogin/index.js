@@ -77,8 +77,8 @@ export default function FormLogin() {
             // login({ cpf: "14734570760", password: "sEnha123456##" });
             // login({ cpf: "76903821007", password: "sEnha123456##" });
             // login({ cpf: "91314128078", password: "sEnha123456##" });
-            // login({ cpf: "76903821007", password: "sEnha123456##" });
-            login({ cpf: desformatCpf(cpf), password });
+            login({ cpf: "76903821007", password: "sEnha123456##" });
+            // login({ cpf: desformatCpf(cpf), password });
           }}
         >
           <Text style={styles.textButton}>Entrar</Text>
