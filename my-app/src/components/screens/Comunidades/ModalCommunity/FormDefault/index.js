@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
@@ -6,7 +6,10 @@ import stylesModal from "../style";
 import { AuthContext } from "../../../../../contexts/auth";
 import { useNavigation } from "@react-navigation/native";
 import { checkEmail } from "../../../Initial/FormCadastroUser/functions";
-import { cadastryCommunity } from "../../../../../services/community_api";
+import {
+  cadastryCommunity,
+  updateCommunity,
+} from "../../../../../services/community_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FormDefault({
@@ -20,7 +23,6 @@ export default function FormDefault({
   const [patron, setPatron] = useState(community ? community.patron : "");
   const [location, setLocation] = useState(community ? community.location : "");
   const [email, setEmail] = useState(community ? community.email : "");
-  const { communityList, setCommunityList } = useContext(AuthContext);
   const navigation = useNavigation();
 
   async function createCommunity(data) {
@@ -30,19 +32,19 @@ export default function FormDefault({
       setModalVisible(!modalVisible);
     } else {
       // exibir uma msg de erro
-      console.log(response);
+      // console.log(response);
     }
   }
 
-  function updateCommunity(oldDatas, newDatas) {
-    for (let i = 0; i < communityList.length; i++) {
-      if (communityList[i].id === oldDatas.id) {
-        communityList[i].patron = newDatas.patron;
-        communityList[i].location = newDatas.location;
-      }
+  async function updateCommunityForm(patronUpdate, data) {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await updateCommunity(patronUpdate, data, token);
+    if (response.status === 204) {
+      navigation.navigate("Menu");
+      setModalVisible(false);
+    } else {
+      // exibir msg de erro
     }
-    setModalVisible(false);
-    navigation.navigate("Menu");
   }
 
   function checkPatron(text) {
@@ -124,20 +126,15 @@ export default function FormDefault({
           const errorL = checkLocation(location);
           const errorE = checkEmailForm(email);
 
-          // if (!errorP && !errorL && errorE) {
-          //   if (!community) {
-          //     id = communityList.length;
-          //     addToList({ id, patron, location });
-          //   } else {
-          //     updateCommunity(community, { patron, location });
-          //   }
-          // }
-
           if (!errorP && !errorL && !errorE) {
             if (!community) {
               createCommunity({ patron, location, email, image: "" });
             } else {
-              // updateCommunity(community, { patron, location });
+              updateCommunityForm(community.patron, {
+                patron,
+                location,
+                email,
+              });
             }
           }
         }}

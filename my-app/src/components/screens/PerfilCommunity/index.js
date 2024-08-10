@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -7,12 +7,24 @@ import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemAdvisor from "./ItemAdvisor";
 import ItemHighlight from "./ItemHighlight";
 import ModalCommunity from "../Comunidades/ModalCommunity";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getDatasCommunity } from "../../../services/community_api";
 import styles from "./style";
 
 export default function PerfilCommunity({ navigation, route }) {
-  const { id, patron, location } = route.params;
+  const { patron, location } = route.params;
+  const [datas, setDatas] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+
+  async function getDatasCommunityForm() {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await getDatasCommunity(patron, token);
+    setDatas(response.data);
+  }
+
+  useEffect(() => {
+    getDatasCommunityForm();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -23,7 +35,7 @@ export default function PerfilCommunity({ navigation, route }) {
           <ModalCommunity
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
-            community={{ id, patron, location }}
+            community={datas}
           />
         ) : (
           <View style={{ flex: 1 }}>

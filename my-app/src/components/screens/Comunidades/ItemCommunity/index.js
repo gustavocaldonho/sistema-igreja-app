@@ -5,7 +5,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ItemCommunity({ id, patron, location }) {
+export default function ItemCommunity({ patron, location }) {
   const navigation = useNavigation();
 
   return (
@@ -13,7 +13,6 @@ export default function ItemCommunity({ id, patron, location }) {
       activeOpacity={0.7}
       onPress={() =>
         navigation.navigate("PerfilCommunity", {
-          id: id,
           patron: patron,
           location: location,
         })

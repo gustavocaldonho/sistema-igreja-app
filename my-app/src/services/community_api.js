@@ -14,8 +14,6 @@ export const getCommunitiesWithoutToken = async () => {
 };
 
 export const cadastryCommunity = async (data, token) => {
-  // console.log("data: ", data);
-  // console.log("token: ", token);
   try {
     const response = await api.post(
       "/community",
@@ -38,51 +36,55 @@ export const cadastryCommunity = async (data, token) => {
   }
 };
 
-export const getCommunitiesWithToken = (data) => {
-  api
-    .get(
-      "/endpoint",
-      {
-        token: data.token,
+export const getCommunitiesWithToken = async (token) => {
+  try {
+    const response = await api.get("/community/list", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
     });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const updateCommunity = (data) => {
-  api
-    .post(
-      "/endpoint",
+export const getDatasCommunity = async (patron, token) => {
+  try {
+    const response = await api.get(`/community/${patron}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateCommunity = async (patronUpdate, data, token) => {
+  try {
+    const response = await api.put(
+      `/community/${patronUpdate}`,
       {
-        id_community: data.id_community,
         patron: data.patron,
         location: data.location,
-        token: data.token,
+        email: data.email,
+        // image: data.image
       },
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: token,
         },
       }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const disableCommunity = (data) => {
