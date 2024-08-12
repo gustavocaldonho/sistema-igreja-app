@@ -115,10 +115,6 @@ export const getUserByCpf = async (cpf, token) => {
   }
 };
 
-export const logout_user = () => {
-  // destruir o token de acesso;
-};
-
 export const disableUser = (data) => {
   api
     .post(

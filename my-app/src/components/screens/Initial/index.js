@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, TouchableOpacity, StatusBar } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -9,7 +9,7 @@ import FormCadastroUser from "./FormCadastroUser";
 import { AuthContext } from "../../../contexts/auth";
 
 export default function Initial() {
-  const { registryEntry, setRegistryEntry } = useContext(AuthContext);
+  const { registryEntry, setRegistryEntry, user } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>

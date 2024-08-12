@@ -10,40 +10,10 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState({});
   const navigation = useNavigation();
 
-  const [userList, setUserList] = useState([
-    {
-      name: "José",
-      cpf: "222.222.222-22",
-      email: "jose@gmail.com",
-      dataNasc: "23/12/1980",
-      community: "a",
-      password: "1234",
-    },
-    {
-      name: "João",
-      cpf: "2",
-      email: "miguel@gmail.com",
-      dataNasc: "23/12/1980",
-      community: "a",
-      password: "1234",
-    },
-  ]);
-
   const [warningList, setWarningList] = useState([
     { id: 0, title: "Título 0", message: "Mensagem", visibleToParish: false },
     { id: 1, title: "Título 1", message: "Mensagem", visibleToParish: false },
     { id: 2, title: "Título 2", message: "Mensagem", visibleToParish: false },
-  ]);
-
-  const [communityList, setCommunityList] = useState([
-    { id: 0, patron: "São Geraldo Magela", location: "Sapucaia" },
-    {
-      id: 1,
-      patron: "Nossa Senhora das Graças",
-      location: "Paul de Graça Aranha",
-    },
-    { id: 2, patron: "Nossa Senhora Auxiliadora", location: "Marilândia-ES" },
-    { id: 3, patron: "Santo Antônio", location: "Graça Aranha" },
   ]);
 
   async function setDatasUser(token) {
@@ -80,8 +50,9 @@ function AuthProvider({ children }) {
     }
   }
 
-  function signOut() {
+  async function signOut() {
     setUser({});
+    await AsyncStorage.removeItem("AccessToken");
     navigation.navigate("Initial");
   }
 
@@ -90,12 +61,8 @@ function AuthProvider({ children }) {
       value={{
         registryEntry,
         setRegistryEntry,
-        userList,
-        setUserList,
         warningList,
         setWarningList,
-        communityList,
-        setCommunityList,
         user,
         setUser,
         signIn,
