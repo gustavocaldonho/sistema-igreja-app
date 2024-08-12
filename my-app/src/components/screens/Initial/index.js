@@ -9,7 +9,7 @@ import FormCadastroUser from "./FormCadastroUser";
 import { AuthContext } from "../../../contexts/auth";
 
 export default function Initial() {
-  const { registryEntry, setRegistryEntry, user } = useContext(AuthContext);
+  const { registryEntry, setRegistryEntry } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
