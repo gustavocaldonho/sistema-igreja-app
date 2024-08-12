@@ -87,21 +87,32 @@ export const updateUser = async (data, token) => {
   }
 };
 
-export const getUsers = (data, token) => {
-  api
-    .get(`/community/${data.patron}/users`, {
+export const getUsersCommunity = async (patron, token) => {
+  try {
+    const response = await api.get(`/community/${patron}/users`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
       },
-    })
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
     });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getUserByCpf = async (cpf, token) => {
+  try {
+    const response = await api.get(`/users/${cpf}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const logout_user = () => {

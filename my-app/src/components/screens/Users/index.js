@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import PageBase from "../PageBase";
 import BoxSearch from "../../auxiliary/BoxSearch";
 import ItemUserContent from "./ItemUserContent";
-import { AuthContext } from "../../../contexts/auth";
 
 export default function Users({ navigation }) {
-  const { userList } = useContext(AuthContext);
-
   return (
     <PageBase title={"Usuários"}>
       <BoxSearch />
-      <ItemUserContent navigation={navigation} userList={userList} />
+      <ItemUserContent navigation={navigation} />
     </PageBase>
   );
 }
