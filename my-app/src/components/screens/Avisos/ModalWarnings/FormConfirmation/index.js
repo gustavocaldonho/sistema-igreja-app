@@ -2,26 +2,37 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import stylesModal from "../style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { deleteWarning } from "../../../../../services/warning_api";
 
 export default function FormConfirmation({
-  warningList,
-  setWarningList,
+  // warningList,
+  // setWarningList,
   itemClicked,
   setItemClicked,
   setModalVisible,
   modalVisible,
 }) {
-  function removeItemFromList(id) {
-    const newList = [...warningList];
-    let itemIndex = "";
-    for (let i = 0; i < newList.length; i++) {
-      if (newList[i].id === id) {
-        itemIndex = newList.indexOf(newList[i]);
-      }
+  // function removeItemFromList(id) {
+  //   const newList = [...warningList];
+  //   let itemIndex = "";
+  //   for (let i = 0; i < newList.length; i++) {
+  //     if (newList[i].id === id) {
+  //       itemIndex = newList.indexOf(newList[i]);
+  //     }
+  //   }
+  //   newList.splice(itemIndex, 1);
+  //   setWarningList(newList);
+  //   setModalVisible(!modalVisible);
+  // }
+
+  async function deleteWarningForm(id) {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await deleteWarning(id, token);
+
+    if (response.status === 200) {
+      setModalVisible(!modalVisible);
     }
-    newList.splice(itemIndex, 1);
-    setWarningList(newList);
-    setModalVisible(!modalVisible);
   }
 
   return (
@@ -31,7 +42,7 @@ export default function FormConfirmation({
         <TouchableOpacity
           activeOpacity={0.7}
           style={stylesModal.boxButton}
-          onPress={() => removeItemFromList(itemClicked.id)}
+          onPress={() => deleteWarningForm(itemClicked.id)}
         >
           <Text style={stylesModal.textButton}>Sim</Text>
         </TouchableOpacity>

@@ -3,43 +3,65 @@ import { View, Text, TouchableOpacity, Switch } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
 import stylesModal from "../style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  createWarning,
+  updateWarning,
+} from "../../../../../services/warning_api";
 
 export default function FormDefault({
-  warningList,
-  setWarningList,
+  // warningList,
+  // setWarningList,
   itemClicked,
   setModalVisible,
   modalVisible,
 }) {
   const [errorTitle, setErrorTitle] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [errorDescription, setErrorDescription] = useState(false);
   const [title, setTitle] = useState(itemClicked ? itemClicked.title : "");
-  const [message, setMessage] = useState(
-    itemClicked ? itemClicked.message : ""
+  const [description, setDescription] = useState(
+    itemClicked ? itemClicked.description : ""
   );
-  const [visibleToParish, setVisibleToParish] = useState(
-    itemClicked ? itemClicked.visibleToParish : false
-  );
+  const [scope, setScope] = useState(itemClicked ? itemClicked.scope : false);
 
-  function addToList(item) {
-    const newList = [...warningList];
-    newList.push(item);
-    setWarningList(newList);
-    setModalVisible(!modalVisible);
+  // function addToList(item) {
+  //   const newList = [...warningList];
+  //   newList.push(item);
+  //   setWarningList(newList);
+  //   setModalVisible(!modalVisible);
+  // }
+
+  // function editItemFromList(item) {
+  //   const newList = [...warningList];
+  //   for (let i = 0; i < newList.length; i++) {
+  //     if (newList[i].id === item.id) {
+  //       newList[i].title = item.title;
+  //       newList[i].message = item.message;
+  //       newList[i].visibleToParish = item.visibleToParish;
+  //     }
+  //   }
+  //   setWarningList(newList);
+  //   setModalVisible(!modalVisible);
+  //   itemClicked = undefined;
+  // }
+
+  async function createWarningForm(item) {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await createWarning(item, token);
+
+    if (response.status === 201) {
+      setModalVisible(!modalVisible);
+    }
   }
 
-  function editItemFromList(item) {
-    const newList = [...warningList];
-    for (let i = 0; i < newList.length; i++) {
-      if (newList[i].id === item.id) {
-        newList[i].title = item.title;
-        newList[i].message = item.message;
-        newList[i].visibleToParish = item.visibleToParish;
-      }
+  async function updateWarningForm(item) {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await updateWarning(item, token);
+
+    if (response.status === 200) {
+      setModalVisible(!modalVisible);
+      itemClicked = undefined;
     }
-    setWarningList(newList);
-    setModalVisible(!modalVisible);
-    itemClicked = undefined;
   }
 
   function checkTitle(text) {
@@ -52,12 +74,12 @@ export default function FormDefault({
     }
   }
 
-  function checkMessage(text) {
+  function checkDescription(text) {
     if (text === "") {
-      setErrorMessage(true);
+      setErrorDescription(true);
       return true;
     } else {
-      setErrorMessage(false);
+      setErrorDescription(false);
       return false;
     }
   }
@@ -88,27 +110,27 @@ export default function FormDefault({
         style={[
           styles.input,
           styles.areaInput,
-          errorMessage ? styles.error : null,
+          errorDescription ? styles.error : null,
         ]}
         placeholder="Digite uma mensagem..."
         placeholderTextColor={"#88C6E7"}
         multiline={true}
         numberOfLines={5}
         onChangeText={(text) => {
-          setMessage(text);
-          checkMessage(text);
+          setDescription(text);
+          checkDescription(text);
         }}
-        defaultValue={itemClicked.message}
+        defaultValue={itemClicked.description}
       />
 
       <View style={styles.boxSwitch}>
         <Text style={styles.textSwitch}>Visível para toda a Paróquia</Text>
         <Switch
           trackColor={{ false: "#767577", true: "#E1E0E1" }}
-          thumbColor={visibleToParish ? "#339dd7" : "#f4f3f4"}
+          thumbColor={scope ? "#339dd7" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={() => setVisibleToParish(!visibleToParish)}
-          value={visibleToParish}
+          onValueChange={() => setScope(!scope)}
+          value={scope}
         />
       </View>
 
@@ -117,18 +139,29 @@ export default function FormDefault({
         activeOpacity={0.7}
         onPress={() => {
           const errorT = checkTitle(title);
-          const errorM = checkMessage(message);
+          const errorM = checkDescription(description);
 
           if (!errorT && !errorM) {
             if (itemClicked.id === undefined) {
-              id = warningList.length;
-              addToList({ id, title, message, visibleToParish });
-            } else {
-              editItemFromList({
-                id: itemClicked.id,
+              // id = warningList.length;
+              // addToList({ id, title, message, visibleToParish });
+              createWarningForm({
                 title,
-                message,
-                visibleToParish,
+                description,
+                scope,
+              });
+            } else {
+              // editItemFromList({
+              //   id: itemClicked.id,
+              //   title,
+              //   message,
+              //   visibleToParish,
+              // });
+              updateWarningForm({
+                id,
+                title,
+                description: message,
+                scope,
               });
             }
           }

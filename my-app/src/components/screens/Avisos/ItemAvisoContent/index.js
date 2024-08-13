@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import ItemAviso from "../ItemAviso";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getTenWarnings } from "../../../../services/warning_api";
 
 export default function ItemAvisoContent({
   warningList,
@@ -10,14 +12,28 @@ export default function ItemAvisoContent({
   setItemClicked,
   setFormModalDefaultVisible,
 }) {
+  const [warningList, setWarningList] = useState([]);
+
+  async function getWarningListForm() {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await getTenWarnings(token);
+    if (response.status === 200) {
+      setWarningList(response.data);
+    }
+  }
+
+  useEffect(() => {
+    getWarningListForm();
+  }, []);
+
   return (
     <View>
       {warningList.map((w, idx) => (
         <ItemAviso
           id={w.id}
           title={w.title}
-          message={w.message}
-          visibleToParish={w.visibleToParish}
+          description={w.description}
+          scope={w.scope}
           warningList={warningList}
           setWarningList={setWarningList}
           setItemClicked={setItemClicked}

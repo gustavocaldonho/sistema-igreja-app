@@ -8,12 +8,12 @@ export default function Avisos({ navigation }) {
   const [itemClicked, setItemClicked] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const [formModalDefaultVisible, setFormModalDefaultVisible] = useState(true);
-  const { warningList, setWarningList } = useContext(AuthContext);
+  // const { warningList, setWarningList } = useContext(AuthContext);
 
   function onPressButtonAdd() {
     setModalVisible(!modalVisible);
     setFormModalDefaultVisible(true);
-    setItemClicked("");
+    setItemClicked({});
   }
 
   return (
@@ -26,16 +26,16 @@ export default function Avisos({ navigation }) {
         <ModalWarnings
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          warningList={warningList}
-          setWarningList={setWarningList}
+          // warningList={warningList}
+          // setWarningList={setWarningList}
           itemClicked={itemClicked}
           setItemClicked={setItemClicked}
           formModalDefaultVisible={formModalDefaultVisible}
         />
       ) : (
         <ItemAvisoContent
-          warningList={warningList}
-          setWarningList={setWarningList}
+          // warningList={warningList}
+          // setWarningList={setWarningList}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           setItemClicked={setItemClicked}

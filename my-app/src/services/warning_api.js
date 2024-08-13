@@ -1,100 +1,75 @@
 import api from "./api";
 
-export const getWarnings = (data) => {
-  api
-    .get(
-      "/endpoint",
-      {
-        // lembrar de pegar os avisos 'public: true', isto é, os públicos;
-        id_community: data.id_community,
-        token: data.token,
+export const getTenWarnings = async (token) => {
+  try {
+    const response = await api.get("/community/warnings", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
     });
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const cadastryWarning = (data) => {
-  api
-    .post(
-      "/endpoint",
+export const createWarning = async (data, token) => {
+  try {
+    const response = await api.post(
+      "/community/warnings",
       {
         title: data.title,
-        message: data.message,
-        id_community: data.id_community,
-        token: data.token,
+        description: data.description,
+        scope: data.scope,
+        // image: data.image,
       },
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: token,
         },
       }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const updateWarning = (data) => {
-  api
-    .post(
-      "/endpoint",
+export const updateWarning = async (data, token) => {
+  try {
+    const response = await api.put(
+      `/community/warnings/${data.id}`,
       {
-        id_warning: data.id_warning,
         title: data.title,
-        message: data.message,
-        id_community: data.id_community,
-        token: data.token,
+        description: data.description,
+        scope: data.scope,
+        // image: data.image,
       },
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: token,
         },
       }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const deleteWarning = (data) => {
-  api
-    .post(
-      "/endpoint",
-      {
-        id_warning: data.id_warning,
-        id_community: data.id_community,
-        token: data.token,
+export const deleteWarning = async (id, token) => {
+  try {
+    const response = await api.delete(`/community/warnings/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
     });
+    return response;
+  } catch (error) {
+    return error;
+  }
 };

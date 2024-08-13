@@ -7,8 +7,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export default function ItemAviso({
   id,
   title,
-  message,
-  visibleToParish,
+  description,
+  scope,
   setItemClicked,
   viewed,
   modalVisible,
@@ -22,7 +22,7 @@ export default function ItemAviso({
         <View style={styles.boxTitle}>
           <Text style={[styles.textTitle, styles.titleNotDisplayed]}>
             {title}
-            {visibleToParish ? " (Paróquia)" : ""}
+            {scope ? " (Paróquia)" : ""}
           </Text>
           {viewed ? <Icon name="circle" style={styles.iconNotDisplayed} /> : ""}
         </View>
@@ -31,7 +31,7 @@ export default function ItemAviso({
             onPress={() => {
               setModalVisible(!modalVisible);
               setFormModalDefaultVisible(true);
-              setItemClicked({ id, title, message, visibleToParish });
+              setItemClicked({ id, title, description, scope });
             }}
           >
             <Icon
@@ -43,7 +43,7 @@ export default function ItemAviso({
             onPress={() => {
               setModalVisible(!modalVisible);
               setFormModalDefaultVisible(false);
-              setItemClicked({ id, title, message, visibleToParish });
+              setItemClicked({ id, title, description, scope });
             }}
           >
             <Icon name="trash-o" style={[styles.icon, { color: "#f094c0" }]} />
@@ -51,7 +51,7 @@ export default function ItemAviso({
         </View>
       </View>
       <View style={styles.boxBody}>
-        <Text style={styles.textBody}>{message}</Text>
+        <Text style={styles.textBody}>{description}</Text>
       </View>
     </View>
   );
