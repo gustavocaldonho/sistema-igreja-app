@@ -14,7 +14,7 @@ export default function itemAdvisor(props) {
       </TouchableOpacity>
       <View style={styles.itemAdvisorMiddle}>
         <Text style={styles.textNameAdvisor}>{props.name}</Text>
-        <Text style={styles.positionAdvisor}>{props.position}</Text>
+        <Text style={styles.functionAdvisor}>{props.function}</Text>
       </View>
       <TouchableOpacity style={styles.itemAdvisorRight}>
         <Icon name="trash-o" style={{ color: "#f094c0", fontSize: 25 }} />

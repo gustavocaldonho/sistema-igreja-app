@@ -9,6 +9,7 @@ import ItemHighlight from "./ItemHighlight";
 import ModalCommunity from "../Comunidades/ModalCommunity";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDatasCommunity } from "../../../services/community_api";
+import ItemAdvisorContent from "./ItemAdvisorContent";
 import styles from "./style";
 
 export default function PerfilCommunity({ navigation, route }) {
@@ -97,26 +98,7 @@ export default function PerfilCommunity({ navigation, route }) {
               </View>
               <View style={[styles.boxInformations]}>
                 <Text style={styles.titleBoxAdvidors}>MEMBROS DO CONSELHO</Text>
-                <ItemAdvisor
-                  style={styles.boxShadow}
-                  name={"Elizabeth Suann"}
-                  position={"Diretor Geral"}
-                />
-                <ItemAdvisor
-                  style={styles.boxShadow}
-                  name={"Marcos Antônio da Silva"}
-                  position={"Tesoureiro"}
-                />
-                <ItemAdvisor
-                  style={styles.boxShadow}
-                  name={"Estevão Soares de Souza"}
-                  position={"Catecismo"}
-                />
-                <ItemAdvisor
-                  style={styles.boxShadow}
-                  name={"Milena Gomes Araújo"}
-                  position={"Cemitério"}
-                />
+                <ItemAdvisorContent />
                 <TouchableOpacity style={styles.boxAddMembro}>
                   <Icon name="plus" style={styles.iconPlusMembro} />
                   <Text style={styles.textAddMembro}>ADICIONAR MEMBRO</Text>
