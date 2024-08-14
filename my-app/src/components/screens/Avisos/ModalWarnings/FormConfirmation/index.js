@@ -6,31 +6,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { deleteWarning } from "../../../../../services/warning_api";
 
 export default function FormConfirmation({
-  // warningList,
-  // setWarningList,
   itemClicked,
   setItemClicked,
   setModalVisible,
   modalVisible,
 }) {
-  // function removeItemFromList(id) {
-  //   const newList = [...warningList];
-  //   let itemIndex = "";
-  //   for (let i = 0; i < newList.length; i++) {
-  //     if (newList[i].id === id) {
-  //       itemIndex = newList.indexOf(newList[i]);
-  //     }
-  //   }
-  //   newList.splice(itemIndex, 1);
-  //   setWarningList(newList);
-  //   setModalVisible(!modalVisible);
-  // }
-
   async function deleteWarningForm(id) {
     const token = await AsyncStorage.getItem("AccessToken");
     const response = await deleteWarning(id, token);
-
-    if (response.status === 200) {
+    if (response.status === 204) {
       setModalVisible(!modalVisible);
     }
   }

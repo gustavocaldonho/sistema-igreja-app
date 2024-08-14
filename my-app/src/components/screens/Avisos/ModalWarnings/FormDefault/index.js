@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Switch } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
@@ -10,45 +10,25 @@ import {
 } from "../../../../../services/warning_api";
 
 export default function FormDefault({
-  // warningList,
-  // setWarningList,
   itemClicked,
   setModalVisible,
   modalVisible,
 }) {
   const [errorTitle, setErrorTitle] = useState(false);
   const [errorDescription, setErrorDescription] = useState(false);
-  const [title, setTitle] = useState(itemClicked ? itemClicked.title : "");
-  const [description, setDescription] = useState(
-    itemClicked ? itemClicked.description : ""
+  const [title, setTitle] = useState(
+    itemClicked.title ? itemClicked.title : ""
   );
-  const [scope, setScope] = useState(itemClicked ? itemClicked.scope : false);
-
-  // function addToList(item) {
-  //   const newList = [...warningList];
-  //   newList.push(item);
-  //   setWarningList(newList);
-  //   setModalVisible(!modalVisible);
-  // }
-
-  // function editItemFromList(item) {
-  //   const newList = [...warningList];
-  //   for (let i = 0; i < newList.length; i++) {
-  //     if (newList[i].id === item.id) {
-  //       newList[i].title = item.title;
-  //       newList[i].message = item.message;
-  //       newList[i].visibleToParish = item.visibleToParish;
-  //     }
-  //   }
-  //   setWarningList(newList);
-  //   setModalVisible(!modalVisible);
-  //   itemClicked = undefined;
-  // }
+  const [description, setDescription] = useState(
+    itemClicked.description ? itemClicked.description : ""
+  );
+  const [scope, setScope] = useState(
+    itemClicked.scope ? itemClicked.scope : "private"
+  );
 
   async function createWarningForm(item) {
     const token = await AsyncStorage.getItem("AccessToken");
     const response = await createWarning(item, token);
-
     if (response.status === 201) {
       setModalVisible(!modalVisible);
     }
@@ -57,8 +37,7 @@ export default function FormDefault({
   async function updateWarningForm(item) {
     const token = await AsyncStorage.getItem("AccessToken");
     const response = await updateWarning(item, token);
-
-    if (response.status === 200) {
+    if (response.status === 204) {
       setModalVisible(!modalVisible);
       itemClicked = undefined;
     }
@@ -84,8 +63,6 @@ export default function FormDefault({
     }
   }
 
-  // console.log(visibleToParish);
-
   return (
     <View>
       <View style={stylesModal.boxTitle}>
@@ -104,7 +81,7 @@ export default function FormDefault({
       />
       <View style={stylesModal.boxTitle}>
         <Text style={stylesModal.title}>Mensagem</Text>
-        <Text style={stylesModal.textError}>{errorMessage ? "*" : ""}</Text>
+        <Text style={stylesModal.textError}>{errorDescription ? "*" : ""}</Text>
       </View>
       <TextInput
         style={[
@@ -127,10 +104,12 @@ export default function FormDefault({
         <Text style={styles.textSwitch}>Visível para toda a Paróquia</Text>
         <Switch
           trackColor={{ false: "#767577", true: "#E1E0E1" }}
-          thumbColor={scope ? "#339dd7" : "#f4f3f4"}
+          thumbColor={scope === "public" ? "#339dd7" : "#f4f3f4"}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={() => setScope(!scope)}
-          value={scope}
+          onValueChange={() =>
+            scope === "public" ? setScope("private") : setScope("public")
+          }
+          value={scope === "public" ? true : false}
         />
       </View>
 
@@ -143,24 +122,16 @@ export default function FormDefault({
 
           if (!errorT && !errorM) {
             if (itemClicked.id === undefined) {
-              // id = warningList.length;
-              // addToList({ id, title, message, visibleToParish });
               createWarningForm({
                 title,
                 description,
                 scope,
               });
             } else {
-              // editItemFromList({
-              //   id: itemClicked.id,
-              //   title,
-              //   message,
-              //   visibleToParish,
-              // });
               updateWarningForm({
-                id,
+                id: itemClicked.id,
                 title,
-                description: message,
+                description,
                 scope,
               });
             }

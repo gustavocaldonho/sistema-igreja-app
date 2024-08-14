@@ -1,8 +1,8 @@
 import api from "./api";
 
-export const getTenWarnings = async (token) => {
+export const getTenWarnings = async (community, token) => {
   try {
-    const response = await api.get("/community/warnings", {
+    const response = await api.get(`/community/warnings/${community}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
