@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
+import { BlurView } from "expo-blur";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormDefault from "./FormDefault";
@@ -19,6 +20,7 @@ export default function ModalCommunity({
       }}
     >
       <View style={styles.centeredView}>
+        <BlurView style={styles.absolute} tint="dark" intensity={100} />
         <View style={styles.modalView}>
           <View style={styles.boxIconClose}>
             <TouchableOpacity

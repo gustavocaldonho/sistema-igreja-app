@@ -18,17 +18,14 @@ export default function Comunidades({ navigation }) {
       signButtonAdd={true}
       onPressAdd={OnPressButtonAdd}
     >
-      {modalVisible ? (
-        <ModalCommunity
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
-      ) : (
-        <View>
-          <BoxSearch />
-          <ItemCommunityContent />
-        </View>
-      )}
+      <ModalCommunity
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
+      <View>
+        <BoxSearch />
+        <ItemCommunityContent />
+      </View>
     </PageBase>
   );
 }

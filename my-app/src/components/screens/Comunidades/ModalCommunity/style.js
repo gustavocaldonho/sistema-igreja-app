@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  absolute: {
+    ...StyleSheet.absoluteFill,
+  },
   boxIconClose: {
     position: "absolute",
     top: 0,
