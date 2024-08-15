@@ -7,6 +7,7 @@ import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemAdvisor from "./ItemAdvisor";
 import ItemHighlight from "./ItemHighlight";
 import ModalCommunity from "../Comunidades/ModalCommunity";
+import ModalAdvisor from "./ModalAdvisor";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDatasCommunity } from "../../../services/community_api";
 import ItemAdvisorContent from "./ItemAdvisorContent";
@@ -16,6 +17,17 @@ export default function PerfilCommunity({ navigation, route }) {
   const { patron, location } = route.params;
   const [datas, setDatas] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const [itemAdvisorClicked, setItemAdvisorClicked] = useState({});
+  const [advisorModalVisible, setAdvisorModalVisible] = useState(false);
+  const [formModalAdvisorDefaultVisible, setFormModalAdvisorDefaultVisible] =
+    useState(true);
+
+  function onPressButtonAddAdvisor() {
+    setAdvisorModalVisible(!advisorModalVisible);
+    setFormModalAdvisorDefaultVisible(true);
+    setItemAdvisorClicked({});
+  }
 
   async function getDatasCommunityForm() {
     const token = await AsyncStorage.getItem("AccessToken");
@@ -98,8 +110,26 @@ export default function PerfilCommunity({ navigation, route }) {
               </View>
               <View style={[styles.boxInformations]}>
                 <Text style={styles.titleBoxAdvidors}>MEMBROS DO CONSELHO</Text>
-                <ItemAdvisorContent />
-                <TouchableOpacity style={styles.boxAddMembro}>
+                {advisorModalVisible ? (
+                  <ModalAdvisor
+                    patron={patron}
+                    advisorModalVisible={advisorModalVisible}
+                    setAdvisorModalVisible={setAdvisorModalVisible}
+                    itemAdvisorClicked={itemAdvisorClicked}
+                    setItemAdvisorClicked={setItemAdvisorClicked}
+                    formModalAdvisorDefaultVisible={
+                      formModalAdvisorDefaultVisible
+                    }
+                  />
+                ) : (
+                  <ItemAdvisorContent />
+                )}
+                <TouchableOpacity
+                  style={styles.boxAddMembro}
+                  onPress={() => {
+                    onPressButtonAddAdvisor();
+                  }}
+                >
                   <Icon name="plus" style={styles.iconPlusMembro} />
                   <Text style={styles.textAddMembro}>ADICIONAR MEMBRO</Text>
                 </TouchableOpacity>

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
-  functionAdvisor: {
+  responsibilityAdvisor: {
     color: "#339DD7",
     fontSize: 15,
   },

@@ -1,21 +1,17 @@
 import React from "react";
 import { View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import styles from "../style";
+import styles from "./style";
 
-const InputGroupSelect = ({
-  iconName,
+const InputGroupSelectAdvisor = ({
   options,
   selectedValue,
   onValueChange,
+  style,
 }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.boxIcon}>
-        <FontAwesome5 name={iconName} size={20} style={styles.icon} />
-      </View>
-      <View style={[styles.input, styles.inputPicker]}>
+    <View style={[styles.container, style]}>
+      <View style={styles.input}>
         <Picker
           style={styles.labelPicker}
           selectedValue={selectedValue}
@@ -23,7 +19,7 @@ const InputGroupSelect = ({
         >
           {options.map((option, index) => (
             <Picker.Item
-              style={[styles.labelPicker]}
+              style={styles.labelPicker}
               key={index}
               label={option.label}
               value={option.value}
@@ -35,4 +31,4 @@ const InputGroupSelect = ({
   );
 };
 
-export default InputGroupSelect;
+export default InputGroupSelectAdvisor;

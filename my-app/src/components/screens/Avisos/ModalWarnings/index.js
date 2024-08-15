@@ -8,8 +8,6 @@ import FormConfirmation from "./FormConfirmation";
 export default function ModalWarning({
   modalVisible,
   setModalVisible,
-  warningList,
-  setWarningList,
   itemClicked,
   setItemClicked,
   formModalDefaultVisible,
@@ -38,8 +36,6 @@ export default function ModalWarning({
 
           {formModalDefaultVisible ? (
             <FormDefault
-              warningList={warningList}
-              setWarningList={setWarningList}
               itemClicked={itemClicked}
               setModalVisible={setModalVisible}
               modalVisible={modalVisible}
@@ -48,8 +44,6 @@ export default function ModalWarning({
             <FormConfirmation
               itemClicked={itemClicked}
               setItemClicked={setItemClicked}
-              warningList={warningList}
-              setWarningList={setWarningList}
               setModalVisible={setModalVisible}
               modalVisible={modalVisible}
             />

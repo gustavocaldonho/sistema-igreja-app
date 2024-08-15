@@ -7,10 +7,10 @@ import { AuthContext } from "../../../../contexts/auth";
 export default function ItemAdvisorContent() {
   const { user } = useContext(AuthContext);
   const [advisorList, setAdvisorList] = useState([
-    { name: "Elizabeth Suann", function: "Diretor Geral" },
-    { name: "Marcos Antônio da Silva", function: "Tesoureiro" },
-    { name: "Estevão Soares de Souza", function: "Catecismo" },
-    { name: "Milena Gomes Araújo", function: "Cemitério" },
+    { name: "Elizabeth Suann", responsibility: "Diretor Geral" },
+    { name: "Marcos Antônio da Silva", responsibility: "Tesoureiro" },
+    { name: "Estevão Soares de Souza", responsibility: "Catecismo" },
+    { name: "Milena Gomes Araújo", responsibility: "Cemitério" },
   ]);
 
   //   async function getUsersForm() {
@@ -30,7 +30,7 @@ export default function ItemAdvisorContent() {
       {advisorList.map((a, idx) => (
         <ItemAdvisor
           name={a.name}
-          function={a.function}
+          responsibility={a.responsibility}
           key={`item-advisor-${idx}`}
         />
       ))}
