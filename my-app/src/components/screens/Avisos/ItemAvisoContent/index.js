@@ -34,10 +34,8 @@ export default function ItemAvisoContent({
           title={w.title}
           description={w.description}
           scope={w.scope}
-          warningList={warningList}
-          setWarningList={setWarningList}
-          setItemClicked={setItemClicked}
           viewed={false}
+          setItemClicked={setItemClicked}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           setFormModalDefaultVisible={setFormModalDefaultVisible}

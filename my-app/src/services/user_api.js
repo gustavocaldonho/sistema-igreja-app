@@ -138,6 +138,67 @@ export const disableUser = (data) => {
     });
 };
 
+export const upgradeUser = async (data, token) => {
+  try {
+    const response = await api.patch(
+      "/user/upgrade/position",
+      {
+        cpf: data.cpf,
+        responsibility: data.responsibility,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const downgradeUser = async (cpf, token) => {
+  try {
+    const response = await api.patch(
+      "/users/downgrade/position",
+      {
+        cpf: cpf,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateAdvisor = async (data, token) => {
+  try {
+    const response = await api.put(
+      `/user/update/advisor/${data.cpf}`,
+      {
+        responsibility: data.responsibility,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 // Authorization: `Bearer ${token}`,
 
 // const user_api = async (data) => {

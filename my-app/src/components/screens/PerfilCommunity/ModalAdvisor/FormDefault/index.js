@@ -7,7 +7,11 @@ import stylesModal from "../style";
 import { AuthContext } from "../../../../../contexts/auth";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getUsersCommunity } from "../../../../../services/user_api";
+import {
+  getUsersCommunity,
+  updateAdvisor,
+  upgradeUser,
+} from "../../../../../services/user_api";
 
 export default function FormDefault({
   patron,
@@ -26,6 +30,24 @@ export default function FormDefault({
   );
   const [userList, setUserList] = useState([]);
   const navigation = useNavigation();
+
+  async function upgradeUserForm(cpf, responsibility) {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await upgradeUser({ cpf, responsibility }, token);
+
+    if (response.status === 200) {
+      setAdvisorModalVisible(!advisorModalVisible);
+    }
+  }
+
+  async function updateAdvisorForm(cpf, responsibility) {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await updateAdvisor({ cpf, responsibility }, token);
+
+    if (response.status === 200) {
+      setAdvisorModalVisible(!advisorModalVisible);
+    }
+  }
 
   function getItemsSelectUsers(dataList) {
     if (!dataList || dataList.length === 0) {
@@ -46,6 +68,10 @@ export default function FormDefault({
 
   useEffect(() => {
     getUsersForm(patron);
+    // console.log(
+    //   `advisorClicked: ${itemAdvisorClicked.cpf},
+    //   ${itemAdvisorClicked.name}, ${itemAdvisorClicked.responsibility} `
+    // );
   }, []);
 
   function checkCpf(text) {
@@ -106,19 +132,13 @@ export default function FormDefault({
           const errorC = checkCpf(cpf);
           const errorR = checkResponsability(responsibility);
 
-          // console.log(`cpf: ${cpf}, responsability: ${responsibility}`);
-          // console.log(`cpf: ${errorC}, responsability: ${errorR}`);
           if (!errorC && !errorR) {
             if (!itemAdvisorClicked) {
-              // console.log("create");
-              // createCommunity({ patron, location, email, image: "" });
+              console.log("UPGRADE");
+              upgradeUserForm(cpf, responsibility);
             } else {
-              // console.log("update");
-              // updateCommunityForm(community.patron, {
-              //   patron,
-              //   location,
-              //   email,
-              // });
+              console.log("EDITION");
+              updateAdvisorForm(cpf, responsibility);
             }
           }
         }}

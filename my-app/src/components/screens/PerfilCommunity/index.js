@@ -4,7 +4,6 @@ import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ButtonBack from "../../auxiliary/ButtonBack";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
-import ItemAdvisor from "./ItemAdvisor";
 import ItemHighlight from "./ItemHighlight";
 import ModalCommunity from "../Comunidades/ModalCommunity";
 import ModalAdvisor from "./ModalAdvisor";
@@ -105,15 +104,27 @@ export default function PerfilCommunity({ navigation, route }) {
             </View>
             <View style={[styles.boxInformations]}>
               <Text style={styles.titleBoxAdvidors}>MEMBROS DO CONSELHO</Text>
-              <ModalAdvisor
-                patron={patron}
-                advisorModalVisible={advisorModalVisible}
-                setAdvisorModalVisible={setAdvisorModalVisible}
-                itemAdvisorClicked={itemAdvisorClicked}
-                setItemAdvisorClicked={setItemAdvisorClicked}
-                formModalAdvisorDefaultVisible={formModalAdvisorDefaultVisible}
-              />
-              <ItemAdvisorContent />
+              {advisorModalVisible ? (
+                <ModalAdvisor
+                  patron={patron}
+                  advisorModalVisible={advisorModalVisible}
+                  setAdvisorModalVisible={setAdvisorModalVisible}
+                  itemAdvisorClicked={itemAdvisorClicked}
+                  setItemAdvisorClicked={setItemAdvisorClicked}
+                  formModalAdvisorDefaultVisible={
+                    formModalAdvisorDefaultVisible
+                  }
+                />
+              ) : (
+                <ItemAdvisorContent
+                  advisorModalVisible={advisorModalVisible}
+                  setAdvisorModalVisible={setAdvisorModalVisible}
+                  setItemAdvisorClicked={setItemAdvisorClicked}
+                  setFormModalAdvisorDefaultVisible={
+                    setFormModalAdvisorDefaultVisible
+                  }
+                />
+              )}
 
               <TouchableOpacity
                 style={styles.boxAddMembro}

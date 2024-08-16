@@ -1,32 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import stylesModal from "../style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { deleteWarning } from "../../../../../services/warning_api";
+import { downgradeUser } from "../../../../../services/user_api";
 
 export default function FormConfirmation({
-  itemClicked,
-  setItemClicked,
-  setModalVisible,
-  modalVisible,
+  itemAdvisorClicked,
+  setItemAdvisorClicked,
+  setAdvisorModalVisible,
+  advisorModalVisible,
 }) {
-  async function deleteWarningForm(id) {
+  async function deleteAdvisorForm(cpf) {
     const token = await AsyncStorage.getItem("AccessToken");
-    const response = await deleteWarning(id, token);
+    const response = await downgradeUser(cpf, token);
+
     if (response.status === 204) {
-      setModalVisible(!modalVisible);
+      setAdvisorModalVisible(!advisorModalVisible);
     }
   }
 
+  useEffect(() => {
+    // console.log`advisorClicked: ${itemAdvisorClicked.cpf},
+    //   ${itemAdvisorClicked.name}, ${itemAdvisorClicked.responsibility} `();
+  }, []);
+
   return (
     <View>
-      <Text style={styles.titleConfirmation}>Deseja excluir este aviso?</Text>
+      <Text style={styles.titleConfirmation}>
+        Deseja excluir este Conselheiro?
+      </Text>
       <View>
         <TouchableOpacity
           activeOpacity={0.7}
           style={stylesModal.boxButton}
-          onPress={() => deleteWarningForm(itemClicked.id)}
+          onPress={() => {
+            // deleteAdvisorForm(itemAdvisorClicked.cpf);
+          }}
         >
           <Text style={stylesModal.textButton}>Sim</Text>
         </TouchableOpacity>
@@ -34,8 +44,8 @@ export default function FormConfirmation({
           activeOpacity={0.7}
           style={stylesModal.boxButton}
           onPress={() => {
-            setModalVisible(!modalVisible);
-            setItemClicked({});
+            setAdvisorModalVisible(!advisorModalVisible);
+            setItemAdvisorClicked({});
           }}
         >
           <Text style={stylesModal.textButton}>Não</Text>
