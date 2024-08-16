@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   buttonCancel: {
     backgroundColor: "#f094c0",
-    marginTop: 10,
+    marginTop: 5,
   },
   textButton: {
     fontSize: 20,
@@ -43,15 +43,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "red",
     paddingTop: 5,
-    paddingBottom: 10,
+    paddingBottom: 5,
     paddingLeft: 25,
     fontWeight: "bold",
   },
-  forgotPassword: {
-    paddingTop: 5,
-    paddingLeft: 25,
-    fontStyle: "italic",
-    color: "#8F8F8F",
+  errorMessagePassword: {
+    paddingBottom: 10,
   },
 });
 

@@ -22,6 +22,7 @@ import {
   formatDateUSA,
   formatCpf,
   desformatCpf,
+  checkPassword,
 } from "./functions";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
 import { signupUser, updateUser } from "../../../../services/user_api";
@@ -32,6 +33,7 @@ import InputGroupEmail from "../../../auxiliary/InputGroup/InputGroupEmail";
 import InputGroupDN from "../../../auxiliary/InputGroup/InputGroupDN";
 import InputGroupSelect from "../../../auxiliary/InputGroup/InputGroupSelect";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
 
 export default function FormCadastroUser({ user, setModalVisible }) {
   const [name, setName] = useState(user ? user.name : "");
@@ -41,7 +43,10 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     user ? formatDateBR(user.birthday) : ""
   );
   const [community, setCommunity] = useState(user ? user.community : "");
-  const [password, setPassword] = useState("sEnha123456##");
+  const [password, setPassword] = useState(user ? "" : "sEnha123456##");
+  const [passwordConfirmation, setPasswordConfirmation] = useState(
+    user ? "" : "sEnha123456##"
+  );
   const [showErrors, setShowErrors] = useState(false);
   const { setDatasUser, setRegistryEntry } = useContext(AuthContext);
   const navigation = useNavigation();
@@ -115,7 +120,8 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       !checkCpf(cpf) &&
       !checkEmail(email) &&
       !checkDataNasc(dataNasc) &&
-      !checkText(community)
+      !checkText(community) &&
+      !checkPassword(password, passwordConfirmation)
     ) {
       if (!user) {
         addUser({
@@ -214,10 +220,43 @@ export default function FormCadastroUser({ user, setModalVisible }) {
               : ""}
           </Text>
 
+          {user ? (
+            <View>
+              <InputGroupPassword
+                iconName="key"
+                placeholder="Sua senha"
+                value={password}
+                onChangeText={(text) => {
+                  setPassword(text);
+                }}
+                style={{ marginBottom: 10 }}
+              />
+              <InputGroupPassword
+                iconName="key"
+                placeholder="Confirme sua senha"
+                value={passwordConfirmation}
+                onChangeText={(text) => {
+                  setPasswordConfirmation(text);
+                }}
+              />
+
+              <Text style={[styles.errorMessage, styles.errorMessagePassword]}>
+                {checkPassword(password, passwordConfirmation) && showErrors
+                  ? "Senha Inválida! (Mínimo de 4 dígitos)"
+                  : ""}
+              </Text>
+            </View>
+          ) : (
+            ""
+          )}
+
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
               sendDatas();
+              // console.log(
+              // `password: ${password}, passwordConfirmation: ${passwordConfirmation}`
+              // );
             }}
           >
             <Text style={styles.textButton}>

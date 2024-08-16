@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   boxFormCadastro: {
     width: "85%",
     borderRadius: 35,
-    paddingVertical: 20,
+    paddingVertical: 30,
     alignSelf: "center",
     backgroundColor: "#ffffff",
   },

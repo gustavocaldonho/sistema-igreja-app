@@ -14,6 +14,14 @@ export function checkDataNasc(dataNasc) {
   return dataNasc.length !== 10 ? true : false;
 }
 
+export function checkPassword(textPassword, textPasswordConfirmation) {
+  if (textPassword === textPasswordConfirmation && textPassword.length >= 4) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 export function formatDateBR(data) {
   const [year, month, day] = data.split("-");
   return `${day}/${month}/${year}`;
