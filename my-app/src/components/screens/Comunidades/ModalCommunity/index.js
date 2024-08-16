@@ -1,5 +1,12 @@
 import React from "react";
-import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  Modal,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StatusBar,
+} from "react-native";
 import { BlurView } from "expo-blur";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
