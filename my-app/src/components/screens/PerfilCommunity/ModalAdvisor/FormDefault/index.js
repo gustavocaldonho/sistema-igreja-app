@@ -42,7 +42,12 @@ export default function FormDefault({
     }
   }
 
-  function getItemsSelectUsers(dataList) {
+  function getItemsSelectUsers(dataList, itemAdvisorClicked) {
+    if (itemAdvisorClicked.cpf !== undefined) {
+      return [
+        { label: itemAdvisorClicked.name, value: itemAdvisorClicked.cpf },
+      ];
+    }
     if (!dataList || dataList.length === 0) {
       return [{ label: "Escolha um usuário", value: "" }];
     }
@@ -54,6 +59,7 @@ export default function FormDefault({
   async function getUsersForm(patron) {
     const token = await AsyncStorage.getItem("AccessToken");
     const response = await getUsersCommunity(patron, token);
+    // filtrar os users q já são council member
     if (response.status === 200) {
       setUserList(response.data);
     }
@@ -91,7 +97,7 @@ export default function FormDefault({
       </View>
       <InputGroupSelectAdvisor
         style={errorCpf ? styles.error : null}
-        options={getItemsSelectUsers(userList)}
+        options={getItemsSelectUsers(userList, itemAdvisorClicked)}
         selectedValue={cpf}
         onValueChange={(text) => {
           setCpf(text);
