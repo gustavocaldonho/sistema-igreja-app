@@ -117,6 +117,7 @@ export default function PerfilCommunity({ navigation, route }) {
                 />
               ) : (
                 <ItemAdvisorContent
+                  patron={patron}
                   advisorModalVisible={advisorModalVisible}
                   setAdvisorModalVisible={setAdvisorModalVisible}
                   setItemAdvisorClicked={setItemAdvisorClicked}

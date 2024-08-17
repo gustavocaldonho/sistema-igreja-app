@@ -8,6 +8,7 @@ import {
   Keyboard,
   ScrollView,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from "react-native";
 import styles from "./style";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -93,6 +94,7 @@ export default function FormLogin() {
         >
           <Text style={styles.textButton}>Criar Conta</Text>
         </TouchableOpacity>
+        {/* <ActivityIndicator size={"large"} color={"#000"} animating={true} /> */}
       </Pressable>
     </View>
   );

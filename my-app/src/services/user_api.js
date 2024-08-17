@@ -138,52 +138,27 @@ export const disableUser = (data) => {
     });
 };
 
+export const getCouncils = async (community, token) => {
+  try {
+    const response = await api.get(`/community/${community}/councils`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const upgradeUser = async (data, token) => {
   try {
     const response = await api.patch(
-      "/user/upgrade/position",
+      "/user/upgrade/position_and_responsability",
       {
         cpf: data.cpf,
-        responsibility: data.responsibility,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
-    return response;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const downgradeUser = async (cpf, token) => {
-  try {
-    const response = await api.patch(
-      "/users/downgrade/position",
-      {
-        cpf: cpf,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
-    return response;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const updateAdvisor = async (data, token) => {
-  try {
-    const response = await api.put(
-      `/user/update/advisor/${data.cpf}`,
-      {
+        position: data.position,
         responsibility: data.responsibility,
       },
       {

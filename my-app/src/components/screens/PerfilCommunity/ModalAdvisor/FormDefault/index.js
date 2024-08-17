@@ -31,20 +31,13 @@ export default function FormDefault({
   const [userList, setUserList] = useState([]);
   const navigation = useNavigation();
 
-  async function upgradeUserForm(cpf, responsibility) {
+  async function upgradeUserForm(cpf, responsibility, position) {
     const token = await AsyncStorage.getItem("AccessToken");
-    const response = await upgradeUser({ cpf, responsibility }, token);
-
-    if (response.status === 200) {
-      setAdvisorModalVisible(!advisorModalVisible);
-    }
-  }
-
-  async function updateAdvisorForm(cpf, responsibility) {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await updateAdvisor({ cpf, responsibility }, token);
-
-    if (response.status === 200) {
+    const response = await upgradeUser(
+      { cpf, position, responsibility },
+      token
+    );
+    if (response.status === 204) {
       setAdvisorModalVisible(!advisorModalVisible);
     }
   }
@@ -68,10 +61,6 @@ export default function FormDefault({
 
   useEffect(() => {
     getUsersForm(patron);
-    // console.log(
-    //   `advisorClicked: ${itemAdvisorClicked.cpf},
-    //   ${itemAdvisorClicked.name}, ${itemAdvisorClicked.responsibility} `
-    // );
   }, []);
 
   function checkCpf(text) {
@@ -133,12 +122,10 @@ export default function FormDefault({
           const errorR = checkResponsability(responsibility);
 
           if (!errorC && !errorR) {
-            if (!itemAdvisorClicked) {
-              console.log("UPGRADE");
-              upgradeUserForm(cpf, responsibility);
+            if (itemAdvisorClicked.length === undefined) {
+              upgradeUserForm(cpf, responsibility, "council member");
             } else {
-              console.log("EDITION");
-              updateAdvisorForm(cpf, responsibility);
+              upgradeUserForm(cpf, responsibility, "council member");
             }
           }
         }}

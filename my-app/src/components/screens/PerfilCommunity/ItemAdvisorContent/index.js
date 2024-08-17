@@ -1,38 +1,29 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import ItemAdvisor from "../ItemAdvisor";
+import { getCouncils } from "../../../../services/user_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AuthContext } from "../../../../contexts/auth";
 
 export default function ItemAdvisorContent({
+  patron,
   advisorModalVisible,
   setAdvisorModalVisible,
   setItemAdvisorClicked,
   setFormModalAdvisorDefaultVisible,
 }) {
-  const { user } = useContext(AuthContext);
-  const [advisorList, setAdvisorList] = useState([
-    { cpf: "10", name: "Elizabeth Suann", responsibility: "Diretor Geral" },
-    {
-      cpf: "12",
-      name: "Marcos Antônio da Silva",
-      responsibility: "Tesoureiro",
-    },
-    { cpf: "13", name: "Estevão Soares de Souza", responsibility: "Catecismo" },
-    { cpf: "14", name: "Milena Gomes Araújo", responsibility: "Cemitério" },
-  ]);
+  const [advisorList, setAdvisorList] = useState([]);
 
-  //   async function getUsersForm() {
-  //     const token = await AsyncStorage.getItem("AccessToken");
-  //     const response = await getUsersCommunity(user.community, token);
-  //     if (response.status === 200) {
-  //       setUserList(response.data);
-  //     }
-  //   }
+  async function getCouncilsForm(patron) {
+    const token = await AsyncStorage.getItem("AccessToken");
+    const response = await getCouncils(patron, token);
+    if (response.status === 200) {
+      setAdvisorList(response.data);
+    }
+  }
 
-  //   useEffect(() => {
-  //     getUsersForm();
-  //   }, []);
+  useEffect(() => {
+    getCouncilsForm(patron);
+  }, []);
 
   return (
     <View>
@@ -40,7 +31,7 @@ export default function ItemAdvisorContent({
         <ItemAdvisor
           cpf={a.cpf}
           name={a.name}
-          responsibility={a.responsibility}
+          responsibility={a.responsability}
           setItemAdvisorClicked={setItemAdvisorClicked}
           advisorModalVisible={advisorModalVisible}
           setAdvisorModalVisible={setAdvisorModalVisible}
