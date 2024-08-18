@@ -8,17 +8,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#f6f6f6",
+    borderRadius: 50,
   },
   input: {
     width: "85%",
     height: "100%",
     fontSize: 20,
-    backgroundColor: "#f6f6f6",
     paddingLeft: 20,
     marginRight: "auto",
     marginLeft: "auto",
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
+  },
+  inputPassword: {
+    width: "70%",
   },
   inputPicker: {
     paddingLeft: 5,
@@ -32,13 +34,13 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f6f6f6",
-    borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50,
     paddingLeft: 20,
   },
   icon: {
     color: "#adadad",
+  },
+  boxIconRight: {
+    paddingLeft: 0,
   },
 });
 
