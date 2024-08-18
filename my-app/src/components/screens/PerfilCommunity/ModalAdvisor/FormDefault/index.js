@@ -1,15 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import InputGroupSelectAdvisor from "../../../../auxiliary/InputGroup/InputGroupSelectAdvisor";
 import styles from "./style";
 import stylesModal from "../style";
-import { AuthContext } from "../../../../../contexts/auth";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   getUsersCommunity,
-  updateAdvisor,
   upgradeUser,
 } from "../../../../../services/user_api";
 
@@ -59,10 +57,18 @@ export default function FormDefault({
   async function getUsersForm(patron) {
     const token = await AsyncStorage.getItem("AccessToken");
     const response = await getUsersCommunity(patron, token);
-    // filtrar os users q já são council member
     if (response.status === 200) {
-      setUserList(response.data);
+      const newList = filterList(response.data);
+      setUserList(newList);
     }
+  }
+
+  function filterList(list) {
+    let newList = [];
+    list.map((l) => {
+      l.position === "user" ? newList.push(l) : "";
+    });
+    return newList;
   }
 
   useEffect(() => {
@@ -137,7 +143,7 @@ export default function FormDefault({
         }}
       >
         <Text style={stylesModal.textButton}>
-          {itemAdvisorClicked.id ? "Atualizar" : "Adicionar"}
+          {itemAdvisorClicked.cpf ? "Atualizar" : "Adicionar"}
         </Text>
       </TouchableOpacity>
     </View>

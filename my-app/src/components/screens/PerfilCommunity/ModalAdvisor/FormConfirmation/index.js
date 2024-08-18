@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import stylesModal from "../style";
@@ -25,7 +25,7 @@ export default function FormConfirmation({
   return (
     <View>
       <Text style={styles.titleConfirmation}>
-        Deseja excluir este Conselheiro?
+        Deseja excluir este(a) Conselheiro(a)?
       </Text>
       <View>
         <TouchableOpacity
