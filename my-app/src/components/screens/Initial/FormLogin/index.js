@@ -35,6 +35,7 @@ export default function FormLogin() {
     } catch (error) {
       setShowError(true);
       console.log("error (login): ", error);
+      console.log("data (login): ", data);
     }
   }
 
@@ -75,10 +76,11 @@ export default function FormLogin() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            // login({ cpf: "14734570760", password: "sEnha123456##" });
-            // login({ cpf: "76903821007", password: "sEnha123456##" });
-            // login({ cpf: "91314128078", password: "sEnha123456##" });
-            login({ cpf: "32300950065", password: "sEnha123456##" });
+            login({ cpf: "14734570760", password: "sEnha123456##" });
+            // login({ cpf: "99991581022", password: "sEnha123456&&" });
+            // login({ cpf: "76903821007", password: "sEnha123456@@" });
+            // login({ cpf: "91314128078", password: "sEnha123456**" });
+            // login({ cpf: "32300950065", password: "sEnha123456**" });
             // login({ cpf: desformatCpf(cpf), password });
           }}
         >

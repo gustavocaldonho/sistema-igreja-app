@@ -16,7 +16,7 @@ function AuthProvider({ children }) {
     { id: 2, title: "Título 2", message: "Mensagem", visibleToParish: false },
   ]);
 
-  async function setDatasUser(token) {
+  async function setDatasUser(token, password) {
     try {
       const response = await getMe(token);
       setUser({
@@ -26,6 +26,7 @@ function AuthProvider({ children }) {
         birthday: response.data.birthday,
         community: response.data.community,
         position: response.data.position,
+        password: password,
       });
       console.log("setDatasUser (auth):", response.data);
     } catch (error) {
@@ -38,7 +39,7 @@ function AuthProvider({ children }) {
       const response = await signinUser(data);
       const token = response.data.access_token;
       if (token !== undefined) {
-        setDatasUser(token);
+        setDatasUser(token, data.password);
         await AsyncStorage.setItem(
           "AccessToken",
           String(response.data.access_token)

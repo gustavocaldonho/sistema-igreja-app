@@ -33,6 +33,7 @@ export default function Menu({ navigation }) {
                 birthday: user.birthday,
                 email: user.email,
                 community: user.community,
+                password: user.password,
               })
             }
           />

@@ -23,6 +23,7 @@ import {
   formatCpf,
   desformatCpf,
   checkPassword,
+  generatePasswordDefault,
 } from "./functions";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
 import { signupUser, updateUser } from "../../../../services/user_api";
@@ -43,9 +44,11 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     user ? formatDateBR(user.birthday) : ""
   );
   const [community, setCommunity] = useState(user ? user.community : "");
-  const [password, setPassword] = useState(user ? "" : "sEnha123456##");
+  const [password, setPassword] = useState(
+    user ? user.password : "sEnha123456##"
+  );
   const [passwordConfirmation, setPasswordConfirmation] = useState(
-    user ? "" : "sEnha123456##"
+    user ? user.password : "sEnha123456##"
   );
   const [showErrors, setShowErrors] = useState(false);
   const { setDatasUser, setRegistryEntry } = useContext(AuthContext);
@@ -88,6 +91,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   }
 
   async function updateDatasUser(newDatas) {
+    console.log("newDatas: ", newDatas);
     try {
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await updateUser(newDatas, token);
@@ -96,7 +100,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           "AccessToken",
           String(response.data.access_token)
         );
-        await setDatasUser(response.data.access_token);
+        await setDatasUser(response.data.access_token, newDatas.password);
         setModalVisible(false);
         navigation.goBack();
       }
@@ -130,7 +134,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           email,
           birthday: formatDateUSA(dataNasc),
           community,
-          password,
+          password: generatePasswordDefault(name, dataNasc),
         });
       } else {
         updateDatasUser({
@@ -225,7 +229,8 @@ export default function FormCadastroUser({ user, setModalVisible }) {
               <InputGroupPassword
                 iconName="key"
                 placeholder="Sua senha"
-                value={password}
+                defaultValue={password}
+                // value={password}
                 onChangeText={(text) => {
                   setPassword(text);
                 }}
@@ -234,7 +239,8 @@ export default function FormCadastroUser({ user, setModalVisible }) {
               <InputGroupPassword
                 iconName="key"
                 placeholder="Confirme sua senha"
-                value={passwordConfirmation}
+                defaultValue={passwordConfirmation}
+                // value={passwordConfirmation}
                 onChangeText={(text) => {
                   setPasswordConfirmation(text);
                 }}
