@@ -8,11 +8,13 @@ import {
   createWarning,
   updateWarning,
 } from "../../../../../services/warning_api";
+import ToastMessage from "../../../../auxiliary/ToastMessage";
 
 export default function FormDefault({
   itemClicked,
   setModalVisible,
   modalVisible,
+  setErrorToast,
 }) {
   const [errorTitle, setErrorTitle] = useState(false);
   const [errorDescription, setErrorDescription] = useState(false);
@@ -27,19 +29,31 @@ export default function FormDefault({
   );
 
   async function createWarningForm(item) {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await createWarning(item, token);
-    if (response.status === 201) {
-      setModalVisible(!modalVisible);
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await createWarning(item, token);
+      if (response.status === 201) {
+        setModalVisible(!modalVisible);
+      } else {
+        // exibir toast de erro
+      }
+    } catch (error) {
+      // exibir toast de erro
     }
   }
 
   async function updateWarningForm(item) {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await updateWarning(item, token);
-    if (response.status === 204) {
-      setModalVisible(!modalVisible);
-      itemClicked = undefined;
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await updateWarning(item, token);
+      if (response.status === 204) {
+        setModalVisible(!modalVisible);
+        itemClicked = undefined;
+      } else {
+        // exibir toast de erro
+      }
+    } catch (error) {
+      // exibir toast de erro
     }
   }
 

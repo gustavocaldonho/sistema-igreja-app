@@ -7,6 +7,7 @@ import FormDefault from "./FormDefault";
 import FormConfirmation from "./FormConfirmation";
 
 export default function ModalWarning({
+  setErrorToast,
   modalVisible,
   setModalVisible,
   itemClicked,
@@ -38,12 +39,14 @@ export default function ModalWarning({
 
           {formModalDefaultVisible ? (
             <FormDefault
+              setErrorToast={setErrorToast}
               itemClicked={itemClicked}
               setModalVisible={setModalVisible}
               modalVisible={modalVisible}
             />
           ) : (
             <FormConfirmation
+              setErrorToast={setErrorToast}
               itemClicked={itemClicked}
               setItemClicked={setItemClicked}
               setModalVisible={setModalVisible}

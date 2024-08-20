@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ItemAvisoContent from "./ItemAvisoContent";
 import ModalWarnings from "./ModalWarnings";
 import PageBase from "../PageBase";
+import ToastMessage from "../../auxiliary/ToastMessage";
 
 export default function Avisos({ navigation }) {
   const [itemClicked, setItemClicked] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const [formModalDefaultVisible, setFormModalDefaultVisible] = useState(true);
+  const [errorToast, setErrorToast] = useState(false);
 
   function onPressButtonAdd() {
     setModalVisible(!modalVisible);
@@ -22,6 +24,7 @@ export default function Avisos({ navigation }) {
     >
       {modalVisible ? (
         <ModalWarnings
+          setErrorToast={setErrorToast}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           itemClicked={itemClicked}
@@ -30,11 +33,22 @@ export default function Avisos({ navigation }) {
         />
       ) : (
         <ItemAvisoContent
+          setErrorToast={setErrorToast}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           setItemClicked={setItemClicked}
           setFormModalDefaultVisible={setFormModalDefaultVisible}
         />
+      )}
+
+      {errorToast ? (
+        <ToastMessage
+          type="error"
+          text1="Erro"
+          text2="Tente novamente mais tarde."
+        />
+      ) : (
+        ""
       )}
     </PageBase>
   );
