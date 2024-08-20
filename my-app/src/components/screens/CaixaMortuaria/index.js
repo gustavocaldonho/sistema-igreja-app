@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import PageBase from "../PageBase";
+import { AuthContext } from "../../../contexts/auth";
 
 export default function CaixaMortuaria({ navigation }) {
   const [valorCaixaMortuaria, setValorCaixaMortuaria] = useState("");
   const [codPix, setCodePix] = useState(null);
+  const { user } = useContext(AuthContext);
 
   return (
-    <PageBase title={"Caixa Mortuária"} signButtonAdd={true}>
+    <PageBase
+      title={"Caixa Mortuária"}
+      signButtonAdd={user.position !== "user" ? true : false}
+    >
       <View style={styles.boxItem}>
         <View style={styles.boxTop}>
           <View style={styles.boxStatus}>

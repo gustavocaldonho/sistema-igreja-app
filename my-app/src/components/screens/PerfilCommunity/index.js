@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -11,11 +11,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDatasCommunity } from "../../../services/community_api";
 import ItemAdvisorContent from "./ItemAdvisorContent";
 import styles from "./style";
+import { AuthContext } from "../../../contexts/auth";
 
 export default function PerfilCommunity({ navigation, route }) {
   const { patron, location } = route.params;
   const [datas, setDatas] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const { user } = useContext(AuthContext);
 
   const [itemAdvisorClicked, setItemAdvisorClicked] = useState({});
   const [advisorModalVisible, setAdvisorModalVisible] = useState(false);
@@ -67,15 +69,21 @@ export default function PerfilCommunity({ navigation, route }) {
           </View>
           <View style={styles.boxNamePatron}>
             <Text style={styles.textNamePatron}>{patron}</Text>
-            <Text style={styles.textLocation}>{location}</Text>
-            <TouchableOpacity
-              style={styles.buttonChangeDatas}
-              onPress={() => {
-                setModalVisible(true);
-              }}
-            >
-              <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
-            </TouchableOpacity>
+            <Text style={styles.textLocation}>
+              {location ? location : datas.location}
+            </Text>
+            {user.position !== "user" ? (
+              <TouchableOpacity
+                style={styles.buttonChangeDatas}
+                onPress={() => {
+                  setModalVisible(true);
+                }}
+              >
+                <Text style={styles.textChangeDatas}>ALTERAR DADOS</Text>
+              </TouchableOpacity>
+            ) : (
+              ""
+            )}
           </View>
           <ScrollView>
             <View
@@ -126,16 +134,19 @@ export default function PerfilCommunity({ navigation, route }) {
                   }
                 />
               )}
-
-              <TouchableOpacity
-                style={styles.boxAddMembro}
-                onPress={() => {
-                  onPressButtonAddAdvisor();
-                }}
-              >
-                <Icon name="plus" style={styles.iconPlusMembro} />
-                <Text style={styles.textAddMembro}>ADICIONAR MEMBRO</Text>
-              </TouchableOpacity>
+              {user.position !== "user" ? (
+                <TouchableOpacity
+                  style={styles.boxAddMembro}
+                  onPress={() => {
+                    onPressButtonAddAdvisor();
+                  }}
+                >
+                  <Icon name="plus" style={styles.iconPlusMembro} />
+                  <Text style={styles.textAddMembro}>ADICIONAR MEMBRO</Text>
+                </TouchableOpacity>
+              ) : (
+                ""
+              )}
             </View>
           </ScrollView>
         </View>

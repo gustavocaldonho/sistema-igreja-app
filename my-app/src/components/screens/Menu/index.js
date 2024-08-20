@@ -47,26 +47,32 @@ export default function Menu({ navigation }) {
             icon={"cross"}
             onPress={() => navigation.navigate("CaixaMortuario")}
           />
-          <ItemMenu
-            screenName={"Usuários"}
-            icon={"users"}
-            onPress={() => navigation.navigate("Users", {})}
-          />
-          <ItemMenu
-            screenName={"Comunidades"}
-            icon={"church"}
-            onPress={() => navigation.navigate("Comunidades")}
-          />
-          {/* <ItemMenu
-            screenName={"Comunidade"}
-            icon={"church"}
-            onPress={() =>
-              navigation.navigate("PerfilCommunity", {
-                patron: "São Geraldo Magela",
-                location: "Sapucaia",
-              })
-            }
-          /> */}
+          {user.position === "council member" ? (
+            <ItemMenu
+              screenName={"Usuários"}
+              icon={"users"}
+              onPress={() => navigation.navigate("Users", {})}
+            />
+          ) : (
+            ""
+          )}
+          {user.position === "parish leader" ? (
+            <ItemMenu
+              screenName={"Comunidades"}
+              icon={"church"}
+              onPress={() => navigation.navigate("Comunidades")}
+            />
+          ) : (
+            <ItemMenu
+              screenName={"Comunidade"}
+              icon={"church"}
+              onPress={() =>
+                navigation.navigate("PerfilCommunity", {
+                  patron: user.community,
+                })
+              }
+            />
+          )}
         </View>
         <TouchableOpacity
           activeOpacity={0.7}
