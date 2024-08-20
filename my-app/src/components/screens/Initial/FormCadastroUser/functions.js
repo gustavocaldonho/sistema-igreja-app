@@ -23,12 +23,12 @@ export function checkPassword(textPassword, textPasswordConfirmation) {
 }
 
 export function generatePasswordDefault(name, birthday) {
-  let password = "";
-  password += name.substring(0, 2);
-  password += birthday.substring(0, 2);
-  password += birthday.substring(3, 5);
-  password += "##";
-  return password;
+  return (
+    name.substring(0, 2) +
+    birthday.substring(0, 2) +
+    birthday.substring(3, 5) +
+    "##"
+  );
 }
 
 export function formatDateBR(data) {
