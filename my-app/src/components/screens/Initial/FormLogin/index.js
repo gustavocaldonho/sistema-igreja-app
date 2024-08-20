@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator,
 } from "react-native";
+import Toast from "react-native-toast-message";
 import styles from "./style";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
@@ -76,7 +77,12 @@ export default function FormLogin() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            login({ cpf: "14734570760", password: "sEnha123456##" });
+            Toast.show({
+              type: "success",
+              text1: "Opa!",
+              text2: "Essas são as letrinhas miúdas...",
+            });
+            // login({ cpf: "14734570760", password: "sEnha123456##" });
             // login({ cpf: "99991581022", password: "sEnha123456&&" });
             // login({ cpf: "76903821007", password: "sEnha123456@@" });
             // login({ cpf: "91314128078", password: "sEnha123456**" });
