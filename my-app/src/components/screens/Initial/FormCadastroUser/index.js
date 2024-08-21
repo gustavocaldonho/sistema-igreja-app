@@ -9,6 +9,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import styles from "./style";
 import { AuthContext } from "../../../../contexts/auth";
@@ -25,9 +26,15 @@ import {
   checkPassword,
   generatePasswordDefault,
 } from "./functions";
-// import Spinner from "react-native-loading-spinner-overlay";
+import Spinner from "react-native-loading-spinner-overlay";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
 import { signupUser, updateUser } from "../../../../services/user_api";
+import {
+  msgCadastrySuccess,
+  msgCadastryError,
+  msgUpdateError,
+  msgUpdateSuccess,
+} from "./alerts";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -53,7 +60,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const { setDatasUser, setRegistryEntry } = useContext(AuthContext);
   const navigation = useNavigation();
   const [patronList, setPatronList] = useState([]);
-  // const [visibleSpinner, setVisibleSpinner] = useState(false);
+  const [visibleSpinner, setVisibleSpinner] = useState(false);
 
   async function getPatrons() {
     try {
@@ -79,23 +86,29 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   }, []);
 
   async function addUser(item) {
-    // setVisibleSpinner(true);
-    // console.log(item);
     try {
+      setVisibleSpinner(true);
       const response = await signupUser(item);
-      setRegistryEntry(false);
-      resetInputs();
-      console.log("(add): ", response);
+      if (response.status === 201) {
+        setVisibleSpinner(false);
+        msgCadastrySuccess(
+          setRegistryEntry,
+          cpf,
+          generatePasswordDefault(name, dataNasc)
+        );
+        resetInputs();
+      }
       console.log("(add): ", item);
     } catch (error) {
+      msgError();
       console.log(error);
     }
-    // setVisibleSpinner(false);
   }
 
   async function updateDatasUser(newDatas) {
     console.log("newDatas: ", newDatas);
     try {
+      setVisibleSpinner(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await updateUser(newDatas, token);
       if (response.status === 200) {
@@ -104,12 +117,12 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           String(response.data.access_token)
         );
         await setDatasUser(response.data.access_token, newDatas.password);
-        setModalVisible(false);
-        navigation.goBack();
+        setVisibleSpinner(false);
+        msgUpdateSuccess(setModalVisible, navigation);
       }
     } catch (error) {
       console.log(error);
-      setModalVisible(false);
+      msgUpdateError();
     }
   }
 
@@ -161,7 +174,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       behavior={Platform.OS == "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 250}
     >
-      {/* <Spinner visible={visibleSpinner} /> */}
+      <Spinner visible={visibleSpinner} />
       <ScrollView style={styles.boxScrollView}>
         <Pressable style={styles.form} onPress={Keyboard.dismiss}>
           <InputGroupName

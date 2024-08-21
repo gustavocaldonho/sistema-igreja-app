@@ -25,7 +25,8 @@ function AuthProvider({ children }) {
         email: response.data.email,
         birthday: response.data.birthday,
         community: response.data.community,
-        position: response.data.position,
+        // position: response.data.position,
+        position: "council member",
         password: password,
       });
       console.log("setDatasUser (auth):", response.data);
@@ -38,7 +39,6 @@ function AuthProvider({ children }) {
     try {
       const response = await signinUser(data);
       const token = response.data.access_token;
-      console.log(token);
       if (token !== undefined) {
         setDatasUser(token, data.password);
         await AsyncStorage.setItem(
