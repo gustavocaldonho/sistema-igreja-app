@@ -52,9 +52,9 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     user ? formatDateBR(user.birthday) : ""
   );
   const [community, setCommunity] = useState(user ? user.community : "");
-  const [password, setPassword] = useState(user.password ? user.password : "");
+  const [password, setPassword] = useState(user ? user.password : "");
   const [passwordConfirmation, setPasswordConfirmation] = useState(
-    user.password ? user.password : ""
+    user ? user.password : ""
   );
   const [showErrors, setShowErrors] = useState(false);
   const { setDatasUser, setRegistryEntry } = useContext(AuthContext);
