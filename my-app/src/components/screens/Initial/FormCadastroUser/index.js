@@ -25,6 +25,7 @@ import {
   checkPassword,
   generatePasswordDefault,
 } from "./functions";
+// import Spinner from "react-native-loading-spinner-overlay";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
 import { signupUser, updateUser } from "../../../../services/user_api";
 
@@ -52,6 +53,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const { setDatasUser, setRegistryEntry } = useContext(AuthContext);
   const navigation = useNavigation();
   const [patronList, setPatronList] = useState([]);
+  // const [visibleSpinner, setVisibleSpinner] = useState(false);
 
   async function getPatrons() {
     try {
@@ -77,6 +79,8 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   }, []);
 
   async function addUser(item) {
+    // setVisibleSpinner(true);
+    // console.log(item);
     try {
       const response = await signupUser(item);
       setRegistryEntry(false);
@@ -86,6 +90,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     } catch (error) {
       console.log(error);
     }
+    // setVisibleSpinner(false);
   }
 
   async function updateDatasUser(newDatas) {
@@ -104,6 +109,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       }
     } catch (error) {
       console.log(error);
+      setModalVisible(false);
     }
   }
 
@@ -122,8 +128,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       !checkCpf(cpf) &&
       !checkEmail(email) &&
       !checkDataNasc(dataNasc) &&
-      !checkText(community) &&
-      !checkPassword(password, passwordConfirmation)
+      !checkText(community)
     ) {
       if (!user) {
         addUser({
@@ -134,7 +139,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           community,
           password: generatePasswordDefault(name, dataNasc),
         });
-      } else {
+      } else if (!checkPassword(password, passwordConfirmation)) {
         updateDatasUser({
           name,
           cpf: desformatCpf(cpf),
@@ -143,6 +148,8 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           community,
           password,
         });
+      } else {
+        setShowErrors(true);
       }
     } else {
       setShowErrors(true);
@@ -154,6 +161,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       behavior={Platform.OS == "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 250}
     >
+      {/* <Spinner visible={visibleSpinner} /> */}
       <ScrollView style={styles.boxScrollView}>
         <Pressable style={styles.form} onPress={Keyboard.dismiss}>
           <InputGroupName
@@ -246,7 +254,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
 
               <Text style={[styles.errorMessage, styles.errorMessagePassword]}>
                 {checkPassword(password, passwordConfirmation) && showErrors
-                  ? "Senha Inválida! (Mínimo de 4 dígitos)"
+                  ? "Senhas Inválidas! (Mínimo de 4 dígitos)"
                   : ""}
               </Text>
             </View>
@@ -258,9 +266,6 @@ export default function FormCadastroUser({ user, setModalVisible }) {
             style={styles.button}
             onPress={() => {
               sendDatas();
-              // console.log(
-              // `password: ${password}, passwordConfirmation: ${passwordConfirmation}`
-              // );
             }}
           >
             <Text style={styles.textButton}>

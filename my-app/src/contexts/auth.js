@@ -38,6 +38,7 @@ function AuthProvider({ children }) {
     try {
       const response = await signinUser(data);
       const token = response.data.access_token;
+      console.log(token);
       if (token !== undefined) {
         setDatasUser(token, data.password);
         await AsyncStorage.setItem(

@@ -72,7 +72,7 @@ export const updateUser = async (data, token) => {
         community_patron: data.community,
         password: data.password,
         birthday: data.birthday,
-        image: "",
+        // image: "",
       },
       {
         headers: {

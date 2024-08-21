@@ -9,7 +9,10 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   ActivityIndicator,
+  Alert,
 } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
+
 import styles from "./style";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
@@ -23,17 +26,21 @@ export default function FormLogin() {
   const [showError, setShowError] = useState(false);
   const navigation = useNavigation();
   const { signIn, setRegistryEntry } = useContext(AuthContext);
+  const [visibleSpinner, setVisibleSpinner] = useState(false);
 
   async function login(data) {
     try {
+      setVisibleSpinner(true);
       const response = await signIn(data);
       if (response.data.access_token !== undefined) {
         resetInputs();
         setShowError(false);
         navigation.navigate("Menu");
+        setVisibleSpinner(false);
       }
     } catch (error) {
       setShowError(true);
+      setVisibleSpinner(false);
       console.log("error (login): ", error);
       console.log("data (login): ", data);
     }
@@ -47,6 +54,7 @@ export default function FormLogin() {
   return (
     // usar <ScrollView></ScrollView>
     <View style={styles.formContext}>
+      <Spinner visible={visibleSpinner} />
       <Pressable style={styles.form} onPress={Keyboard.dismiss}>
         <Text style={styles.errorMessage}>
           {showError ? "Credenciais Inválidas!" : ""}
@@ -75,9 +83,10 @@ export default function FormLogin() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
+            login({ cpf: "14734570760", password: "Hu2908##" });
+            // login({ cpf: "81440509085", password: "Ra0807##" });
             // login({ cpf: "14734570760", password: "sEnha123456##" });
             // login({ cpf: "84922282025", password: "Co2908##" });
-            login({ cpf: "81440509085", password: "Ra0807##" });
             // login({ cpf: "99991581022", password: "sEnha123456&&" });
             // login({ cpf: "76903821007", password: "sEnha123456@@" });
             // login({ cpf: "91314128078", password: "sEnha123456**" });
@@ -95,7 +104,6 @@ export default function FormLogin() {
         >
           <Text style={styles.textButton}>Criar Conta</Text>
         </TouchableOpacity>
-        {/* <ActivityIndicator size={"large"} color={"#000"} animating={true} /> */}
       </Pressable>
     </View>
   );
