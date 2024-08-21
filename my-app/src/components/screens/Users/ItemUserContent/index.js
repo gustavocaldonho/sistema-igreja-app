@@ -5,15 +5,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUsersCommunity } from "../../../../services/user_api";
 import { AuthContext } from "../../../../contexts/auth";
 
-export default function ItemUserContent({ navigation }) {
+export default function ItemUserContent({ navigation, setVisibleIndicator }) {
   const { user } = useContext(AuthContext);
   const [userList, setUserList] = useState([]);
 
   async function getUsersForm() {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await getUsersCommunity(user.community, token);
-    if (response.status === 200) {
-      setUserList(response.data);
+    try {
+      setVisibleIndicator(true);
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getUsersCommunity(user.community, token);
+      if (response.status === 200) {
+        setUserList(response.data);
+        setVisibleIndicator(false);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 

@@ -56,7 +56,8 @@ export default function Menu({ navigation }) {
           ) : (
             ""
           )}
-          {user.position === "parish leader" ? (
+          {/* {user.position === "parish leader" ? ( */}
+          {user.position === "council member" ? (
             <ItemMenu
               screenName={"Comunidades"}
               icon={"church"}

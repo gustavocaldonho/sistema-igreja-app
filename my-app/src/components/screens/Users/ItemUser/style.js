@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: "#fff",
     flexDirection: "row",
-    marginBottom: 10,
+    marginTop: 10,
   },
   boxIconLeft: {
     height: "100%",

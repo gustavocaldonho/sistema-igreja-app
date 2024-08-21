@@ -5,13 +5,19 @@ import { AuthContext } from "../../../../contexts/auth";
 import { getCommunitiesWithToken } from "../../../../services/community_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function ItemCommunityContent({}) {
+export default function ItemCommunityContent({ setVisibleIndicator }) {
   const [communityList, setCommunityList] = useState([]);
 
   async function getCommunities() {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await getCommunitiesWithToken(token);
-    setCommunityList(response);
+    try {
+      setVisibleIndicator(true);
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getCommunitiesWithToken(token);
+      setCommunityList(response);
+      setVisibleIndicator(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {

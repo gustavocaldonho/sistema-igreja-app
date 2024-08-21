@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import PageBase from "../PageBase";
-import BoxSearch from "../../auxiliary/BoxSearch";
 import ItemCommunityContent from "./ItemCommunityContent";
 import ModalCommunity from "./ModalCommunity";
+import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 
 export default function Comunidades({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [visibleIndicator, setVisibleIndicator] = useState(false);
 
   function OnPressButtonAdd() {
     setModalVisible(!modalVisible);
@@ -23,8 +24,8 @@ export default function Comunidades({ navigation }) {
         setModalVisible={setModalVisible}
       />
       <View>
-        <BoxSearch />
-        <ItemCommunityContent />
+        {visibleIndicator ? <LoadingIndicator /> : ""}
+        <ItemCommunityContent setVisibleIndicator={setVisibleIndicator} />
       </View>
     </PageBase>
   );

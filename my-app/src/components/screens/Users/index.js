@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { ActivityIndicator } from "react-native";
 import PageBase from "../PageBase";
-import BoxSearch from "../../auxiliary/BoxSearch";
 import ItemUserContent from "./ItemUserContent";
+import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 
 export default function Users({ navigation }) {
+  const [visibleIndicator, setVisibleIndicator] = useState(false);
   return (
     <PageBase title={"Usuários"}>
-      <BoxSearch />
-      <ItemUserContent navigation={navigation} />
+      {visibleIndicator ? <LoadingIndicator /> : ""}
+      <ItemUserContent
+        navigation={navigation}
+        setVisibleIndicator={setVisibleIndicator}
+      />
     </PageBase>
   );
 }
