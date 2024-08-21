@@ -10,12 +10,6 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState({});
   const navigation = useNavigation();
 
-  const [warningList, setWarningList] = useState([
-    { id: 0, title: "Título 0", message: "Mensagem", visibleToParish: false },
-    { id: 1, title: "Título 1", message: "Mensagem", visibleToParish: false },
-    { id: 2, title: "Título 2", message: "Mensagem", visibleToParish: false },
-  ]);
-
   async function setDatasUser(token, password) {
     try {
       const response = await getMe(token);
@@ -63,8 +57,6 @@ function AuthProvider({ children }) {
       value={{
         registryEntry,
         setRegistryEntry,
-        warningList,
-        setWarningList,
         user,
         setUser,
         signIn,

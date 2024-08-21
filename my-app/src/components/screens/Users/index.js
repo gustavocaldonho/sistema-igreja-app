@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ActivityIndicator } from "react-native";
 import PageBase from "../PageBase";
 import ItemUserContent from "./ItemUserContent";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
