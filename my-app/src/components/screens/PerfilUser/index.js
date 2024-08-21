@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -48,7 +48,7 @@ export default function PerfilUser({ navigation, route }) {
 
           <ScrollView>
             <PersonalDataContainer
-              sentUser={{ name, cpf, birthday, email, community }}
+              sentUser={{ name, cpf, birthday, email, community, password }}
               style={[styles.boxInformationsUser, styles.boxShadow]}
               setModalVisible={setModalVisible}
             />

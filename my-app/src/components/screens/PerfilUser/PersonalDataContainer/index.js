@@ -1,15 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
-import { AuthContext } from "../../../../contexts/auth";
 import {
   formatDateBR,
   formatCpf,
 } from "../../Initial/FormCadastroUser/functions";
 
 const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
-  const { user } = useContext(AuthContext);
-
   return (
     <View style={style}>
       <View style={styles.line}>
@@ -35,7 +32,7 @@ const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
         </Text>
       </View>
       {/* Só podem ser alterados os dados de perfil da conta do usuário logado  */}
-      {user.cpf === sentUser.cpf ? (
+      {sentUser.password !== undefined ? (
         <TouchableOpacity
           style={styles.buttonChangeDatas}
           onPress={() => {

@@ -24,15 +24,16 @@ export default function ItemUser(props) {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={() =>
+      onPress={() => {
+        console.log(userItem);
         props.navigation.navigate("PerfilUser", {
           name: userItem.name,
           cpf: userItem.cpf,
           birthday: userItem.birthday,
           email: userItem.email,
           community: userItem.community,
-        })
-      }
+        });
+      }}
     >
       <View style={styles.boxItem}>
         <View style={styles.boxIconLeft}>
