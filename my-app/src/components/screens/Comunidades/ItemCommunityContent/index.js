@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import ItemCommunity from "../ItemCommunity";
-import { AuthContext } from "../../../../contexts/auth";
 import { getCommunitiesWithToken } from "../../../../services/community_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AlertMsg from "../../../auxiliary/AlertMsg";
 
 export default function ItemCommunityContent({ setVisibleIndicator }) {
   const [communityList, setCommunityList] = useState([]);
@@ -13,10 +13,14 @@ export default function ItemCommunityContent({ setVisibleIndicator }) {
       setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await getCommunitiesWithToken(token);
-      setCommunityList(response);
-      setVisibleIndicator(false);
+      if (response !== undefined) {
+        setCommunityList(response);
+        setVisibleIndicator(false);
+      } else {
+        AlertMsg("Não retornou a lista de comunidades.");
+      }
     } catch (error) {
-      console.log(error);
+      AlertMsg("Não retornou a lista de avisos.", error);
     }
   }
 

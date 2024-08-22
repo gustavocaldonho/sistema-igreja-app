@@ -4,12 +4,14 @@ import ModalWarnings from "./ModalWarnings";
 import PageBase from "../PageBase";
 import ToastMessage from "../../auxiliary/ToastMessage";
 import { AuthContext } from "../../../contexts/auth";
+import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 
 export default function Avisos({ navigation }) {
   const [itemClicked, setItemClicked] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
   const [formModalDefaultVisible, setFormModalDefaultVisible] = useState(true);
   const [errorToast, setErrorToast] = useState(false);
+  const [visibleIndicator, setVisibleIndicator] = useState(false);
   const { user } = useContext(AuthContext);
 
   function onPressButtonAdd() {
@@ -24,6 +26,7 @@ export default function Avisos({ navigation }) {
       signButtonAdd={user.position !== "user" ? true : false}
       onPressAdd={onPressButtonAdd}
     >
+      {visibleIndicator ? <LoadingIndicator /> : ""}
       {modalVisible ? (
         <ModalWarnings
           setErrorToast={setErrorToast}
@@ -40,6 +43,7 @@ export default function Avisos({ navigation }) {
           setModalVisible={setModalVisible}
           setItemClicked={setItemClicked}
           setFormModalDefaultVisible={setFormModalDefaultVisible}
+          setVisibleIndicator={setVisibleIndicator}
         />
       )}
 

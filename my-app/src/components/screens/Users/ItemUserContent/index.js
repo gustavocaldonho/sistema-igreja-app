@@ -4,6 +4,7 @@ import ItemUser from "../ItemUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUsersCommunity } from "../../../../services/user_api";
 import { AuthContext } from "../../../../contexts/auth";
+import AlertMsg from "../../../auxiliary/AlertMsg";
 
 export default function ItemUserContent({ navigation, setVisibleIndicator }) {
   const { user } = useContext(AuthContext);
@@ -17,9 +18,11 @@ export default function ItemUserContent({ navigation, setVisibleIndicator }) {
       if (response.status === 200) {
         setUserList(response.data);
         setVisibleIndicator(false);
+      } else {
+        AlertMsg("Não foi possível obter a lista de usuários.");
       }
     } catch (error) {
-      console.log(error);
+      AlertMsg("Falha na requisição.", error);
     }
   }
 

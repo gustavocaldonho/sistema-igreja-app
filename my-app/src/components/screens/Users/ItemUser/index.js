@@ -5,15 +5,22 @@ import styles from "./style";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUserByCpf } from "../../../../services/user_api";
+import AlertMsg from "../../../auxiliary/AlertMsg";
 
 export default function ItemUser(props) {
   const [userItem, setUserItem] = useState([]);
 
   async function getDatasUser() {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await getUserByCpf(props.cpf, token);
-    if (response.status === 200) {
-      setUserItem(response.data);
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getUserByCpf(props.cpf, token);
+      if (response.status === 200) {
+        setUserItem(response.data);
+      } else {
+        AlertMsg("Não foi possível obter as informações do usuário.");
+      }
+    } catch (error) {
+      AlertMsg("Falha na requisição.", error);
     }
   }
 

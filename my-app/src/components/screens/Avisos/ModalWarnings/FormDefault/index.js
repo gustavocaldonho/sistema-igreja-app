@@ -9,6 +9,7 @@ import {
   updateWarning,
 } from "../../../../../services/warning_api";
 import ToastMessage from "../../../../auxiliary/ToastMessage";
+import AlertMsg from "../../../../auxiliary/AlertMsg";
 
 export default function FormDefault({
   itemClicked,
@@ -35,10 +36,10 @@ export default function FormDefault({
       if (response.status === 201) {
         setModalVisible(!modalVisible);
       } else {
-        // exibir toast de erro
+        AlertMsg(`Não foi possível criar o aviso.`);
       }
     } catch (error) {
-      // exibir toast de erro
+      AlertMsg(`Falha na requisição. ${error}`);
     }
   }
 
@@ -50,10 +51,10 @@ export default function FormDefault({
         setModalVisible(!modalVisible);
         itemClicked = undefined;
       } else {
-        // exibir toast de erro
+        AlertMsg(`Não foi possível atualizar o aviso.`);
       }
     } catch (error) {
-      // exibir toast de erro
+      AlertMsg(`Falha na requisição. ${error}`);
     }
   }
 

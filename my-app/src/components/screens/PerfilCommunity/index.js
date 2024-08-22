@@ -12,6 +12,7 @@ import { getDatasCommunity } from "../../../services/community_api";
 import ItemAdvisorContent from "./ItemAdvisorContent";
 import styles from "./style";
 import { AuthContext } from "../../../contexts/auth";
+import AlertMsg from "../../auxiliary/AlertMsg";
 
 export default function PerfilCommunity({ navigation, route }) {
   const { patron, location } = route.params;
@@ -31,9 +32,17 @@ export default function PerfilCommunity({ navigation, route }) {
   }
 
   async function getDatasCommunityForm() {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await getDatasCommunity(patron, token);
-    setDatas(response.data);
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getDatasCommunity(patron, token);
+      if (response.status === 200) {
+        setDatas(response.data);
+      } else {
+        AlertMsg("Não foi possível obter as informações da comunidade.");
+      }
+    } catch (error) {
+      AlertMsg("Falha na requisição.", error);
+    }
   }
 
   useEffect(() => {

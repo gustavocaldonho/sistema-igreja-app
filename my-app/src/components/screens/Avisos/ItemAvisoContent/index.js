@@ -4,21 +4,32 @@ import ItemAviso from "../ItemAviso";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getTenWarnings } from "../../../../services/warning_api";
 import { AuthContext } from "../../../../contexts/auth";
+import AlertMsg from "../../../auxiliary/AlertMsg";
+import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 
 export default function ItemAvisoContent({
   modalVisible,
   setModalVisible,
   setItemClicked,
   setFormModalDefaultVisible,
+  setVisibleIndicator,
 }) {
   const [warningList, setWarningList] = useState([]);
   const { user } = useContext(AuthContext);
 
   async function getWarningListForm() {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await getTenWarnings(user.community, token);
-    if (response.status === 200) {
-      setWarningList(response.data);
+    try {
+      setVisibleIndicator(true);
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getTenWarnings(user.community, token);
+      if (response.status === 200) {
+        setWarningList(response.data);
+      } else {
+        AlertMsg("Não retornou a lista de avisos.");
+      }
+      setVisibleIndicator(false);
+    } catch (error) {
+      AlertMsg(`Falha na requisição. ${error}`);
     }
   }
 

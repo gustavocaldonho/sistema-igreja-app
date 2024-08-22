@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
 import stylesModal from "../style";
-import { AuthContext } from "../../../../../contexts/auth";
 import { useNavigation } from "@react-navigation/native";
 import { checkEmail } from "../../../Initial/FormCadastroUser/functions";
 import {
@@ -11,6 +10,7 @@ import {
   updateCommunity,
 } from "../../../../../services/community_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AlertMsg from "../../../../auxiliary/AlertMsg";
 
 export default function FormDefault({
   setModalVisible,
@@ -26,24 +26,35 @@ export default function FormDefault({
   const navigation = useNavigation();
 
   async function createCommunity(data) {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await cadastryCommunity(data, token);
-    if (response.status === 201) {
-      setModalVisible(!modalVisible);
-    } else {
-      // exibir uma msg de erro
-      // console.log(response);
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await cadastryCommunity(data, token);
+      if (response.status === 201) {
+        setModalVisible(!modalVisible);
+      } else {
+        AlertMsg(
+          "Não foi possível criar a comunidade. Tente novamente mais tarde."
+        );
+      }
+    } catch (error) {
+      AlertMsg("Falha na requisição.", error);
     }
   }
 
   async function updateCommunityForm(patronUpdate, data) {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await updateCommunity(patronUpdate, data, token);
-    if (response.status === 204) {
-      navigation.navigate("Menu");
-      setModalVisible(false);
-    } else {
-      // exibir msg de erro
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await updateCommunity(patronUpdate, data, token);
+      if (response.status === 204) {
+        navigation.navigate("Menu");
+        setModalVisible(false);
+      } else {
+        AlertMsg(
+          "Não foi possível atualizar a comunidade. Tente novamente mais tarde."
+        );
+      }
+    } catch (error) {
+      AlertMsg("Falha na requisição.", error);
     }
   }
 

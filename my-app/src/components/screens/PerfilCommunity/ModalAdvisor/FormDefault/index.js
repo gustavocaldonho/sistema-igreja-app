@@ -10,6 +10,7 @@ import {
   getUsersCommunity,
   upgradeUser,
 } from "../../../../../services/user_api";
+import AlertMsg from "../../../../auxiliary/AlertMsg";
 
 export default function FormDefault({
   patron,
@@ -30,13 +31,19 @@ export default function FormDefault({
   const navigation = useNavigation();
 
   async function upgradeUserForm(cpf, responsibility, position) {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await upgradeUser(
-      { cpf, position, responsibility },
-      token
-    );
-    if (response.status === 204) {
-      setAdvisorModalVisible(!advisorModalVisible);
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await upgradeUser(
+        { cpf, position, responsibility },
+        token
+      );
+      if (response.status === 204) {
+        setAdvisorModalVisible(!advisorModalVisible);
+      } else {
+        AlertMsg("Não foi possível atualizar as informações do usuários.");
+      }
+    } catch (error) {
+      AlertMsg("Falha na requisição.", error);
     }
   }
 
@@ -55,11 +62,17 @@ export default function FormDefault({
   }
 
   async function getUsersForm(patron) {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await getUsersCommunity(patron, token);
-    if (response.status === 200) {
-      const newList = filterList(response.data);
-      setUserList(newList);
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getUsersCommunity(patron, token);
+      if (response.status === 200) {
+        const newList = filterList(response.data);
+        setUserList(newList);
+      } else {
+        AlertMsg("Não foi possível retornar a lista de usuários.");
+      }
+    } catch (error) {
+      AlertMsg("Falha na requisição.", error);
     }
   }
 

@@ -19,8 +19,7 @@ function AuthProvider({ children }) {
         email: response.data.email,
         birthday: response.data.birthday,
         community: response.data.community,
-        // position: response.data.position,
-        position: "council member",
+        position: response.data.position,
         password: password,
       });
       console.log("setDatasUser (auth):", response.data);

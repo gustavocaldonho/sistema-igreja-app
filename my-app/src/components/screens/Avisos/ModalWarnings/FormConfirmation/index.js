@@ -4,6 +4,7 @@ import styles from "./style";
 import stylesModal from "../style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { deleteWarning } from "../../../../../services/warning_api";
+import AlertMsg from "../../../../auxiliary/AlertMsg";
 
 export default function FormConfirmation({
   itemClicked,
@@ -12,10 +13,16 @@ export default function FormConfirmation({
   modalVisible,
 }) {
   async function deleteWarningForm(id) {
-    const token = await AsyncStorage.getItem("AccessToken");
-    const response = await deleteWarning(id, token);
-    if (response.status === 204) {
-      setModalVisible(!modalVisible);
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await deleteWarning(id, token);
+      if (response.status === 204) {
+        setModalVisible(!modalVisible);
+      } else {
+        AlertMsg(`Não foi possível excluir o aviso.`);
+      }
+    } catch (error) {
+      AlertMsg(`Falha na requisição. ${error}`);
     }
   }
 
