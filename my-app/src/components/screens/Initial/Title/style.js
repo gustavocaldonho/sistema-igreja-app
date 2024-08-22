@@ -5,11 +5,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   boxLogo: {
-    width: 120,
-    height: 120,
-    backgroundColor: "#ffffff",
-    borderRadius: 100,
     marginBottom: 10,
+  },
+  logo: {
+    width: 140,
+    height: 120,
   },
   textTitle: {
     fontSize: 24,
