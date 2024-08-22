@@ -27,6 +27,7 @@ import {
   generatePasswordDefault,
 } from "./functions";
 import Spinner from "react-native-loading-spinner-overlay";
+import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
 import { signupUser, updateUser } from "../../../../services/user_api";
 import {
@@ -61,11 +62,14 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const navigation = useNavigation();
   const [patronList, setPatronList] = useState([]);
   const [visibleSpinner, setVisibleSpinner] = useState(false);
+  const [visibleIndicator, setVisibleIndicator] = useState(false);
 
   async function getPatrons() {
     try {
+      setVisibleIndicator(true);
       const response = await getCommunitiesWithoutToken();
       setPatronList(response);
+      setVisibleIndicator(false);
     } catch (error) {
       console.log(error);
     }
@@ -275,16 +279,20 @@ export default function FormCadastroUser({ user, setModalVisible }) {
             ""
           )}
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              sendDatas();
-            }}
-          >
-            <Text style={styles.textButton}>
-              {user ? "Atualizar" : "Cadastrar"}
-            </Text>
-          </TouchableOpacity>
+          {visibleIndicator ? (
+            <LoadingIndicator color="#339dd7" />
+          ) : (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                sendDatas();
+              }}
+            >
+              <Text style={styles.textButton}>
+                {user ? "Atualizar" : "Cadastrar"}
+              </Text>
+            </TouchableOpacity>
+          )}
           {user ? (
             <TouchableOpacity
               style={[styles.button, styles.buttonCancel]}

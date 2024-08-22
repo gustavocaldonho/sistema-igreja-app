@@ -1,9 +1,9 @@
 import React from "react";
 import { ActivityIndicator, StyleSheet } from "react-native";
 
-export default function LoadingIndicator({ navigation }) {
+export default function LoadingIndicator({ navigation, color = "#fff" }) {
   return (
-    <ActivityIndicator color={"#fff"} size={"large"} style={styles.indicator} />
+    <ActivityIndicator color={color} size={"large"} style={styles.indicator} />
   );
 }
 
