@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import ItemAdvisor from "../ItemAdvisor";
 import { getCouncils } from "../../../../services/user_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -34,18 +34,33 @@ export default function ItemAdvisorContent({
 
   return (
     <View>
-      {advisorList.map((a, idx) => (
-        <ItemAdvisor
-          cpf={a.cpf}
-          name={a.name}
-          responsibility={a.responsability}
-          setItemAdvisorClicked={setItemAdvisorClicked}
-          advisorModalVisible={advisorModalVisible}
-          setAdvisorModalVisible={setAdvisorModalVisible}
-          setFormModalAdvisorDefaultVisible={setFormModalAdvisorDefaultVisible}
-          key={`item-advisor-${idx}`}
-        />
-      ))}
+      {advisorList.length !== 0 ? (
+        advisorList.map((a, idx) => (
+          <ItemAdvisor
+            cpf={a.cpf}
+            name={a.name}
+            responsibility={a.responsability}
+            setItemAdvisorClicked={setItemAdvisorClicked}
+            advisorModalVisible={advisorModalVisible}
+            setAdvisorModalVisible={setAdvisorModalVisible}
+            setFormModalAdvisorDefaultVisible={
+              setFormModalAdvisorDefaultVisible
+            }
+            key={`item-advisor-${idx}`}
+          />
+        ))
+      ) : (
+        <Text style={styles.msgContentEmpty}>
+          Ainda não foi inserido nenhum membro
+        </Text>
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  msgContentEmpty: {
+    color: "#fff",
+    alignSelf: "center",
+  },
+});

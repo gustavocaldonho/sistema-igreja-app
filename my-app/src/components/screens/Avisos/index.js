@@ -44,6 +44,7 @@ export default function Avisos({ navigation }) {
           setItemClicked={setItemClicked}
           setFormModalDefaultVisible={setFormModalDefaultVisible}
           setVisibleIndicator={setVisibleIndicator}
+          visibleIndicator={visibleIndicator}
         />
       )}
 
