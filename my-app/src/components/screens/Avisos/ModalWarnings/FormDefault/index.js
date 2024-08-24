@@ -10,6 +10,7 @@ import {
 } from "../../../../../services/warning_api";
 import ToastMessage from "../../../../auxiliary/ToastMessage";
 import AlertMsg from "../../../../auxiliary/AlertMsg";
+import LoadingIndicator from "../../../../auxiliary/LoadingIndicator";
 
 export default function FormDefault({
   itemClicked,
@@ -28,9 +29,11 @@ export default function FormDefault({
   const [scope, setScope] = useState(
     itemClicked.scope ? itemClicked.scope : "private"
   );
+  const [visibleIndicator, setVisibleIndicator] = useState(false);
 
   async function createWarningForm(item) {
     try {
+      setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await createWarning(item, token);
       if (response.status === 201) {
@@ -38,13 +41,16 @@ export default function FormDefault({
       } else {
         AlertMsg(`Não foi possível criar o aviso.`);
       }
+      setVisibleIndicator(false);
     } catch (error) {
       AlertMsg(`Falha na requisição. ${error}`);
+      setVisibleIndicator(false);
     }
   }
 
   async function updateWarningForm(item) {
     try {
+      setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await updateWarning(item, token);
       if (response.status === 204) {
@@ -53,8 +59,10 @@ export default function FormDefault({
       } else {
         AlertMsg(`Não foi possível atualizar o aviso.`);
       }
+      setVisibleIndicator(false);
     } catch (error) {
       AlertMsg(`Falha na requisição. ${error}`);
+      setVisibleIndicator(false);
     }
   }
 
@@ -128,35 +136,39 @@ export default function FormDefault({
         />
       </View>
 
-      <TouchableOpacity
-        style={stylesModal.boxButton}
-        activeOpacity={0.7}
-        onPress={() => {
-          const errorT = checkTitle(title);
-          const errorM = checkDescription(description);
+      {visibleIndicator ? (
+        <LoadingIndicator color="#339dd7" />
+      ) : (
+        <TouchableOpacity
+          style={stylesModal.boxButton}
+          activeOpacity={0.7}
+          onPress={() => {
+            const errorT = checkTitle(title);
+            const errorM = checkDescription(description);
 
-          if (!errorT && !errorM) {
-            if (itemClicked.id === undefined) {
-              createWarningForm({
-                title,
-                description,
-                scope,
-              });
-            } else {
-              updateWarningForm({
-                id: itemClicked.id,
-                title,
-                description,
-                scope,
-              });
+            if (!errorT && !errorM) {
+              if (itemClicked.id === undefined) {
+                createWarningForm({
+                  title,
+                  description,
+                  scope,
+                });
+              } else {
+                updateWarningForm({
+                  id: itemClicked.id,
+                  title,
+                  description,
+                  scope,
+                });
+              }
             }
-          }
-        }}
-      >
-        <Text style={stylesModal.textButton}>
-          {itemClicked.id === undefined ? "Adicionar" : "Alterar"}
-        </Text>
-      </TouchableOpacity>
+          }}
+        >
+          <Text style={stylesModal.textButton}>
+            {itemClicked.id === undefined ? "Adicionar" : "Alterar"}
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }

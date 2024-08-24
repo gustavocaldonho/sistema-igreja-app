@@ -11,6 +11,7 @@ import {
 } from "../../../../../services/community_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AlertMsg from "../../../../auxiliary/AlertMsg";
+import LoadingIndicator from "../../../../auxiliary/LoadingIndicator";
 
 export default function FormDefault({
   setModalVisible,
@@ -23,26 +24,32 @@ export default function FormDefault({
   const [patron, setPatron] = useState(community ? community.patron : "");
   const [location, setLocation] = useState(community ? community.location : "");
   const [email, setEmail] = useState(community ? community.email : "");
+  const [visibleIndicator, setVisibleIndicator] = useState(false);
   const navigation = useNavigation();
 
   async function createCommunity(data) {
     try {
+      setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await cadastryCommunity(data, token);
       if (response.status === 201) {
         setModalVisible(!modalVisible);
+        navigation.goBack();
       } else {
         AlertMsg(
           "Não foi possível criar a comunidade. Tente novamente mais tarde."
         );
+        setVisibleIndicator(false);
       }
     } catch (error) {
       AlertMsg("Falha na requisição.", error);
+      setVisibleIndicator(false);
     }
   }
 
   async function updateCommunityForm(patronUpdate, data) {
     try {
+      setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await updateCommunity(patronUpdate, data, token);
       if (response.status === 204) {
@@ -52,9 +59,11 @@ export default function FormDefault({
         AlertMsg(
           "Não foi possível atualizar a comunidade. Tente novamente mais tarde."
         );
+        setVisibleIndicator(false);
       }
     } catch (error) {
       AlertMsg("Falha na requisição.", error);
+      setVisibleIndicator(false);
     }
   }
 
@@ -129,36 +138,40 @@ export default function FormDefault({
         defaultValue={email}
       />
 
-      <TouchableOpacity
-        style={stylesModal.boxButton}
-        activeOpacity={0.7}
-        onPress={() => {
-          const errorP = checkPatron(patron);
-          const errorL = checkLocation(location);
-          const errorE = checkEmailForm(email);
+      {visibleIndicator ? (
+        <LoadingIndicator color="#339dd7" />
+      ) : (
+        <TouchableOpacity
+          style={stylesModal.boxButton}
+          activeOpacity={0.7}
+          onPress={() => {
+            const errorP = checkPatron(patron);
+            const errorL = checkLocation(location);
+            const errorE = checkEmailForm(email);
 
-          if (!errorP && !errorL && !errorE) {
-            if (!community) {
-              createCommunity({
-                patron: patron.trim(),
-                location: location.trim(),
-                email: email.trim(),
-                image: "",
-              });
-            } else {
-              updateCommunityForm(community.patron, {
-                patron: patron.trim(),
-                location: location.trim(),
-                email: email.trim(),
-              });
+            if (!errorP && !errorL && !errorE) {
+              if (!community) {
+                createCommunity({
+                  patron: patron.trim(),
+                  location: location.trim(),
+                  email: email.trim(),
+                  image: "",
+                });
+              } else {
+                updateCommunityForm(community.patron, {
+                  patron: patron.trim(),
+                  location: location.trim(),
+                  email: email.trim(),
+                });
+              }
             }
-          }
-        }}
-      >
-        <Text style={stylesModal.textButton}>
-          {community ? "Atualizar" : "Adicionar"}
-        </Text>
-      </TouchableOpacity>
+          }}
+        >
+          <Text style={stylesModal.textButton}>
+            {community ? "Atualizar" : "Adicionar"}
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
