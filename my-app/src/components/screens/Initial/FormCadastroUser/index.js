@@ -149,18 +149,18 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     ) {
       if (!user) {
         addUser({
-          name,
+          name: name.trim(),
           cpf: desformatCpf(cpf),
-          email,
+          email: email.trim(),
           birthday: formatDateUSA(dataNasc),
           community,
           password: generatePasswordDefault(name, dataNasc),
         });
       } else if (!checkPassword(password, passwordConfirmation)) {
         updateDatasUser({
-          name,
+          name: name.trim(),
           cpf: desformatCpf(cpf),
-          email,
+          email: email.trim(),
           birthday: formatDateUSA(dataNasc),
           community,
           password,

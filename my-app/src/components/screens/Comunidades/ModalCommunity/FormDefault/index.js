@@ -139,12 +139,17 @@ export default function FormDefault({
 
           if (!errorP && !errorL && !errorE) {
             if (!community) {
-              createCommunity({ patron, location, email, image: "" });
+              createCommunity({
+                patron: patron.trim(),
+                location: location.trim(),
+                email: email.trim(),
+                image: "",
+              });
             } else {
               updateCommunityForm(community.patron, {
-                patron,
-                location,
-                email,
+                patron: patron.trim(),
+                location: location.trim(),
+                email: email.trim(),
               });
             }
           }
