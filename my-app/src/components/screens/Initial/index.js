@@ -13,7 +13,7 @@ export default function Initial() {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#339DD7" translucent />
+      <StatusBar hidden={false} translucent backgroundColor="transparent" />
       <BoxLinearGradient style={{ flex: 1 }}>
         {registryEntry == false ? (
           <View style={styles.main}>

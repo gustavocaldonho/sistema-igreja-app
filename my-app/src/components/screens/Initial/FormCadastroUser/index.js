@@ -36,6 +36,7 @@ import {
   msgUpdateError,
   msgUpdateSuccess,
 } from "./alerts";
+import ModalCompleteRegistry from "./ModalCompleteRegistry";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -63,6 +64,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const [patronList, setPatronList] = useState([]);
   const [visibleSpinner, setVisibleSpinner] = useState(false);
   const [visibleIndicator, setVisibleIndicator] = useState(false);
+  const [modalSuccessVisible, setModalSuccessVisible] = useState(false);
 
   async function getPatrons() {
     try {
@@ -95,12 +97,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       const response = await signupUser(item);
       if (response.status === 201) {
         setVisibleSpinner(false);
-        msgCadastrySuccess(
-          setRegistryEntry,
-          cpf,
-          generatePasswordDefault(name, dataNasc)
-        );
-        resetInputs();
+        setModalSuccessVisible(!modalSuccessVisible);
       }
       console.log("(add): ", item);
     } catch (error) {
@@ -178,6 +175,18 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       behavior={Platform.OS == "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 250}
     >
+      {modalSuccessVisible ? (
+        <ModalCompleteRegistry
+          cpf={cpf}
+          password={generatePasswordDefault(name, dataNasc)}
+          modalVisible={modalSuccessVisible}
+          setModalVisible={setModalSuccessVisible}
+          setRegistryEntry={setRegistryEntry}
+        />
+      ) : (
+        ""
+      )}
+
       <Spinner visible={visibleSpinner} />
       <ScrollView style={styles.boxScrollView}>
         <Pressable style={styles.form} onPress={Keyboard.dismiss}>

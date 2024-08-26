@@ -88,10 +88,10 @@ export default function FormLogin() {
             // login({ cpf: "14734570760", password: "Gu2405##" });
             // login({ cpf: "53705211072", password: "Jo2908##" });
             // login({ cpf: "76903821007", password: "Di1406##" });
-            login({ cpf: "91314128078", password: "Ag1405##" });
+            // login({ cpf: "91314128078", password: "Ag1405##" });
             // c
             // login({ cpf: "32300950065", password: "sEnha123456**" });
-            // login({ cpf: desformatCpf(cpf), password });
+            login({ cpf: desformatCpf(cpf), password });
           }}
         >
           <Text style={styles.textButton}>Entrar</Text>
