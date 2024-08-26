@@ -7,11 +7,6 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     alignSelf: "center",
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
     backgroundColor: "#339dd7",
   },
   textButton: {

@@ -18,7 +18,7 @@ export default function ModalCompleteRegistry(props) {
         Fique a vontade para alterar seus dados ao acessar o App.
       </Text>
       <Pressable
-        style={[styles.button, styles.buttonClose]}
+        style={styles.button}
         onPress={() => {
           props.setModalVisible(!props.modalVisible);
           props.setRegistryEntry(false);
