@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View } from "react-native";
 import ItemDizimo from "../ItemDizimo";
 
 export default function ItemDizimoContent({ setModalVisible, setItemClicked }) {
@@ -9,16 +9,16 @@ export default function ItemDizimoContent({ setModalVisible, setItemClicked }) {
       year: "2024",
       status: "não pago",
     },
-    // {
-    //   month: "JUNHO",
-    //   year: "2024",
-    //   status: "não pago",
-    // },
-    // {
-    //   month: "JULHO",
-    //   year: "2024",
-    //   status: "não pago",
-    // },
+    {
+      month: "june",
+      year: "2024",
+      status: "não pago",
+    },
+    {
+      month: "july",
+      year: "2024",
+      status: "não pago",
+    },
   ]);
 
   //   async function getWarningListForm() {

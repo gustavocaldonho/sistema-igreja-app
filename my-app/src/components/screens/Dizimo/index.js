@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import styles from "./style";
 import ModalPagamentoDizimo from "./modalPagamento/";
 import PageBase from "../PageBase";
 import ItemDizimoContent from "./ItemDizimoContent";

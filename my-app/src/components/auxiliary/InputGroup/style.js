@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
   icon: {
     color: "#adadad",
   },
+  iconMoney: {
+    fontSize: 20,
+  },
   boxIconRight: {
     paddingLeft: 0,
   },

@@ -72,6 +72,18 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontWeight: "500",
   },
+  errorMessage: {
+    fontSize: 14,
+    color: "red",
+    paddingLeft: 20,
+    marginTop: 5,
+    marginBottom: 5,
+    fontWeight: "bold",
+  },
+  inputError: {
+    borderWidth: 2,
+    borderColor: "red",
+  },
 });
 
 export default styles;

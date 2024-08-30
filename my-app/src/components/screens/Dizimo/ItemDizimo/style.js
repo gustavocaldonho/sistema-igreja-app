@@ -70,12 +70,6 @@ const styles = StyleSheet.create({
   textObs: {
     color: "#339dd7",
   },
-  errorMessage: {
-    fontSize: 14,
-    color: "red",
-    paddingLeft: 20,
-    fontWeight: "bold",
-  },
 });
 
 export default styles;

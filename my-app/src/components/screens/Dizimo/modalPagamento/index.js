@@ -20,6 +20,7 @@ export default function ModalPagamentoDizimo({
   const [linkQrCode, setLinkQrCode] = useState(null);
   const [labelCopyCode, setLabelCopyCode] = useState("Copiar Código");
   const { user } = useContext(AuthContext);
+  const [showError, setShowError] = useState(false);
 
   const sendNotification = async () => {
     await Notifications.scheduleNotificationAsync({
@@ -52,6 +53,39 @@ export default function ModalPagamentoDizimo({
     setLabelCopyCode("Copiado!");
   };
 
+  const formatMoney = (value) => {
+    let newValue = "";
+    // console.log(value);
+
+    switch (value.lenght) {
+      case 1:
+        newValue = "0,0" + value;
+      case 2:
+        newValue = "0," + value;
+      case 3:
+        newValue = value.slice(0, 1) + "," + value.slice(1, value.lenght);
+    }
+
+    setValorDizimo(value);
+    return newValue;
+  };
+
+  function sendData() {
+    if (!errorValue(valorDizimo)) {
+      getCode({
+        year: parseInt(year),
+        month,
+        value: parseInt(valorDizimo),
+      });
+    } else {
+      setShowError(true);
+    }
+  }
+
+  function errorValue(value) {
+    return value >= 1 ? false : true;
+  }
+
   return (
     <Modal
       animationType="slide"
@@ -79,19 +113,23 @@ export default function ModalPagamentoDizimo({
             <View>
               <Text style={styles.modalText}>Qual Valor?</Text>
               <InputGroupValorDizimo
-                placeholder="10 (10 reais)"
+                placeholder="0,00"
                 value={valorDizimo}
+                // onChangeText={(text) => formatMoney(text)}
                 onChangeText={(text) => setValorDizimo(text)}
+                style={
+                  errorValue(valorDizimo) && showError ? styles.inputError : ""
+                }
               />
-              <Text style={styles.errorMessage}></Text>
+              <Text style={styles.errorMessage}>
+                {errorValue(valorDizimo) && showError
+                  ? "Digite um valor válido!"
+                  : ""}
+              </Text>
               <TouchableOpacity
                 style={styles.boxButtonPix}
                 onPress={() => {
-                  getCode({
-                    year: parseInt(year),
-                    month,
-                    value: parseInt(valorDizimo),
-                  });
+                  sendData();
                 }}
               >
                 <Text style={styles.textButtonPix}>Gerar Pix</Text>

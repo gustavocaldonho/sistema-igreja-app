@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
+import { translateMonth } from "./functions";
 
 export default function ItemDizimo({
   month,
@@ -14,7 +15,7 @@ export default function ItemDizimo({
     <View style={styles.boxItem}>
       <View style={styles.boxTop}>
         <View style={styles.boxMonth}>
-          <Text style={styles.textMonth}>{month}</Text>
+          <Text style={styles.textMonth}>{translateMonth(month)}</Text>
         </View>
         <View style={styles.boxPayButton}>
           {status === "pago" ? (
