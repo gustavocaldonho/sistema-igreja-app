@@ -5,8 +5,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import InputGroupValorDizimo from "../../../auxiliary/InputGroup/InputGroupValorDizimo";
 import { AuthContext } from "../../../../contexts/auth";
 import * as Notifications from "expo-notifications";
+import { getCodePaymentDizimo } from "../../../../services/payment_api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ModalPagamentoDizimo({
+  year,
+  month,
   modalVisible,
   setModalVisible,
 }) {
@@ -25,6 +29,20 @@ export default function ModalPagamentoDizimo({
       },
     });
   };
+
+  async function getCode(data) {
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      console.log(data);
+      // const response = await getCodePaymentDizimo(data, token);
+
+      // if (response.status === 201) {
+      //   setModalVisible(false);
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Modal
@@ -61,7 +79,7 @@ export default function ModalPagamentoDizimo({
               <TouchableOpacity
                 style={styles.boxButtonPix}
                 onPress={() => {
-                  setCodePix(10);
+                  getCode({ year, month, valorDizimo });
                 }}
               >
                 <Text style={styles.textButtonPix}>Gerar Pix</Text>
@@ -77,8 +95,7 @@ export default function ModalPagamentoDizimo({
               <TouchableOpacity
                 style={styles.boxButtonCopyCode}
                 onPress={() => {
-                  // setCodePix(null);
-                  sendNotification();
+                  // sendNotification();
                 }}
               >
                 <Text style={styles.textButtonCode}>Copiar Código</Text>

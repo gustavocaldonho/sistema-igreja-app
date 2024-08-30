@@ -11,11 +11,13 @@ export default function Dizimo({ navigation }) {
     <PageBase title={"Dízimo"}>
       {modalVisible ? (
         <ModalPagamentoDizimo
+          year={2024}
+          month={"agosto"}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
         />
       ) : (
-        <View />
+        ""
       )}
 
       <View style={styles.boxItem}>
