@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import InputGroupValorDizimo from "../../../auxiliary/InputGroup/InputGroupValorDizimo";
 import { AuthContext } from "../../../../contexts/auth";
 import * as Notifications from "expo-notifications";
+import * as Clipboard from "expo-clipboard";
 import { getCodePaymentDizimo } from "../../../../services/payment_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -15,7 +16,9 @@ export default function ModalPagamentoDizimo({
   setModalVisible,
 }) {
   const [valorDizimo, setValorDizimo] = useState("");
-  const [codPix, setCodePix] = useState(null);
+  const [codePix, setCodePix] = useState(null);
+  const [linkQrCode, setLinkQrCode] = useState(null);
+  const [labelCopyCode, setLabelCopyCode] = useState("Copiar Código");
   const { user } = useContext(AuthContext);
 
   const sendNotification = async () => {
@@ -32,17 +35,22 @@ export default function ModalPagamentoDizimo({
 
   async function getCode(data) {
     try {
-      const token = await AsyncStorage.getItem("AccessToken");
       console.log(data);
-      // const response = await getCodePaymentDizimo(data, token);
-
-      // if (response.status === 201) {
-      //   setModalVisible(false);
-      // }
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getCodePaymentDizimo(data, token);
+      if (response.status === 201) {
+        setCodePix(response.data.brCode);
+        setLinkQrCode(response.data.qrCodeImage);
+      }
     } catch (error) {
       console.log(error);
     }
   }
+
+  const copyCode = async () => {
+    await Clipboard.setStringAsync(codePix);
+    setLabelCopyCode("Copiado!");
+  };
 
   return (
     <Modal
@@ -67,19 +75,23 @@ export default function ModalPagamentoDizimo({
         </View>
 
         <View style={styles.modalView}>
-          {codPix == null ? (
+          {codePix == null ? (
             <View>
               <Text style={styles.modalText}>Qual Valor?</Text>
               <InputGroupValorDizimo
                 placeholder="10 (10 reais)"
                 value={valorDizimo}
-                onChangeText={setValorDizimo}
+                onChangeText={(text) => setValorDizimo(text)}
               />
               <Text style={styles.errorMessage}></Text>
               <TouchableOpacity
                 style={styles.boxButtonPix}
                 onPress={() => {
-                  getCode({ year, month, valorDizimo });
+                  getCode({
+                    year: parseInt(year),
+                    month,
+                    value: parseInt(valorDizimo),
+                  });
                 }}
               >
                 <Text style={styles.textButtonPix}>Gerar Pix</Text>
@@ -88,17 +100,22 @@ export default function ModalPagamentoDizimo({
           ) : (
             <View>
               <Text style={styles.modalText}>Código Pix</Text>
+              <Text style={styles.modalText}>LINK QR CODE: {linkQrCode}</Text>
               <Image
                 style={styles.qrcode}
-                source={require("../../../../images/qrcode.png")}
+                // source={require("../../../../images/qrcode.png")}
+                source={{ uri: linkQrCode }}
               />
               <TouchableOpacity
                 style={styles.boxButtonCopyCode}
+                activeOpacity={0.7}
                 onPress={() => {
-                  // sendNotification();
+                  // console.log(codePix);
+                  // console.log(linkQrCode);
+                  copyCode();
                 }}
               >
-                <Text style={styles.textButtonCode}>Copiar Código</Text>
+                <Text style={styles.textButtonCode}>{labelCopyCode}</Text>
               </TouchableOpacity>
             </View>
           )}
