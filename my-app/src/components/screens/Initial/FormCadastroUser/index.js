@@ -16,7 +16,7 @@ import { AuthContext } from "../../../../contexts/auth";
 import { useNavigation } from "@react-navigation/native";
 import {
   checkCpf,
-  checkEmail,
+  checkPhone,
   checkText,
   checkDataNasc,
   formatDateBR,
@@ -25,6 +25,8 @@ import {
   desformatCpf,
   checkPassword,
   generatePasswordDefault,
+  desformatPhone,
+  formatPhone,
 } from "./functions";
 import Spinner from "react-native-loading-spinner-overlay";
 import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
@@ -40,7 +42,7 @@ import ModalCompleteRegistry from "./ModalCompleteRegistry";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
-import InputGroupEmail from "../../../auxiliary/InputGroup/InputGroupEmail";
+import InputGroupPhone from "../../../auxiliary/InputGroup/InputGroupPhone";
 import InputGroupDN from "../../../auxiliary/InputGroup/InputGroupDN";
 import InputGroupSelect from "../../../auxiliary/InputGroup/InputGroupSelect";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -49,7 +51,7 @@ import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword
 export default function FormCadastroUser({ user, setModalVisible }) {
   const [name, setName] = useState(user ? user.name : "");
   const [cpf, setCpf] = useState(user ? user.cpf : "");
-  const [email, setEmail] = useState(user ? user.email : "");
+  const [phone, setPhone] = useState(user ? user.phone : "");
   const [dataNasc, setDataNasc] = useState(
     user ? formatDateBR(user.birthday) : ""
   );
@@ -92,6 +94,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   }, []);
 
   async function addUser(item) {
+    // console.log(item);
     try {
       setVisibleSpinner(true);
       const response = await signupUser(item);
@@ -130,7 +133,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   function resetInputs() {
     setName("");
     setCpf("");
-    setEmail("");
+    setPhone("");
     setDataNasc("");
     setCommunity("");
     setShowErrors(false);
@@ -140,7 +143,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     if (
       !checkText(name) &&
       !checkCpf(cpf) &&
-      !checkEmail(email) &&
+      !checkPhone(phone) &&
       !checkDataNasc(dataNasc) &&
       !checkText(community)
     ) {
@@ -148,7 +151,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
         addUser({
           name: name.trim(),
           cpf: desformatCpf(cpf),
-          email: email.trim(),
+          phone: desformatPhone(phone),
           birthday: formatDateUSA(dataNasc),
           community,
           password: generatePasswordDefault(name, dataNasc),
@@ -157,7 +160,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
         updateDatasUser({
           name: name.trim(),
           cpf: desformatCpf(cpf),
-          email: email.trim(),
+          phone: desformatPhone(phone),
           birthday: formatDateUSA(dataNasc),
           community,
           password,
@@ -215,16 +218,17 @@ export default function FormCadastroUser({ user, setModalVisible }) {
             {checkCpf(cpf) && showErrors ? "CPF Inválido!" : ""}
           </Text>
 
-          <InputGroupEmail
-            iconName="envelope"
-            placeholder="Digite seu E-mail"
-            defaultValue={email}
+          <InputGroupPhone
+            iconName="phone"
+            placeholder="(27) 00000-0000"
+            // defaultValue={phone}
+            value={phone}
             onChangeText={(text) => {
-              setEmail(text);
+              setPhone(text);
             }}
           />
           <Text style={styles.errorMessage}>
-            {checkEmail(email) && showErrors ? "Email Inválido" : ""}
+            {checkPhone(phone) && showErrors ? "Número Inválido!" : ""}
           </Text>
 
           <InputGroupDN

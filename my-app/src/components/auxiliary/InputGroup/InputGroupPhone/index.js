@@ -1,0 +1,56 @@
+import React from "react";
+import { View } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import MaskInput from "react-native-mask-input";
+import styles from "../style";
+
+const PHONE_MASK = [
+  "(",
+  /\d/,
+  /\d/,
+  ")",
+  " ",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+];
+
+const InputGroupPhone = ({
+  iconName,
+  placeholder,
+  value,
+  onChangeText,
+  style,
+}) => {
+  return (
+    <View style={[style, styles.container]}>
+      <View style={styles.boxIcon}>
+        <Icon name={iconName} size={20} style={styles.icon} />
+      </View>
+      <MaskInput
+        style={styles.input}
+        placeholder={placeholder}
+        keyboardType="numeric"
+        maxLength={15}
+        value={value}
+        onChangeText={onChangeText}
+        placeholderTextColor="#ccc"
+        mask={(text) => {
+          if (text.replace(/\D+/g, "").length <= 11) {
+            return PHONE_MASK;
+          } else {
+          }
+        }}
+      />
+    </View>
+  );
+};
+
+export default InputGroupPhone;

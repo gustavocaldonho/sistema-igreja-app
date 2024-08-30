@@ -16,7 +16,7 @@ function AuthProvider({ children }) {
       setUser({
         name: response.data.name,
         cpf: response.data.cpf,
-        email: response.data.email,
+        phone: response.data.phone,
         birthday: response.data.birthday,
         community: response.data.community,
         position: response.data.position,

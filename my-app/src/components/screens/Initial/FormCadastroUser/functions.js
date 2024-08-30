@@ -6,8 +6,8 @@ export function checkCpf(cpf) {
   return desformatCpf(cpf).length !== 11 ? true : false;
 }
 
-export function checkEmail(email) {
-  return !email.includes("@") || !email.includes(".com") ? true : false;
+export function checkPhone(phone) {
+  return !phone.length === 11 ? true : false;
 }
 
 export function checkDataNasc(dataNasc) {
@@ -50,4 +50,18 @@ export function formatCpf(data) {
 
 export function desformatCpf(data) {
   return data.replace(/\D/g, "");
+}
+
+export function formatPhone(data) {
+  const cleaned = data.replace(/\D/g, "");
+
+  const ddd = cleaned.slice(2, 4);
+  const firstPart = cleaned.slice(4, 9);
+  const secondPart = cleaned.slice(9);
+
+  return `(${ddd}) ${firstPart}-${secondPart}`;
+}
+
+export function desformatPhone(data) {
+  return "+55" + data.replace(/\D/g, "");
 }

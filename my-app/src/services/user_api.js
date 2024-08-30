@@ -8,7 +8,7 @@ export const signupUser = async (data) => {
         birthday: data.birthday,
         community: data.community,
         cpf: data.cpf,
-        email: data.email,
+        phone: data.phone,
         name: data.name,
         password: data.password,
         // active: data.active,
@@ -67,7 +67,7 @@ export const updateUser = async (data, token) => {
       "/me",
       {
         cpf: data.cpf,
-        email: data.email,
+        phone: data.phone,
         name: data.name,
         community_patron: data.community,
         password: data.password,
