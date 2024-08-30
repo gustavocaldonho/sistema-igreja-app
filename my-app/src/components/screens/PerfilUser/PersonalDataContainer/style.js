@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textAlign: "right",
   },
-  textLabelEmail: {
-    width: "25%",
+  textLabelPhone: {
+    width: "40%",
   },
-  textDataEmail: {
-    width: "75%",
+  textDataPhone: {
+    width: "60%",
   },
   textLabelComunity: {
     width: "40%",

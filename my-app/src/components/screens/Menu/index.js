@@ -31,7 +31,7 @@ export default function Menu({ navigation }) {
                 name: user.name,
                 cpf: user.cpf,
                 birthday: user.birthday,
-                email: user.email,
+                phone: user.phone,
                 community: user.community,
                 password: user.password,
               })

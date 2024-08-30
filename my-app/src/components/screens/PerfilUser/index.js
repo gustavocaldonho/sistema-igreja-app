@@ -11,8 +11,12 @@ import MortuaryContainer from "./MortuaryContainer";
 import ModalUpdateDatasUser from "./PersonalDataContainer/ModalUpdateDatasUser";
 
 export default function PerfilUser({ navigation, route }) {
-  const { name, cpf, birthday, email, community, password } = route.params;
+  const { name, cpf, birthday, phone, community, password } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    console.log(name, cpf, birthday, phone, community, password);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -22,7 +26,7 @@ export default function PerfilUser({ navigation, route }) {
         <ModalUpdateDatasUser
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          user={{ name, cpf, birthday, email, community, password }}
+          user={{ name, cpf, phone, birthday, community, password }}
         />
       ) : (
         <BoxLinearGradient style={{ flex: 1 }}>
@@ -48,7 +52,7 @@ export default function PerfilUser({ navigation, route }) {
 
           <ScrollView>
             <PersonalDataContainer
-              sentUser={{ name, cpf, birthday, email, community, password }}
+              sentUser={{ name, cpf, birthday, phone, community, password }}
               style={[styles.boxInformationsUser, styles.boxShadow]}
               setModalVisible={setModalVisible}
             />

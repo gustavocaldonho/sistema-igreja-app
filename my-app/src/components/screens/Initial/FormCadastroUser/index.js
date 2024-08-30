@@ -51,7 +51,7 @@ import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword
 export default function FormCadastroUser({ user, setModalVisible }) {
   const [name, setName] = useState(user ? user.name : "");
   const [cpf, setCpf] = useState(user ? user.cpf : "");
-  const [phone, setPhone] = useState(user ? user.phone : "");
+  const [phone, setPhone] = useState(user ? formatPhone(user.phone) : "");
   const [dataNasc, setDataNasc] = useState(
     user ? formatDateBR(user.birthday) : ""
   );

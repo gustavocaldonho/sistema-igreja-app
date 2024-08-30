@@ -4,6 +4,7 @@ import styles from "./style";
 import {
   formatDateBR,
   formatCpf,
+  formatPhone,
 } from "../../Initial/FormCadastroUser/functions";
 
 const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
@@ -18,9 +19,11 @@ const PersonalDataContainer = ({ sentUser, style, setModalVisible }) => {
         <Text style={styles.textData}>{formatDateBR(sentUser.birthday)}</Text>
       </View>
       <View style={styles.line}>
-        <Text style={[styles.textLabel, styles.textLabelEmail]}>EMAIL:</Text>
-        <Text style={[styles.textData, styles.textDataEmail]}>
-          {sentUser.email}
+        <Text style={[styles.textLabel, styles.textLabelPhone]}>
+          Nº CELULAR:
+        </Text>
+        <Text style={[styles.textData, styles.textDataPhone]}>
+          {formatPhone(sentUser.phone)}
         </Text>
       </View>
       <View style={styles.line}>
