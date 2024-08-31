@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -23,6 +23,7 @@ export default function ModalPagamentoDizimo({
   const { user } = useContext(AuthContext);
   const [showError, setShowError] = useState(false);
   const [visibleIndicator, setVisibleIndicator] = useState(false);
+  const inputRef = useRef(null);
 
   const sendNotification = async () => {
     await Notifications.scheduleNotificationAsync({
@@ -38,7 +39,6 @@ export default function ModalPagamentoDizimo({
 
   async function getCode(data) {
     try {
-      console.log(data);
       setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await getCodePaymentDizimo(data, token);
@@ -64,16 +64,19 @@ export default function ModalPagamentoDizimo({
 
     switch (value.length) {
       case 1:
-        // newValue = `0,0${value}`;
-        newValue = 1;
+        newValue = "0,0" + value;
+        break;
       case 2:
-        // newValue = `0,${value}`;
-        newValue = 2;
+        newValue = "0," + value;
+        break;
       case 3:
-        // newValue = `${value.slice(0, 1)} "," ${value.slice(1, value.lenght)}`;
-        newValue = 3;
+        newValue = `${value.slice(0, 1)},${value.slice(1)}`;
+        break;
+      default:
+        newValue = value;
+        break;
     }
-    return newValue.length;
+    return newValue;
   };
 
   function sendData() {
@@ -89,8 +92,18 @@ export default function ModalPagamentoDizimo({
   }
 
   function errorValue(value) {
-    return value >= 1 ? false : true;
+    const numericValue = value.replace(/\./g, "").replace(",", ".");
+    const number = parseFloat(numericValue);
+    return isNaN(number) || number < 1;
   }
+
+  useEffect(() => {
+    if (modalVisible && inputRef.current) {
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 100);
+    }
+  }, [modalVisible]);
 
   return (
     <Modal
@@ -106,7 +119,7 @@ export default function ModalPagamentoDizimo({
           <TouchableOpacity
             onPress={() => {
               setModalVisible(!modalVisible);
-              setValorDizimo(0);
+              setValorDizimo("");
               setCodePix(null);
             }}
           >
@@ -119,6 +132,7 @@ export default function ModalPagamentoDizimo({
             <View>
               <Text style={styles.modalText}>Qual Valor?</Text>
               <InputGroupValorDizimo
+                ref={inputRef}
                 placeholder="0,00"
                 value={valorDizimo}
                 onChangeText={(text) => {
@@ -152,7 +166,8 @@ export default function ModalPagamentoDizimo({
               <Text style={styles.modalText}>Código Pix</Text>
               <Image
                 style={styles.qrcode}
-                source={{ uri: linkQrCode, alt: "qr-code.png" }}
+                source={{ uri: linkQrCode }}
+                alt="qr-code.png"
               />
               <TouchableOpacity
                 style={styles.boxButtonCopyCode}

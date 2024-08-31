@@ -38,7 +38,7 @@ export default function ItemDizimo({
       </View>
       <View style={styles.boxBottom}>
         <View style={styles.boxObs}>
-          <Text style={styles.textObs}>Disponivel até {expiresDate}</Text>
+          <Text style={styles.textObs}>Disponível até {expiresDate}</Text>
           {/* <Text style={styles.textObs}>Será Liberado em 01/05/2024</Text> */}
           {/* <Text style={styles.textObs}>Disponivel para pagamento</Text> */}
         </View>
