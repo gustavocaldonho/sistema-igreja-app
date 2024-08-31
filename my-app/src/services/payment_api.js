@@ -21,3 +21,17 @@ export const getCodePaymentDizimo = async (data, token) => {
     return error;
   }
 };
+
+export const getPaymentsDizimo = async (year, token) => {
+  try {
+    const response = await api.get(`/dizimo_payment/${year}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};

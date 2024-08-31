@@ -1,29 +1,29 @@
 export function translateMonth(monthEnglish) {
   switch (monthEnglish) {
-    case "january":
-      return "JANEIRO";
-    case "february":
-      return "FEVEREIRO";
-    case "march":
-      return "MARÇO";
-    case "april":
-      return "ABRIL";
-    case "may":
-      return "MAIO";
-    case "june":
-      return "JUNHO";
-    case "july":
-      return "JULHO";
-    case "august":
-      return "AGOSTO";
-    case "september":
-      return "SETEMBRO";
-    case "october":
-      return "OUTUBRO";
-    case "november":
-      return "NOVEMBRO";
-    case "december":
-      return "DEZEMBRO";
+    case "01":
+      return ["january", "JANEIRO"];
+    case "02":
+      return ["february", "FEVEREIRO"];
+    case "03":
+      return ["march", "MARÇO"];
+    case "04":
+      return ["april", "ABRIL"];
+    case "05":
+      return ["may", "MAIO"];
+    case "06":
+      return ["june", "JUNHO"];
+    case "07":
+      return ["july", "JULHO"];
+    case "08":
+      return ["august", "AGOSTO"];
+    case "09":
+      return ["september", "SETEMBRO"];
+    case "10":
+      return ["october", "OUTUBRO"];
+    case "11":
+      return ["november", "NOVEMBRO"];
+    case "12":
+      return ["december", "DEZEMBRO"];
     default:
       return "NOT MONTH";
   }

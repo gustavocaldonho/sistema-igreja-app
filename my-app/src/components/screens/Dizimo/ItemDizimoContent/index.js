@@ -1,53 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import ItemDizimo from "../ItemDizimo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getPaymentsDizimo } from "../../../../services/payment_api";
+import { getExpiresDate, getMonth, getYear, getStatus } from "./functions";
 
-export default function ItemDizimoContent({ setModalVisible, setItemClicked }) {
-  const [dizimoList, setDizimoList] = useState([
-    {
-      month: "august",
-      year: "2024",
-      status: "não pago",
-    },
-    {
-      month: "june",
-      year: "2024",
-      status: "não pago",
-    },
-    {
-      month: "july",
-      year: "2024",
-      status: "não pago",
-    },
-  ]);
+export default function ItemDizimoContent({
+  setModalVisible,
+  setItemClicked,
+  setVisibleIndicator,
+}) {
+  const [dizimoList, setDizimoList] = useState([]);
 
-  //   async function getWarningListForm() {
-  //     try {
-  //       setVisibleIndicator(true);
-  //       const token = await AsyncStorage.getItem("AccessToken");
-  //       const response = await getTenWarnings(user.community, token);
-  //       if (response.status === 200) {
-  //         setWarningList(response.data);
-  //       } else {
-  //         AlertMsg("Não retornou a lista de avisos.");
-  //       }
-  //       setVisibleIndicator(false);
-  //     } catch (error) {
-  //       AlertMsg(`Falha na requisição. ${error}`);
-  //     }
-  //   }
+  async function getPaymentsDizimoForm() {
+    try {
+      setVisibleIndicator(true);
+      const token = await AsyncStorage.getItem("AccessToken");
+      const date = new Date();
+      const response = await getPaymentsDizimo(date.getFullYear(), token);
+      if (response.status === 200) {
+        setDizimoList(response.data);
+      } else {
+        console.log("Não retornou a lista de meses.");
+      }
+      setVisibleIndicator(false);
+    } catch (error) {
+      console.log(`Falha na requisição. ${error}`);
+    }
+  }
 
   useEffect(() => {
-    // getWarningListForm();
+    getPaymentsDizimoForm();
   }, []);
 
   return (
     <View>
       {dizimoList.map((d, idx) => (
         <ItemDizimo
-          month={d.month}
-          year={d.year}
-          status={d.status}
+          month={getMonth(d.createdAt)}
+          year={getYear(d.createdAt)}
+          status={getStatus(d.status)}
+          expiresDate={getExpiresDate(d.expiresDate)}
           setModalVisible={setModalVisible}
           setItemClicked={setItemClicked}
           key={`dizimo-item-${idx}`}
