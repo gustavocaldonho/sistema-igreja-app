@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Modal, View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -8,6 +8,7 @@ import * as Notifications from "expo-notifications";
 import * as Clipboard from "expo-clipboard";
 import { getCodePaymentDizimo } from "../../../../services/payment_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 
 export default function ModalPagamentoDizimo({
   year,
@@ -21,6 +22,7 @@ export default function ModalPagamentoDizimo({
   const [labelCopyCode, setLabelCopyCode] = useState("Copiar Código");
   const { user } = useContext(AuthContext);
   const [showError, setShowError] = useState(false);
+  const [visibleIndicator, setVisibleIndicator] = useState(false);
 
   const sendNotification = async () => {
     await Notifications.scheduleNotificationAsync({
@@ -37,12 +39,16 @@ export default function ModalPagamentoDizimo({
   async function getCode(data) {
     try {
       console.log(data);
+      setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await getCodePaymentDizimo(data, token);
       if (response.status === 201) {
         setCodePix(response.data.brCode);
         setLinkQrCode(response.data.qrCodeImage);
+      } else {
+        console.log(response);
       }
+      setVisibleIndicator(false);
     } catch (error) {
       console.log(error);
     }
@@ -55,19 +61,19 @@ export default function ModalPagamentoDizimo({
 
   const formatMoney = (value) => {
     let newValue = "";
-    // console.log(value);
 
-    switch (value.lenght) {
+    switch (value.length) {
       case 1:
-        newValue = "0,0" + value;
+        // newValue = `0,0${value}`;
+        newValue = 1;
       case 2:
-        newValue = "0," + value;
+        // newValue = `0,${value}`;
+        newValue = 2;
       case 3:
-        newValue = value.slice(0, 1) + "," + value.slice(1, value.lenght);
+        // newValue = `${value.slice(0, 1)} "," ${value.slice(1, value.lenght)}`;
+        newValue = 3;
     }
-
-    setValorDizimo(value);
-    return newValue;
+    return newValue.length;
   };
 
   function sendData() {
@@ -115,8 +121,9 @@ export default function ModalPagamentoDizimo({
               <InputGroupValorDizimo
                 placeholder="0,00"
                 value={valorDizimo}
-                // onChangeText={(text) => formatMoney(text)}
-                onChangeText={(text) => setValorDizimo(text)}
+                onChangeText={(text) => {
+                  setValorDizimo(text);
+                }}
                 style={
                   errorValue(valorDizimo) && showError ? styles.inputError : ""
                 }
@@ -126,30 +133,31 @@ export default function ModalPagamentoDizimo({
                   ? "Digite um valor válido!"
                   : ""}
               </Text>
-              <TouchableOpacity
-                style={styles.boxButtonPix}
-                onPress={() => {
-                  sendData();
-                }}
-              >
-                <Text style={styles.textButtonPix}>Gerar Pix</Text>
-              </TouchableOpacity>
+
+              {visibleIndicator ? (
+                <LoadingIndicator color="#339dd7" />
+              ) : (
+                <TouchableOpacity
+                  style={styles.boxButtonPix}
+                  onPress={() => {
+                    sendData();
+                  }}
+                >
+                  <Text style={styles.textButtonPix}>Gerar Pix</Text>
+                </TouchableOpacity>
+              )}
             </View>
           ) : (
             <View>
               <Text style={styles.modalText}>Código Pix</Text>
-              <Text style={styles.modalText}>LINK QR CODE: {linkQrCode}</Text>
               <Image
                 style={styles.qrcode}
-                // source={require("../../../../images/qrcode.png")}
-                source={{ uri: linkQrCode }}
+                source={{ uri: linkQrCode, alt: "qr-code.png" }}
               />
               <TouchableOpacity
                 style={styles.boxButtonCopyCode}
                 activeOpacity={0.7}
                 onPress={() => {
-                  // console.log(codePix);
-                  // console.log(linkQrCode);
                   copyCode();
                 }}
               >

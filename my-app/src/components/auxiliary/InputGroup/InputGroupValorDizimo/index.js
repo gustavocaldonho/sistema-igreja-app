@@ -1,29 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import MaskInput from "react-native-mask-input";
-import styles from "../style";
 
-const formatCurrency = (value) => {
-  const numericValue = value.replace(/\D/g, "");
-  const formattedValue = (numericValue / 100)
-    .toFixed(2)
-    .replace(".", ",")
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-  return formattedValue;
-};
-
-const InputGroupValorDizimo = ({
-  iconName,
-  placeholder,
-  value,
-  onChangeText,
-  style,
-}) => {
+const InputGroupValorDizimo = ({ placeholder, value, onChangeText, style }) => {
   return (
     <View style={[style, styles.container]}>
-      <View style={styles.boxIcon}>
-        <Text style={[styles.icon, styles.iconMoney]}>R$</Text>
+      <View>
+        <Text style={styles.iconMoney}>R$</Text>
       </View>
       <MaskInput
         style={styles.input}
@@ -38,5 +21,25 @@ const InputGroupValorDizimo = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: "70%",
+    marginTop: 10,
+    alignSelf: "center",
+    flexDirection: "row",
+    paddingBottom: 5,
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+  },
+  iconMoney: {
+    fontSize: 25,
+    marginRight: 10,
+  },
+  input: {
+    fontSize: 25,
+  },
+});
 
 export default InputGroupValorDizimo;

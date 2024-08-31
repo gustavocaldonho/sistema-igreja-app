@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "90%",
+    minHeight: 250,
     margin: 20,
     marginTop: 85,
     backgroundColor: "white",
@@ -39,12 +40,14 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   modalText: {
-    fontSize: 20,
+    fontSize: 22,
     marginBottom: 15,
     textAlign: "center",
+    color: "#f094c0",
+    fontWeight: "600",
   },
   boxButtonPix: {
-    backgroundColor: "#5cc25f",
+    backgroundColor: "#339dd7",
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginTop: 10,
@@ -58,6 +61,8 @@ const styles = StyleSheet.create({
   },
   qrcode: {
     alignSelf: "center",
+    width: 200,
+    height: 200,
   },
   boxButtonCopyCode: {
     backgroundColor: "#339dd7",
@@ -75,13 +80,12 @@ const styles = StyleSheet.create({
   errorMessage: {
     fontSize: 14,
     color: "red",
-    paddingLeft: 20,
     marginTop: 5,
     marginBottom: 5,
     fontWeight: "bold",
+    textAlign: "center",
   },
   inputError: {
-    borderWidth: 2,
     borderColor: "red",
   },
 });
