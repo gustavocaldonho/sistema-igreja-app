@@ -7,10 +7,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingTop: 10,
   },
-  itemLineList: {
-    width: "23%",
-    flexDirection: "column",
+  container: {
+    flex: 1,
+    paddingTop: 10,
     justifyContent: "center",
+  },
+  innerContainer: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    marginTop: 5,
+  },
+  itemMonth: {
+    width: "24%",
     alignItems: "center",
     paddingVertical: 8,
     borderRadius: 12,
@@ -18,6 +28,7 @@ const styles = StyleSheet.create({
     gap: 5,
     borderWidth: 3,
     borderColor: "#fff",
+    margin: 1,
   },
   textMonth: {
     color: "#fff",
