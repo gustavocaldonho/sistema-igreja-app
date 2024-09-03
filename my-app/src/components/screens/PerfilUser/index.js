@@ -62,11 +62,11 @@ export default function PerfilUser({ navigation, route }) {
               styleTitleBox={styles.textTitleBox}
             />
 
-            <MortuaryContainer
+            {/* <MortuaryContainer
               years={{}}
               style={[styles.boxInformationsUser, styles.boxShadow]}
               styleTitleBox={styles.textTitleBox}
-            />
+            /> */}
 
             <TouchableOpacity style={styles.buttonDisable}>
               <Text style={styles.textDisable}>DESATIVAR CONTA</Text>
