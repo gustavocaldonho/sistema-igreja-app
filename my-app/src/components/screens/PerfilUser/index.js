@@ -15,7 +15,7 @@ export default function PerfilUser({ navigation, route }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    console.log(name, cpf, birthday, phone, community, password);
+    // console.log(name, cpf, birthday, phone, community, password);
   }, []);
 
   return (
@@ -58,7 +58,6 @@ export default function PerfilUser({ navigation, route }) {
             />
 
             <DizimoContainer
-              months={{}}
               style={[styles.boxInformationsUser, styles.boxShadow]}
               styleTitleBox={styles.textTitleBox}
             />

@@ -101,7 +101,7 @@ export default function ModalPagamentoDizimo({
     if (modalVisible && inputRef.current) {
       setTimeout(() => {
         inputRef.current.focus();
-      }, 100);
+      }, 200);
     }
   }, [modalVisible]);
 

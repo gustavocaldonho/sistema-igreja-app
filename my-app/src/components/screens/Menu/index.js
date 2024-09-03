@@ -42,11 +42,11 @@ export default function Menu({ navigation }) {
             icon={"heart"}
             onPress={() => navigation.navigate("Dizimo")}
           />
-          <ItemMenu
+          {/* <ItemMenu
             screenName={"Caixa Mortuária"}
             icon={"cross"}
             onPress={() => navigation.navigate("CaixaMortuario")}
-          />
+          /> */}
           {user.position === "council member" ? (
             <ItemMenu
               screenName={"Usuários"}
