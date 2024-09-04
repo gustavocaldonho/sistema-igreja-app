@@ -17,7 +17,6 @@ const DizimoContainer = ({ style, styleTitleBox }) => {
       const token = await AsyncStorage.getItem("AccessToken");
       const date = new Date();
       const response = await getPaymentsDizimo(date.getFullYear(), token);
-      console.log(response.data);
       if (response.status === 200) {
         setDizimoList(response.data);
       } else {
