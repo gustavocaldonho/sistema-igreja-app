@@ -23,6 +23,7 @@ const DizimoContainer = ({ months, style, styleTitleBox }) => {
       const token = await AsyncStorage.getItem("AccessToken");
       const date = new Date();
       const response = await getPaymentsDizimo(date.getFullYear(), token);
+      console.log(response.data);
       if (response.status === 200) {
         setDizimoList(response.data);
       } else {
@@ -36,12 +37,12 @@ const DizimoContainer = ({ months, style, styleTitleBox }) => {
 
   function getStatusIcon(status) {
     switch (status) {
-      case "PENDENTE":
-        return "exclamation";
-      case "PAGO":
-        return "heart";
-      case "EXPIRADO":
-        return "remove";
+      case "ACTIVE":
+        return "exclamation"; //pendente
+      case "EXPIRED":
+        return "remove"; //não pago
+      case "PAID":
+        return "heart"; //pago
       default:
         return "minus";
     }
@@ -74,8 +75,8 @@ const DizimoContainer = ({ months, style, styleTitleBox }) => {
       <View style={styles.innerContainer}>
         {dizimoList.map((d, idx) => (
           <ItemDizimoProfileUser
-            month={translateMonth(getMonth(d.createdAt))[2]}
-            status={getStatus(d.status)}
+            month={translateMonth(getMonth(d.payment.createdAt))[2]}
+            status={d.payment.status}
             key={idx}
           />
         ))}

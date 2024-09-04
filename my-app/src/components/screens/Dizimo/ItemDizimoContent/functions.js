@@ -17,6 +17,10 @@ export function getStatus(data) {
   switch (data) {
     case "ACTIVE":
       return "PENDENTE";
+    case "EXPIRED":
+      return "NÃO PAGO";
+    case "PAID":
+      return "PAGO";
     default:
       return "STATUS";
   }

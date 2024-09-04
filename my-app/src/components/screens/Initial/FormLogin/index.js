@@ -83,8 +83,8 @@ export default function FormLogin() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            login({ cpf: "14734570760", password: "Gu2405##" });
-            // login({ cpf: "84922282025", password: "Co2908##" });
+            // login({ cpf: "14734570760", password: "Gu2405##" });
+            login({ cpf: "49403669012", password: "Te0101##" });
             // login({ cpf: "99991581022", password: "Gi0410##" });
             // login({ cpf: "53705211072", password: "Jo2908##" });
             // login({ cpf: "76903821007", password: "Di1406##" });
