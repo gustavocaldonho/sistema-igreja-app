@@ -7,7 +7,7 @@ export function checkCpf(cpf) {
 }
 
 export function checkPhone(phone) {
-  return !phone.length === 11 ? true : false;
+  return phone.length !== 15 ? true : false;
 }
 
 export function checkDataNasc(dataNasc) {

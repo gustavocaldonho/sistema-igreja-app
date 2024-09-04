@@ -59,26 +59,6 @@ export default function ModalPagamentoDizimo({
     setLabelCopyCode("Copiado!");
   };
 
-  const formatMoney = (value) => {
-    let newValue = "";
-
-    switch (value.length) {
-      case 1:
-        newValue = "0,0" + value;
-        break;
-      case 2:
-        newValue = "0," + value;
-        break;
-      case 3:
-        newValue = `${value.slice(0, 1)},${value.slice(1)}`;
-        break;
-      default:
-        newValue = value;
-        break;
-    }
-    return newValue;
-  };
-
   function sendData() {
     if (!errorValue(valorDizimo)) {
       getCode({

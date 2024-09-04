@@ -3,7 +3,7 @@ import { View } from "react-native";
 import ItemDizimo from "../ItemDizimo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getPaymentsDizimo } from "../../../../services/payment_api";
-import { getExpiresDate, getMonth, getYear, getStatus } from "./functions";
+import { getExpiresDate } from "../functions";
 
 export default function ItemDizimoContent({
   setModalVisible,
@@ -37,10 +37,10 @@ export default function ItemDizimoContent({
     <View>
       {dizimoList.map((d, idx) => (
         <ItemDizimo
-          month={getMonth(d.createdAt)}
-          year={getYear(d.createdAt)}
-          status={getStatus(d.status)}
-          expiresDate={getExpiresDate(d.expiresDate)}
+          month={d.month}
+          year={d.year}
+          status={d.status}
+          expiresDate={getExpiresDate(d.payment.expiresDate)}
           setModalVisible={setModalVisible}
           setItemClicked={setItemClicked}
           key={`dizimo-item-${idx}`}

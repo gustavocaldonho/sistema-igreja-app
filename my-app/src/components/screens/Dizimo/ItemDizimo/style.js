@@ -42,10 +42,17 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "700",
   },
-  boxIconCheck: {
+  boxIconStatus: {
+    width: 40,
     backgroundColor: "#339dd7",
-    padding: 10,
+    paddingVertical: 10,
     borderRadius: 10,
+    textAlign: "center",
+  },
+  icon: {
+    color: "#fff",
+    fontSize: 20,
+    alignSelf: "center",
   },
   boxBottom: {
     width: "100%",

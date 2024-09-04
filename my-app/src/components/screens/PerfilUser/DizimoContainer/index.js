@@ -9,8 +9,8 @@ import {
   getStatus,
   getYear,
   getExpiresDate,
-} from "../../Dizimo/ItemDizimoContent/functions";
-import { translateMonth } from "../../Dizimo/ItemDizimo/functions";
+} from "../../Dizimo/functions";
+import { translateMonth } from "../../Dizimo/functions";
 import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 
 const DizimoContainer = ({ months, style, styleTitleBox }) => {
@@ -32,19 +32,6 @@ const DizimoContainer = ({ months, style, styleTitleBox }) => {
       setVisibleIndicator(false);
     } catch (error) {
       console.log(`Falha na requisição. ${error}`);
-    }
-  }
-
-  function getStatusIcon(status) {
-    switch (status) {
-      case "ACTIVE":
-        return "exclamation"; //pendente
-      case "EXPIRED":
-        return "remove"; //não pago
-      case "PAID":
-        return "heart"; //pago
-      default:
-        return "minus";
     }
   }
 
