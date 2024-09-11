@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "758919411198",
+    "project_id": "e-igreja-61f45",
+    "storage_bucket": "e-igreja-61f45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758919411198:android:162765de076ee5246ebcaf",
+        "android_client_info": {
+          "package_name": "com.gcaldonho.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy9L-LNZ1f5PBcW2NBJB5QJ5b_HVhNWFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

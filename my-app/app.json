@@ -2,7 +2,7 @@
   "expo": {
     "name": "e-igreja",
     "slug": "my-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,21 +11,20 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.gcaldonho.myapp",
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json",
+      "useNextNotificationsApi": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "RECEIVE_BOOT_COMPLETED"
-      ],
-      "package": "com.gcaldonho.myapp"
+      "permissions": ["RECEIVE_BOOT_COMPLETED"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,6 +33,7 @@
       "eas": {
         "projectId": "20d6e717-1aea-4c22-a0b0-756bb3f05867"
       }
-    }
+    },
+    "owner": "gcaldonho"
   }
 }

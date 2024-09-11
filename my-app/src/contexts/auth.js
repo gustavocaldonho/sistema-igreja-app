@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMe, signinUser } from "../services/user_api";
+import { sendApiExpoToken } from "../services/notification_api";
 
 export const AuthContext = createContext({});
 
@@ -9,6 +10,7 @@ function AuthProvider({ children }) {
   const [registryEntry, setRegistryEntry] = useState(false);
   const [user, setUser] = useState({});
   const navigation = useNavigation();
+  // const [expoPushTokenAuth, setExpoPushTokenAuth] = useState("");
 
   async function setDatasUser(token, password) {
     try {
@@ -38,6 +40,9 @@ function AuthProvider({ children }) {
           "AccessToken",
           String(response.data.access_token)
         );
+        const fcmToken = await AsyncStorage.getItem("FCMToken");
+        await sendApiExpoToken(fcmToken, token);
+        console.log("(auth) ", fcmToken);
       }
       return response;
     } catch (error) {
@@ -61,6 +66,7 @@ function AuthProvider({ children }) {
         signIn,
         signOut,
         setDatasUser,
+        // setExpoPushTokenAuth,
       }}
     >
       {children}
