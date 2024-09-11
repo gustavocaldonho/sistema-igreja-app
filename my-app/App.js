@@ -8,7 +8,6 @@ import * as Notifications from "expo-notifications";
 import messaging from "@react-native-firebase/messaging";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Configuração do canal de notificação para Android
 const setupNotificationChannel = async () => {
   await Notifications.setNotificationChannelAsync("default", {
     name: "default",
@@ -17,7 +16,6 @@ const setupNotificationChannel = async () => {
   });
 };
 
-// Configuração do manipulador de notificações
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -27,7 +25,6 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
-  // Função para solicitar permissão do usuário para notificações
   const requestUserPermission = async () => {
     try {
       const authStatus = await messaging().requestPermission();
@@ -49,7 +46,6 @@ export default function App() {
   };
 
   useEffect(() => {
-    // Função para inicializar a configuração de mensagens
     const initializeMessaging = async () => {
       const permissionGranted = await requestUserPermission();
       if (permissionGranted) {
@@ -62,10 +58,7 @@ export default function App() {
         }
       }
 
-      // Configuração do canal de notificação
       await setupNotificationChannel();
-
-      // Handle notification when app is opened from a quit state
       messaging()
         .getInitialNotification()
         .then((remoteMessage) => {
@@ -77,7 +70,6 @@ export default function App() {
           }
         });
 
-      // Handle notification when the app is in the background
       messaging().onNotificationOpenedApp((remoteMessage) => {
         console.log(
           "Notification caused app to open from background state:",
@@ -90,7 +82,6 @@ export default function App() {
         console.log("Message handled in the background!", remoteMessage);
       });
 
-      // Handle notification when the app is in the foreground
       const unsubscribe = messaging().onMessage(async (remoteMessage) => {
         // Notificação exibida quando o app está em primeiro plano
         await Notifications.scheduleNotificationAsync({
