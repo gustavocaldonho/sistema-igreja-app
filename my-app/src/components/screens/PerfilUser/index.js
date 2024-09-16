@@ -15,7 +15,7 @@ export default function PerfilUser({ navigation, route }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    // console.log(name, cpf, birthday, phone, community, password);
+    // console.log("perfil User", name, cpf, birthday, phone, community, password);
   }, []);
 
   return (

@@ -37,7 +37,7 @@ export default function ItemUser(props) {
           name: userItem.name,
           cpf: userItem.cpf,
           birthday: userItem.birthday,
-          email: userItem.email,
+          phone: userItem.phone,
           community: userItem.community,
         });
       }}
