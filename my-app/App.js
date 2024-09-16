@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { View, Text, Button } from "react-native";
+import { AppRegistry } from "react-native";
+import { name as appName } from "./app.json";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import AuthProvider from "./src/contexts/auth";
 import MyStack from "./src/routes/MyStack";
 import * as Notifications from "expo-notifications";
+import "@react-native-firebase/app";
 import messaging from "@react-native-firebase/messaging";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

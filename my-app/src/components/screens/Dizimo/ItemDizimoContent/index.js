@@ -40,7 +40,7 @@ export default function ItemDizimoContent({
           month={d.month}
           year={d.year}
           status={d.status}
-          expiresDate={getExpiresDate(d.payment.expiresDate)}
+          expiresDate={getExpiresDate(d.payment ? d.payment.expiresDate : null)}
           setModalVisible={setModalVisible}
           setItemClicked={setItemClicked}
           key={`dizimo-item-${idx}`}

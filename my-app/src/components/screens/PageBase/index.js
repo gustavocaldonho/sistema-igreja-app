@@ -15,7 +15,7 @@ export default function PageBase({
 }) {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor={"#fff"} />
+      <StatusBar backgroundColor={"#fff"} style="dark" />
       <View style={styles.boxHeader}>
         <ButtonBack color={"#339dd7"} />
         <Text style={styles.textTitle}>{title}</Text>

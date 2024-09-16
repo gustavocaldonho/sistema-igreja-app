@@ -144,11 +144,15 @@ export default function ModalPagamentoDizimo({
           ) : (
             <View>
               <Text style={styles.modalText}>Código Pix</Text>
-              <Image
-                style={styles.qrcode}
-                source={{ uri: linkQrCode }}
-                alt="qr-code.png"
-              />
+              {linkQrCode ? (
+                <Image
+                  style={styles.qrcode}
+                  source={{ uri: linkQrCode }}
+                  alt="qr-code.png"
+                />
+              ) : (
+                <Text style={styles.modalText}>QR Code indisponível</Text>
+              )}
               <TouchableOpacity
                 style={styles.boxButtonCopyCode}
                 activeOpacity={0.7}

@@ -7,6 +7,9 @@ export function getYear(data) {
 }
 
 export function getExpiresDate(data) {
+  if (data === null) {
+    return "(não informado)";
+  }
   const year = data.slice(0, 4);
   const month = data.slice(5, 7);
   const day = data.slice(8, 10);

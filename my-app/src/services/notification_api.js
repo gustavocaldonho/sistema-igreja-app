@@ -1,10 +1,9 @@
 import api from "./api";
 
-export const sendApiExpoToken = async (fcmToken, tokenUser) => {
+export const sendApiFCMToken = async (fcmToken, tokenUser) => {
   try {
-    console.log("pegou");
-    console.log("pegou: ", fcmToken);
-    console.log("pegou: ", tokenUser);
+    console.log("pegou fcm: ", fcmToken);
+    console.log("pegou user: ", tokenUser);
     const response = await api.post(
       "/web_push/subscription",
       {
