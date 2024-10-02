@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   },
   boxFormCadastro: {
     width: "85%",
+    minHeight: "61%",
     borderRadius: 35,
     paddingVertical: 30,
     alignSelf: "center",

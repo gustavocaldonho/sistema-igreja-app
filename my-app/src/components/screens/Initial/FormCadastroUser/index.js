@@ -73,10 +73,10 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       setVisibleIndicator(true);
       const response = await getCommunitiesWithoutToken();
       setPatronList(response);
-      setVisibleIndicator(false);
     } catch (error) {
       console.log(error);
     }
+    setVisibleIndicator(false);
   }
 
   function getItemsSelectCommunity(dataList) {

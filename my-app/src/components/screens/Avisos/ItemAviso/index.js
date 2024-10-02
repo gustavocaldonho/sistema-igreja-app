@@ -25,7 +25,7 @@ export default function ItemAviso({
         <View style={styles.boxTitle}>
           <Text style={[styles.textTitle, styles.titleNotDisplayed]}>
             {title}
-            {scope !== "private" && scope !== false ? " (Paróquia)" : ""}
+            {scope !== "private" && scope !== false ? " (Comunidade)" : ""}
           </Text>
           {viewed ? <Icon name="circle" style={styles.iconNotDisplayed} /> : ""}
         </View>

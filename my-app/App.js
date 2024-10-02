@@ -4,6 +4,7 @@ import { AppRegistry } from "react-native";
 import { name as appName } from "./app.json";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
+import "@react-native-firebase/app";
 import AuthProvider from "./src/contexts/auth";
 import MyStack from "./src/routes/MyStack";
 import * as Notifications from "expo-notifications";

@@ -124,7 +124,7 @@ export default function FormDefault({
       />
 
       <View style={styles.boxSwitch}>
-        <Text style={styles.textSwitch}>Visível para toda a Paróquia</Text>
+        <Text style={styles.textSwitch}>Visível para toda a Comunidade?</Text>
         <Switch
           trackColor={{ false: "#767577", true: "#E1E0E1" }}
           thumbColor={scope === "public" ? "#339dd7" : "#f4f3f4"}
