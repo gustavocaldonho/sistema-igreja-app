@@ -174,6 +174,21 @@ export const upgradeUser = async (data, token) => {
   }
 };
 
+// temporário
+export const getUsersTemp = async (token) => {
+  try {
+    const response = await api.get(`/users/all`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 // Authorization: `Bearer ${token}`,
 
 // const user_api = async (data) => {

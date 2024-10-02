@@ -9,6 +9,7 @@ import ModalCommunity from "../Comunidades/ModalCommunity";
 import ModalAdvisor from "./ModalAdvisor";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getDatasCommunity } from "../../../services/community_api";
+import { getUsersTemp } from "../../../services/user_api";
 import ItemAdvisorContent from "./ItemAdvisorContent";
 import styles from "./style";
 import { AuthContext } from "../../../contexts/auth";
@@ -19,6 +20,7 @@ export default function PerfilCommunity({ navigation, route }) {
   const [datas, setDatas] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useContext(AuthContext);
+  const [qtdUsers, setQtdUsers] = useState(0);
 
   const [itemAdvisorClicked, setItemAdvisorClicked] = useState({});
   const [advisorModalVisible, setAdvisorModalVisible] = useState(false);
@@ -45,8 +47,23 @@ export default function PerfilCommunity({ navigation, route }) {
     }
   }
 
+  async function getUsers() {
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getUsersTemp(token);
+      if (response != undefined) {
+        setQtdUsers(response.length);
+      } else {
+        AlertMsg("Não foi possível obter os usuários.");
+      }
+    } catch (error) {
+      AlertMsg("Falha na requisição.", error);
+    }
+  }
+
   useEffect(() => {
     getDatasCommunityForm();
+    getUsers();
   }, []);
 
   return (
@@ -100,22 +117,22 @@ export default function PerfilCommunity({ navigation, route }) {
             >
               <ItemHighlight
                 style={styles.boxShadow}
-                number={647}
+                number={qtdUsers}
                 label={"Fiéis"}
               />
               <ItemHighlight
                 style={styles.boxShadow}
-                number={470}
+                number={0}
                 label={"Pagantes"}
               />
               <ItemHighlight
                 style={styles.boxShadow}
-                number={"3.460,00"}
+                number={"R$ 0,00"}
                 label={"Dízimo"}
               />
               <ItemHighlight
                 style={styles.boxShadow}
-                number={"23.500,00"}
+                number={"R$ 0,00"}
                 label={"Caixa Mortuária"}
               />
             </View>

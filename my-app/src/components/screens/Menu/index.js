@@ -37,11 +37,11 @@ export default function Menu({ navigation }) {
               })
             }
           />
-          <ItemMenu
+          {/* <ItemMenu
             screenName={"Dízimo"}
             icon={"heart"}
             onPress={() => navigation.navigate("Dizimo")}
-          />
+          /> */}
           {/* <ItemMenu
             screenName={"Caixa Mortuária"}
             icon={"cross"}

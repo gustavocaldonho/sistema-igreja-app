@@ -57,10 +57,10 @@ export default function PerfilUser({ navigation, route }) {
               setModalVisible={setModalVisible}
             />
 
-            <DizimoContainer
+            {/* <DizimoContainer
               style={[styles.boxInformationsUser, styles.boxShadow]}
               styleTitleBox={styles.textTitleBox}
-            />
+            /> */}
 
             {/* <MortuaryContainer
               years={{}}
