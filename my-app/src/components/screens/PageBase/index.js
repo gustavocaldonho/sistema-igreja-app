@@ -22,9 +22,9 @@ export default function PageBase({
       </View>
       <View style={styles.innerContainer}>
         <BoxLinearGradient style={{ flex: 1 }}>
-          <ScrollView>
-            <View style={styles.main}>{children}</View>
-          </ScrollView>
+          {/* <ScrollView> */}
+          <View style={styles.main}>{children}</View>
+          {/* </ScrollView> */}
           {signButtonAdd ? <ButtonAdd onPress={onPressAdd} /> : ""}
         </BoxLinearGradient>
       </View>

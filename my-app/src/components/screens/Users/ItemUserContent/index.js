@@ -1,5 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View } from "react-native";
+import {
+  View,
+  FlatList,
+  ActivityIndicator,
+  Text,
+  StyleSheet,
+} from "react-native";
 import ItemUser from "../ItemUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUsersCommunity } from "../../../../services/user_api";
@@ -15,14 +21,16 @@ export default function ItemUserContent({ navigation, setVisibleIndicator }) {
       setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await getUsersCommunity(user.community, token);
-      if (response.status === 200) {
+
+      if (response && response.status === 200 && Array.isArray(response.data)) {
         setUserList(response.data);
-        setVisibleIndicator(false);
       } else {
         AlertMsg("Não foi possível obter a lista de usuários.");
       }
     } catch (error) {
       AlertMsg("Falha na requisição.", error);
+    } finally {
+      setVisibleIndicator(false);
     }
   }
 
@@ -30,16 +38,31 @@ export default function ItemUserContent({ navigation, setVisibleIndicator }) {
     getUsersForm();
   }, []);
 
+  const renderItem = ({ item }) => (
+    <ItemUser
+      name={item.name || "Nome não disponível"}
+      cpf={item.cpf || "CPF não disponível"}
+      navigation={navigation}
+    />
+  );
+
   return (
     <View>
-      {userList.map((user, idx) => (
-        <ItemUser
-          name={user.name}
-          cpf={user.cpf}
-          navigation={navigation}
-          key={`item-user-${idx}`}
-        />
-      ))}
+      <FlatList
+        data={userList}
+        keyExtractor={(item, index) => `item-user-${index}`}
+        renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={<View style={{ height: 100 }} />}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

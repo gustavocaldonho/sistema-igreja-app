@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     paddingHorizontal: 15,
-    paddingBottom: 100,
+    // paddingBottom: 100,
   },
   boxHeader: {
     flexDirection: "row",
