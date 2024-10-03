@@ -19,6 +19,7 @@ import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword
 import { useNavigation } from "@react-navigation/native";
 import { desformatCpf, formatCpf } from "../FormCadastroUser/functions";
 import { AuthContext } from "../../../../contexts/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
@@ -50,6 +51,17 @@ export default function FormLogin() {
     setCpf("");
     setPassword("");
   }
+
+  // Login automático, se tiver um usuário (cpf e password) salvo no async storage
+  useEffect(() => {
+    const makeLogin = async () => {
+      const data = await AsyncStorage.getItem("Login");
+      if (data !== null) {
+        login(JSON.parse(data));
+      }
+    };
+    makeLogin();
+  }, []);
 
   return (
     // usar <ScrollView></ScrollView>

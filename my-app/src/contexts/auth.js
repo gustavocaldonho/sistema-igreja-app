@@ -39,6 +39,7 @@ function AuthProvider({ children }) {
           "AccessToken",
           String(response.data.access_token)
         );
+        await AsyncStorage.setItem("Login", JSON.stringify(data));
         const fcmToken = await AsyncStorage.getItem("FCMToken");
         await sendApiFCMToken(fcmToken, token);
         console.log("(auth) ", fcmToken);
@@ -51,7 +52,8 @@ function AuthProvider({ children }) {
 
   async function signOut() {
     setUser({});
-    await AsyncStorage.removeItem("AccessToken");
+    const keys = await AsyncStorage.getAllKeys();
+    await AsyncStorage.multiRemove(keys);
     navigation.navigate("Initial");
   }
 
