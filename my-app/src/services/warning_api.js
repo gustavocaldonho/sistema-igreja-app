@@ -1,13 +1,19 @@
 import api from "./api";
 
-export const getTenWarnings = async (community, token) => {
+export const getTenWarnings = async (community, token, page) => {
+  const pageSize = 10;
   try {
-    const response = await api.get(`/community/warnings/${community}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
+    const response = await api.get(
+      // /community/warnings/{community_patron}/paginated/{page}/{page_size}
+      `/community/warnings/${community}/paginated/${page}/${pageSize}`,
+      // { page, page_size: 10 },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
     return response;
   } catch (error) {
     return error;

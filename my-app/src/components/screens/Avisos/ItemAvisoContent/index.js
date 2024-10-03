@@ -36,7 +36,10 @@ export default function ItemAvisoContent({
       }
 
       const token = await AsyncStorage.getItem("AccessToken");
-      const response = await getTenWarnings(user.community, token, pageNumber); // Envie o número da página para a API
+      const response = await getTenWarnings(user.community, token, pageNumber); // Use o número da página passada como argumento
+
+      console.log("page: ", pageNumber);
+      console.log(response);
 
       if (response.status === 200) {
         const newWarnings = response.data;
@@ -52,6 +55,7 @@ export default function ItemAvisoContent({
           setHasMoreWarnings(false); // Não há mais avisos para carregar
         }
       } else {
+        console.log(response);
         AlertMsg("Não retornou a lista de avisos.");
       }
     } catch (error) {
@@ -69,9 +73,9 @@ export default function ItemAvisoContent({
   // Função chamada quando o usuário chega ao fim da lista
   const loadMoreWarnings = () => {
     if (hasMoreWarnings && !loadingMore) {
-      setPage((prevPage) => prevPage + 1); // Incrementa o número da página
-      getWarningList(page + 1); // Carrega a próxima página
-      // console.log("page: ", page);
+      const nextPage = page + 1; // Incrementa a página localmente
+      setPage(nextPage); // Atualiza o estado com a nova página
+      getWarningList(nextPage); // Passa a próxima página diretamente
     }
   };
 
