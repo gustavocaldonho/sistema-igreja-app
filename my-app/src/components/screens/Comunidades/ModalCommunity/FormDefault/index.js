@@ -59,10 +59,10 @@ export default function FormDefault({
         AlertMsg(
           "Não foi possível atualizar a comunidade. Tente novamente mais tarde."
         );
-        setVisibleIndicator(false);
       }
     } catch (error) {
       AlertMsg("Falha na requisição.", error);
+    } finally {
       setVisibleIndicator(false);
     }
   }

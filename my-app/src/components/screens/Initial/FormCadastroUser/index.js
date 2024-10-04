@@ -121,12 +121,15 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           String(response.data.access_token)
         );
         await setDatasUser(response.data.access_token, newDatas.password);
-        setVisibleSpinner(false);
         msgUpdateSuccess(setModalVisible, navigation);
+      } else {
+        throw new Error("Não é possível atualizar o usuário.");
       }
     } catch (error) {
       console.log(error);
       msgUpdateError();
+    } finally {
+      setVisibleSpinner(false);
     }
   }
 
