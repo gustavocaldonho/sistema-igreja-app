@@ -19,10 +19,12 @@ export default function FormConfirmation({
       if (response.status === 204) {
         setModalVisible(!modalVisible);
       } else {
-        AlertMsg(`Não foi possível excluir o aviso.`);
+        throw new Error("Não foi possível excluir o aviso.");
       }
     } catch (error) {
       AlertMsg(`Falha na requisição. ${error}`);
+    } finally {
+      setModalVisible(!modalVisible);
     }
   }
 

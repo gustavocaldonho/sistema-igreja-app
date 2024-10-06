@@ -39,11 +39,11 @@ export default function FormDefault({
       if (response.status === 201) {
         setModalVisible(!modalVisible);
       } else {
-        AlertMsg(`Não foi possível criar o aviso.`);
+        throw new Error("Não foi possível criar o aviso.");
       }
-      setVisibleIndicator(false);
     } catch (error) {
       AlertMsg(`Falha na requisição. ${error}`);
+    } finally {
       setVisibleIndicator(false);
     }
   }
@@ -57,11 +57,11 @@ export default function FormDefault({
         setModalVisible(!modalVisible);
         itemClicked = undefined;
       } else {
-        AlertMsg(`Não foi possível atualizar o aviso.`);
+        throw new Error("Não foi possível atualizar o aviso.");
       }
-      setVisibleIndicator(false);
     } catch (error) {
       AlertMsg(`Falha na requisição. ${error}`);
+    } finally {
       setVisibleIndicator(false);
     }
   }

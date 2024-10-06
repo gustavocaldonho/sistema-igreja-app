@@ -40,10 +40,12 @@ export default function FormDefault({
       if (response.status === 204) {
         setAdvisorModalVisible(!advisorModalVisible);
       } else {
-        AlertMsg("Não foi possível atualizar as informações do usuários.");
+        throw new Error(
+          "Não foi possível atualizar as informações do usuários."
+        );
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      AlertMsg(error);
     }
   }
 
@@ -69,10 +71,10 @@ export default function FormDefault({
         const newList = filterList(response.data);
         setUserList(newList);
       } else {
-        AlertMsg("Não foi possível retornar a lista de usuários.");
+        throw new Error("Não foi possível retornar a lista de usuários.");
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      AlertMsg(error);
     }
   }
 

@@ -47,6 +47,7 @@ import InputGroupDN from "../../../auxiliary/InputGroup/InputGroupDN";
 import InputGroupSelect from "../../../auxiliary/InputGroup/InputGroupSelect";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
+import AlertMsg from "../../../auxiliary/AlertMsg";
 
 export default function FormCadastroUser({ user, setModalVisible }) {
   const [name, setName] = useState(user ? user.name : "");
@@ -94,18 +95,23 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   }, []);
 
   async function addUser(item) {
-    // console.log(item);
     try {
       setVisibleSpinner(true);
       const response = await signupUser(item);
       if (response.status === 201) {
-        setVisibleSpinner(false);
         setModalSuccessVisible(!modalSuccessVisible);
+      } else {
+        throw new Error(
+          "Não foi possível adicionar o usuário. Verifique suas informações e tente novamente."
+        );
       }
+      console.log(response);
       console.log("(add): ", item);
     } catch (error) {
-      msgError();
+      AlertMsg(error);
       console.log(error);
+    } finally {
+      setVisibleSpinner(false);
     }
   }
 

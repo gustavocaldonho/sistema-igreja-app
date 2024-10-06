@@ -37,13 +37,13 @@ export default function FormLogin() {
         resetInputs();
         setShowError(false);
         navigation.navigate("Menu");
-        setVisibleSpinner(false);
       }
     } catch (error) {
       setShowError(true);
-      setVisibleSpinner(false);
       console.log("error (login): ", error);
       console.log("data (login): ", data);
+    } finally {
+      setVisibleSpinner(false);
     }
   }
 
