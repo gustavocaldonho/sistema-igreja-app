@@ -8,7 +8,6 @@ import "@react-native-firebase/app";
 import AuthProvider from "./src/contexts/auth";
 import MyStack from "./src/routes/MyStack";
 import * as Notifications from "expo-notifications";
-import "@react-native-firebase/app";
 import messaging from "@react-native-firebase/messaging";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -54,9 +53,15 @@ export default function App() {
       const permissionGranted = await requestUserPermission();
       if (permissionGranted) {
         try {
-          const token = await messaging().getToken();
-          console.log("FCM Token:", token);
-          await AsyncStorage.setItem("FCMToken", token);
+          // Verifique se o token já está armazenado no AsyncStorage
+          const existingToken = await AsyncStorage.getItem("FCMToken");
+          if (!existingToken) {
+            const token = await messaging().getToken();
+            console.log("FCM Token:", token);
+            await AsyncStorage.setItem("FCMToken", token);
+          } else {
+            console.log("Existing FCM Token:", existingToken);
+          }
         } catch (error) {
           console.error("Failed to get FCM token", error);
         }
@@ -81,13 +86,11 @@ export default function App() {
         );
       });
 
-      // Register background handler
       messaging().setBackgroundMessageHandler(async (remoteMessage) => {
         console.log("Message handled in the background!", remoteMessage);
       });
 
       const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-        // Notificação exibida quando o app está em primeiro plano
         await Notifications.scheduleNotificationAsync({
           content: {
             title: remoteMessage.notification.title || "New Notification",
