@@ -20,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { desformatCpf, formatCpf } from "../FormCadastroUser/functions";
 import { AuthContext } from "../../../../contexts/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AlertMsg from "../../../auxiliary/AlertMsg";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
@@ -35,14 +36,20 @@ export default function FormLogin() {
       const response = await signIn(data);
       if (response.data.access_token !== undefined) {
         resetInputs();
-        setShowError(false);
         navigation.navigate("Menu");
+      } else {
+        throw new Error("Não foi possível fazer login.");
       }
     } catch (error) {
-      setShowError(true);
+      // Se o login automático der erro (login está no storage), não mostra a msg de erro.
+      AsyncStorage.getItem("Login").then((item) => {
+        console.log("Login storage: ", item);
+        item !== null ? setShowError(false) : setShowError(true);
+      });
       console.log("error (login): ", error);
       console.log("data (login): ", data);
     } finally {
+      setShowError(false);
       setVisibleSpinner(false);
     }
   }
@@ -96,7 +103,7 @@ export default function FormLogin() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            login({ cpf: "49403669012", password: "Te0101##" });
+            // login({ cpf: "49403669012", password: "Te0101##" });
             // login({ cpf: "14734570760", password: "Gu2405##" });
             // login({ cpf: "99991581022", password: "Gi0410##" });
             // login({ cpf: "53705211072", password: "Jo2908##" });
@@ -107,7 +114,7 @@ export default function FormLogin() {
             // login({ cpf: "26536306058", password: "Fa0101##" });
             // c
             // login({ cpf: "32300950065", password: "sEnha123456**" });
-            // login({ cpf: desformatCpf(cpf), password });
+            login({ cpf: desformatCpf(cpf), password });
           }}
         >
           <Text style={styles.textButton}>Entrar</Text>

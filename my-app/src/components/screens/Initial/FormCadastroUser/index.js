@@ -39,6 +39,7 @@ import {
   msgUpdateSuccess,
 } from "./alerts";
 import ModalCompleteRegistry from "./ModalCompleteRegistry";
+import AlertMsg from "../../../auxiliary/AlertMsg";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -47,7 +48,6 @@ import InputGroupDN from "../../../auxiliary/InputGroup/InputGroupDN";
 import InputGroupSelect from "../../../auxiliary/InputGroup/InputGroupSelect";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
-import AlertMsg from "../../../auxiliary/AlertMsg";
 
 export default function FormCadastroUser({ user, setModalVisible }) {
   const [name, setName] = useState(user ? user.name : "");
@@ -73,11 +73,20 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     try {
       setVisibleIndicator(true);
       const response = await getCommunitiesWithoutToken();
-      setPatronList(response);
+      if (response.status === 200) {
+        setPatronList(response);
+      } else {
+        throw new Error(
+          "Não foi possível carregar a lista de comunidades. Volte mais tarde."
+        );
+      }
     } catch (error) {
+      AlertMsg(error);
       console.log(error);
+    } finally {
+      setVisibleIndicator(false);
+      return [];
     }
-    setVisibleIndicator(false);
   }
 
   function getItemsSelectCommunity(dataList) {
