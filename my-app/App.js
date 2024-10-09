@@ -53,17 +53,18 @@ export default function App() {
       const permissionGranted = await requestUserPermission();
       if (permissionGranted) {
         try {
-          // Verifique se o token já está armazenado no AsyncStorage
+          const token = await messaging().getToken();
           const existingToken = await AsyncStorage.getItem("FCMToken");
-          if (!existingToken) {
-            const token = await messaging().getToken();
-            console.log("FCM Token:", token);
-            await AsyncStorage.setItem("FCMToken", token);
+          if (token && token != existingToken) {
+            await AsyncStorage.removeItem("FCMToken"); //deleta o FCMToken antigo
+            await AsyncStorage.setItem("FCMToken", token); //adiciona o FCMToken novo
+          } else if (!token) {
+            throw new Error("Failed to get FCM token");
           } else {
             console.log("Existing FCM Token:", existingToken);
           }
         } catch (error) {
-          console.error("Failed to get FCM token", error);
+          console.error(error);
         }
       }
 

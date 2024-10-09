@@ -74,7 +74,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       setVisibleIndicator(true);
       const response = await getCommunitiesWithoutToken();
       if (response.status === 200) {
-        setPatronList(response);
+        setPatronList(response.data);
       } else {
         throw new Error(
           "Não foi possível carregar a lista de comunidades. Volte mais tarde."

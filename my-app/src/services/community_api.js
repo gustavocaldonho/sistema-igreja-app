@@ -7,7 +7,7 @@ export const getCommunitiesWithoutToken = async () => {
         "Content-Type": "application/json",
       },
     });
-    return response.data;
+    return response;
   } catch (error) {
     return error;
   }

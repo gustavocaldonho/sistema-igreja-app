@@ -52,7 +52,8 @@ function AuthProvider({ children }) {
 
   async function signOut() {
     setUser({});
-    const keys = await AsyncStorage.getAllKeys();
+    let keys = await AsyncStorage.getAllKeys();
+    keys = keys.filter((item) => item != "FCMToken");
     await AsyncStorage.multiRemove(keys);
     navigation.navigate("Initial");
   }
