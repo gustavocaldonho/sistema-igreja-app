@@ -97,6 +97,9 @@ export default function App() {
             title: remoteMessage.notification.title || "New Notification",
             body: remoteMessage.notification.body || "You have a new message",
           },
+          android: {
+            icon: "./assets/icon-notification.png",
+          },
           trigger: null, // Exibe a notificação imediatamente
         });
       });

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "e-igreja",
+    "name": "e-Igreja",
     "slug": "my-app",
     "version": "1.0.1",
     "orientation": "portrait",
@@ -10,6 +10,9 @@
       "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
+    },
+    "notification": {
+      "icon": "./assets/icon-notification.png"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
