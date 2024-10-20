@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, PermissionsAndroid, Platform } from "react-native";
 import { AppRegistry } from "react-native";
 import { name as appName } from "./app.json";
 import { NavigationContainer } from "@react-navigation/native";
@@ -11,6 +11,7 @@ import * as Notifications from "expo-notifications";
 import messaging from "@react-native-firebase/messaging";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+// Função para configurar o canal de notificação
 const setupNotificationChannel = async () => {
   await Notifications.setNotificationChannelAsync("default", {
     name: "default",
@@ -19,6 +20,7 @@ const setupNotificationChannel = async () => {
   });
 };
 
+// Manipulador de notificações
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -28,74 +30,97 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
-  const requestUserPermission = async () => {
-    try {
-      const authStatus = await messaging().requestPermission();
-      const enabled =
-        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-      if (enabled) {
-        console.log("Authorization status:", authStatus);
-        return true;
-      } else {
-        console.log("Failed to get permission status", authStatus);
+  // Função para solicitar permissões de notificações
+  const requestNotificationPermission = async () => {
+    if (Platform.OS === "android") {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+          {
+            title: "Permissão para Notificações",
+            message: "O app gostaria de enviar notificações",
+            buttonNeutral: "Perguntar depois",
+            buttonNegative: "Cancelar",
+            buttonPositive: "Permitir",
+          }
+        );
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } catch (error) {
+        console.error("Falha ao solicitar permissão de notificação", error);
         return false;
       }
-    } catch (error) {
-      console.error("Permission request failed", error);
-      return false;
+    } else {
+      try {
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+          authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+          authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+        return enabled;
+      } catch (error) {
+        console.error("Falha ao solicitar permissão de notificação", error);
+        return false;
+      }
     }
   };
 
   useEffect(() => {
     const initializeMessaging = async () => {
-      const permissionGranted = await requestUserPermission();
+      // Solicita permissão de notificações
+      const permissionGranted = await requestNotificationPermission();
       if (permissionGranted) {
         try {
+          // Obtém o token FCM
           const token = await messaging().getToken();
           const existingToken = await AsyncStorage.getItem("FCMToken");
-          if (token && token != existingToken) {
-            await AsyncStorage.removeItem("FCMToken"); //deleta o FCMToken antigo
-            await AsyncStorage.setItem("FCMToken", token); //adiciona o FCMToken novo
+          if (token && token !== existingToken) {
+            await AsyncStorage.removeItem("FCMToken"); // Deleta o FCMToken antigo
+            await AsyncStorage.setItem("FCMToken", token); // Armazena o novo FCMToken
           } else if (!token) {
-            throw new Error("Failed to get FCM token");
+            throw new Error("Falha ao obter token FCM");
           } else {
-            console.log("Existing FCM Token:", existingToken);
+            console.log("FCM Token existente:", existingToken);
           }
         } catch (error) {
           console.error(error);
         }
       }
 
+      // Configura o canal de notificações
       await setupNotificationChannel();
+
+      // Manipula notificações quando o app é aberto pelo estado de quit
       messaging()
         .getInitialNotification()
         .then((remoteMessage) => {
           if (remoteMessage) {
             console.log(
-              "Notification caused app to open from quit state:",
+              "Notificação fez o app abrir do estado quit:",
               remoteMessage.notification
             );
           }
         });
 
+      // Manipula notificações quando o app está em segundo plano
       messaging().onNotificationOpenedApp((remoteMessage) => {
         console.log(
-          "Notification caused app to open from background state:",
+          "Notificação fez o app abrir do estado em segundo plano:",
           remoteMessage.notification
         );
       });
 
+      // Manipula notificações em segundo plano
       messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-        console.log("Message handled in the background!", remoteMessage);
+        console.log("Mensagem manipulada em segundo plano!", remoteMessage);
       });
 
+      // Manipula notificações enquanto o app está em execução (foreground)
       const unsubscribe = messaging().onMessage(async (remoteMessage) => {
         await Notifications.scheduleNotificationAsync({
           content: {
-            title: remoteMessage.notification.title || "New Notification",
-            body: remoteMessage.notification.body || "You have a new message",
+            title: remoteMessage.notification.title || "Nova Notificação",
+            body:
+              remoteMessage.notification.body || "Você tem uma nova mensagem",
           },
           android: {
             icon: "./assets/icon-notification.png",
