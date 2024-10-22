@@ -17,7 +17,6 @@ export const sendApiFCMToken = async (fcmToken, tokenUser) => {
       }
     );
     console.log(response);
-    console.log("PASSOU");
 
     return response;
   } catch (error) {

@@ -41,7 +41,6 @@ export default function App() {
               buttonPositive: "Permitir",
             }
           );
-
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             console.log("Permissão para notificações concedida.");
             return true;
@@ -70,7 +69,8 @@ export default function App() {
               ]
             );
           }
-          return true;
+          console.log("enable: ", enabled.status);
+          return enabled.status === "granted" ? true : false;
         }
       } catch (error) {
         console.error("Falha ao solicitar permissão de notificação", error);
@@ -82,7 +82,7 @@ export default function App() {
   useEffect(() => {
     const initializeMessaging = async () => {
       const permissionGranted = await requestUserPermission();
-      console.log("Permissão concedida: ", permissionGranted);
+      console.log("Permissão de Notificação concedida: ", permissionGranted);
 
       if (permissionGranted) {
         try {
@@ -98,7 +98,11 @@ export default function App() {
         } catch (error) {
           console.error("Erro ao obter o token FCM:", error);
         }
+      } else {
+        await AsyncStorage.removeItem("FCMToken");
       }
+      // const t = await AsyncStorage.getItem("FCMToken");
+      // console.log("t: ", t);
 
       await setupNotificationChannel();
 
@@ -123,6 +127,21 @@ export default function App() {
       messaging().setBackgroundMessageHandler(async (remoteMessage) => {
         console.log("Mensagem recebida em segundo plano:", remoteMessage);
       });
+
+      const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: remoteMessage.notification.title || "New Notification",
+            body: remoteMessage.notification.body || "You have a new message",
+          },
+          android: {
+            icon: "./assets/icon-notification.png",
+          },
+          trigger: null, // Exibe a notificação imediatamente
+        });
+      });
+
+      return unsubscribe;
     };
 
     initializeMessaging();

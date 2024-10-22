@@ -41,7 +41,9 @@ function AuthProvider({ children }) {
         );
         await AsyncStorage.setItem("Login", JSON.stringify(data));
         const fcmToken = await AsyncStorage.getItem("FCMToken");
-        await sendApiFCMToken(fcmToken, token);
+        if (fcmToken) {
+          await sendApiFCMToken(fcmToken, token);
+        }
         console.log("(auth) FCMToken: ", fcmToken);
       }
       return response;
