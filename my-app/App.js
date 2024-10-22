@@ -11,7 +11,6 @@ import * as Notifications from "expo-notifications";
 import messaging from "@react-native-firebase/messaging";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Função para configurar o canal de notificação
 const setupNotificationChannel = async () => {
   await Notifications.setNotificationChannelAsync("default", {
     name: "default",
@@ -20,7 +19,6 @@ const setupNotificationChannel = async () => {
   });
 };
 
-// Manipulador de notificações
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -30,8 +28,7 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
-  // Função para solicitar permissões de notificações
-  const requestNotificationPermission = async () => {
+  const requestUserPermission = async () => {
     if (Platform.OS === "android") {
       try {
         const granted = await PermissionsAndroid.request(
@@ -44,7 +41,9 @@ export default function App() {
             buttonPositive: "Permitir",
           }
         );
-        return granted === PermissionsAndroid.RESULTS.GRANTED;
+        console.log("granted: ", granted);
+        console.log("notification: ", PermissionsAndroid.RESULTS.GRANTED);
+        return "granted" === PermissionsAndroid.RESULTS.GRANTED; //###### tirar as ""
       } catch (error) {
         console.error("Falha ao solicitar permissão de notificação", error);
         return false;
@@ -66,61 +65,53 @@ export default function App() {
 
   useEffect(() => {
     const initializeMessaging = async () => {
-      // Solicita permissão de notificações
-      const permissionGranted = await requestNotificationPermission();
+      const permissionGranted = await requestUserPermission();
+      console.log("permissionGranted: ", permissionGranted);
       if (permissionGranted) {
         try {
-          // Obtém o token FCM
           const token = await messaging().getToken();
           const existingToken = await AsyncStorage.getItem("FCMToken");
-          if (token && token !== existingToken) {
-            await AsyncStorage.removeItem("FCMToken"); // Deleta o FCMToken antigo
-            await AsyncStorage.setItem("FCMToken", token); // Armazena o novo FCMToken
+          if (token && token != existingToken) {
+            await AsyncStorage.removeItem("FCMToken"); //deleta o FCMToken antigo
+            await AsyncStorage.setItem("FCMToken", token); //adiciona o FCMToken novo
           } else if (!token) {
-            throw new Error("Falha ao obter token FCM");
+            throw new Error("Failed to get FCM token");
           } else {
-            console.log("FCM Token existente:", existingToken);
+            console.log("Existing FCM Token:", existingToken);
           }
         } catch (error) {
           console.error(error);
         }
       }
 
-      // Configura o canal de notificações
       await setupNotificationChannel();
-
-      // Manipula notificações quando o app é aberto pelo estado de quit
       messaging()
         .getInitialNotification()
         .then((remoteMessage) => {
           if (remoteMessage) {
             console.log(
-              "Notificação fez o app abrir do estado quit:",
+              "Notification caused app to open from quit state:",
               remoteMessage.notification
             );
           }
         });
 
-      // Manipula notificações quando o app está em segundo plano
       messaging().onNotificationOpenedApp((remoteMessage) => {
         console.log(
-          "Notificação fez o app abrir do estado em segundo plano:",
+          "Notification caused app to open from background state:",
           remoteMessage.notification
         );
       });
 
-      // Manipula notificações em segundo plano
       messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-        console.log("Mensagem manipulada em segundo plano!", remoteMessage);
+        console.log("Message handled in the background!", remoteMessage);
       });
 
-      // Manipula notificações enquanto o app está em execução (foreground)
       const unsubscribe = messaging().onMessage(async (remoteMessage) => {
         await Notifications.scheduleNotificationAsync({
           content: {
-            title: remoteMessage.notification.title || "Nova Notificação",
-            body:
-              remoteMessage.notification.body || "Você tem uma nova mensagem",
+            title: remoteMessage.notification.title || "New Notification",
+            body: remoteMessage.notification.body || "You have a new message",
           },
           android: {
             icon: "./assets/icon-notification.png",
@@ -132,6 +123,7 @@ export default function App() {
       return unsubscribe;
     };
 
+    console.log("opa");
     initializeMessaging();
   }, []);
 
