@@ -6,9 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "cli": {
-      "appVersionSource": "local"
-    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
@@ -25,7 +22,6 @@
       "package": "com.gcaldonho.myapp",
       "versionCode": 3,
       "googleServicesFile": "./google-services.json",
-      "useNextNotificationsApi": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -38,11 +34,6 @@
     "extra": {
       "eas": {
         "projectId": "20d6e717-1aea-4c22-a0b0-756bb3f05867"
-      }
-    },
-    "env": {
-      "production": {
-        "API_URL": "https://api.example.com"
       }
     },
     "owner": "gcaldonho"
