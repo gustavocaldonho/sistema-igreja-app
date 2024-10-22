@@ -40,6 +40,11 @@
         "projectId": "20d6e717-1aea-4c22-a0b0-756bb3f05867"
       }
     },
+    "env": {
+      "production": {
+        "API_URL": "https://api.example.com"
+      }
+    },
     "owner": "gcaldonho"
   }
 }
