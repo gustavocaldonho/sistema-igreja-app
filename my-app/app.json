@@ -2,10 +2,13 @@
   "expo": {
     "name": "e-Igreja",
     "slug": "my-app",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "cli": {
+      "appVersionSource": "local"
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
@@ -20,7 +23,7 @@
     },
     "android": {
       "package": "com.gcaldonho.myapp",
-      "versionCode": 2,
+      "versionCode": 3,
       "googleServicesFile": "./google-services.json",
       "useNextNotificationsApi": true,
       "adaptiveIcon": {
