@@ -39,6 +39,7 @@ import {
   msgUpdateSuccess,
 } from "./alerts";
 import ModalCompleteRegistry from "./ModalCompleteRegistry";
+import AlertMsg from "../../../auxiliary/AlertMsg";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -72,11 +73,20 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     try {
       setVisibleIndicator(true);
       const response = await getCommunitiesWithoutToken();
-      setPatronList(response);
+      if (response.status === 200) {
+        setPatronList(response.data);
+      } else {
+        throw new Error(
+          "Não foi possível carregar a lista de comunidades. Volte mais tarde."
+        );
+      }
     } catch (error) {
+      AlertMsg(error);
       console.log(error);
+    } finally {
+      setVisibleIndicator(false);
+      return [];
     }
-    setVisibleIndicator(false);
   }
 
   function getItemsSelectCommunity(dataList) {
@@ -94,18 +104,23 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   }, []);
 
   async function addUser(item) {
-    // console.log(item);
     try {
       setVisibleSpinner(true);
       const response = await signupUser(item);
       if (response.status === 201) {
-        setVisibleSpinner(false);
         setModalSuccessVisible(!modalSuccessVisible);
+      } else {
+        throw new Error(
+          "Não foi possível adicionar o usuário. Verifique suas informações e tente novamente."
+        );
       }
+      console.log(response);
       console.log("(add): ", item);
     } catch (error) {
-      msgError();
+      AlertMsg(error);
       console.log(error);
+    } finally {
+      setVisibleSpinner(false);
     }
   }
 
@@ -121,12 +136,15 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           String(response.data.access_token)
         );
         await setDatasUser(response.data.access_token, newDatas.password);
-        setVisibleSpinner(false);
         msgUpdateSuccess(setModalVisible, navigation);
+      } else {
+        throw new Error("Não é possível atualizar o usuário.");
       }
     } catch (error) {
       console.log(error);
       msgUpdateError();
+    } finally {
+      setVisibleSpinner(false);
     }
   }
 

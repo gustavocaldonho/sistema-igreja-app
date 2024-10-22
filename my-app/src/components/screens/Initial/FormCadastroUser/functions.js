@@ -6,6 +6,14 @@ export function checkCpf(cpf) {
   return desformatCpf(cpf).length !== 11 ? true : false;
 }
 
+export function checkEmail(email) {
+  if (email.includes("@") && email.includes(".com")) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 export function checkPhone(phone) {
   return phone.length !== 15 ? true : false;
 }

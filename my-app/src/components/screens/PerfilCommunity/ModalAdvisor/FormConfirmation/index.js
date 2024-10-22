@@ -22,10 +22,10 @@ export default function FormConfirmation({
       if (response.status === 204) {
         setAdvisorModalVisible(!advisorModalVisible);
       } else {
-        AlertMsg("Não foi possível excluir o conselheiro.");
+        throw new Error("Não foi possível excluir o conselheiro.");
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      AlertMsg(error);
     }
   }
 

@@ -36,13 +36,13 @@ export default function FormDefault({
         setModalVisible(!modalVisible);
         navigation.goBack();
       } else {
-        AlertMsg(
+        throw new Error(
           "Não foi possível criar a comunidade. Tente novamente mais tarde."
         );
-        setVisibleIndicator(false);
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      AlertMsg(error);
+    } finally {
       setVisibleIndicator(false);
     }
   }
@@ -56,13 +56,13 @@ export default function FormDefault({
         navigation.navigate("Menu");
         setModalVisible(false);
       } else {
-        AlertMsg(
+        throw new Error(
           "Não foi possível atualizar a comunidade. Tente novamente mais tarde."
         );
-        setVisibleIndicator(false);
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      AlertMsg(error);
+    } finally {
       setVisibleIndicator(false);
     }
   }

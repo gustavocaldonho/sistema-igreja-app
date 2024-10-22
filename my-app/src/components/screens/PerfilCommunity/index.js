@@ -40,10 +40,10 @@ export default function PerfilCommunity({ navigation, route }) {
       if (response.status === 200) {
         setDatas(response.data);
       } else {
-        AlertMsg("Não foi possível obter as informações da comunidade.");
+        throw new Error("Não foi possível obter as informações da comunidade.");
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      AlertMsg(error);
     }
   }
 
@@ -54,10 +54,10 @@ export default function PerfilCommunity({ navigation, route }) {
       if (response != undefined) {
         setQtdUsers(response.length);
       } else {
-        AlertMsg("Não foi possível obter os usuários.");
+        throw new Error("Não foi possível obter os usuários.");
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      AlertMsg(error);
     }
   }
 
