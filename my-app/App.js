@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, Button, PermissionsAndroid, Platform } from "react-native";
-import { AppRegistry } from "react-native";
-import { name as appName } from "./app.json";
+import { PermissionsAndroid, Platform, Alert, Linking } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import "@react-native-firebase/app";
@@ -31,31 +29,49 @@ export default function App() {
   const requestUserPermission = async () => {
     if (Platform.OS === "android") {
       try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-          {
-            title: "Permissão para Notificações",
-            message: "O app gostaria de enviar notificações",
-            buttonNeutral: "Perguntar depois",
-            buttonNegative: "Cancelar",
-            buttonPositive: "Permitir",
-          }
-        );
-        console.log("granted: ", granted);
-        console.log("notification: ", PermissionsAndroid.RESULTS.GRANTED);
-        return "granted" === PermissionsAndroid.RESULTS.GRANTED; //###### tirar as ""
-      } catch (error) {
-        console.error("Falha ao solicitar permissão de notificação", error);
-        return false;
-      }
-    } else {
-      try {
-        const authStatus = await messaging().requestPermission();
-        const enabled =
-          authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-          authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+        // Verifica se o dispositivo está rodando Android 13 (API 33) ou superior
+        if (Platform.Version >= 33) {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+            {
+              title: "Permissão para Notificações",
+              message: "O app gostaria de enviar notificações",
+              buttonNeutral: "Perguntar depois",
+              buttonNegative: "Cancelar",
+              buttonPositive: "Permitir",
+            }
+          );
 
-        return enabled;
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log("Permissão para notificações concedida.");
+            return true;
+          } else {
+            console.log("Permissão para notificações negada.");
+            return false;
+          }
+        } else {
+          // Se o SO não for da versão 13 ou superior
+          const enabled = await Notifications.getPermissionsAsync();
+          if (enabled.status !== "granted") {
+            Alert.alert(
+              "Notificações Desabilitadas",
+              "As notificações estão desativadas para este app. Deseja habilitá-las agora?",
+              [
+                {
+                  text: "Fazer depois",
+                  style: "cancel",
+                },
+                {
+                  text: "Habilitar",
+                  onPress: () => {
+                    Linking.openSettings();
+                  },
+                },
+              ]
+            );
+          }
+          return true;
+        }
       } catch (error) {
         console.error("Falha ao solicitar permissão de notificação", error);
         return false;
@@ -66,31 +82,32 @@ export default function App() {
   useEffect(() => {
     const initializeMessaging = async () => {
       const permissionGranted = await requestUserPermission();
-      console.log("permissionGranted: ", permissionGranted);
+      console.log("Permissão concedida: ", permissionGranted);
+
       if (permissionGranted) {
         try {
           const token = await messaging().getToken();
           const existingToken = await AsyncStorage.getItem("FCMToken");
-          if (token && token != existingToken) {
-            await AsyncStorage.removeItem("FCMToken"); //deleta o FCMToken antigo
-            await AsyncStorage.setItem("FCMToken", token); //adiciona o FCMToken novo
-          } else if (!token) {
-            throw new Error("Failed to get FCM token");
+          if (token && token !== existingToken) {
+            await AsyncStorage.removeItem("FCMToken"); // Remove o token FCM antigo
+            await AsyncStorage.setItem("FCMToken", token); // Armazena o novo token
+            console.log("Novo FCM Token salvo:", token);
           } else {
-            console.log("Existing FCM Token:", existingToken);
+            console.log("Token FCM existente:", existingToken);
           }
         } catch (error) {
-          console.error(error);
+          console.error("Erro ao obter o token FCM:", error);
         }
       }
 
       await setupNotificationChannel();
+
       messaging()
         .getInitialNotification()
         .then((remoteMessage) => {
           if (remoteMessage) {
             console.log(
-              "Notification caused app to open from quit state:",
+              "Notificação causou a abertura do app a partir do estado quit:",
               remoteMessage.notification
             );
           }
@@ -98,32 +115,16 @@ export default function App() {
 
       messaging().onNotificationOpenedApp((remoteMessage) => {
         console.log(
-          "Notification caused app to open from background state:",
+          "Notificação causou a abertura do app a partir do estado background:",
           remoteMessage.notification
         );
       });
 
       messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-        console.log("Message handled in the background!", remoteMessage);
+        console.log("Mensagem recebida em segundo plano:", remoteMessage);
       });
-
-      const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-        await Notifications.scheduleNotificationAsync({
-          content: {
-            title: remoteMessage.notification.title || "New Notification",
-            body: remoteMessage.notification.body || "You have a new message",
-          },
-          android: {
-            icon: "./assets/icon-notification.png",
-          },
-          trigger: null, // Exibe a notificação imediatamente
-        });
-      });
-
-      return unsubscribe;
     };
 
-    console.log("opa");
     initializeMessaging();
   }, []);
 
