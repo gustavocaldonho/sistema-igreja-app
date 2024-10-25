@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
   boxOption: {
-    width: 175,
-    height: 170,
+    width: Dimensions.get("window").width / 2 - 25,
+    height: Dimensions.get("window").width / 2 - 25,
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 15,
@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#fff",
     marginBottom: 20,
-    borderWidth: 2,
   },
   textOption: {
     width: "100%",
