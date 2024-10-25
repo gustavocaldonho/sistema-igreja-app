@@ -10,6 +10,8 @@ import messaging from "@react-native-firebase/messaging";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SplashScreen from "expo-splash-screen";
 
+SplashScreen.preventAutoHideAsync();
+
 const setupNotificationChannel = async () => {
   await Notifications.setNotificationChannelAsync("default", {
     name: "default",
@@ -25,8 +27,6 @@ Notifications.setNotificationHandler({
     shouldSetBadge: true,
   }),
 });
-
-SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
