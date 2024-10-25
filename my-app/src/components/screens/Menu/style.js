@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignContent: "center",
     paddingHorizontal: 10,
-    borderWidth: 2,
   },
   buttonSignOut: {
     marginTop: 15,
