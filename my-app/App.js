@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PermissionsAndroid, Platform, Alert, Linking } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
@@ -8,6 +8,7 @@ import MyStack from "./src/routes/MyStack";
 import * as Notifications from "expo-notifications";
 import messaging from "@react-native-firebase/messaging";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SplashScreen from "expo-splash-screen";
 
 const setupNotificationChannel = async () => {
   await Notifications.setNotificationChannelAsync("default", {
@@ -25,11 +26,14 @@ Notifications.setNotificationHandler({
   }),
 });
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
+
   const requestUserPermission = async () => {
     if (Platform.OS === "android") {
       try {
-        // Verifica se o dispositivo está rodando Android 13 (API 33) ou superior
         if (Platform.Version >= 33) {
           const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
@@ -41,36 +45,20 @@ export default function App() {
               buttonPositive: "Permitir",
             }
           );
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log("Permissão para notificações concedida.");
-            return true;
-          } else {
-            console.log("Permissão para notificações negada.");
-            return false;
-          }
+          return granted === PermissionsAndroid.RESULTS.GRANTED;
         } else {
-          // Se o SO não for da versão 13 ou superior
           const enabled = await Notifications.getPermissionsAsync();
           if (enabled.status !== "granted") {
             Alert.alert(
               "Notificações Desabilitadas",
               "As notificações estão desativadas para este app. Deseja habilitá-las agora?",
               [
-                {
-                  text: "Fazer depois",
-                  style: "cancel",
-                },
-                {
-                  text: "Habilitar",
-                  onPress: () => {
-                    Linking.openSettings();
-                  },
-                },
+                { text: "Fazer depois", style: "cancel" },
+                { text: "Habilitar", onPress: () => Linking.openSettings() },
               ]
             );
           }
-          console.log("enable: ", enabled.status);
-          return enabled.status === "granted" ? true : false;
+          return enabled.status === "granted";
         }
       } catch (error) {
         console.error("Falha ao solicitar permissão de notificação", error);
@@ -80,72 +68,86 @@ export default function App() {
   };
 
   useEffect(() => {
-    const initializeMessaging = async () => {
-      const permissionGranted = await requestUserPermission();
-      console.log("Permissão de Notificação concedida: ", permissionGranted);
+    const initializeApp = async () => {
+      try {
+        const permissionGranted = await requestUserPermission();
+        console.log("Permissão de Notificação concedida: ", permissionGranted);
 
-      if (permissionGranted) {
-        try {
-          const token = await messaging().getToken();
-          const existingToken = await AsyncStorage.getItem("FCMToken");
-          if (token && token !== existingToken) {
-            await AsyncStorage.removeItem("FCMToken"); // Remove o token FCM antigo
-            await AsyncStorage.setItem("FCMToken", token); // Armazena o novo token
-            console.log("Novo FCM Token salvo:", token);
-          } else {
-            console.log("Token FCM existente:", existingToken);
+        if (permissionGranted) {
+          try {
+            const token = await messaging().getToken();
+            const existingToken = await AsyncStorage.getItem("FCMToken");
+            if (token && token !== existingToken) {
+              await AsyncStorage.setItem("FCMToken", token);
+              console.log("Novo FCM Token salvo:", token);
+            } else {
+              console.log("Token FCM existente:", existingToken);
+            }
+          } catch (error) {
+            console.error("Erro ao obter o token FCM:", error);
           }
-        } catch (error) {
-          console.error("Erro ao obter o token FCM:", error);
+        } else {
+          await AsyncStorage.removeItem("FCMToken");
         }
-      } else {
-        await AsyncStorage.removeItem("FCMToken");
+
+        await setupNotificationChannel();
+
+        messaging()
+          .getInitialNotification()
+          .then((remoteMessage) => {
+            if (remoteMessage) {
+              console.log(
+                "Notificação causou a abertura do app a partir do estado quit:",
+                remoteMessage.notification
+              );
+            }
+          });
+
+        messaging().onNotificationOpenedApp((remoteMessage) => {
+          console.log(
+            "Notificação causou a abertura do app a partir do estado background:",
+            remoteMessage.notification
+          );
+        });
+
+        messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+          console.log("Mensagem recebida em segundo plano:", remoteMessage);
+        });
+
+        messaging().onMessage(async (remoteMessage) => {
+          await Notifications.scheduleNotificationAsync({
+            content: {
+              title: remoteMessage.notification.title || "New Notification",
+              body: remoteMessage.notification.body || "You have a new message",
+            },
+            android: {
+              icon: "./assets/icon-notification.png",
+            },
+            trigger: null,
+          });
+        });
+
+        setAppIsReady(true);
+      } catch (e) {
+        console.error("Erro ao inicializar o app:", e);
       }
-      // const t = await AsyncStorage.getItem("FCMToken");
-      // console.log("t: ", t);
-
-      await setupNotificationChannel();
-
-      messaging()
-        .getInitialNotification()
-        .then((remoteMessage) => {
-          if (remoteMessage) {
-            console.log(
-              "Notificação causou a abertura do app a partir do estado quit:",
-              remoteMessage.notification
-            );
-          }
-        });
-
-      messaging().onNotificationOpenedApp((remoteMessage) => {
-        console.log(
-          "Notificação causou a abertura do app a partir do estado background:",
-          remoteMessage.notification
-        );
-      });
-
-      messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-        console.log("Mensagem recebida em segundo plano:", remoteMessage);
-      });
-
-      const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-        await Notifications.scheduleNotificationAsync({
-          content: {
-            title: remoteMessage.notification.title || "New Notification",
-            body: remoteMessage.notification.body || "You have a new message",
-          },
-          android: {
-            icon: "./assets/icon-notification.png",
-          },
-          trigger: null, // Exibe a notificação imediatamente
-        });
-      });
-
-      return unsubscribe;
     };
 
-    initializeMessaging();
+    initializeApp();
   }, []);
+
+  useEffect(() => {
+    const hideSplashScreen = async () => {
+      if (appIsReady) {
+        await SplashScreen.hideAsync();
+      }
+    };
+    hideSplashScreen();
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null; // Evita renderizar o app enquanto não estiver pronto
+  }
 
   return (
     <NavigationContainer>

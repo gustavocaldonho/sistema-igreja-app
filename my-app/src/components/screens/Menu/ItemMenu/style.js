@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#fff",
     marginBottom: 20,
+    borderWidth: 2,
   },
   textOption: {
     width: "100%",
