@@ -8,9 +8,9 @@ import MyStack from "./src/routes/MyStack";
 import * as Notifications from "expo-notifications";
 import messaging from "@react-native-firebase/messaging";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as SplashScreen from "expo-splash-screen";
+// import * as SplashScreen from "expo-splash-screen";
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 const setupNotificationChannel = async () => {
   await Notifications.setNotificationChannelAsync("default", {
@@ -29,7 +29,7 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
+  // const [appIsReady, setAppIsReady] = useState(false);
 
   const requestUserPermission = async () => {
     if (Platform.OS === "android") {
@@ -127,7 +127,7 @@ export default function App() {
           });
         });
 
-        setAppIsReady(true);
+        // setAppIsReady(true);
       } catch (e) {
         console.error("Erro ao inicializar o app:", e);
       }
@@ -136,18 +136,18 @@ export default function App() {
     initializeApp();
   }, []);
 
-  useEffect(() => {
-    const hideSplashScreen = async () => {
-      if (appIsReady) {
-        await SplashScreen.hideAsync();
-      }
-    };
-    hideSplashScreen();
-  }, [appIsReady]);
+  // useEffect(() => {
+  //   const hideSplashScreen = async () => {
+  //     if (appIsReady) {
+  //       await SplashScreen.hideAsync();
+  //     }
+  //   };
+  //   hideSplashScreen();
+  // }, [appIsReady]);
 
-  if (!appIsReady) {
-    return null; // Evita renderizar o app enquanto não estiver pronto
-  }
+  // if (!appIsReady) {
+  //   return null; // Evita renderizar o app enquanto não estiver pronto
+  // }
 
   return (
     <NavigationContainer>
