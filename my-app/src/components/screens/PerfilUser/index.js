@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView, Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
+import * as ImagePicker from 'expo-image-picker';
 import ButtonBack from "../../auxiliary/ButtonBack";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import styles from "./style";
@@ -13,6 +14,68 @@ import ModalUpdateDatasUser from "./PersonalDataContainer/ModalUpdateDatasUser";
 export default function PerfilUser({ navigation, route }) {
   const { name, cpf, birthday, phone, community, password } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
+  const [image, setImage] = useState('');
+
+  const getImageProfile = async () => {
+    try {
+      //chamada da api
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  const pickImage = async () => {
+    const handlePickerImage = async () => {
+      const {granted} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!granted){
+        Alert.alert(
+          'Permissão necessária', 
+          'Permita que o App acesse as imagens');
+      } else{
+          const {assets, canceled} = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            base64: false,
+            aspect: [4, 4],
+            quality: 1,
+          });
+
+          if(!canceled){
+            const filename = assets[0].uri.substring(assets[0].uri.lastIndexOf('/') + 1, assets[0].uri.length);
+            const extend = filename.split('.')[1];
+            const formData = new FormData();
+            formData.append('file', JSON.parse(JSON.stringify({
+              name: filename,
+              uri: assets[0].uri,
+              type: 'image/' + extend,
+            }
+            )));
+
+            try {
+              //fazer o post para a api
+              if(!result){
+                throw new Error("Não foi possível enviar sua imagem. Por favor, tente novamente.");
+              }
+            } catch (error) {
+              alert(error);
+            }
+          }
+        }
+      }
+    }
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    
+    console.log(result);
+
+    if (!result.canceled){
+      setImage(result.assets[0].uri);
+    }
+  }
 
   useEffect(() => {
     // console.log("perfil User", name, cpf, birthday, phone, community, password);
@@ -37,10 +100,11 @@ export default function PerfilUser({ navigation, route }) {
             <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
               <Image
                 style={styles.imageProfile}
-                source={require("../../../images/img-perfil-user.png")}
+                //source={require("../../../images/img-perfil-user.png")}
+                source={image}
               />
               <View style={styles.boxIconCamera}>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={pickImage}>
                   <Icon name="camera" style={styles.iconCamera} />
                 </TouchableOpacity>
               </View>
