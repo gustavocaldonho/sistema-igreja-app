@@ -1,6 +1,5 @@
 import React from "react";
-import { Modal, View, Image, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { Modal, View, Image, TouchableOpacity, Text } from "react-native";
 import styles from "./style";
 
 export default function ViewImage({ visible, onClose, image }) {
@@ -19,7 +18,7 @@ export default function ViewImage({ visible, onClose, image }) {
             resizeMode="contain"
           />
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Icon name="close" size={24} color="#fff" />
+            <Text style={styles.textClose}>Fechar</Text>
           </TouchableOpacity>
         </View>
       </View>

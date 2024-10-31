@@ -10,7 +10,7 @@ export default StyleSheet.create({
   imageContainer: {
     position: "relative",
     width: "90%",
-    height: "80%",
+    height: "70%",
   },
   fullImage: {
     width: "100%",
@@ -18,11 +18,14 @@ export default StyleSheet.create({
     borderRadius: 10,
   },
   closeButton: {
-    position: "absolute",
-    top: 15,
-    right: 15,
+    alignSelf: "center",
     backgroundColor: "rgba(0, 0, 0, 0.6)",
     borderRadius: 15,
-    padding: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 30,
+  },
+  textClose: {
+    fontSize: 16,
+    color: "#fff",
   },
 });

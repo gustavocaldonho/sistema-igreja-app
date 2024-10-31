@@ -7,7 +7,7 @@ import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import styles from "./style";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import OptionsImage from "./ModalImage";
-import ViewImage from "./ModalImage/ModalViewImage/ViewImage";
+import ViewImage from "./ModalImage/ViewImage";
 import { getImageProfile } from "./ModalImage/functions";
 
 import PersonalDataContainer from "./PersonalDataContainer";
@@ -52,19 +52,21 @@ export default function PerfilUser({ navigation, route }) {
                     : require("../../../images/img-perfil-user.png")
                 }
               />
-              <View style={styles.boxIconCamera}>
-                {!loadingImage ? (
-                  <TouchableOpacity
-                    onPress={() => {
-                      setVisibleOptionsImage(true);
-                    }}
-                  >
-                    <Icon name="camera" style={styles.iconCamera} />
-                  </TouchableOpacity>
-                ) : (
-                  <LoadingIndicator color="#339dd7" size="small" />
-                )}
-              </View>
+              {password ? (
+                <View style={styles.boxIconCamera}>
+                  {!loadingImage ? (
+                    <TouchableOpacity
+                      onPress={() => {
+                        setVisibleOptionsImage(true);
+                      }}
+                    >
+                      <Icon name="camera" style={styles.iconCamera} />
+                    </TouchableOpacity>
+                  ) : (
+                    <LoadingIndicator color="#339dd7" size="small" />
+                  )}
+                </View>
+              ) : null}
             </View>
           </View>
           <View style={styles.boxNameUser}>
