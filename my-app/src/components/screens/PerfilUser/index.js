@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  Alert,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
-import * as ImagePicker from "expo-image-picker";
 import ButtonBack from "../../auxiliary/ButtonBack";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import styles from "./style";
+import LoadingIndicator from "../../auxiliary/LoadingIndicator";
+import OptionsImage from "./ModalImage";
+import ViewImage from "./ModalImage/ModalViewImage/ViewImage";
+import { getImageProfile } from "./ModalImage/functions";
+
 import PersonalDataContainer from "./PersonalDataContainer";
 import DizimoContainer from "./DizimoContainer";
 import MortuaryContainer from "./MortuaryContainer";
@@ -22,78 +19,12 @@ export default function PerfilUser({ navigation, route }) {
   const { name, cpf, birthday, phone, community, password } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState("");
-
-  const getImageProfile = async () => {
-    try {
-      //chamada da api
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const handleImagePicker = async () => {
-    // const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    // if (!granted) {
-    //   Alert.alert(
-    //     "Permissão necessária",
-    //     "Permita que o App acesse as imagens"
-    //   );
-    // } else {
-    //   const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
-    //     allowsEditing: true,
-    //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    //     base64: false,
-    //     aspect: [4, 4],
-    //     quality: 1,
-    //   });
-
-    //   if (!canceled) {
-    //     const filename = assets[0].uri.substring(
-    //       assets[0].uri.lastIndexOf("/") + 1,
-    //       assets[0].uri.length
-    //     );
-    //     const extend = filename.split(".")[1];
-    //     const formData = new FormData();
-    //     formData.append(
-    //       "file",
-    //       JSON.parse(
-    //         JSON.stringify({
-    //           name: filename,
-    //           uri: assets[0].uri,
-    //           type: "image/" + extend,
-    //         })
-    //       )
-    //     );
-
-    //     try {
-    //       //fazer o post para a api
-    //       if (!result) {
-    //         throw new Error(
-    //           "Não foi possível enviar sua imagem. Por favor, tente novamente."
-    //         );
-    //       }
-    //     } catch (error) {
-    //       alert(error);
-    //     }
-    //   }
-    // }
-
-    let result = await ImagePicker.launchImageLibraryAsync({
-      aspect: [4, 4],
-      allowsEditing: true,
-      base64: true,
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  };
+  const [loadingImage, setLoadingImage] = useState(true);
+  const [visibleOptionsImage, setVisibleOptionsImage] = useState(false);
+  const [viewImageVisible, setViewImageVisible] = useState(false);
 
   useEffect(() => {
-    // console.log("perfil User", name, cpf, birthday, phone, community, password);
+    getImageProfile(cpf, setImage, setLoadingImage);
   }, []);
 
   return (
@@ -115,13 +46,24 @@ export default function PerfilUser({ navigation, route }) {
             <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
               <Image
                 style={styles.imageProfile}
-                //source={require("../../../images/img-perfil-user.png")}
-                source={image}
+                source={
+                  image !== ""
+                    ? { uri: `data:image/png;base64,${image}` }
+                    : require("../../../images/img-perfil-user.png")
+                }
               />
               <View style={styles.boxIconCamera}>
-                <TouchableOpacity onPress={handleImagePicker}>
-                  <Icon name="camera" style={styles.iconCamera} />
-                </TouchableOpacity>
+                {!loadingImage ? (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setVisibleOptionsImage(true);
+                    }}
+                  >
+                    <Icon name="camera" style={styles.iconCamera} />
+                  </TouchableOpacity>
+                ) : (
+                  <LoadingIndicator color="#339dd7" size="small" />
+                )}
               </View>
             </View>
           </View>
@@ -153,6 +95,23 @@ export default function PerfilUser({ navigation, route }) {
           </ScrollView>
         </BoxLinearGradient>
       )}
+
+      <OptionsImage
+        visibleOptionsImage={visibleOptionsImage}
+        setVisibleOptionsImage={setVisibleOptionsImage}
+        cpf={cpf}
+        image={image}
+        setImage={setImage}
+        loadingImage={loadingImage}
+        setLoadingImage={setLoadingImage}
+        setViewImageVisible={setViewImageVisible}
+      />
+
+      <ViewImage
+        visible={viewImageVisible}
+        image={image}
+        onClose={() => setViewImageVisible(false)}
+      />
     </View>
   );
 }

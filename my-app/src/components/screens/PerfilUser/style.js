@@ -14,12 +14,16 @@ const styles = StyleSheet.create({
     top: 0,
   },
   boxIconCamera: {
+    minWidth: 45,
+    minHeight: 45,
     position: "absolute",
     bottom: 0,
     right: 0,
     padding: 8,
-    borderRadius: 40,
+    borderRadius: 100,
     backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
   },
   iconCamera: {
     fontSize: 25,

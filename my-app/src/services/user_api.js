@@ -174,6 +174,48 @@ export const upgradeUser = async (data, token) => {
   }
 };
 
+export const setImageUser = async (formData, token, cpf) => {
+  try {
+    const response = await api.patch(`/image/user/${cpf}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getImageUser = async (token, cpf) => {
+  try {
+    const response = await api.get(`image/user/${cpf}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteImageUser = async (token, cpf) => {
+  try {
+    const response = await api.delete(`image/user/${cpf}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 // temporário
 export const getUsersTemp = async (token) => {
   try {
