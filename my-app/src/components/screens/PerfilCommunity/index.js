@@ -74,6 +74,7 @@ export default function PerfilCommunity({ navigation, route }) {
     getDatasCommunityForm();
     getUsers();
     getImageProfile(patron, "", setImage, setLoadingImage); // "" = cpf vazio
+    console.log(user);
   }, []);
 
   return (
@@ -100,19 +101,21 @@ export default function PerfilCommunity({ navigation, route }) {
                     : require("../../../images/church-icon.png")
                 }
               />
-              <View style={styles.boxIconCamera}>
-                {!loadingImage ? (
-                  <TouchableOpacity
-                    onPress={() => {
-                      setVisibleOptionsImage(true);
-                    }}
-                  >
-                    <Icon name="camera" style={styles.iconCamera} />
-                  </TouchableOpacity>
-                ) : (
-                  <LoadingIndicator color="#339dd7" size="small" />
-                )}
-              </View>
+              {user.position !== "user" ? (
+                <View style={styles.boxIconCamera}>
+                  {!loadingImage ? (
+                    <TouchableOpacity
+                      onPress={() => {
+                        setVisibleOptionsImage(true);
+                      }}
+                    >
+                      <Icon name="camera" style={styles.iconCamera} />
+                    </TouchableOpacity>
+                  ) : (
+                    <LoadingIndicator color="#339dd7" size="small" />
+                  )}
+                </View>
+              ) : null}
             </View>
           </View>
           <View style={styles.boxNamePatron}>
