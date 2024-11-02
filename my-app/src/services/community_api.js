@@ -139,16 +139,16 @@ export const getImageCommunity = async (token, patron) => {
   }
 };
 
-// export const deleteImageCommunity = async (token, patron) => {
-//   try {
-//     const response = await api.delete(`image/community/${patron}`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: token,
-//       },
-//     });
-//     return response;
-//   } catch (error) {
-//     return error;
-//   }
-// };
+export const deleteImageCommunity = async (token, patron) => {
+  try {
+    const response = await api.delete(`image/community/${patron}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};

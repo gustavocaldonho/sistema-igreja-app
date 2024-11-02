@@ -1,17 +1,17 @@
 import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import AlertMsg from "../../../auxiliary/AlertMsg";
+import AlertMsg from "../AlertMsg";
 import {
   setImageUser,
   getImageUser,
   deleteImageUser,
-} from "../../../../services/user_api";
+} from "../../../services/user_api";
 import {
   setImageCommunity,
   getImageCommunity,
   deleteImageCommunity,
-} from "../../../../services/community_api";
+} from "../../../services/community_api";
 
 export const getImageProfile = async (
   patron,

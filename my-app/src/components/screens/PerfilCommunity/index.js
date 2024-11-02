@@ -14,7 +14,6 @@ import ItemAdvisorContent from "./ItemAdvisorContent";
 import styles from "./style";
 import { AuthContext } from "../../../contexts/auth";
 import AlertMsg from "../../auxiliary/AlertMsg";
-import { getImageProfile } from "../PerfilUser/ModalImage/functions";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import ViewImage from "../../auxiliary/ModalImage/ViewImage";
 import OptionsImage from "../../auxiliary/ModalImage";
@@ -205,6 +204,7 @@ export default function PerfilCommunity({ navigation, route }) {
         visibleOptionsImage={visibleOptionsImage}
         setVisibleOptionsImage={setVisibleOptionsImage}
         patron={patron}
+        cpf={null}
         image={image}
         setImage={setImage}
         loadingImage={loadingImage}
