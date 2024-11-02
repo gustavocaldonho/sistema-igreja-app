@@ -14,6 +14,11 @@ import ItemAdvisorContent from "./ItemAdvisorContent";
 import styles from "./style";
 import { AuthContext } from "../../../contexts/auth";
 import AlertMsg from "../../auxiliary/AlertMsg";
+import { getImageProfile } from "../PerfilUser/ModalImage/functions";
+import LoadingIndicator from "../../auxiliary/LoadingIndicator";
+import ViewImage from "../../auxiliary/ModalImage/ViewImage";
+import OptionsImage from "../../auxiliary/ModalImage";
+import { getImageProfile } from "../../auxiliary/ModalImage/functions";
 
 export default function PerfilCommunity({ navigation, route }) {
   const { patron, location } = route.params;
@@ -26,6 +31,11 @@ export default function PerfilCommunity({ navigation, route }) {
   const [advisorModalVisible, setAdvisorModalVisible] = useState(false);
   const [formModalAdvisorDefaultVisible, setFormModalAdvisorDefaultVisible] =
     useState(true);
+
+  const [image, setImage] = useState("");
+  const [loadingImage, setLoadingImage] = useState(true);
+  const [visibleOptionsImage, setVisibleOptionsImage] = useState(false);
+  const [viewImageVisible, setViewImageVisible] = useState(false);
 
   function onPressButtonAddAdvisor() {
     setAdvisorModalVisible(!advisorModalVisible);
@@ -64,6 +74,7 @@ export default function PerfilCommunity({ navigation, route }) {
   useEffect(() => {
     getDatasCommunityForm();
     getUsers();
+    getImageProfile(patron, "", setImage, setLoadingImage); // "" = cpf vazio
   }, []);
 
   return (
@@ -84,12 +95,24 @@ export default function PerfilCommunity({ navigation, route }) {
             <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
               <Image
                 style={styles.imageProfile}
-                source={require("../../../images/church-icon.png")}
+                source={
+                  image !== ""
+                    ? { uri: `data:image/png;base64,${image}` }
+                    : require("../../../images/church-icon.png")
+                }
               />
               <View style={styles.boxIconCamera}>
-                <TouchableOpacity onPress={() => {}}>
-                  <Icon name="camera" style={styles.iconCamera} />
-                </TouchableOpacity>
+                {!loadingImage ? (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setVisibleOptionsImage(true);
+                    }}
+                  >
+                    <Icon name="camera" style={styles.iconCamera} />
+                  </TouchableOpacity>
+                ) : (
+                  <LoadingIndicator color="#339dd7" size="small" />
+                )}
               </View>
             </View>
           </View>
@@ -177,6 +200,23 @@ export default function PerfilCommunity({ navigation, route }) {
           </ScrollView>
         </View>
       </BoxLinearGradient>
+
+      <OptionsImage
+        visibleOptionsImage={visibleOptionsImage}
+        setVisibleOptionsImage={setVisibleOptionsImage}
+        patron={patron}
+        image={image}
+        setImage={setImage}
+        loadingImage={loadingImage}
+        setLoadingImage={setLoadingImage}
+        setViewImageVisible={setViewImageVisible}
+      />
+
+      <ViewImage
+        visible={viewImageVisible}
+        image={image}
+        onClose={() => setViewImageVisible(false)}
+      />
     </View>
   );
 }

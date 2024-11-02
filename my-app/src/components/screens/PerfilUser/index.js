@@ -6,9 +6,9 @@ import ButtonBack from "../../auxiliary/ButtonBack";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import styles from "./style";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
-import OptionsImage from "./ModalImage";
-import ViewImage from "./ModalImage/ViewImage";
-import { getImageProfile } from "./ModalImage/functions";
+import OptionsImage from "../../auxiliary/ModalImage";
+import ViewImage from "../../auxiliary/ModalImage/ViewImage";
+import { getImageProfile } from "../../auxiliary/ModalImage/functions";
 
 import PersonalDataContainer from "./PersonalDataContainer";
 import DizimoContainer from "./DizimoContainer";
@@ -24,7 +24,7 @@ export default function PerfilUser({ navigation, route }) {
   const [viewImageVisible, setViewImageVisible] = useState(false);
 
   useEffect(() => {
-    getImageProfile(cpf, setImage, setLoadingImage);
+    getImageProfile("", cpf, setImage, setLoadingImage); // "" = patron vazio
   }, []);
 
   return (
@@ -101,6 +101,7 @@ export default function PerfilUser({ navigation, route }) {
       <OptionsImage
         visibleOptionsImage={visibleOptionsImage}
         setVisibleOptionsImage={setVisibleOptionsImage}
+        patron={null}
         cpf={cpf}
         image={image}
         setImage={setImage}

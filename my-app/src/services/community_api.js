@@ -110,3 +110,45 @@ export const disableCommunity = (data) => {
       console.log(error);
     });
 };
+
+export const setImageCommunity = async (formData, token, patron) => {
+  try {
+    const response = await api.patch(`/image/community/${patron}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getImageCommunity = async (token, patron) => {
+  try {
+    const response = await api.get(`image/community/${patron}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+// export const deleteImageCommunity = async (token, patron) => {
+//   try {
+//     const response = await api.delete(`image/community/${patron}`, {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: token,
+//       },
+//     });
+//     return response;
+//   } catch (error) {
+//     return error;
+//   }
+// };
