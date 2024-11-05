@@ -1,28 +1,32 @@
 import { StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
+  container: {
+    // borderWidth: 2,
+    // width: "100%",
+    // flex: 1,
+  },
   boxOption: {
-    width: Dimensions.get("window").width / 2 - 25,
-    height: Dimensions.get("window").width / 2 - 25,
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
+    width: 80,
+    height: 80,
+    borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#fff",
-    marginBottom: 20,
+    alignSelf: "center",
+    marginBottom: 5,
+    // borderWidth: 2,
   },
   textOption: {
     width: "100%",
-    color: "#339dd7",
-    marginTop: 15,
-    fontSize: 20,
+    color: "#fff",
+    fontSize: 12,
     fontWeight: "bold",
     textAlign: "center",
   },
   icon: {
     color: "#f094c0",
-    fontSize: 75,
+    fontSize: 30,
   },
   boxShadow: {
     shadowColor: "#171717",

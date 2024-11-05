@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StatusBar, View, Text } from "react-native";
+import { StatusBar, View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
@@ -14,10 +14,27 @@ export default function Menu({ navigation }) {
     <BoxLinearGradient style={styles.container}>
       <StatusBar translucent />
       <View style={styles.innerContainer}>
-        <View style={styles.boxTitleMenu}>
-          <Text style={styles.textMenu}>MENU</Text>
+        <View style={styles.header}>
+          <Text style={styles.userLogin}>Olá, {user.name}!</Text>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.buttonSignOut}
+            onPress={() => {
+              signOut();
+            }}
+          >
+            <Text style={styles.textSignOut}>Sair</Text>
+            <Icon name="sign-out" style={styles.iconSignOut} />
+          </TouchableOpacity>
         </View>
         <View style={styles.main}>
+          <Image
+            source={require("../../../images/logo.png")}
+            style={styles.logo}
+          />
+          <View style={styles.boxTitleMenu}>
+            <Text style={styles.textMenu}>Menu</Text>
+          </View>
           <ItemMenu
             screenName={"Avisos"}
             icon={"info"}
@@ -43,6 +60,7 @@ export default function Menu({ navigation }) {
             onPress={() => navigation.navigate("Dizimo")}
           /> */}
           {/* <ItemMenu
+            // screenName={"Caixa Mortuária"}
             screenName={"Caixa Mortuária"}
             icon={"cross"}
             onPress={() => navigation.navigate("CaixaMortuario")}
@@ -75,16 +93,13 @@ export default function Menu({ navigation }) {
             />
           )}
         </View>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.buttonSignOut}
-          onPress={() => {
-            signOut();
-          }}
-        >
-          <Text style={styles.textSignOut}>Sair</Text>
-          <Icon name="sign-out" style={styles.iconSignOut} />
-        </TouchableOpacity>
+        <View style={styles.footer}>
+          <Text style={styles.footerTitle}>Defagus Systems</Text>
+          <View style={styles.footerSubTitle}>
+            <Icon name="copyright" color={"#fff"} />
+            <Text style={styles.subTitle}>Todos os Direitos Reservados</Text>
+          </View>
+        </View>
       </View>
     </BoxLinearGradient>
   );
