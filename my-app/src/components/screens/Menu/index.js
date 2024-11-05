@@ -15,7 +15,7 @@ export default function Menu({ navigation }) {
       <StatusBar translucent />
       <View style={styles.innerContainer}>
         <View style={styles.header}>
-          <Text style={styles.userLogin}>Olá, {user.name}!</Text>
+          <Text style={styles.userLogged}>Olá, {user.name}!</Text>
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.buttonSignOut}
@@ -28,10 +28,6 @@ export default function Menu({ navigation }) {
           </TouchableOpacity>
         </View>
         <View style={styles.main}>
-          <Image
-            source={require("../../../images/logo.png")}
-            style={styles.logo}
-          />
           <View style={styles.boxTitleMenu}>
             <Text style={styles.textMenu}>Menu</Text>
           </View>
@@ -60,8 +56,7 @@ export default function Menu({ navigation }) {
             onPress={() => navigation.navigate("Dizimo")}
           /> */}
           {/* <ItemMenu
-            // screenName={"Caixa Mortuária"}
-            screenName={"Caixa Mortuária"}
+            screenName={"C. Mortuária"}
             icon={"cross"}
             onPress={() => navigation.navigate("CaixaMortuario")}
           /> */}
@@ -94,6 +89,10 @@ export default function Menu({ navigation }) {
           )}
         </View>
         <View style={styles.footer}>
+          <Image
+            source={require("../../../images/logo.png")}
+            style={styles.logo}
+          />
           <Text style={styles.footerTitle}>Defagus Systems</Text>
           <View style={styles.footerSubTitle}>
             <Icon name="copyright" color={"#fff"} />
