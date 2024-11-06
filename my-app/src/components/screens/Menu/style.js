@@ -8,10 +8,31 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
+    alignItems: "center",
+    paddingHorizontal: 30,
     paddingTop: 60,
     paddingBottom: 10,
     backgroundColor: "rgba(0, 0, 0, 0.2)",
+  },
+  boxUserProfile: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+  },
+  boxImageProfile: {
+    width: 40,
+    height: 40,
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imageProfile: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 100,
   },
   userLogged: {
     fontSize: 24,
@@ -22,13 +43,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 5,
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    borderRadius: 10,
   },
   textSignOut: {
-    fontSize: 18,
+    fontSize: 15,
     color: "#fff",
   },
   iconSignOut: {
-    fontSize: 22,
+    fontSize: 20,
     color: "#fff",
   },
   boxTitleMenu: {
@@ -83,8 +108,11 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: "#fff",
-    fontSize: 14,
+    fontSize: 12,
     fontStyle: "italic",
+  },
+  iconCopyright: {
+    fontSize: 10,
   },
 });
 

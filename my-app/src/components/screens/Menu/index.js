@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StatusBar, View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -8,16 +8,28 @@ import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
 
 export default function Menu({ navigation }) {
-  const { signOut, user } = useContext(AuthContext);
+  const { signOut, user, imageProfile } = useContext(AuthContext);
 
   return (
     <BoxLinearGradient style={styles.container}>
       <StatusBar translucent />
       <View style={styles.innerContainer}>
         <View style={styles.header}>
-          <Text style={styles.userLogged}>Olá, {user.name}!</Text>
+          <View style={styles.boxUserProfile}>
+            <View style={styles.boxImageProfile}>
+              <Image
+                style={styles.imageProfile}
+                source={
+                  imageProfile !== ""
+                    ? { uri: `data:image/png;base64,${imageProfile}` }
+                    : require("../../../images/img-perfil-user.png")
+                }
+              />
+            </View>
+            <Text style={styles.userLogged}>Olá, {user.name}!</Text>
+          </View>
           <TouchableOpacity
-            activeOpacity={0.7}
+            activeOpacity={0.6}
             style={styles.buttonSignOut}
             onPress={() => {
               signOut();
@@ -95,7 +107,11 @@ export default function Menu({ navigation }) {
           />
           <Text style={styles.footerTitle}>Defagus Systems</Text>
           <View style={styles.footerSubTitle}>
-            <Icon name="copyright" color={"#fff"} />
+            <Icon
+              name="copyright"
+              color={"#fff"}
+              style={styles.iconCopyright}
+            />
             <Text style={styles.subTitle}>Todos os Direitos Reservados</Text>
           </View>
         </View>

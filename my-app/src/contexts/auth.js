@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMe, signinUser } from "../services/user_api";
 import { sendApiFCMToken } from "../services/notification_api";
+import { getImageProfile } from "../components/auxiliary/ModalImage/functions";
 
 export const AuthContext = createContext({});
 
@@ -10,6 +11,7 @@ function AuthProvider({ children }) {
   const [registryEntry, setRegistryEntry] = useState(false);
   const [user, setUser] = useState({});
   const navigation = useNavigation();
+  const [imageProfile, setImageProfile] = useState("");
 
   async function setDatasUser(token, password) {
     try {
@@ -45,6 +47,7 @@ function AuthProvider({ children }) {
           await sendApiFCMToken(fcmToken, token);
         }
         console.log("(auth) FCMToken: ", fcmToken);
+        await getImageProfile("", data.cpf, setImageProfile, "");
       }
       return response;
     } catch (error) {
@@ -70,6 +73,8 @@ function AuthProvider({ children }) {
         signIn,
         signOut,
         setDatasUser,
+        imageProfile,
+        setImageProfile,
       }}
     >
       {children}
