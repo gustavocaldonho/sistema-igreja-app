@@ -4,12 +4,16 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
   },
   modalContent: {
+    width: "100%",
     backgroundColor: "white",
     padding: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    position: "absolute",
+    bottom: 0,
   },
   optionButton: {
     paddingVertical: 10,

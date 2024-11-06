@@ -10,8 +10,8 @@ export const AuthContext = createContext({});
 function AuthProvider({ children }) {
   const [registryEntry, setRegistryEntry] = useState(false);
   const [user, setUser] = useState({});
-  const navigation = useNavigation();
   const [imageProfile, setImageProfile] = useState("");
+  const navigation = useNavigation();
 
   async function setDatasUser(token, password) {
     try {

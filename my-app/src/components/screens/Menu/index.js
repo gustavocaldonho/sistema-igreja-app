@@ -26,7 +26,9 @@ export default function Menu({ navigation }) {
                 }
               />
             </View>
-            <Text style={styles.userLogged}>Olá, {user.name}!</Text>
+            <Text style={styles.userLogged}>
+              Olá, {user.name.split(" ")[0]}!
+            </Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.6}
