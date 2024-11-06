@@ -5,7 +5,7 @@ import styles from "./style";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
-import ConfirmModalSignOut from "./ConfirmModalSignOut"; // Importa o modal de confirmação
+import ConfirmModalSignOut from "./ConfirmModalSignOut";
 
 export default function Menu({ navigation }) {
   const { signOut, user, imageProfile } = useContext(AuthContext);
@@ -39,7 +39,7 @@ export default function Menu({ navigation }) {
           <TouchableOpacity
             activeOpacity={0.6}
             style={styles.buttonSignOut}
-            onPress={() => setConfirmModalVisible(true)} // Abre o modal
+            onPress={() => setConfirmModalVisible(true)}
           >
             <Text style={styles.textSignOut}>Sair</Text>
             <Icon name="sign-out" style={styles.iconSignOut} />
