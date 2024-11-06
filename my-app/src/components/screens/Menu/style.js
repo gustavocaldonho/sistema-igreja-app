@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 100,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
@@ -113,6 +113,16 @@ const styles = StyleSheet.create({
   },
   iconCopyright: {
     fontSize: 10,
+  },
+  boxShadowLight: {
+    shadowColor: "#ffffff",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.9,
+    shadowRadius: 3.05,
+    elevation: 20,
   },
 });
 

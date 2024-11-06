@@ -16,7 +16,7 @@ export default function Menu({ navigation }) {
       <View style={styles.innerContainer}>
         <View style={styles.header}>
           <View style={styles.boxUserProfile}>
-            <View style={styles.boxImageProfile}>
+            <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
               <Image
                 style={styles.imageProfile}
                 source={

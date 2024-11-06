@@ -57,6 +57,7 @@ function AuthProvider({ children }) {
 
   async function signOut() {
     setUser({});
+    setImageProfile("");
     let keys = await AsyncStorage.getAllKeys();
     keys = keys.filter((item) => item != "FCMToken");
     await AsyncStorage.multiRemove(keys);
