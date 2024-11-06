@@ -10,7 +10,11 @@ export default function ConfirmModalSignOut({ visible, onConfirm, onCancel }) {
       animationType="fade"
       onRequestClose={onCancel}
     >
-      <View style={styles.modalOverlay}>
+      <TouchableOpacity
+        style={styles.modalOverlay}
+        onPress={onCancel}
+        activeOpacity={1}
+      >
         <View style={styles.modalContainer}>
           <Text style={styles.modalText}>Deseja realmente sair?</Text>
           <View style={styles.modalButtonContainer}>
@@ -32,7 +36,7 @@ export default function ConfirmModalSignOut({ visible, onConfirm, onCancel }) {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </Modal>
   );
 }

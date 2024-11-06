@@ -13,7 +13,7 @@ export default function Menu({ navigation }) {
 
   const handleConfirmSignOut = () => {
     setConfirmModalVisible(false);
-    signOut(navigation);
+    signOut();
   };
 
   return (
@@ -33,7 +33,7 @@ export default function Menu({ navigation }) {
               />
             </View>
             <Text style={styles.userLogged}>
-              Olá, {user.name.split(" ")[0]}!
+              Olá, {user.name ? user.name.split(" ")[0] : ""}!
             </Text>
           </View>
           <TouchableOpacity

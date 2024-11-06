@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getMe, signinUser } from "../services/user_api";
 import { sendApiFCMToken } from "../services/notification_api";
@@ -11,7 +11,7 @@ function AuthProvider({ children }) {
   const [registryEntry, setRegistryEntry] = useState(false);
   const [user, setUser] = useState({});
   const [imageProfile, setImageProfile] = useState("");
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   async function setDatasUser(token, password) {
     try {
@@ -55,16 +55,13 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function signOut(navigation) {
-    console.log("1");
+  async function signOut() {
     setUser({});
     setImageProfile("");
-    console.log("2");
     let keys = await AsyncStorage.getAllKeys();
     keys = keys.filter((item) => item != "FCMToken");
     await AsyncStorage.multiRemove(keys);
     navigation.navigate("Initial");
-    console.log("3");
   }
 
   return (
