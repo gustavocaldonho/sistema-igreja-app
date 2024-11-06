@@ -1,14 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
-import { StatusBar, View, Text, Image } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import React, { useContext, useState } from "react";
+import { StatusBar, View, Text, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
+import ConfirmModalSignOut from "./ConfirmModalSignOut"; // Importa o modal de confirmação
 
 export default function Menu({ navigation }) {
   const { signOut, user, imageProfile } = useContext(AuthContext);
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+
+  const handleConfirmSignOut = () => {
+    setConfirmModalVisible(false);
+    signOut(navigation);
+  };
 
   return (
     <BoxLinearGradient style={styles.container}>
@@ -33,9 +39,7 @@ export default function Menu({ navigation }) {
           <TouchableOpacity
             activeOpacity={0.6}
             style={styles.buttonSignOut}
-            onPress={() => {
-              signOut();
-            }}
+            onPress={() => setConfirmModalVisible(true)} // Abre o modal
           >
             <Text style={styles.textSignOut}>Sair</Text>
             <Icon name="sign-out" style={styles.iconSignOut} />
@@ -64,26 +68,13 @@ export default function Menu({ navigation }) {
               })
             }
           />
-          {/* <ItemMenu
-            screenName={"Dízimo"}
-            icon={"heart"}
-            onPress={() => navigation.navigate("Dizimo")}
-          /> */}
-          {/* <ItemMenu
-            screenName={"C. Mortuária"}
-            icon={"cross"}
-            onPress={() => navigation.navigate("CaixaMortuario")}
-          /> */}
           {user.position === "council member" ? (
             <ItemMenu
               screenName={"Usuários"}
               icon={"users"}
               onPress={() => navigation.navigate("Users", {})}
             />
-          ) : (
-            ""
-          )}
-          {/* {user.position === "council member" ? ( */}
+          ) : null}
           {user.position === "parish leader" ? (
             <ItemMenu
               screenName={"Comunidades"}
@@ -118,6 +109,12 @@ export default function Menu({ navigation }) {
           </View>
         </View>
       </View>
+
+      <ConfirmModalSignOut
+        visible={confirmModalVisible}
+        onConfirm={handleConfirmSignOut}
+        onCancel={() => setConfirmModalVisible(false)}
+      />
     </BoxLinearGradient>
   );
 }
