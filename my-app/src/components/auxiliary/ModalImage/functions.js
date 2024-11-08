@@ -40,7 +40,9 @@ export const getImageProfile = async (
   } catch (error) {
     AlertMsg(error);
   } finally {
-    setLoadingImage(false);
+    if (setLoadingImage) {
+      setLoadingImage(false);
+    }
   }
 };
 

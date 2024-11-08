@@ -34,10 +34,12 @@ export default function FormLogin() {
     try {
       setVisibleSpinner(true);
       const response = await signIn(data);
+      console.log("response: ", response);
       if (response.data.access_token !== undefined) {
         resetInputs();
         navigation.navigate("Menu");
       } else {
+        item !== null ? setShowError(false) : setShowError(true);
         throw new Error("Não foi possível fazer login.");
       }
     } catch (error) {
@@ -48,6 +50,7 @@ export default function FormLogin() {
       });
       console.log("error (login): ", error);
       console.log("data (login): ", data);
+      // AlertMsg(error, "Tente novamente mais tarde.");
     } finally {
       setShowError(false);
       setVisibleSpinner(false);
@@ -97,7 +100,9 @@ export default function FormLogin() {
           }}
         />
         <TouchableOpacity>
-          {/* <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text> */}
+          <Text style={styles.forgotPassword}>
+            Esqueceu sua senha? Clique aqui.
+          </Text>
           <Text style={styles.forgotPassword}></Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -105,7 +110,7 @@ export default function FormLogin() {
           onPress={() => {
             // login({ cpf: "49403669012", password: "Te0101##" });
             // login({ cpf: "14734570760", password: "Gu2405##" });
-            // login({ cpf: "99991581022", password: "Gi0410##" });
+            // login({ cpf: "99991581022", password: "Gi0401##" });
             // login({ cpf: "53705211072", password: "Jo2908##" });
             // login({ cpf: "76903821007", password: "Di1406##" });
             // login({ cpf: "91314128078", password: "Ag1405##" });

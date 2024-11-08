@@ -1,23 +1,59 @@
-import React, { useContext } from "react";
-import { StatusBar, View, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import React, { useContext, useEffect, useState } from "react";
+import { StatusBar, View, Text, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
+import ConfirmModalSignOut from "./ConfirmModalSignOut";
 
 export default function Menu({ navigation }) {
-  const { signOut, user } = useContext(AuthContext);
+  const { signOut, user, imageProfile } = useContext(AuthContext);
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [imageUser, setImageUser] = useState(imageProfile);
+
+  const handleConfirmSignOut = () => {
+    setConfirmModalVisible(false);
+    signOut();
+  };
+
+  useEffect(() => {
+    console.log("Menu");
+  }, []);
 
   return (
     <BoxLinearGradient style={styles.container}>
       <StatusBar translucent />
       <View style={styles.innerContainer}>
-        <View style={styles.boxTitleMenu}>
-          <Text style={styles.textMenu}>MENU</Text>
+        <View style={styles.header}>
+          <View style={styles.boxUserProfile}>
+            <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
+              <Image
+                style={styles.imageProfile}
+                source={
+                  imageProfile !== ""
+                    ? { uri: `data:image/png;base64,${imageUser}` }
+                    : require("../../../images/img-perfil-user.png")
+                }
+              />
+            </View>
+            <Text style={styles.userLogged}>
+              Olá, {user.name ? user.name.split(" ")[0] : ""}!
+            </Text>
+          </View>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            style={styles.buttonSignOut}
+            onPress={() => setConfirmModalVisible(true)}
+          >
+            <Text style={styles.textSignOut}>Sair</Text>
+            <Icon name="sign-out" style={styles.iconSignOut} />
+          </TouchableOpacity>
         </View>
         <View style={styles.main}>
+          <View style={styles.boxTitleMenu}>
+            <Text style={styles.textMenu}>Menu</Text>
+          </View>
           <ItemMenu
             screenName={"Avisos"}
             icon={"info"}
@@ -37,26 +73,13 @@ export default function Menu({ navigation }) {
               })
             }
           />
-          {/* <ItemMenu
-            screenName={"Dízimo"}
-            icon={"heart"}
-            onPress={() => navigation.navigate("Dizimo")}
-          /> */}
-          {/* <ItemMenu
-            screenName={"Caixa Mortuária"}
-            icon={"cross"}
-            onPress={() => navigation.navigate("CaixaMortuario")}
-          /> */}
           {user.position === "council member" ? (
             <ItemMenu
               screenName={"Usuários"}
               icon={"users"}
               onPress={() => navigation.navigate("Users", {})}
             />
-          ) : (
-            ""
-          )}
-          {/* {user.position === "council member" ? ( */}
+          ) : null}
           {user.position === "parish leader" ? (
             <ItemMenu
               screenName={"Comunidades"}
@@ -75,17 +98,28 @@ export default function Menu({ navigation }) {
             />
           )}
         </View>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.buttonSignOut}
-          onPress={() => {
-            signOut();
-          }}
-        >
-          <Text style={styles.textSignOut}>Sair</Text>
-          <Icon name="sign-out" style={styles.iconSignOut} />
-        </TouchableOpacity>
+        <View style={styles.footer}>
+          <Image
+            source={require("../../../images/logo.png")}
+            style={styles.logo}
+          />
+          <Text style={styles.footerTitle}>Defagus Systems</Text>
+          <View style={styles.footerSubTitle}>
+            <Icon
+              name="copyright"
+              color={"#fff"}
+              style={styles.iconCopyright}
+            />
+            <Text style={styles.subTitle}>Todos os Direitos Reservados</Text>
+          </View>
+        </View>
       </View>
+
+      <ConfirmModalSignOut
+        visible={confirmModalVisible}
+        onConfirm={handleConfirmSignOut}
+        onCancel={() => setConfirmModalVisible(false)}
+      />
     </BoxLinearGradient>
   );
 }

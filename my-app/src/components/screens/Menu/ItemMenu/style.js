@@ -1,38 +1,35 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    marginVertical: 10,
+    width: 100,
+  },
   boxOption: {
-    width: Dimensions.get("window").width / 2 - 25,
-    height: Dimensions.get("window").width / 2 - 25,
+    width: 80,
+    height: 80,
     borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
-    marginBottom: 20,
+    backgroundColor: "#ffffff",
+    marginBottom: 5,
+    shadowColor: "#171717",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
+    elevation: 10,
   },
   textOption: {
-    width: "100%",
-    color: "#339dd7",
-    marginTop: 15,
-    fontSize: 20,
-    fontWeight: "bold",
+    color: "#f0f0f0",
+    fontSize: 14,
+    fontWeight: "600",
     textAlign: "center",
+    width: "100%",
   },
   icon: {
     color: "#f094c0",
-    fontSize: 75,
-  },
-  boxShadow: {
-    shadowColor: "#171717",
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.21,
-    shadowRadius: 7.68,
-    elevation: 10,
+    fontSize: 36,
   },
 });
 
