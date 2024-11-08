@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StatusBar, View, Text, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
@@ -10,11 +10,16 @@ import ConfirmModalSignOut from "./ConfirmModalSignOut";
 export default function Menu({ navigation }) {
   const { signOut, user, imageProfile } = useContext(AuthContext);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [imageUser, setImageUser] = useState(imageProfile);
 
   const handleConfirmSignOut = () => {
     setConfirmModalVisible(false);
     signOut();
   };
+
+  useEffect(() => {
+    console.log("Menu");
+  }, []);
 
   return (
     <BoxLinearGradient style={styles.container}>
@@ -27,7 +32,7 @@ export default function Menu({ navigation }) {
                 style={styles.imageProfile}
                 source={
                   imageProfile !== ""
-                    ? { uri: `data:image/png;base64,${imageProfile}` }
+                    ? { uri: `data:image/png;base64,${imageUser}` }
                     : require("../../../images/img-perfil-user.png")
                 }
               />

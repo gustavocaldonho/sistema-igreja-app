@@ -34,10 +34,12 @@ export default function FormLogin() {
     try {
       setVisibleSpinner(true);
       const response = await signIn(data);
+      console.log("response: ", response);
       if (response.data.access_token !== undefined) {
         resetInputs();
         navigation.navigate("Menu");
       } else {
+        item !== null ? setShowError(false) : setShowError(true);
         throw new Error("Não foi possível fazer login.");
       }
     } catch (error) {
@@ -48,6 +50,7 @@ export default function FormLogin() {
       });
       console.log("error (login): ", error);
       console.log("data (login): ", data);
+      // AlertMsg(error, "Tente novamente mais tarde.");
     } finally {
       setShowError(false);
       setVisibleSpinner(false);
