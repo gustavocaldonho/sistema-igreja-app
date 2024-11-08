@@ -100,7 +100,9 @@ export default function FormLogin() {
           }}
         />
         <TouchableOpacity>
-          {/* <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text> */}
+          <Text style={styles.forgotPassword}>
+            Esqueceu sua senha? Clique aqui.
+          </Text>
           <Text style={styles.forgotPassword}></Text>
         </TouchableOpacity>
         <TouchableOpacity

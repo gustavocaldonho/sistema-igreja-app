@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     fontStyle: "italic",
     color: "#8F8F8F",
-    marginBottom: 10,
   },
 });
 
