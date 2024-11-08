@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { desformatCpf, formatCpf } from "../FormCadastroUser/functions";
 import { AuthContext } from "../../../../contexts/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import PasswordRecoveryModal from "../PasswordRecoveryModal/index";
+import AccountRecoveryModal from "../AccountRecoveryModal";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
@@ -72,7 +72,7 @@ export default function FormLogin() {
           defaultValue={password}
           onChangeText={setPassword}
         />
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <TouchableOpacity onPress={() => setRecoveryModalVisible(true)}>
           <Text style={styles.forgotPassword}>
             Esqueceu sua senha? Clique aqui.
           </Text>
@@ -103,9 +103,9 @@ export default function FormLogin() {
       </Pressable>
 
       {/* Componente do modal de verificação */}
-      <PasswordRecoveryModal
+      <AccountRecoveryModal
         isVisible={isRecoveryModalVisible}
-        onClose={() => setModalVisible(false)}
+        onClose={() => setRecoveryModalVisible(false)}
       />
     </View>
   );
