@@ -30,6 +30,9 @@ const modalStyles = StyleSheet.create({
     paddingHorizontal: 50,
     color: "#fff",
   },
+  inputDisable: {
+    opacity: 0.6,
+  },
   errorText: {
     color: "#fff",
     marginBottom: 20,

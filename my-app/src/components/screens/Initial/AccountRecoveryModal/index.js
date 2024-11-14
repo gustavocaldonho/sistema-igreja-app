@@ -3,11 +3,13 @@ import { View, Text, Modal, TouchableOpacity } from "react-native";
 import modalStyles from "./style";
 import BoxLinearGradient from "../../PageBase/BoxLinearGradient";
 import MaskInput from "react-native-mask-input";
+import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 
 export default function AccountRecoveryModal({ isVisible, onClose }) {
   const [modalCpf, setModalCpf] = useState("");
   const [errorCpf, setErrorCpf] = useState(false);
   const [showErrorCpf, setShowErrorCpf] = useState(false);
+  const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
 
   const CPF_MASK = [
@@ -32,10 +34,12 @@ export default function AccountRecoveryModal({ isVisible, onClose }) {
       console.log("Código de verificação enviado para o CPF:", modalCpf);
       setErrorCpf(false);
       setShowErrorCpf(false);
-      onClose();
+      setLoading(true);
+      // onClose();
     } else {
       setErrorCpf(true);
       setShowErrorCpf(true);
+      setLoading(false);
     }
   };
 
@@ -44,6 +48,7 @@ export default function AccountRecoveryModal({ isVisible, onClose }) {
     setModalCpf("");
     setErrorCpf(false);
     setShowErrorCpf(false);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -85,6 +90,7 @@ export default function AccountRecoveryModal({ isVisible, onClose }) {
               }
             }}
             mask={CPF_MASK}
+            editable={!loading}
           />
           <Text style={modalStyles.errorText}>
             {errorCpf && showErrorCpf
@@ -92,9 +98,13 @@ export default function AccountRecoveryModal({ isVisible, onClose }) {
               : ""}
           </Text>
           <TouchableOpacity
-            style={modalStyles.button}
+            style={[
+              modalStyles.button,
+              loading ? modalStyles.inputDisable : "",
+            ]}
             onPress={requestVerificationCode}
             activeOpacity={0.6}
+            disabled={loading}
           >
             <Text style={[modalStyles.buttonText, modalStyles.textConfirm]}>
               Solicitar Código
@@ -109,6 +119,7 @@ export default function AccountRecoveryModal({ isVisible, onClose }) {
               Cancelar
             </Text>
           </TouchableOpacity>
+          {loading ? <LoadingIndicator /> : null}
         </View>
       </BoxLinearGradient>
     </Modal>

@@ -72,7 +72,10 @@ export default function FormLogin() {
           defaultValue={password}
           onChangeText={setPassword}
         />
-        <TouchableOpacity onPress={() => setRecoveryModalVisible(true)}>
+        <TouchableOpacity
+          onPress={() => setRecoveryModalVisible(true)}
+          activeOpacity={0.4}
+        >
           <Text style={styles.forgotPassword}>
             Esqueceu sua senha? Clique aqui.
           </Text>
