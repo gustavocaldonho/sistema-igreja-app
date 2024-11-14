@@ -4,10 +4,10 @@ const modalStyles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     alignItems: "center",
+    paddingHorizontal: 20,
   },
   modalContent: {
-    width: "90%",
-    padding: 10,
+    width: "100%",
     marginTop: 30,
     alignItems: "center",
     borderRadius: 20,
