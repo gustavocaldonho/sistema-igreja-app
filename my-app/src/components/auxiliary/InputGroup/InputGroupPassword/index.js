@@ -13,13 +13,13 @@ const InputGroupPassword = ({
   const [security, setSecurity] = useState(true);
   const [nameIconEye, setNameIconEye] = useState("eye-slash");
 
-  function changeNameIconEye() {
-    if (nameIconEye === "eye-slash") {
-      setNameIconEye("eye");
-    } else {
+  function changeSecurity() {
+    setSecurity(false);
+    setNameIconEye("eye");
+    setTimeout(() => {
+      setSecurity(true);
       setNameIconEye("eye-slash");
-    }
-    setSecurity(!security);
+    }, 3000);
   }
 
   return (
@@ -36,7 +36,7 @@ const InputGroupPassword = ({
         secureTextEntry={security}
       />
       <View style={[styles.boxIcon, styles.boxIconRight]}>
-        <TouchableWithoutFeedback onPress={() => changeNameIconEye()}>
+        <TouchableWithoutFeedback onPress={changeSecurity}>
           <Icon name={nameIconEye} size={20} style={styles.icon} />
         </TouchableWithoutFeedback>
       </View>

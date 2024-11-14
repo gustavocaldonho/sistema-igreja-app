@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -8,7 +8,7 @@ import styles from "./style";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import OptionsImage from "../../auxiliary/ModalImage";
 import ViewImage from "../../auxiliary/ModalImage/ViewImage";
-import { getImageProfile } from "../../auxiliary/ModalImage/functions";
+import { AuthContext } from "../../../contexts/auth";
 
 import PersonalDataContainer from "./PersonalDataContainer";
 import DizimoContainer from "./DizimoContainer";
@@ -17,15 +17,11 @@ import ModalUpdateDatasUser from "./PersonalDataContainer/ModalUpdateDatasUser";
 
 export default function PerfilUser({ navigation, route }) {
   const { name, cpf, birthday, phone, community, password } = route.params;
+  const { imageProfile, setImageProfile } = useContext(AuthContext);
   const [modalVisible, setModalVisible] = useState(false);
-  const [image, setImage] = useState("");
-  const [loadingImage, setLoadingImage] = useState(true);
+  const [loadingImage, setLoadingImage] = useState(false);
   const [visibleOptionsImage, setVisibleOptionsImage] = useState(false);
   const [viewImageVisible, setViewImageVisible] = useState(false);
-
-  useEffect(() => {
-    getImageProfile("", cpf, setImage, setLoadingImage); // "" = patron vazio
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -47,8 +43,8 @@ export default function PerfilUser({ navigation, route }) {
               <Image
                 style={styles.imageProfile}
                 source={
-                  image !== ""
-                    ? { uri: `data:image/png;base64,${image}` }
+                  imageProfile !== ""
+                    ? { uri: `data:image/png;base64,${imageProfile}` }
                     : require("../../../images/img-perfil-user.png")
                 }
               />
@@ -103,8 +99,8 @@ export default function PerfilUser({ navigation, route }) {
         setVisibleOptionsImage={setVisibleOptionsImage}
         patron={null}
         cpf={cpf}
-        image={image}
-        setImage={setImage}
+        image={imageProfile}
+        setImage={setImageProfile}
         loadingImage={loadingImage}
         setLoadingImage={setLoadingImage}
         setViewImageVisible={setViewImageVisible}
@@ -112,7 +108,7 @@ export default function PerfilUser({ navigation, route }) {
 
       <ViewImage
         visible={viewImageVisible}
-        image={image}
+        image={imageProfile}
         onClose={() => setViewImageVisible(false)}
       />
     </View>

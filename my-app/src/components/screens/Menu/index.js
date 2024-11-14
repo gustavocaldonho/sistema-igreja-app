@@ -10,16 +10,11 @@ import ConfirmModalSignOut from "./ConfirmModalSignOut";
 export default function Menu({ navigation }) {
   const { signOut, user, imageProfile } = useContext(AuthContext);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
-  const [imageUser, setImageUser] = useState(imageProfile);
 
   const handleConfirmSignOut = () => {
     setConfirmModalVisible(false);
     signOut();
   };
-
-  useEffect(() => {
-    console.log("Menu");
-  }, []);
 
   return (
     <BoxLinearGradient style={styles.container}>
@@ -32,7 +27,7 @@ export default function Menu({ navigation }) {
                 style={styles.imageProfile}
                 source={
                   imageProfile !== ""
-                    ? { uri: `data:image/png;base64,${imageUser}` }
+                    ? { uri: `data:image/png;base64,${imageProfile}` }
                     : require("../../../images/img-perfil-user.png")
                 }
               />
