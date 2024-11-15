@@ -2,11 +2,20 @@ import React, { useState, useRef, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import MaskInput from "react-native-mask-input";
 import modalStyles from "./style";
+import { getCodeSms } from "../../../../services/user_api";
+import { desformatCpf } from "../FormCadastroUser/functions";
 
-export default function FormCpf({ loading, setLoading }) {
+export default function FormCpf({
+  loading,
+  setLoading,
+  setIsVisibleFormCpf,
+  setPhone,
+  setCpfConfirmed,
+}) {
   const [cpf, setCpf] = useState("");
   const [errorCpf, setErrorCpf] = useState(false);
   const [showErrorCpf, setShowErrorCpf] = useState(false);
+  const [msgErro, setMsgErro] = useState("");
   const inputRef = useRef(null);
 
   const CPF_MASK = [
@@ -26,15 +35,31 @@ export default function FormCpf({ loading, setLoading }) {
     /\d/,
   ];
 
-  const requestVerificationCode = () => {
-    if (cpf.length === 14) {
-      console.log("Código de verificação enviado para o CPF:", cpf);
-      setErrorCpf(false);
-      setShowErrorCpf(false);
-      setLoading(true);
-    } else {
+  const requestVerificationCode = async () => {
+    try {
+      const newCpf = desformatCpf(cpf);
+      if (newCpf.length === 11) {
+        setLoading(true);
+        const result = await getCodeSms(newCpf);
+        if (result.status === 200) {
+          setPhone(result.data.phone);
+          setErrorCpf(false);
+          setShowErrorCpf(false);
+          setIsVisibleFormCpf(false);
+          setCpfConfirmed(newCpf);
+        } else {
+          setMsgErro("CPF não cadastrado.");
+          throw new Error("Falha na requisição");
+        }
+      } else {
+        setMsgErro("Por favor, informe seu CPF corretamente!");
+        throw new Error("Cpf inválido.");
+      }
+    } catch (error) {
+      console.log(error);
       setErrorCpf(true);
       setShowErrorCpf(true);
+    } finally {
       setLoading(false);
     }
   };
@@ -50,7 +75,7 @@ export default function FormCpf({ loading, setLoading }) {
   return (
     <View style={modalStyles.modalContent}>
       <Text style={modalStyles.modalText}>
-        Confirme seu CPF para receber um código de verificação via SMS.
+        Confirme seu CPF para receber um código de verificação via SMS
       </Text>
       <MaskInput
         ref={inputRef}
@@ -74,9 +99,7 @@ export default function FormCpf({ loading, setLoading }) {
         editable={!loading}
       />
       <Text style={modalStyles.errorText}>
-        {errorCpf && showErrorCpf
-          ? "Por favor, informe seu CPF corretamente!"
-          : ""}
+        {errorCpf && showErrorCpf ? msgErro : ""}
       </Text>
       <TouchableOpacity
         style={[modalStyles.button, loading ? modalStyles.inputDisable : ""]}

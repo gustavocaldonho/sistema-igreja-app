@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import modalStyles from "./style";
 
-export default function FormNewPassword({ isVisible, onClose, newPassword }) {
+export default function FormNewPassword({ cancel, newPassword }) {
   return (
     <View style={[modalStyles.modalContent, { gap: 20 }]}>
       <Text style={styles.title}>Código confirmado com sucesso!</Text>
@@ -11,7 +11,7 @@ export default function FormNewPassword({ isVisible, onClose, newPassword }) {
       <Text style={styles.modalSubText}>
         Entre no app e altere-a o mais rápido possível!
       </Text>
-      <TouchableOpacity style={modalStyles.button} onPress={onClose}>
+      <TouchableOpacity style={modalStyles.button} onPress={cancel}>
         <Text style={[modalStyles.buttonText, modalStyles.textConfirm]}>
           Ir para Login
         </Text>

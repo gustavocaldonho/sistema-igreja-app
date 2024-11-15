@@ -231,6 +231,32 @@ export const getUsersTemp = async (token) => {
   }
 };
 
+export const getCodeSms = async (cpf) => {
+  try {
+    const response = await api.get(`password_recovery/${cpf}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getNewPassword = async (cpf, codeSms) => {
+  try {
+    const response = await api.get(`password_recovery/${cpf}/${codeSms}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 // Authorization: `Bearer ${token}`,
 
 // const user_api = async (data) => {

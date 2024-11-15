@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Modal, TouchableOpacity } from "react-native";
+import { Text, Modal, TouchableOpacity } from "react-native";
 import modalStyles from "./style";
 import BoxLinearGradient from "../../PageBase/BoxLinearGradient";
 import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
@@ -9,14 +9,17 @@ import FormNewPassword from "./FormNewPassword";
 
 export default function AccountRecoveryModal({ isVisible, onClose }) {
   const [loading, setLoading] = useState(false);
-  const [isVisibleFormCpf, setIsVisibleFormCpf] = useState(false);
+  const [isVisibleFormCpf, setIsVisibleFormCpf] = useState(true);
+  const [phone, setPhone] = useState("");
+  const [cpfConfirmed, setCpfConfirmed] = useState("");
+  const [msgSuccessIsVisible, setMsgSuccessIsVisible] = useState(false);
   const [newPassword, setNewPassword] = useState("Se0203##");
-
-  const [result, setResult] = useState("");
 
   const cancel = () => {
     onClose();
     setLoading(false);
+    setIsVisibleFormCpf(true);
+    setMsgSuccessIsVisible(false);
   };
 
   return (
@@ -27,12 +30,25 @@ export default function AccountRecoveryModal({ isVisible, onClose }) {
       onRequestClose={onClose}
     >
       <BoxLinearGradient style={modalStyles.modalContainer}>
-        {!result ? (
+        {!msgSuccessIsVisible ? (
           <>
             {isVisibleFormCpf ? (
-              <FormCpf loading={loading} setLoading={setLoading} />
+              <FormCpf
+                loading={loading}
+                setLoading={setLoading}
+                setIsVisibleFormCpf={setIsVisibleFormCpf}
+                setPhone={setPhone}
+                setCpfConfirmed={setCpfConfirmed}
+              />
             ) : (
-              <FormSMS loading={loading} setLoading={setLoading} />
+              <FormSMS
+                loading={loading}
+                setLoading={setLoading}
+                phone={phone}
+                cpfConfirmed={cpfConfirmed}
+                setMsgSuccessIsVisible={setMsgSuccessIsVisible}
+                setNewPassword={setNewPassword}
+              />
             )}
             <TouchableOpacity
               style={modalStyles.button}
@@ -46,11 +62,7 @@ export default function AccountRecoveryModal({ isVisible, onClose }) {
             {loading ? <LoadingIndicator /> : null}
           </>
         ) : (
-          <FormNewPassword
-            isVisible={isVisible}
-            onClose={onClose}
-            newPassword={newPassword}
-          />
+          <FormNewPassword cancel={cancel} newPassword={newPassword} />
         )}
       </BoxLinearGradient>
     </Modal>
