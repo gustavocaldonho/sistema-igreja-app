@@ -35,12 +35,18 @@ export default function FormLogin() {
         resetInputs();
         navigation.navigate("Menu");
       } else {
-        setShowError(true);
+        item !== null ? setShowError(false) : setShowError(true);
         throw new Error("Não foi possível fazer login.");
       }
     } catch (error) {
-      const item = await AsyncStorage.getItem("Login");
-      setShowError(!item);
+      // Se o login automático der erro (login está no storage), não mostra a msg de erro.
+      AsyncStorage.getItem("Login").then((item) => {
+        console.log("Login storage: ", item);
+        item !== null ? setShowError(false) : setShowError(true);
+      });
+      console.log("error (login): ", error);
+      console.log("data (login): ", data);
+      // AlertMsg(error, "Tente novamente mais tarde.");
     } finally {
       setShowError(false);
       setVisibleSpinner(false);
@@ -51,6 +57,17 @@ export default function FormLogin() {
     setCpf("");
     setPassword("");
   }
+
+  // Login automático, se tiver um usuário (cpf e password) salvo no async storage
+  useEffect(() => {
+    const makeLogin = async () => {
+      const data = await AsyncStorage.getItem("Login");
+      if (data !== null) {
+        login(JSON.parse(data));
+      }
+    };
+    makeLogin();
+  }, []);
 
   return (
     <View style={styles.formContext}>
@@ -84,7 +101,7 @@ export default function FormLogin() {
           style={styles.button}
           onPress={() => {
             // login({ cpf: "49403669012", password: "Te0101##" });
-            login({ cpf: "14734570760", password: "Gu2405##" });
+            // login({ cpf: "14734570760", password: "Gu2405##" });
             // login({ cpf: "99991581022", password: "Gi0401##" });
             // login({ cpf: "53705211072", password: "Jo2908##" });
             // login({ cpf: "76903821007", password: "Di1406##" });
@@ -92,9 +109,7 @@ export default function FormLogin() {
             // login({ cpf: "49824720090", password: "Hu3001##" });
             // login({ cpf: "88448720059", password: "Ra0101##" });
             // login({ cpf: "26536306058", password: "Fa0101##" });
-            // login({ cpf: desformatCpf(cpf), password })
-
-            // ######## Não está mostrando mensagem de erro no login incorreto! ########
+            login({ cpf: desformatCpf(cpf), password });
           }}
         >
           <Text style={styles.textButton}>Entrar</Text>
