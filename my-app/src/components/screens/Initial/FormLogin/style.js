@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   forgotPassword: {
     paddingTop: 5,
     paddingLeft: 25,
+    marginBottom: 15,
     fontStyle: "italic",
     color: "#8F8F8F",
   },

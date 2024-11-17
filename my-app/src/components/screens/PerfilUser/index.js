@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -8,24 +8,34 @@ import styles from "./style";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import OptionsImage from "../../auxiliary/ModalImage";
 import ViewImage from "../../auxiliary/ModalImage/ViewImage";
-import { getImageProfile } from "../../auxiliary/ModalImage/functions";
-
+import { AuthContext } from "../../../contexts/auth";
 import PersonalDataContainer from "./PersonalDataContainer";
-import DizimoContainer from "./DizimoContainer";
-import MortuaryContainer from "./MortuaryContainer";
 import ModalUpdateDatasUser from "./PersonalDataContainer/ModalUpdateDatasUser";
+import { getImageProfile } from "../../auxiliary/ModalImage/functions";
 
 export default function PerfilUser({ navigation, route }) {
   const { name, cpf, birthday, phone, community, password } = route.params;
+  const { imageProfile, setImageProfile } = useContext(AuthContext);
+  const [imageAnyUser, setImageAnyUser] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  const [image, setImage] = useState("");
-  const [loadingImage, setLoadingImage] = useState(true);
+  const [loadingImage, setLoadingImage] = useState(false);
   const [visibleOptionsImage, setVisibleOptionsImage] = useState(false);
   const [viewImageVisible, setViewImageVisible] = useState(false);
 
+  const isCurrentUser = Boolean(password);
+
   useEffect(() => {
-    getImageProfile("", cpf, setImage, setLoadingImage); // "" = patron vazio
-  }, []);
+    if (!isCurrentUser) {
+      getImageProfile("", cpf, setImageAnyUser, setLoadingImage);
+    }
+  }, [cpf, isCurrentUser]);
+
+  const getProfileImageSource = () => {
+    const imageBase64 = isCurrentUser ? imageProfile : imageAnyUser;
+    return imageBase64
+      ? { uri: `data:image/png;base64,${imageBase64}` }
+      : require("../../../images/img-perfil-user.png");
+  };
 
   return (
     <View style={styles.container}>
@@ -46,19 +56,13 @@ export default function PerfilUser({ navigation, route }) {
             <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
               <Image
                 style={styles.imageProfile}
-                source={
-                  image !== ""
-                    ? { uri: `data:image/png;base64,${image}` }
-                    : require("../../../images/img-perfil-user.png")
-                }
+                source={getProfileImageSource()}
               />
-              {password ? (
+              {isCurrentUser && (
                 <View style={styles.boxIconCamera}>
                   {!loadingImage ? (
                     <TouchableOpacity
-                      onPress={() => {
-                        setVisibleOptionsImage(true);
-                      }}
+                      onPress={() => setVisibleOptionsImage(true)}
                     >
                       <Icon name="camera" style={styles.iconCamera} />
                     </TouchableOpacity>
@@ -66,7 +70,7 @@ export default function PerfilUser({ navigation, route }) {
                     <LoadingIndicator color="#339dd7" size="small" />
                   )}
                 </View>
-              ) : null}
+              )}
             </View>
           </View>
           <View style={styles.boxNameUser}>
@@ -79,21 +83,6 @@ export default function PerfilUser({ navigation, route }) {
               style={[styles.boxInformationsUser, styles.boxShadow]}
               setModalVisible={setModalVisible}
             />
-
-            {/* <DizimoContainer
-              style={[styles.boxInformationsUser, styles.boxShadow]}
-              styleTitleBox={styles.textTitleBox}
-            /> */}
-
-            {/* <MortuaryContainer
-              years={{}}
-              style={[styles.boxInformationsUser, styles.boxShadow]}
-              styleTitleBox={styles.textTitleBox}
-            /> */}
-
-            {/* <TouchableOpacity style={styles.buttonDisable}>
-              <Text style={styles.textDisable}>DESATIVAR CONTA</Text>
-            </TouchableOpacity> */}
           </ScrollView>
         </BoxLinearGradient>
       )}
@@ -103,8 +92,8 @@ export default function PerfilUser({ navigation, route }) {
         setVisibleOptionsImage={setVisibleOptionsImage}
         patron={null}
         cpf={cpf}
-        image={image}
-        setImage={setImage}
+        image={imageProfile}
+        setImage={setImageProfile}
         loadingImage={loadingImage}
         setLoadingImage={setLoadingImage}
         setViewImageVisible={setViewImageVisible}
@@ -112,7 +101,7 @@ export default function PerfilUser({ navigation, route }) {
 
       <ViewImage
         visible={viewImageVisible}
-        image={image}
+        image={imageProfile}
         onClose={() => setViewImageVisible(false)}
       />
     </View>
