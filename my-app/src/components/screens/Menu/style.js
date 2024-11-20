@@ -5,56 +5,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#1a1a2e",
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 30,
-    paddingTop: 60,
-    paddingBottom: 10,
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
-  },
-  boxUserProfile: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 10,
-  },
-  boxImageProfile: {
-    width: 40,
-    height: 40,
-    borderRadius: 100,
-    borderColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imageProfile: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 100,
-  },
-  userLogged: {
-    fontSize: 24,
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  buttonSignOut: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
-    backgroundColor: "rgba(0, 0, 0, 0.2)",
-    borderRadius: 10,
-  },
-  textSignOut: {
-    fontSize: 15,
-    color: "#fff",
-  },
-  iconSignOut: {
-    fontSize: 20,
-    color: "#fff",
-  },
   boxTitleMenu: {
     width: "100%",
     marginBottom: 20,
@@ -112,16 +62,6 @@ const styles = StyleSheet.create({
   },
   iconCopyright: {
     fontSize: 10,
-  },
-  boxShadowLight: {
-    shadowColor: "#ffffff",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.9,
-    shadowRadius: 3.05,
-    elevation: 20,
   },
 });
 

@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import { StatusBar, View, Text, Image, TouchableOpacity } from "react-native";
+import React, { useContext, useState } from "react";
+import { StatusBar, View, Text, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
 import ConfirmModalSignOut from "./ConfirmModalSignOut";
+import Header from "./Header";
 
 export default function Menu({ navigation }) {
-  const { signOut, user, imageProfile } = useContext(AuthContext);
+  const { signOut, user } = useContext(AuthContext);
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
 
   const handleConfirmSignOut = () => {
@@ -20,31 +21,7 @@ export default function Menu({ navigation }) {
     <BoxLinearGradient style={styles.container}>
       <StatusBar translucent />
       <View style={styles.innerContainer}>
-        <View style={styles.header}>
-          <View style={styles.boxUserProfile}>
-            <View style={[styles.boxImageProfile, styles.boxShadowLight]}>
-              <Image
-                style={styles.imageProfile}
-                source={
-                  imageProfile !== ""
-                    ? { uri: `data:image/png;base64,${imageProfile}` }
-                    : require("../../../images/img-perfil-user.png")
-                }
-              />
-            </View>
-            <Text style={styles.userLogged}>
-              Olá, {user.name ? user.name.split(" ")[0] : ""}!
-            </Text>
-          </View>
-          <TouchableOpacity
-            activeOpacity={0.6}
-            style={styles.buttonSignOut}
-            onPress={() => setConfirmModalVisible(true)}
-          >
-            <Text style={styles.textSignOut}>Sair</Text>
-            <Icon name="sign-out" style={styles.iconSignOut} />
-          </TouchableOpacity>
-        </View>
+        <Header setConfirmModalVisible={setConfirmModalVisible} />
         <View style={styles.main}>
           <View style={styles.boxTitleMenu}>
             <Text style={styles.textMenu}>Menu</Text>
