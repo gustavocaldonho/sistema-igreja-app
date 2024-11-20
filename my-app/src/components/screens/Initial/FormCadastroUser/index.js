@@ -9,7 +9,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert,
 } from "react-native";
 import styles from "./style";
 import { AuthContext } from "../../../../contexts/auth";
@@ -32,14 +31,8 @@ import Spinner from "react-native-loading-spinner-overlay";
 import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 import { getCommunitiesWithoutToken } from "../../../../services/community_api";
 import { signupUser, updateUser } from "../../../../services/user_api";
-import {
-  msgCadastrySuccess,
-  msgCadastryError,
-  msgUpdateError,
-  msgUpdateSuccess,
-} from "./alerts";
 import ModalCompleteRegistry from "./ModalCompleteRegistry";
-import AlertMsg from "../../../auxiliary/AlertMsg";
+import { ModalContext } from "../../../../contexts/modalContext";
 
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
@@ -69,6 +62,8 @@ export default function FormCadastroUser({ user, setModalVisible }) {
   const [visibleIndicator, setVisibleIndicator] = useState(false);
   const [modalSuccessVisible, setModalSuccessVisible] = useState(false);
 
+  const { modalAlert } = useContext(ModalContext);
+
   async function getPatrons() {
     try {
       setVisibleIndicator(true);
@@ -81,7 +76,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
         );
       }
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
       console.log(error);
     } finally {
       setVisibleIndicator(false);
@@ -117,7 +112,7 @@ export default function FormCadastroUser({ user, setModalVisible }) {
       console.log(response);
       console.log("(add): ", item);
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
       console.log(error);
     } finally {
       setVisibleSpinner(false);
@@ -136,13 +131,21 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           String(response.data.access_token)
         );
         await setDatasUser(response.data.access_token, newDatas.password);
-        msgUpdateSuccess(setModalVisible, navigation);
+        modalAlert(
+          "Atualização Concluída!",
+          "Guarde bem seus dados e fique a vontade para atualizá-los quando quiser."
+        );
+        setModalVisible(false);
+        navigation.goBack();
       } else {
-        throw new Error("Não é possível atualizar o usuário.");
+        throw new Error(
+          "Não foi possível atualizar os seus dados. Tente mais tarde."
+        );
       }
     } catch (error) {
       console.log(error);
-      msgUpdateError();
+      modalAlert("Ops!", error.message);
+      setModalVisible(false);
     } finally {
       setVisibleSpinner(false);
     }

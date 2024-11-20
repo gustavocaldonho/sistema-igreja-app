@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import "@react-native-firebase/app";
 import AuthProvider from "./src/contexts/auth";
+import ModalProvider from "./src/contexts/modalContext";
 import MyStack from "./src/routes/MyStack";
 import * as Notifications from "expo-notifications";
 import messaging from "@react-native-firebase/messaging";
@@ -132,7 +133,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <MyStack />
+        <ModalProvider>
+          <MyStack />
+        </ModalProvider>
       </AuthProvider>
     </NavigationContainer>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Modal, TouchableOpacity } from "react-native";
+import { View, Text, Modal } from "react-native";
 import styles from "./style";
 import BoxLinearGradient from "../../../PageBase/BoxLinearGradient";
 import FormCadastroUser from "../../../Initial/FormCadastroUser";
@@ -12,7 +12,6 @@ const ModalUpdateDatasUser = ({ modalVisible, setModalVisible, user }) => {
         transparent={false}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
         }}
       >
