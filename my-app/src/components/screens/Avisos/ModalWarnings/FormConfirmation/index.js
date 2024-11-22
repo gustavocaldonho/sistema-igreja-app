@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import stylesModal from "../style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { deleteWarning } from "../../../../../services/warning_api";
-import AlertMsg from "../../../../auxiliary/AlertMsg";
+import { ModalContext } from "../../../../../contexts/modalContext";
 
 export default function FormConfirmation({
   itemClicked,
@@ -12,6 +12,8 @@ export default function FormConfirmation({
   setModalVisible,
   modalVisible,
 }) {
+  const { modalAlert } = useContext(ModalContext);
+
   async function deleteWarningForm(id) {
     try {
       const token = await AsyncStorage.getItem("AccessToken");
@@ -22,7 +24,7 @@ export default function FormConfirmation({
         throw new Error("Não foi possível excluir o aviso.");
       }
     } catch (error) {
-      AlertMsg(`Falha na requisição. ${error}`);
+      modalAlert("Ops!", error.message);
     } finally {
       setModalVisible(!modalVisible);
     }

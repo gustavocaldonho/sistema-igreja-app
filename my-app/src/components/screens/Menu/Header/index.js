@@ -8,7 +8,9 @@ export default function Header({ setConfirmModalVisible }) {
   const { user, imageProfile } = useContext(AuthContext);
 
   const formatName = (user) => {
-    return user.name.split(" ")[0] + " " + user.name.split(" ")[1];
+    const name = user.name?.split(" ")[0] ?? "";
+    const surname = user.name?.split(" ")[1] ?? "";
+    return name + " " + surname;
   };
 
   return (

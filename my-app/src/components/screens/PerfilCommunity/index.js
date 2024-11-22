@@ -13,17 +13,18 @@ import { getUsersTemp } from "../../../services/user_api";
 import ItemAdvisorContent from "./ItemAdvisorContent";
 import styles from "./style";
 import { AuthContext } from "../../../contexts/auth";
-import AlertMsg from "../../auxiliary/AlertMsg";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import ViewImage from "../../auxiliary/ModalImage/ViewImage";
 import OptionsImage from "../../auxiliary/ModalImage";
 import { getImageProfile } from "../../auxiliary/ModalImage/functions";
+import { ModalContext } from "../../../contexts/modalContext";
 
 export default function PerfilCommunity({ navigation, route }) {
   const { patron, location } = route.params;
   const [datas, setDatas] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useContext(AuthContext);
+  const { modalAlert } = useContext(ModalContext);
   const [qtdUsers, setQtdUsers] = useState(0);
 
   const [itemAdvisorClicked, setItemAdvisorClicked] = useState({});
@@ -52,7 +53,7 @@ export default function PerfilCommunity({ navigation, route }) {
         throw new Error("Não foi possível obter as informações da comunidade.");
       }
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
     }
   }
 
@@ -66,7 +67,7 @@ export default function PerfilCommunity({ navigation, route }) {
         throw new Error("Não foi possível obter os usuários.");
       }
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
     }
   }
 

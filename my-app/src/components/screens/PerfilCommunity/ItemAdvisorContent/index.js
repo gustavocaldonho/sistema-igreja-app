@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import ItemAdvisor from "../ItemAdvisor";
 import { getCouncils } from "../../../../services/user_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import AlertMsg from "../../../auxiliary/AlertMsg";
+import { ModalContext } from "../../../../contexts/modalContext";
 
 export default function ItemAdvisorContent({
   patron,
@@ -13,6 +13,7 @@ export default function ItemAdvisorContent({
   setFormModalAdvisorDefaultVisible,
 }) {
   const [advisorList, setAdvisorList] = useState([]);
+  const { modalAlert } = useContext(ModalContext);
 
   async function getCouncilsForm(patron) {
     try {
@@ -21,10 +22,10 @@ export default function ItemAdvisorContent({
       if (response.status === 200) {
         setAdvisorList(response.data);
       } else {
-        AlertMsg("Não foi possível obter a lista de conselheiros.");
+        throw new Error("Não foi possível obter a lista de conselheiros.");
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      modalAlert("Ops!", error.message);
     }
   }
 

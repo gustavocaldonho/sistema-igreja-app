@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
@@ -10,8 +10,8 @@ import {
   updateCommunity,
 } from "../../../../../services/community_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import AlertMsg from "../../../../auxiliary/AlertMsg";
 import LoadingIndicator from "../../../../auxiliary/LoadingIndicator";
+import { ModalContext } from "../../../../../contexts/modalContext";
 
 export default function FormDefault({
   setModalVisible,
@@ -26,6 +26,7 @@ export default function FormDefault({
   const [email, setEmail] = useState(community ? community.email : "");
   const [visibleIndicator, setVisibleIndicator] = useState(false);
   const navigation = useNavigation();
+  const { modalAlert } = useContext(ModalContext);
 
   async function createCommunity(data) {
     try {
@@ -41,7 +42,7 @@ export default function FormDefault({
         );
       }
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
     } finally {
       setVisibleIndicator(false);
     }
@@ -61,7 +62,7 @@ export default function FormDefault({
         );
       }
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
     } finally {
       setVisibleIndicator(false);
     }

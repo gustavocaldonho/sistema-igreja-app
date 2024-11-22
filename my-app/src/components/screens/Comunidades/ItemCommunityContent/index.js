@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View } from "react-native";
 import ItemCommunity from "../ItemCommunity";
 import { getCommunitiesWithToken } from "../../../../services/community_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import AlertMsg from "../../../auxiliary/AlertMsg";
+import { ModalContext } from "../../../../contexts/modalContext";
 
 export default function ItemCommunityContent({ setVisibleIndicator }) {
   const [communityList, setCommunityList] = useState([]);
+  const { modalAlert } = useContext(ModalContext);
 
   async function getCommunities() {
     try {
@@ -17,10 +18,10 @@ export default function ItemCommunityContent({ setVisibleIndicator }) {
         setCommunityList(response);
         setVisibleIndicator(false);
       } else {
-        AlertMsg("Não retornou a lista de comunidades.");
+        throw new Error("Não foi possível retornar a lista de comunidades.");
       }
     } catch (error) {
-      AlertMsg("Não retornou a lista de avisos.", error);
+      modalAlert("Ops!", error.message);
     }
   }
 

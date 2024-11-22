@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View, Modal, Pressable } from "react-native";
+import React from "react";
+import { View, Modal } from "react-native";
 import { BlurView } from "expo-blur";
 import styles from "./style";
 
@@ -10,7 +10,6 @@ export default function ModalBase({ children }) {
       transparent={true}
       visible={true}
       onRequestClose={() => {
-        Alert.alert("Modal has been closed.");
         setModalVisible(!modalVisible);
       }}
     >
