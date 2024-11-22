@@ -16,6 +16,7 @@ import { desformatCpf, formatCpf } from "../FormCadastroUser/functions";
 import { AuthContext } from "../../../../contexts/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AccountRecoveryModal from "../AccountRecoveryModal";
+import { ModalContext } from "../../../../contexts/modalContext";
 
 export default function FormLogin() {
   const [cpf, setCpf] = useState("");
@@ -26,11 +27,13 @@ export default function FormLogin() {
 
   const navigation = useNavigation();
   const { signIn, setRegistryEntry } = useContext(AuthContext);
+  const { modalAlert } = useContext(ModalContext);
 
   async function login(data) {
     try {
       setVisibleSpinner(true);
       const response = await signIn(data);
+      console.log(response);
       if (response.data.access_token !== undefined) {
         resetInputs();
         navigation.navigate("Menu");
@@ -46,7 +49,7 @@ export default function FormLogin() {
       });
       console.log("error (login): ", error);
       console.log("data (login): ", data);
-      // AlertMsg(error, "Tente novamente mais tarde.");
+      modalAlert("Ops!", error.message);
     } finally {
       setShowError(false);
       setVisibleSpinner(false);

@@ -10,7 +10,7 @@ import ItemAviso from "../ItemAviso";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getTenWarnings } from "../../../../services/warning_api";
 import { AuthContext } from "../../../../contexts/auth";
-import AlertMsg from "../../../auxiliary/AlertMsg";
+import { ModalContext } from "../../../../contexts/modalContext";
 
 export default function ItemAvisoContent({
   modalVisible,
@@ -24,15 +24,16 @@ export default function ItemAvisoContent({
   const [page, setPage] = useState(1); // Página inicial
   const [loadingMore, setLoadingMore] = useState(false); // Estado para carregamento adicional
   const [hasMoreWarnings, setHasMoreWarnings] = useState(true); // Controle se há mais avisos
+  const { modalAlert } = useContext(ModalContext);
 
   const { user } = useContext(AuthContext);
 
   async function getWarningList(pageNumber) {
     try {
       if (pageNumber === 1) {
-        setVisibleIndicator(true); // Exibe o indicador na primeira carga
+        setVisibleIndicator(true);
       } else {
-        setLoadingMore(true); // Mostra um indicador para carregamento adicional
+        setLoadingMore(true);
       }
 
       const token = await AsyncStorage.getItem("AccessToken");
@@ -56,10 +57,10 @@ export default function ItemAvisoContent({
         }
       } else {
         console.log(response);
-        AlertMsg("Não retornou a lista de avisos.");
+        throw new Error("Não foi possível retornar a lista de avisos.");
       }
     } catch (error) {
-      AlertMsg(`Falha na requisição. ${error}`);
+      modalAlert("Ops!", error.message);
     } finally {
       setVisibleIndicator(false);
       setLoadingMore(false);

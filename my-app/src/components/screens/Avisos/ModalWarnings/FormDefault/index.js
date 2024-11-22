@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, Switch } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "./style";
@@ -8,9 +8,8 @@ import {
   createWarning,
   updateWarning,
 } from "../../../../../services/warning_api";
-import ToastMessage from "../../../../auxiliary/ToastMessage";
-import AlertMsg from "../../../../auxiliary/AlertMsg";
 import LoadingIndicator from "../../../../auxiliary/LoadingIndicator";
+import { ModalContext } from "../../../../../contexts/modalContext";
 
 export default function FormDefault({
   itemClicked,
@@ -30,6 +29,7 @@ export default function FormDefault({
     itemClicked.scope ? itemClicked.scope : "private"
   );
   const [visibleIndicator, setVisibleIndicator] = useState(false);
+  const { modalAlert } = useContext(ModalContext);
 
   async function createWarningForm(item) {
     try {
@@ -42,7 +42,7 @@ export default function FormDefault({
         throw new Error("Não foi possível criar o aviso.");
       }
     } catch (error) {
-      AlertMsg(`Falha na requisição. ${error}`);
+      modalAlert("Ops!", error.message);
     } finally {
       setVisibleIndicator(false);
     }
@@ -60,7 +60,7 @@ export default function FormDefault({
         throw new Error("Não foi possível atualizar o aviso.");
       }
     } catch (error) {
-      AlertMsg(`Falha na requisição. ${error}`);
+      modalAlert("Ops!", error.message);
     } finally {
       setVisibleIndicator(false);
     }

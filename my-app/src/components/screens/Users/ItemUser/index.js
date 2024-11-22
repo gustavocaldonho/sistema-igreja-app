@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getUserByCpf } from "../../../../services/user_api";
-import AlertMsg from "../../../auxiliary/AlertMsg";
+import { ModalContext } from "../../../../contexts/modalContext";
 
 export default function ItemUser(props) {
   const [userItem, setUserItem] = useState([]);
+  const { modalAlert } = useContext(ModalContext);
 
   async function getDatasUser() {
     try {
@@ -17,10 +18,10 @@ export default function ItemUser(props) {
       if (response.status === 200) {
         setUserItem(response.data);
       } else {
-        AlertMsg("Não foi possível obter as informações do usuário.");
+        throw new Error("Não foi possível obter as informações do usuário.");
       }
     } catch (error) {
-      AlertMsg("Falha na requisição.", error);
+      modalAlert("Ops!", error.message);
     }
   }
 

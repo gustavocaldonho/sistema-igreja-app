@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import InputGroupSelectAdvisor from "../../../../auxiliary/InputGroup/InputGroupSelectAdvisor";
@@ -10,7 +10,7 @@ import {
   getUsersCommunity,
   upgradeUser,
 } from "../../../../../services/user_api";
-import AlertMsg from "../../../../auxiliary/AlertMsg";
+import { ModalContext } from "../../../../../contexts/modalContext";
 
 export default function FormDefault({
   patron,
@@ -20,6 +20,7 @@ export default function FormDefault({
 }) {
   const [errorCpf, setErrorCpf] = useState(false);
   const [errorResponsibility, setErrorResponsibility] = useState(false);
+  const { modalAlert } = useContext(ModalContext);
 
   const [cpf, setCpf] = useState(
     itemAdvisorClicked ? itemAdvisorClicked.cpf : ""
@@ -45,7 +46,7 @@ export default function FormDefault({
         );
       }
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
     }
   }
 
@@ -74,7 +75,7 @@ export default function FormDefault({
         throw new Error("Não foi possível retornar a lista de usuários.");
       }
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
     }
   }
 

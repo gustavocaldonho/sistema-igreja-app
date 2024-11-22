@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./style";
 import stylesModal from "../style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { upgradeUser } from "../../../../../services/user_api";
-import AlertMsg from "../../../../auxiliary/AlertMsg";
+import { ModalContext } from "../../../../../contexts/modalContext";
 
 export default function FormConfirmation({
   itemAdvisorClicked,
@@ -12,6 +12,8 @@ export default function FormConfirmation({
   setAdvisorModalVisible,
   advisorModalVisible,
 }) {
+  const { modalAlert } = useContext(ModalContext);
+
   async function deleteAdvisorForm(cpf) {
     try {
       const token = await AsyncStorage.getItem("AccessToken");
@@ -25,7 +27,7 @@ export default function FormConfirmation({
         throw new Error("Não foi possível excluir o conselheiro.");
       }
     } catch (error) {
-      AlertMsg(error);
+      modalAlert("Ops!", error.message);
     }
   }
 
