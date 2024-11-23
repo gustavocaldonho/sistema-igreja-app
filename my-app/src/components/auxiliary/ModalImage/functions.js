@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ModalContext } from "../../../contexts/modalContext";
+import AlertMsg from "../AlertMsg";
 import {
   setImageUser,
   getImageUser,
@@ -12,7 +12,6 @@ import {
   getImageCommunity,
   deleteImageCommunity,
 } from "../../../services/community_api";
-import { useContext } from "react";
 
 export const getImageProfile = async (
   patron,
@@ -20,8 +19,6 @@ export const getImageProfile = async (
   setImage,
   setLoadingImage
 ) => {
-  const { modalAlert } = useContext(ModalContext);
-
   try {
     const token = await AsyncStorage.getItem("AccessToken");
     let result = "";
@@ -41,7 +38,7 @@ export const getImageProfile = async (
       setImage(result.data.image);
     }
   } catch (error) {
-    modalAlert("Ops!", error.message);
+    AlertMsg(error);
   } finally {
     if (setLoadingImage) {
       setLoadingImage(false);
@@ -106,7 +103,7 @@ export const handleImagePicker = async (
           getImageProfile(patron, cpf, setImage, setLoadingImage); // Atualizar a imagem após o envio
         }
       } catch (error) {
-        modalAlert("Ops!", error.message);
+        AlertMsg(error);
       }
     }
   }
@@ -125,6 +122,6 @@ export const deleteImageProfile = async (patron, cpf) => {
     }
     return result;
   } catch (error) {
-    modalAlert("Ops!", error.message);
+    AlertMsg(error);
   }
 };

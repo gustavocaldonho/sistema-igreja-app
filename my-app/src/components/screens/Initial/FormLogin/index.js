@@ -33,58 +33,28 @@ export default function FormLogin() {
     console.log(data);
     try {
       setVisibleSpinner(true);
-      const response = await signIn(data); // Chama o signIn
-      console.log(response);
-
-      if (response?.data?.access_token) {
+      const response = await signIn(data);
+      if (response.data.access_token !== undefined) {
         resetInputs();
         navigation.navigate("Menu");
       } else {
-        setShowError(true);
-        modalAlert("Erro", "Credenciais inválidas. Tente novamente.");
+        item !== null ? setShowError(false) : setShowError(true);
+        throw new Error("Não foi possível fazer login.");
       }
     } catch (error) {
-      console.log("Error during login:", error);
-      setShowError(true);
-      modalAlert(
-        "Erro",
-        "Erro ao tentar fazer login. Verifique suas credenciais."
-      );
+      // Se o login automático der erro (login está no storage), não mostra a msg de erro.
+      AsyncStorage.getItem("Login").then((item) => {
+        // console.log("Login storage: ", item);
+        item !== null ? setShowError(false) : setShowError(true);
+      });
+      console.log("error (login): ", error);
+      console.log("data (login): ", data);
+      modalAlert("Ops!", error.message);
     } finally {
+      setShowError(false);
       setVisibleSpinner(false);
     }
   }
-
-  // async function login(data) {
-  //   console.log(data);
-  //   try {
-  //     setVisibleSpinner(true);
-  //     const response = await signIn(data);
-  //     console.log(response);
-  //     // const rep = JSON.parse(response);
-  //     // console.log("rep: ", rep.data);
-  //     // console.log("data: ", response.data);
-  //     // if (response.data.access_token !== undefined) {
-  //     //   resetInputs();
-  //     //   navigation.navigate("Menu");
-  //     // } else {
-  //     //   item !== null ? setShowError(false) : setShowError(true);
-  //     //   throw new Error("Não foi possível fazer login.");
-  //     // }
-  //   } catch (error) {
-  //     // Se o login automático der erro (login está no storage), não mostra a msg de erro.
-  //     AsyncStorage.getItem("Login").then((item) => {
-  //       // console.log("Login storage: ", item);
-  //       item !== null ? setShowError(false) : setShowError(true);
-  //     });
-  //     // console.log("error (login): ", error);
-  //     // console.log("data (login): ", data);
-  //     // modalAlert("Ops!", error.message);
-  //   } finally {
-  //     setShowError(false);
-  //     setVisibleSpinner(false);
-  //   }
-  // }
 
   function resetInputs() {
     setCpf("");
@@ -100,7 +70,7 @@ export default function FormLogin() {
         login(parsedData);
       }
     };
-    // makeLogin();
+    makeLogin();
   }, []);
 
   return (
