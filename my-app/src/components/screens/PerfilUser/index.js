@@ -14,7 +14,10 @@ import ModalUpdateDatasUser from "./PersonalDataContainer/ModalUpdateDatasUser";
 import { getImageProfile } from "../../auxiliary/ModalImage/functions";
 
 export default function PerfilUser({ navigation, route }) {
-  const { name, cpf, birthday, phone, community, password } = route.params;
+  const { user } = useContext(AuthContext);
+  const { password } = route.params;
+  const data = password ? user : route.params;
+  const { name, cpf, birthday, phone, community } = data;
   const { imageProfile, setImageProfile } = useContext(AuthContext);
   const [imageAnyUser, setImageAnyUser] = useState("");
   const [modalVisible, setModalVisible] = useState(false);

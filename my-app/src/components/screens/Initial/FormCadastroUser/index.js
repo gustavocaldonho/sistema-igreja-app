@@ -136,7 +136,6 @@ export default function FormCadastroUser({ user, setModalVisible }) {
           "Guarde bem seus dados e fique a vontade para atualizá-los quando quiser."
         );
         setModalVisible(false);
-        navigation.goBack();
       } else {
         throw new Error(
           "Não foi possível atualizar os seus dados. Tente mais tarde."
