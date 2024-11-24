@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center",
+    paddingTop: 20,
+    paddingTop: 50,
     alignItems: "center",
     gap: 20,
   },
@@ -21,6 +22,18 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#fff",
     fontWeight: "bold",
+  },
+  buttonClose: {
+    position: "absolute",
+    top: 15,
+    padding: 10,
+    left: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+  iconClose: {
+    color: "#fff",
+    fontSize: 25,
   },
 });
 

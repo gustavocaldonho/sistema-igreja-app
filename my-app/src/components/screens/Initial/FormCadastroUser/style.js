@@ -30,10 +30,6 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
   },
-  buttonCancel: {
-    backgroundColor: "#f094c0",
-    marginTop: 5,
-  },
   textButton: {
     fontSize: 20,
     color: "#ffffff",

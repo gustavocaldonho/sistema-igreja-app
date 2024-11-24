@@ -42,7 +42,11 @@ import InputGroupSelect from "../../../auxiliary/InputGroup/InputGroupSelect";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import InputGroupPassword from "../../../auxiliary/InputGroup/InputGroupPassword";
 
-export default function FormCadastroUser({ user, setModalVisible }) {
+export default function FormCadastroUser({
+  user,
+  setModalVisible,
+  isModalUpdateDatasUser = false,
+}) {
   const [name, setName] = useState(user ? user.name : "");
   const [cpf, setCpf] = useState(user ? user.cpf : "");
   const [phone, setPhone] = useState(user ? formatPhone(user.phone) : "");
@@ -196,7 +200,9 @@ export default function FormCadastroUser({ user, setModalVisible }) {
     <KeyboardAvoidingView
       style={styles.formContext}
       behavior={Platform.OS == "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 250}
+      keyboardVerticalOffset={
+        Platform.OS == "ios" || isModalUpdateDatasUser ? 0 : 250
+      }
     >
       {modalSuccessVisible ? (
         <ModalCompleteRegistry
@@ -325,16 +331,6 @@ export default function FormCadastroUser({ user, setModalVisible }) {
                 {user ? "Atualizar" : "Cadastrar"}
               </Text>
             </TouchableOpacity>
-          )}
-          {user ? (
-            <TouchableOpacity
-              style={[styles.button, styles.buttonCancel]}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.textButton}>Cancelar</Text>
-            </TouchableOpacity>
-          ) : (
-            ""
           )}
         </Pressable>
       </ScrollView>

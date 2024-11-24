@@ -49,7 +49,7 @@ export default function FormLogin() {
       });
       console.log("error (login): ", error);
       console.log("data (login): ", data);
-      modalAlert("Ops!", error.message);
+      // modalAlert("Ops!", error.message);
     } finally {
       setShowError(false);
       setVisibleSpinner(false);
