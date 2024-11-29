@@ -69,6 +69,11 @@ export default function Menu({ navigation }) {
               }
             />
           )}
+          <ItemMenu
+            screenName={"Financeiro"}
+            icon={"dollar"}
+            onPress={() => navigation.navigate("Financeiro")}
+          />
         </View>
         <View style={styles.footer}>
           <Image

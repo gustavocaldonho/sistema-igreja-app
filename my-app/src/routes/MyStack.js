@@ -10,6 +10,7 @@ import Dizimo from "../components/screens/Dizimo";
 import Users from "../components/screens/Users";
 import PerfilUser from "../components/screens/PerfilUser";
 import PerfilCommunity from "../components/screens/PerfilCommunity";
+import Financeiro from "../components/screens/Financeiro";
 
 const Stack = createStackNavigator();
 
@@ -60,6 +61,11 @@ export default function MyStack() {
       <Stack.Screen
         name="Comunidades"
         component={Comunidades}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Financeiro"
+        component={Financeiro}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
