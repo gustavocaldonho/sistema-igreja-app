@@ -6,32 +6,27 @@ import {
   TouchableOpacity,
   TextInput,
   StatusBar,
-  Keyboard,
-  Pressable,
+  ScrollView,
 } from "react-native";
-// import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from "./style";
 import RadioButtonType from "./RadioButtonType";
-import { ScrollView } from "react-native-gesture-handler";
-import { TouchableHighlight } from "react-native";
 
 export default function ModalLancamento({ visible, onClose }) {
   const [selectedRadio, setSelectedRadio] = useState("entry");
   const [amount, setAmount] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  // const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [showCalendar, setShowCalendar] = useState(false);
   const inputRef = useRef(null);
 
-  const [date, setDate] = useState("");
-  const [showCalendar, setShowCalendar] = useState(false);
   const onChangeDate = (event, selectedDate) => {
-    setDate(selectedDate);
-    console.log(selectedDate);
-  };
-  const showDatePicker = () => {
-    setShowCalendar(true);
+    if (selectedDate) {
+      setDate(selectedDate);
+      setShowCalendar(false);
+    }
   };
 
   const formatMoney = (input) => {
@@ -40,8 +35,14 @@ export default function ModalLancamento({ visible, onClose }) {
       .toFixed(2)
       .replace(".", ",")
       .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
     return formattedValue;
+  };
+
+  const formatDate = (date) => {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   };
 
   const handleChangeAmount = (text) => {
@@ -54,7 +55,7 @@ export default function ModalLancamento({ visible, onClose }) {
     setAmount("");
     setTitle("");
     setDescription("");
-    setDate("");
+    setDate(new Date());
   };
 
   useEffect(() => {
@@ -107,6 +108,27 @@ export default function ModalLancamento({ visible, onClose }) {
           </View>
 
           <View style={styles.row}>
+            <Text style={styles.emoji}>📅</Text>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              style={styles.input}
+              onPress={() => setShowCalendar(true)}
+            >
+              <Text style={styles.text}>{formatDate(date)}</Text>
+            </TouchableOpacity>
+          </View>
+          {showCalendar && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={"date"}
+              is24Hour={true}
+              display="default"
+              onChange={onChangeDate}
+            />
+          )}
+
+          <View style={styles.row}>
             <Text style={styles.emoji}>🏷️</Text>
             <TextInput
               style={styles.input}
@@ -116,35 +138,6 @@ export default function ModalLancamento({ visible, onClose }) {
               onChangeText={(text) => setTitle(text)}
             />
           </View>
-
-          <View style={styles.row}>
-            <Text style={styles.emoji}>📅</Text>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={{ width: "100%" }}
-              onPressIn={() => {
-                console.log("Clicou");
-              }}
-            >
-              <TextInput
-                style={styles.input}
-                placeholder="00/00/0000"
-                value={date}
-                onChangeText={(text) => setDate(text)}
-                editable={false}
-              />
-            </TouchableOpacity>
-          </View>
-          {/* {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={"date"}
-              is24Hour={true}
-              display="default"
-              onChange={onChangeDate}
-            />
-          )} */}
 
           <View style={styles.row}>
             <Text style={styles.emoji}>📝</Text>

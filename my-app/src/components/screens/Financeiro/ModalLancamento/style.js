@@ -64,6 +64,9 @@ export const styles = StyleSheet.create({
     borderBottomColor: "#ccc",
     paddingBottom: 5,
   },
+  text: {
+    fontSize: 20,
+  },
   rowButton: {
     justifyContent: "space-evenly",
     marginTop: 20,
