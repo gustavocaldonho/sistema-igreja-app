@@ -3,32 +3,33 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    backgroundColor: "#6200ea",
-    paddingTop: 40,
+    backgroundColor: "#339dd7",
+    paddingTop: 10,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
     marginBottom: 20,
-    gap: 20,
+    gap: 30,
   },
   closeButton: {
-    fontSize: 24,
+    fontSize: 27,
     color: "#fff",
     marginRight: 10,
   },
   title: {
-    fontSize: 25,
+    fontSize: 30,
     color: "#fff",
     fontWeight: "bold",
   },
   content: {
     backgroundColor: "#fff",
     flex: 1,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    padding: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingTop: 20,
+    paddingHorizontal: 25,
   },
   boxAmount: {
     width: "100%",
@@ -47,62 +48,48 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
   },
-  radioGroup: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 10,
-  },
-  radioOption: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#333",
-  },
   row: {
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 10,
   },
-  icon: {
-    fontSize: 18,
-    marginRight: 10,
+  emoji: {
+    fontSize: 22,
+    marginRight: 15,
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
     paddingBottom: 5,
   },
-  switchRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginVertical: 10,
-  },
-  switchGroup: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  switchText: {
-    marginLeft: 5,
-    fontSize: 16,
-    color: "#333",
-  },
-  smallInput: {
-    width: 60,
-    fontSize: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-    marginHorizontal: 10,
-    textAlign: "center",
+  rowButton: {
+    justifyContent: "space-evenly",
+    marginTop: 20,
   },
   button: {
     backgroundColor: "#6200ea",
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+  },
+  buttonIcon: {
+    color: "#fff",
+    fontSize: 20,
   },
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
+    fontSize: 18,
+  },
+  save: {
+    backgroundColor: "#339dd7",
+  },
+  delete: {
+    backgroundColor: "#f094c0",
   },
 });

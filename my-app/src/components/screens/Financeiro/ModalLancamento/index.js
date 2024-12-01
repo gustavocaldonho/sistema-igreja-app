@@ -8,19 +8,23 @@ import {
   StatusBar,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { styles } from "./style";
+import RadioButtonType from "./RadioButtonType";
 
 export default function ModalLancamento({ visible, onClose }) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedRadio, setSelectedRadio] = useState("entry");
 
   return (
-    <Modal visible={visible} animationType="slide" transparent={true}>
-      <StatusBar backgroundColor="transparent" translucent={true} />
+    <Modal visible={visible} animationType="slide" transparent={false}>
+      <StatusBar
+        translucent={true}
+        barStyle="light-content"
+        backgroundColor={"#339dd7"}
+      />
       <View style={styles.modalContainer}>
         <View style={styles.header}>
           <TouchableOpacity onPress={onClose}>
-            <Icon name="chevron-left" size={25} color={"#fff"} />
+            <Icon name="times" style={styles.closeButton} />
           </TouchableOpacity>
           <Text style={styles.title}>Lançamento</Text>
         </View>
@@ -35,31 +39,43 @@ export default function ModalLancamento({ visible, onClose }) {
             />
           </View>
 
-          <View style={styles.radioGroup}>
-            <SegmentedControl
-              values={["Gasto", "Ganho"]}
-              selectedIndex={selectedIndex}
-              onChange={(event) => {
-                setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
-              }}
-              style={{ height: 40, marginVertical: 10 }}
-              tintColor="#6200ea"
+          <View style={styles.row}>
+            <RadioButtonType
+              selectedRadio={selectedRadio}
+              setSelectedRadio={setSelectedRadio}
             />
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.icon}>🏷️</Text>
-            <TextInput style={styles.input} placeholder="Educação" />
+            <Text style={styles.emoji}>🏷️</Text>
+            <TextInput style={styles.input} placeholder="Título" multiline />
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.icon}>📅</Text>
-            <TextInput style={styles.input} placeholder="10/01/2020" />
+            <Text style={styles.emoji}>📅</Text>
+            <TextInput style={styles.input} placeholder="00/00/0000" />
           </View>
 
           <View style={styles.row}>
-            <Text style={styles.icon}>🖊️</Text>
-            <TextInput style={styles.input} placeholder="Curso de Inglês" />
+            <Text style={styles.emoji}>📝</Text>
+            <TextInput style={styles.input} placeholder="Descrição" multiline />
+          </View>
+
+          <View style={[styles.row, styles.rowButton]}>
+            <TouchableOpacity
+              onPress={onClose}
+              style={[styles.button, styles.delete]}
+            >
+              <Icon name="trash" style={styles.buttonIcon} />
+              <Text style={styles.buttonText}>Excluir</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={onClose}
+              style={[styles.button, styles.save]}
+            >
+              <Icon name="save" style={styles.buttonIcon} />
+              <Text style={styles.buttonText}>Salvar</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
