@@ -1,16 +1,28 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  boxBalance: {
+  container: {
+    marginTop: 10,
+    // borderWidth: 1,
+  },
+  main: {
     paddingVertical: 5,
     justifyContent: "center",
     backgroundColor: "#fff",
     paddingHorizontal: 20,
+    borderRadius: 10,
   },
   lineIndicator: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  monthTitle: {
+    fontSize: 17,
+    color: "#fff",
+    textAlign: "center",
+    paddingVertical: 5,
+    fontWeight: "bold",
   },
   textIndicator: {
     fontSize: 18,

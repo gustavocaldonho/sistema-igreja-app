@@ -62,7 +62,7 @@ export default function ModalLancamento({ visible, onClose }) {
     if (visible && inputRef.current) {
       setTimeout(() => {
         inputRef.current.focus();
-      }, 200);
+      }, 500);
     }
   }, [visible]);
 

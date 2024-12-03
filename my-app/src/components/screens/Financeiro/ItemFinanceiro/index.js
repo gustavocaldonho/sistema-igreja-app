@@ -2,7 +2,14 @@ import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import styles from "./style";
 
-export default function ItemFinanceiro({ positive, style }) {
+export default function ItemFinanceiro({
+  title,
+  description,
+  date,
+  value,
+  positive,
+  style,
+}) {
   return (
     <TouchableOpacity style={[styles.container, style]} activeOpacity={0.8}>
       <View style={styles.boxMain}>
@@ -15,21 +22,21 @@ export default function ItemFinanceiro({ positive, style }) {
           >
             {positive ? "+" : "-"}
           </Text>
-          <Text style={styles.title}>Exemplo</Text>
+          <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.boxSubtitle}>
-          <Text style={styles.subtitle}>Valor pago referente...</Text>
+          <Text style={styles.subtitle}>{description}</Text>
         </View>
       </View>
       <View style={styles.boxRigth}>
         <View style={styles.boxDate}>
-          <Text style={styles.date}>10 NOV 24</Text>
+          <Text style={styles.date}>{date}</Text>
         </View>
         <View style={styles.boxValue}>
           <Text
             style={[styles.value, positive ? styles.positive : styles.negative]}
           >
-            R$ 20.000,00
+            R$ {value}
           </Text>
         </View>
       </View>

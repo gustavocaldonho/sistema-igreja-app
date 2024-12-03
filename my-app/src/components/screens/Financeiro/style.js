@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
     height: "85%",
     marginTop: 12,
     justifyContent: "space-between",
+    borderRadius: 10,
+    overflow: "hidden",
   },
   boxFiltersAndMain: {
     height: "78%",
@@ -19,13 +21,6 @@ const styles = StyleSheet.create({
   main: {
     maxHeight: "90%",
     overflow: "hidden",
-  },
-  boxBalance: {
-    maxHeight: "22%",
-    borderRadius: 10,
-  },
-  backgroundColorGray: {
-    backgroundColor: "#f5f5f5",
   },
 
   boxShadow: {

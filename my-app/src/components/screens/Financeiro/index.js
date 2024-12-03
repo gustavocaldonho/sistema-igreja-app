@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Text, View, Alert, StatusBar } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import styles from "./style";
 import PageBase from "../PageBase";
-import ItemFinanceiro from "./ItemFinanceiro";
 import BoxBalance from "./BoxBalance";
 import BoxFilters from "./BoxFilters";
 import ModalLancamento from "./ModalLancamento";
+import ItemFinanceiroContent from "./ItemFinanceiroContent";
+import ItemBoxBalanceContent from "./ItemBoxBalanceContent";
 
 export default function Financeiro({}) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -17,24 +17,6 @@ export default function Financeiro({}) {
       id: 10,
       label: "Outubro",
       value: "out",
-      year: "2024",
-    },
-    {
-      id: 11,
-      label: "Novembro",
-      value: "nov",
-      year: "2024",
-    },
-    {
-      id: 12,
-      label: "Dezembro",
-      value: "dez",
-      year: "2024",
-    },
-    {
-      id: 0,
-      label: "Todos",
-      value: "tod",
       year: "2024",
     },
   ]);
@@ -56,31 +38,11 @@ export default function Financeiro({}) {
             onValueChange={(text) => setSelectedMonth(text)}
           />
           <View style={styles.main}>
-            <ScrollView>
-              <ItemFinanceiro positive={true} />
-              <ItemFinanceiro
-                positive={false}
-                style={styles.backgroundColorGray}
-              />
-              <ItemFinanceiro positive={true} />
-              <ItemFinanceiro
-                positive={false}
-                style={styles.backgroundColorGray}
-              />
-              <ItemFinanceiro positive={true} />
-              <ItemFinanceiro
-                positive={false}
-                style={styles.backgroundColorGray}
-              />
-              <ItemFinanceiro positive={true} />
-              <ItemFinanceiro
-                positive={false}
-                style={styles.backgroundColorGray}
-              />
-            </ScrollView>
+            <ItemFinanceiroContent />
           </View>
         </View>
-        <BoxBalance style={styles.boxBalance} />
+        <BoxBalance />
+        {/* <ItemBoxBalanceContent /> */}
       </View>
       <ModalLancamento
         visible={modalVisible}
