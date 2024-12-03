@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import styles from "./style";
+import { formatValueFinancial } from "../functions";
 
 export default function ItemFinanceiro({
   title,
@@ -8,10 +9,12 @@ export default function ItemFinanceiro({
   date,
   value,
   positive,
-  style,
+  index,
 }) {
+  const styleGray = index % 2 !== 0 ? styles.backgroundColorGray : null;
+
   return (
-    <TouchableOpacity style={[styles.container, style]} activeOpacity={0.8}>
+    <TouchableOpacity style={[styles.container, styleGray]} activeOpacity={0.6}>
       <View style={styles.boxMain}>
         <View style={styles.boxTitle}>
           <Text
@@ -36,7 +39,7 @@ export default function ItemFinanceiro({
           <Text
             style={[styles.value, positive ? styles.positive : styles.negative]}
           >
-            R$ {value}
+            {formatValueFinancial(value)}
           </Text>
         </View>
       </View>

@@ -1,26 +1,46 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import styles from "./style";
+import { formatValueFinancial } from "../functions";
 
-export default function BoxBalance({ month }) {
+export default function BoxBalance({
+  month,
+  previousBalance,
+  entry,
+  out,
+  setShowExtract,
+  disableOpacity = false,
+  setSelectedMonth,
+  valueMonth,
+}) {
   return (
     <View style={styles.container}>
       {month ? <Text style={styles.monthTitle}>{month}</Text> : ""}
-      <TouchableOpacity style={styles.main} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={styles.main}
+        activeOpacity={0.7}
+        onPress={() => {
+          setShowExtract(true);
+          setSelectedMonth(valueMonth);
+        }}
+        disabled={disableOpacity}
+      >
         <View style={styles.lineIndicator}>
           <Text style={styles.textIndicator}>Tinha</Text>
-          <Text style={[styles.valueIndicator]}>R$ 10.000,00</Text>
+          <Text style={[styles.valueIndicator]}>
+            {formatValueFinancial(previousBalance)}
+          </Text>
         </View>
         <View style={styles.lineIndicator}>
           <Text style={styles.textIndicator}>Entrada</Text>
           <Text style={[styles.valueIndicator, styles.positive]}>
-            R$ 2.745,00
+            {formatValueFinancial(entry)}
           </Text>
         </View>
         <View style={styles.lineIndicator}>
           <Text style={styles.textIndicator}>Saída</Text>
           <Text style={[styles.valueIndicator, styles.negative]}>
-            R$ 745,00
+            {formatValueFinancial(out)}
           </Text>
         </View>
         <View style={[styles.lineIndicator, styles.hr]}>
@@ -28,7 +48,7 @@ export default function BoxBalance({ month }) {
           <Text
             style={[styles.valueIndicator, styles.positive, styles.valueTotal]}
           >
-            R$ 12.000,00
+            {formatValueFinancial(previousBalance + entry - out)}
           </Text>
         </View>
       </TouchableOpacity>

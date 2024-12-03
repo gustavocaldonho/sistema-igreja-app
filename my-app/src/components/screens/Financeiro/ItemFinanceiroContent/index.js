@@ -1,20 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import React, { useState } from "react";
+import { View, FlatList } from "react-native";
 import ItemFinanceiro from "../ItemFinanceiro";
 
-export default function ItemFinanceiroContent({}) {
+export default function ItemFinanceiroContent({ month }) {
   const [releaseList, setReleaseList] = useState([
     {
       id: 0,
       title: "Exemplo",
       description: "Valor referente...",
-      date: "10 out 2024",
+      date: "10 OUT 2024",
       positive: true,
       value: 20000,
     },
@@ -22,7 +16,7 @@ export default function ItemFinanceiroContent({}) {
       id: 10,
       title: "Exemplo",
       description: "Valor referente...",
-      date: "10 out 2024",
+      date: "10 OUT 2024",
       positive: true,
       value: 20000,
     },
@@ -30,7 +24,7 @@ export default function ItemFinanceiroContent({}) {
       id: 20,
       title: "Exemplo",
       description: "Valor referente...",
-      date: "10 out 2024",
+      date: "10 OUT 2024",
       positive: false,
       value: 20000,
     },
@@ -38,7 +32,7 @@ export default function ItemFinanceiroContent({}) {
       id: 30,
       title: "Exemplo",
       description: "Valor referente...",
-      date: "10 out 2024",
+      date: "10 OUT 2024",
       positive: true,
       value: 20000,
     },
@@ -46,7 +40,7 @@ export default function ItemFinanceiroContent({}) {
       id: 30,
       title: "Exemplo",
       description: "Valor referente...",
-      date: "10 out 2024",
+      date: "10 OUT 2024",
       positive: false,
       value: 20000,
     },
@@ -54,7 +48,7 @@ export default function ItemFinanceiroContent({}) {
       id: 30,
       title: "Exemplo",
       description: "Valor referente...",
-      date: "10 out 2024",
+      date: "10 OUT 2024",
       positive: true,
       value: 20000,
     },
@@ -62,7 +56,7 @@ export default function ItemFinanceiroContent({}) {
       id: 30,
       title: "Exemplo",
       description: "Valor referente...",
-      date: "10 out 2024",
+      date: "10 OUT 2024",
       positive: true,
       value: 20000,
     },
@@ -70,7 +64,7 @@ export default function ItemFinanceiroContent({}) {
       id: 30,
       title: "Exemplo",
       description: "Valor referente...",
-      date: "10 out 2024",
+      date: "10 OUT 2024",
       positive: true,
       value: 20000,
     },
@@ -82,14 +76,14 @@ export default function ItemFinanceiroContent({}) {
         <FlatList
           data={releaseList}
           keyExtractor={(item, index) => `financial-item-${index}`}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <ItemFinanceiro
               positive={item.positive}
               title={item.title}
               description={item.description}
               date={item.date}
               value={item.value}
-              //   style={styles.backgroundColorGray}
+              index={index}
             />
           )}
         />
@@ -99,19 +93,3 @@ export default function ItemFinanceiroContent({}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  msgContentEmpty: {
-    color: "#fff",
-    alignSelf: "center",
-    marginTop: 20,
-  },
-  footer: {
-    height: 100,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  backgroundColorGray: {
-    backgroundColor: "#f5f5f5",
-  },
-});

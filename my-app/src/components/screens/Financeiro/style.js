@@ -22,16 +22,21 @@ const styles = StyleSheet.create({
     maxHeight: "90%",
     overflow: "hidden",
   },
-
-  boxShadow: {
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.9,
-    shadowRadius: 3.05,
-    elevation: 5,
+  buttonAnnualSummary: {
+    height: 60,
+    paddingHorizontal: 15,
+    position: "absolute",
+    bottom: 20,
+    left: 30,
+    backgroundColor: "#287BBF",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textAnnualSummary: {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "800",
   },
 });
 
