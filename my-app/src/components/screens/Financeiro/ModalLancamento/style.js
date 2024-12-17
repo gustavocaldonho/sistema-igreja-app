@@ -64,6 +64,9 @@ export const styles = StyleSheet.create({
     borderBottomColor: "#ccc",
     paddingBottom: 5,
   },
+  inputError: {
+    borderBottomColor: "red",
+  },
   text: {
     fontSize: 20,
   },
@@ -94,5 +97,8 @@ export const styles = StyleSheet.create({
   },
   delete: {
     backgroundColor: "#f094c0",
+  },
+  messageError: {
+    color: "red",
   },
 });

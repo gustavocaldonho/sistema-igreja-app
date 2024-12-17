@@ -7,9 +7,9 @@ const RadioButtonType = ({ selectedRadio, setSelectedRadio }) => {
       <TouchableHighlight
         style={[
           styles.optionRadio,
-          selectedRadio === "entry" ? styles.selectedEntry : null,
+          selectedRadio === "input" ? styles.selectedEntry : null,
         ]}
-        onPress={() => setSelectedRadio("entry")}
+        onPress={() => setSelectedRadio("input")}
         underlayColor={"#C2C2C2"}
       >
         <Text style={styles.textRadio}>Entrada</Text>
@@ -17,9 +17,9 @@ const RadioButtonType = ({ selectedRadio, setSelectedRadio }) => {
       <TouchableHighlight
         style={[
           styles.optionRadio,
-          selectedRadio === "out" ? styles.selectedOut : null,
+          selectedRadio === "output" ? styles.selectedOut : null,
         ]}
-        onPress={() => setSelectedRadio("out")}
+        onPress={() => setSelectedRadio("output")}
         underlayColor={"#C2C2C2"}
       >
         <Text style={styles.textRadio}>Saída</Text>

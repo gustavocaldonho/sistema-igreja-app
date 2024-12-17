@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, Alert, StatusBar } from "react-native";
+import { Text, View } from "react-native";
 import styles from "./style";
 import PageBase from "../PageBase";
 import BoxBalance from "./BoxBalance";
@@ -12,96 +12,40 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export default function Financeiro({}) {
   const [showExtract, setShowExtract] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedMonth, setSelectedMonth] = useState("dez");
-  const [monthList, setMonthList] = useState([
-    {
-      id: 12,
-      label: "DEZEMBRO",
-      value: "dez",
-      year: "2024",
-    },
-    {
-      id: 11,
-      label: "NOVEMBRO",
-      value: "nov",
-      year: "2024",
-    },
-    {
-      id: 10,
-      label: "OUTUBRO",
-      value: "out",
-      year: "2024",
-    },
-    {
-      id: 9,
-      label: "SETEMBRO",
-      value: "set",
-      year: "2024",
-    },
-    {
-      id: 8,
-      label: "AGOSTO",
-      value: "ago",
-      year: "2024",
-    },
-    {
-      id: 7,
-      label: "JULHO",
-      value: "jul",
-      year: "2024",
-    },
-    {
-      id: 6,
-      label: "JUNHO",
-      value: "jun",
-      year: "2024",
-    },
-    {
-      id: 5,
-      label: "MAIO",
-      value: "mai",
-      year: "2024",
-    },
-    {
-      id: 4,
-      label: "ABRIL",
-      value: "abr",
-      year: "2024",
-    },
-    {
-      id: 3,
-      label: "MARÇO",
-      value: "mar",
-      year: "2024",
-    },
-    {
-      id: 2,
-      label: "FEVEREIRO",
-      value: "fev",
-      year: "2024",
-    },
-    {
-      id: 1,
-      label: "JANEIRO",
-      value: "jan",
-      year: "2024",
-    },
+  const [selectedOption, setSelectedOption] = useState({
+    month: "december",
+    year: "2024",
+  });
+
+  const [monthList] = useState([
+    { id: 12, label: "DEZEMBRO", value: "december", year: "2024" },
+    { id: 11, label: "NOVEMBRO", value: "november", year: "2024" },
+    { id: 10, label: "OUTUBRO", value: "october", year: "2024" },
+    { id: 9, label: "SETEMBRO", value: "september", year: "2024" },
+    { id: 8, label: "AGOSTO", value: "august", year: "2024" },
+    { id: 7, label: "JULHO", value: "july", year: "2024" },
+    { id: 6, label: "JUNHO", value: "june", year: "2024" },
+    { id: 5, label: "MAIO", value: "may", year: "2024" },
+    { id: 4, label: "ABRIL", value: "april", year: "2024" },
+    { id: 3, label: "MARÇO", value: "march", year: "2024" },
+    { id: 2, label: "FEVEREIRO", value: "february", year: "2024" },
+    { id: 1, label: "JANEIRO", value: "january", year: "2024" },
   ]);
 
   return (
     <>
       <PageBase
-        title={"Financeiro"}
+        title="Financeiro"
         signButtonAdd={true}
-        onPressAdd={() => {
-          setModalVisible(true);
-        }}
+        onPressAdd={() => setModalVisible(true)}
       >
         <View style={styles.container}>
           {!showExtract ? (
             <ItemBoxBalanceContent
               setShowExtract={setShowExtract}
-              setSelectedMonth={setSelectedMonth}
+              setSelectedMonth={(month) =>
+                setSelectedOption((prev) => ({ ...prev, month }))
+              }
             />
           ) : (
             <View>
@@ -109,14 +53,14 @@ export default function Financeiro({}) {
                 <BoxFilters
                   style={styles.boxFilters}
                   options={monthList}
-                  selectedValue={selectedMonth}
-                  onValueChange={(text) => {
-                    setSelectedMonth(text);
-                    console.log(text);
-                  }}
+                  selectedValue={selectedOption}
+                  onValueChange={(value) => setSelectedOption(value)}
                 />
                 <View style={styles.main}>
-                  <ItemFinanceiroContent month={selectedMonth} />
+                  <ItemFinanceiroContent
+                    month={selectedOption.month}
+                    year={selectedOption.year}
+                  />
                 </View>
               </View>
               <BoxBalance
@@ -136,7 +80,7 @@ export default function Financeiro({}) {
           onClose={() => setModalVisible(false)}
         />
       </PageBase>
-      {showExtract ? (
+      {showExtract && (
         <TouchableOpacity
           style={styles.buttonAnnualSummary}
           activeOpacity={0.7}
@@ -144,7 +88,7 @@ export default function Financeiro({}) {
         >
           <Text style={styles.textAnnualSummary}>Ver Resumo Anual</Text>
         </TouchableOpacity>
-      ) : null}
+      )}
     </>
   );
 }

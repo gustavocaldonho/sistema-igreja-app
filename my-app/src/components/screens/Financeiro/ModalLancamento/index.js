@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -12,15 +12,40 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from "./style";
 import RadioButtonType from "./RadioButtonType";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { addBalanceApi } from "../../../../services/financial_api";
+import { ModalContext } from "../../../../contexts/modalContext";
+import { AuthContext } from "../../../../contexts/auth";
+import { formatDate, formatMoney, parseFormattedNumber } from "./functions";
 
 export default function ModalLancamento({ visible, onClose }) {
-  const [selectedRadio, setSelectedRadio] = useState("entry");
+  const [showErrors, setShowErrors] = useState(false);
+  const [selectedRadio, setSelectedRadio] = useState("input");
   const [amount, setAmount] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
   const inputRef = useRef(null);
+  const { modalAlert } = useContext(ModalContext);
+  const { user } = useContext(AuthContext);
+
+  async function addBalance(data) {
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await addBalanceApi(data, user.community, token);
+      if (response.status === 201) {
+        modalAlert("Sucesso!", "Saldo Adicionado.");
+      } else {
+        throw new Error("Não foi possível adicionar o saldo ao extrato.");
+      }
+    } catch (error) {
+      modalAlert("Ops!", error.message);
+    } finally {
+      onClose();
+      resetInput();
+    }
+  }
 
   const onChangeDate = (event, selectedDate) => {
     if (selectedDate) {
@@ -29,33 +54,33 @@ export default function ModalLancamento({ visible, onClose }) {
     }
   };
 
-  const formatMoney = (input) => {
-    const numericValue = input.replace(/\D/g, "");
-    const formattedValue = (numericValue / 100)
-      .toFixed(2)
-      .replace(".", ",")
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    return formattedValue;
-  };
-
-  const formatDate = (date) => {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
-
   const handleChangeAmount = (text) => {
     const formattedText = formatMoney(text);
     setAmount(formattedText);
   };
 
   const resetInput = () => {
-    setSelectedRadio("entry");
+    setSelectedRadio("input");
     setAmount("");
     setTitle("");
     setDescription("");
     setDate(new Date());
+    setShowErrors(false);
+  };
+
+  const sendBalance = () => {
+    const formatAmount = parseFormattedNumber(amount);
+    if (formatAmount >= 1 && title && description) {
+      addBalance({
+        title,
+        description,
+        value: parseFormattedNumber(amount),
+        type: selectedRadio,
+        date,
+      });
+    } else {
+      setShowErrors(true);
+    }
   };
 
   useEffect(() => {
@@ -99,6 +124,11 @@ export default function ModalLancamento({ visible, onClose }) {
               maxLength={10}
             />
           </View>
+          {showErrors && !(parseFormattedNumber(amount) >= 1) ? (
+            <Text style={styles.messageError}>
+              Digite um valor mínimo de R$ 1,00
+            </Text>
+          ) : null}
 
           <View style={styles.row}>
             <RadioButtonType
@@ -131,7 +161,10 @@ export default function ModalLancamento({ visible, onClose }) {
           <View style={styles.row}>
             <Text style={styles.emoji}>🏷️</Text>
             <TextInput
-              style={styles.input}
+              style={[
+                styles.input,
+                showErrors && !title ? styles.inputError : null,
+              ]}
               placeholder="Título"
               multiline
               value={title}
@@ -142,7 +175,10 @@ export default function ModalLancamento({ visible, onClose }) {
           <View style={styles.row}>
             <Text style={styles.emoji}>📝</Text>
             <TextInput
-              style={styles.input}
+              style={[
+                styles.input,
+                showErrors && !description ? styles.inputError : null,
+              ]}
               placeholder="Descrição"
               multiline
               value={description}
@@ -159,7 +195,7 @@ export default function ModalLancamento({ visible, onClose }) {
               <Text style={styles.buttonText}>Excluir</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={onClose}
+              onPress={sendBalance}
               style={[styles.button, styles.save]}
             >
               <Icon name="save" style={styles.buttonIcon} />
