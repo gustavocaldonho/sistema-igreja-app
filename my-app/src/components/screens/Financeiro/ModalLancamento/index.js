@@ -13,12 +13,16 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from "./style";
 import RadioButtonType from "./RadioButtonType";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { addBalanceApi } from "../../../../services/financial_api";
+import {
+  addBalanceApi,
+  updateBalanceApi,
+  deleteBalanceApi,
+} from "../../../../services/financial_api";
 import { ModalContext } from "../../../../contexts/modalContext";
 import { AuthContext } from "../../../../contexts/auth";
 import { formatDate, formatMoney, parseFormattedNumber } from "./functions";
 
-export default function ModalLancamento({ visible, onClose, data = "" }) {
+export default function ModalLancamento({ visible, onClose, itemClicked }) {
   const [showErrors, setShowErrors] = useState(false);
   const [selectedRadio, setSelectedRadio] = useState("input");
   const [amount, setAmount] = useState("");
@@ -27,13 +31,15 @@ export default function ModalLancamento({ visible, onClose, data = "" }) {
   const [date, setDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
   const inputRef = useRef(null);
+
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
 
-  async function addBalance(data) {
+  const addBalance = async (data) => {
     try {
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await addBalanceApi(data, user.community, token);
+
       if (response.status === 201) {
         modalAlert("Sucesso!", "Saldo Adicionado.");
       } else {
@@ -45,13 +51,52 @@ export default function ModalLancamento({ visible, onClose, data = "" }) {
       onClose();
       resetInput();
     }
-  }
+  };
+
+  const updateBalance = async (data) => {
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await updateBalanceApi(data, user.community, token);
+      if (response.status === 204) {
+        modalAlert("Sucesso!", "Saldo Atualizado.");
+      } else {
+        throw new Error("Não foi possível atualizar o saldo.");
+      }
+    } catch (error) {
+      modalAlert("Ops!", error.message);
+    } finally {
+      onClose();
+      resetInput();
+    }
+  };
+
+  const deleteBalance = async () => {
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await deleteBalanceApi(
+        itemClicked.id,
+        user.community,
+        token
+      );
+      console.log(response);
+      if (response.status === 204) {
+        modalAlert("Sucesso!", "Saldo Excluído.");
+      } else {
+        throw new Error("Não foi possível excluir o saldo.");
+      }
+    } catch (error) {
+      modalAlert("Ops!", error.message);
+    } finally {
+      onClose();
+      resetInput();
+    }
+  };
 
   const onChangeDate = (event, selectedDate) => {
     if (selectedDate) {
       setDate(selectedDate);
-      setShowCalendar(false);
     }
+    setShowCalendar(false);
   };
 
   const handleChangeAmount = (text) => {
@@ -71,17 +116,38 @@ export default function ModalLancamento({ visible, onClose, data = "" }) {
   const sendBalance = () => {
     const formatAmount = parseFormattedNumber(amount);
     if (formatAmount >= 1 && title && description) {
-      addBalance({
-        title,
-        description,
-        value: parseFormattedNumber(amount),
-        type: selectedRadio,
-        date,
-      });
+      if (!itemClicked) {
+        addBalance({
+          title,
+          description,
+          value: formatAmount,
+          type: selectedRadio,
+          date,
+        });
+      } else {
+        updateBalance({
+          title,
+          description,
+          value: formatAmount,
+          type: selectedRadio,
+          date,
+          id: itemClicked.id,
+        });
+      }
     } else {
       setShowErrors(true);
     }
   };
+
+  useEffect(() => {
+    if (itemClicked) {
+      setSelectedRadio(itemClicked.type || "input");
+      setAmount(itemClicked.value ? formatMoney(itemClicked.value) : "");
+      setTitle(itemClicked.title || "");
+      setDescription(itemClicked.description || "");
+      setDate(itemClicked.date ? new Date(itemClicked.date) : new Date());
+    }
+  }, [itemClicked]);
 
   useEffect(() => {
     if (visible && inputRef.current) {
@@ -94,9 +160,9 @@ export default function ModalLancamento({ visible, onClose, data = "" }) {
   return (
     <Modal visible={visible} animationType="slide" transparent={false}>
       <StatusBar
-        translucent={true}
+        translucent
         barStyle="light-content"
-        backgroundColor={"#339dd7"}
+        backgroundColor="#339dd7"
       />
       <View style={styles.modalContainer}>
         <View style={styles.header}>
@@ -124,11 +190,11 @@ export default function ModalLancamento({ visible, onClose, data = "" }) {
               maxLength={10}
             />
           </View>
-          {showErrors && !(parseFormattedNumber(amount) >= 1) ? (
+          {showErrors && !(parseFormattedNumber(amount) >= 1) && (
             <Text style={styles.messageError}>
               Digite um valor mínimo de R$ 1,00
             </Text>
-          ) : null}
+          )}
 
           <View style={styles.row}>
             <RadioButtonType
@@ -149,10 +215,9 @@ export default function ModalLancamento({ visible, onClose, data = "" }) {
           </View>
           {showCalendar && (
             <DateTimePicker
-              testID="dateTimePicker"
               value={date}
-              mode={"date"}
-              is24Hour={true}
+              mode="date"
+              is24Hour
               display="default"
               onChange={onChangeDate}
             />
@@ -161,14 +226,11 @@ export default function ModalLancamento({ visible, onClose, data = "" }) {
           <View style={styles.row}>
             <Text style={styles.emoji}>🏷️</Text>
             <TextInput
-              style={[
-                styles.input,
-                showErrors && !title ? styles.inputError : null,
-              ]}
+              style={[styles.input, showErrors && !title && styles.inputError]}
               placeholder="Título"
               multiline
               value={title}
-              onChangeText={(text) => setTitle(text)}
+              onChangeText={setTitle}
             />
           </View>
 
@@ -177,23 +239,26 @@ export default function ModalLancamento({ visible, onClose, data = "" }) {
             <TextInput
               style={[
                 styles.input,
-                showErrors && !description ? styles.inputError : null,
+                showErrors && !description && styles.inputError,
               ]}
               placeholder="Descrição"
               multiline
               value={description}
-              onChangeText={(text) => setDescription(text)}
+              onChangeText={setDescription}
             />
           </View>
 
           <View style={[styles.row, styles.rowButton]}>
-            <TouchableOpacity
-              onPress={onClose}
-              style={[styles.button, styles.delete]}
-            >
-              <Icon name="trash" style={styles.buttonIcon} />
-              <Text style={styles.buttonText}>Excluir</Text>
-            </TouchableOpacity>
+            {itemClicked.id ? (
+              <TouchableOpacity
+                onPress={deleteBalance}
+                style={[styles.button, styles.delete]}
+              >
+                <Icon name="trash" style={styles.buttonIcon} />
+                <Text style={styles.buttonText}>Excluir</Text>
+              </TouchableOpacity>
+            ) : null}
+
             <TouchableOpacity
               onPress={sendBalance}
               style={[styles.button, styles.save]}

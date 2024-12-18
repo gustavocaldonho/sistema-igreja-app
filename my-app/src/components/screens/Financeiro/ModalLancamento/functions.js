@@ -1,5 +1,12 @@
 export const formatMoney = (input) => {
-  const numericValue = input.replace(/\D/g, "");
+  if (typeof input === "number") {
+    input = (input * 100).toFixed(0); // Multiplica por 100 para trabalhar em centavos
+  } else if (typeof input !== "string") {
+    console.warn("O valor fornecido não é válido:", input);
+    return "0,00";
+  }
+
+  const numericValue = input.replace(/\D/g, ""); // Remove caracteres não numéricos
   const formattedValue = (numericValue / 100)
     .toFixed(2)
     .replace(".", ",")

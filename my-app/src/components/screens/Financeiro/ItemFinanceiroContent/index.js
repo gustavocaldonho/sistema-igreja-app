@@ -10,6 +10,8 @@ import styles from "./style";
 export default function ItemFinanceiroContent({
   selectedOption,
   modalVisible,
+  setModalVisible,
+  setItemFinanceiroClicked,
 }) {
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
@@ -54,7 +56,8 @@ export default function ItemFinanceiroContent({
               value={item.value}
               index={index}
               id={item.id}
-              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              setItemFinanceiroClicked={setItemFinanceiroClicked}
             />
           )}
         />

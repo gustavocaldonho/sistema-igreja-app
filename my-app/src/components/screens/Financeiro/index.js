@@ -16,6 +16,7 @@ export default function Financeiro({}) {
     month: "december",
     year: "2024",
   });
+  const [itemFinanceiroClicked, setItemFinanceiroClicked] = useState({});
 
   const [monthList] = useState([
     { id: 12, label: "DEZEMBRO", value: "december", year: "2024" },
@@ -37,7 +38,10 @@ export default function Financeiro({}) {
       <PageBase
         title="Financeiro"
         signButtonAdd={true}
-        onPressAdd={() => setModalVisible(true)}
+        onPressAdd={() => {
+          setModalVisible(true);
+          setItemFinanceiroClicked({});
+        }}
       >
         <View style={styles.container}>
           {!showExtract ? (
@@ -62,6 +66,8 @@ export default function Financeiro({}) {
                   <ItemFinanceiroContent
                     selectedOption={selectedOption}
                     modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
+                    setItemFinanceiroClicked={setItemFinanceiroClicked}
                   />
                 </View>
               </View>
@@ -80,6 +86,7 @@ export default function Financeiro({}) {
         <ModalLancamento
           visible={modalVisible}
           onClose={() => setModalVisible(false)}
+          itemClicked={itemFinanceiroClicked}
         />
       </PageBase>
       {showExtract && (

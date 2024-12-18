@@ -12,11 +12,21 @@ export default function ItemFinanceiro({
   type,
   index,
   id,
+  setModalVisible,
+  setItemFinanceiroClicked,
 }) {
   const styleGray = index % 2 !== 0 ? styles.backgroundColorGray : null;
 
   const openModalLancamento = () => {
-    console.log(title, description, date, value, type, index, id);
+    setItemFinanceiroClicked({
+      title,
+      description,
+      date,
+      value,
+      type,
+      id,
+    });
+    setModalVisible(true);
   };
 
   return (
