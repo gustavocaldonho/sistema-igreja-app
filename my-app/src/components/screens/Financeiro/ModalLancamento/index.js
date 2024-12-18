@@ -18,7 +18,7 @@ import { ModalContext } from "../../../../contexts/modalContext";
 import { AuthContext } from "../../../../contexts/auth";
 import { formatDate, formatMoney, parseFormattedNumber } from "./functions";
 
-export default function ModalLancamento({ visible, onClose }) {
+export default function ModalLancamento({ visible, onClose, data = "" }) {
   const [showErrors, setShowErrors] = useState(false);
   const [selectedRadio, setSelectedRadio] = useState("input");
   const [amount, setAmount] = useState("");

@@ -54,12 +54,14 @@ export default function Financeiro({}) {
                   style={styles.boxFilters}
                   options={monthList}
                   selectedValue={selectedOption}
-                  onValueChange={(value) => setSelectedOption(value)}
+                  onValueChange={(value) => {
+                    setSelectedOption(value);
+                  }}
                 />
                 <View style={styles.main}>
                   <ItemFinanceiroContent
-                    month={selectedOption.month}
-                    year={selectedOption.year}
+                    selectedOption={selectedOption}
+                    modalVisible={modalVisible}
                   />
                 </View>
               </View>
