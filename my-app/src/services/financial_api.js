@@ -42,6 +42,7 @@ export const getBalancesMonthApi = async (patron, year, month, token) => {
 };
 
 export const updateBalanceApi = async (data, patron, token) => {
+  console.log(data);
   try {
     const response = await api.put(
       `/community/${patron}/finance/${data.id}`,
