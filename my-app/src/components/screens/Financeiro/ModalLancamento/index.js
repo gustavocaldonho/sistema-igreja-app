@@ -57,7 +57,6 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
     try {
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await updateBalanceApi(data, user.community, token);
-      console.log(response);
       if (response.status === 204) {
         modalAlert("Sucesso!", "Saldo Atualizado.");
       } else {
@@ -79,7 +78,6 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
         user.community,
         token
       );
-      console.log(response);
       if (response.status === 204) {
         modalAlert("Sucesso!", "Saldo Excluído.");
       } else {

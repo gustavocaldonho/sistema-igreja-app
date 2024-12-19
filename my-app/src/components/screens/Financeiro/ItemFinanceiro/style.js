@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   boxSubtitle: {
     width: "100%",
-    height: "50%",
+    height: "40%",
   },
   subtitle: {
     fontSize: 15,
