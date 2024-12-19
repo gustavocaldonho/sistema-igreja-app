@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Text, View } from "react-native";
+import React, { useContext, useState, useEffect } from "react";
+import { Text, View, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./style";
 import PageBase from "../PageBase";
 import BoxBalance from "./BoxBalance";
@@ -7,9 +8,13 @@ import BoxFilters from "./BoxFilters";
 import ModalLancamento from "./ModalLancamento";
 import ItemFinanceiroContent from "./ItemFinanceiroContent";
 import ItemBoxBalanceContent from "./ItemBoxBalanceContent";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ModalContext } from "../../../contexts/modalContext";
+import { getResumeBalanceMonthApi } from "../../../services/financial_api";
+import { AuthContext } from "../../../contexts/auth";
 
 export default function Financeiro({}) {
+  const { user } = useContext(AuthContext);
+  const { modalAlert } = useContext(ModalContext);
   const [showExtract, setShowExtract] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState({
@@ -17,7 +22,7 @@ export default function Financeiro({}) {
     year: "2024",
   });
   const [itemFinanceiroClicked, setItemFinanceiroClicked] = useState({});
-
+  const [itemBoxBalanceSelected, setItemBoxBalanceSelected] = useState({});
   const [monthList] = useState([
     { id: 12, label: "DEZEMBRO", value: "december", year: "2024" },
     { id: 11, label: "NOVEMBRO", value: "november", year: "2024" },
@@ -33,6 +38,31 @@ export default function Financeiro({}) {
     { id: 1, label: "JANEIRO", value: "january", year: "2024" },
   ]);
 
+  async function getResumeBalanceMonth() {
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await getResumeBalanceMonthApi(
+        user.community,
+        selectedOption.year,
+        selectedOption.month,
+        token
+      );
+      if (response.status === 200) {
+        setItemBoxBalanceSelected(Object.values(response.data));
+      } else {
+        throw new Error(
+          "Não foi possível carregar o resumo financeiro do mês."
+        );
+      }
+    } catch (error) {
+      modalAlert("Ops!", error.message);
+    }
+  }
+
+  useEffect(() => {
+    getResumeBalanceMonth();
+  }, [selectedOption, modalVisible]);
+
   return (
     <>
       <PageBase
@@ -46,6 +76,7 @@ export default function Financeiro({}) {
         <View style={styles.container}>
           {!showExtract ? (
             <ItemBoxBalanceContent
+              modalVisible={modalVisible}
               setShowExtract={setShowExtract}
               setSelectedMonth={(month) =>
                 setSelectedOption((prev) => ({ ...prev, month }))
@@ -73,10 +104,10 @@ export default function Financeiro({}) {
               </View>
               <BoxBalance
                 month={""}
-                previousBalance={20000}
-                entry={2000}
-                out={1000}
-                revenue={10000}
+                previousBalance={itemBoxBalanceSelected[0].last_month}
+                input={itemBoxBalanceSelected[0].input}
+                output={itemBoxBalanceSelected[0].output}
+                recipe={itemBoxBalanceSelected[0].recipe}
                 setShowExtract={setShowExtract}
                 disableOpacity={true}
               />

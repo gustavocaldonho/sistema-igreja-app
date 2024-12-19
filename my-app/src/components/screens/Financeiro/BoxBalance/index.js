@@ -6,8 +6,9 @@ import { formatValueFinancial } from "../functions";
 export default function BoxBalance({
   month,
   previousBalance,
-  entry,
-  out,
+  input,
+  output,
+  recipe,
   setShowExtract,
   disableOpacity = false,
   setSelectedMonth,
@@ -34,21 +35,25 @@ export default function BoxBalance({
         <View style={styles.lineIndicator}>
           <Text style={styles.textIndicator}>Entrada</Text>
           <Text style={[styles.valueIndicator, styles.positive]}>
-            {formatValueFinancial(entry)}
+            {formatValueFinancial(input)}
           </Text>
         </View>
         <View style={styles.lineIndicator}>
           <Text style={styles.textIndicator}>Saída</Text>
           <Text style={[styles.valueIndicator, styles.negative]}>
-            {formatValueFinancial(out)}
+            {formatValueFinancial(output)}
           </Text>
         </View>
         <View style={[styles.lineIndicator, styles.hr]}>
           <Text style={[styles.textIndicator, styles.textTotal]}>Receita</Text>
           <Text
-            style={[styles.valueIndicator, styles.positive, styles.valueTotal]}
+            style={[
+              styles.valueIndicator,
+              recipe >= 0 ? styles.positive : styles.negative,
+              styles.valueTotal,
+            ]}
           >
-            {formatValueFinancial(previousBalance + entry - out)}
+            {formatValueFinancial(recipe)}
           </Text>
         </View>
       </TouchableOpacity>

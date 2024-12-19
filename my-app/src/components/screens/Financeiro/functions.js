@@ -1,5 +1,9 @@
 export function formatValueFinancial(value) {
-  return value
-    ? value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+  const absoluteValue = Math.abs(value);
+  return absoluteValue
+    ? absoluteValue.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      })
     : value;
 }

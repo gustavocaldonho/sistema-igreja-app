@@ -78,3 +78,37 @@ export const deleteBalanceApi = async (id, patron, token) => {
     return error;
   }
 };
+
+export const getResumeBalancesYearApi = async (patron, year, token) => {
+  try {
+    const response = await api.get(
+      `/community/${patron}/finance_resume/${year}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getResumeBalanceMonthApi = async (patron, year, month, token) => {
+  try {
+    const response = await api.get(
+      `/community/${patron}/finance_resume/${year}/${month}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
