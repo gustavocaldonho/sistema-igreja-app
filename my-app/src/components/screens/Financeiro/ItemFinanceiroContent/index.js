@@ -16,6 +16,7 @@ export default function ItemFinanceiroContent({
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
   const [balanceList, setBalanceList] = useState([]);
+  const [visibleMsgListEmpty, setVisibleMsgListEmpty] = useState(false);
 
   async function getBalancesList() {
     try {
@@ -27,13 +28,14 @@ export default function ItemFinanceiroContent({
         token
       );
       if (response.status === 200) {
-        setBalanceList(response.data.finances);
+        const finances = response.data.finances || [];
+        setBalanceList(finances);
+        setVisibleMsgListEmpty(finances.length === 0);
       } else {
         throw new Error("Não foi possível carregar o extrato mensal.");
       }
     } catch (error) {
       modalAlert("Ops!", error.message);
-    } finally {
     }
   }
 
@@ -62,7 +64,9 @@ export default function ItemFinanceiroContent({
           )}
         />
       ) : (
-        <Text style={styles.info}>Ainda não foi inserido nenhum saldo</Text>
+        visibleMsgListEmpty && (
+          <Text style={styles.info}>Ainda não foi inserido nenhum saldo</Text>
+        )
       )}
     </View>
   );

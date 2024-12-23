@@ -11,6 +11,7 @@ export default function ItemBoxBalanceContent({
   modalVisible,
   setShowExtract,
   setSelectedMonth,
+  setIndicatorVisible,
 }) {
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
@@ -59,6 +60,7 @@ export default function ItemBoxBalanceContent({
                 recipe={data.recipe}
                 setShowExtract={setShowExtract}
                 setSelectedMonth={setSelectedMonth}
+                setIndicatorVisible={setIndicatorVisible}
               />
             );
           }}

@@ -13,6 +13,7 @@ export default function BoxBalance({
   disableOpacity = false,
   setSelectedMonth,
   valueMonth,
+  setIndicatorVisible,
 }) {
   return (
     <View style={styles.container}>
@@ -21,8 +22,12 @@ export default function BoxBalance({
         style={styles.main}
         activeOpacity={0.7}
         onPress={() => {
-          setShowExtract(true);
-          setSelectedMonth(valueMonth);
+          setIndicatorVisible(true);
+          setTimeout(() => {
+            setShowExtract(true);
+            setSelectedMonth(valueMonth);
+            setIndicatorVisible(false);
+          }, 100);
         }}
         disabled={disableOpacity}
       >

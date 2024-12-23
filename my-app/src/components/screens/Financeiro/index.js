@@ -11,12 +11,14 @@ import ItemBoxBalanceContent from "./ItemBoxBalanceContent";
 import { ModalContext } from "../../../contexts/modalContext";
 import { getResumeBalanceMonthApi } from "../../../services/financial_api";
 import { AuthContext } from "../../../contexts/auth";
+import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 
 export default function Financeiro({}) {
   const { user } = useContext(AuthContext);
   const { modalAlert } = useContext(ModalContext);
   const [showExtract, setShowExtract] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [indicatorVisible, setIndicatorVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState({
     month: "december",
     year: "2024",
@@ -56,12 +58,67 @@ export default function Financeiro({}) {
       }
     } catch (error) {
       modalAlert("Ops!", error.message);
+    } finally {
+      setIndicatorVisible(false);
     }
   }
 
   useEffect(() => {
     getResumeBalanceMonth();
   }, [selectedOption, modalVisible]);
+
+  useEffect(() => {
+    setIndicatorVisible(true);
+  }, []);
+
+  const renderContent = () => {
+    if (indicatorVisible) {
+      return <LoadingIndicator />;
+    }
+
+    if (!showExtract) {
+      return (
+        <ItemBoxBalanceContent
+          modalVisible={modalVisible}
+          setIndicatorVisible={setIndicatorVisible}
+          setShowExtract={setShowExtract}
+          setSelectedMonth={(month) =>
+            setSelectedOption((prev) => ({ ...prev, month }))
+          }
+        />
+      );
+    }
+
+    return (
+      <View>
+        <View style={styles.boxFiltersAndMain}>
+          <BoxFilters
+            style={styles.boxFilters}
+            options={monthList}
+            selectedValue={selectedOption}
+            onValueChange={(value) => setSelectedOption(value)}
+          />
+          <View style={styles.main}>
+            <ItemFinanceiroContent
+              selectedOption={selectedOption}
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              setItemFinanceiroClicked={setItemFinanceiroClicked}
+            />
+          </View>
+        </View>
+        <BoxBalance
+          month={""}
+          previousBalance={itemBoxBalanceSelected[0]?.last_month}
+          input={itemBoxBalanceSelected[0]?.input}
+          output={itemBoxBalanceSelected[0]?.output}
+          recipe={itemBoxBalanceSelected[0]?.recipe}
+          setShowExtract={setShowExtract}
+          disableOpacity={true}
+        />
+      </View>
+    );
+  };
 
   return (
     <>
@@ -73,58 +130,26 @@ export default function Financeiro({}) {
           setItemFinanceiroClicked({});
         }}
       >
-        <View style={styles.container}>
-          {!showExtract ? (
-            <ItemBoxBalanceContent
-              modalVisible={modalVisible}
-              setShowExtract={setShowExtract}
-              setSelectedMonth={(month) =>
-                setSelectedOption((prev) => ({ ...prev, month }))
-              }
-            />
-          ) : (
-            <View>
-              <View style={styles.boxFiltersAndMain}>
-                <BoxFilters
-                  style={styles.boxFilters}
-                  options={monthList}
-                  selectedValue={selectedOption}
-                  onValueChange={(value) => {
-                    setSelectedOption(value);
-                  }}
-                />
-                <View style={styles.main}>
-                  <ItemFinanceiroContent
-                    selectedOption={selectedOption}
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                    setItemFinanceiroClicked={setItemFinanceiroClicked}
-                  />
-                </View>
-              </View>
-              <BoxBalance
-                month={""}
-                previousBalance={itemBoxBalanceSelected[0].last_month}
-                input={itemBoxBalanceSelected[0].input}
-                output={itemBoxBalanceSelected[0].output}
-                recipe={itemBoxBalanceSelected[0].recipe}
-                setShowExtract={setShowExtract}
-                disableOpacity={true}
-              />
-            </View>
-          )}
-        </View>
+        <View style={styles.container}>{renderContent()}</View>
+
         <ModalLancamento
           visible={modalVisible}
           onClose={() => setModalVisible(false)}
           itemClicked={itemFinanceiroClicked}
         />
       </PageBase>
+
       {showExtract && (
         <TouchableOpacity
           style={styles.buttonAnnualSummary}
           activeOpacity={0.7}
-          onPress={() => setShowExtract(false)}
+          onPress={() => {
+            setIndicatorVisible(true);
+            setTimeout(() => {
+              setShowExtract(false);
+              setIndicatorVisible(false);
+            }, 500);
+          }}
         >
           <Text style={styles.textAnnualSummary}>Ver Resumo Anual</Text>
         </TouchableOpacity>
