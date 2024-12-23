@@ -31,12 +31,12 @@ export default function BoxBalance({
         }}
         disabled={disableOpacity}
       >
-        <View style={styles.lineIndicator}>
+        {/* <View style={styles.lineIndicator}>
           <Text style={styles.textIndicator}>Tinha</Text>
           <Text style={[styles.valueIndicator]}>
             {formatValueFinancial(previousBalance)}
           </Text>
-        </View>
+        </View> */}
         <View style={styles.lineIndicator}>
           <Text style={styles.textIndicator}>Entrada</Text>
           <Text style={[styles.valueIndicator, styles.positive]}>

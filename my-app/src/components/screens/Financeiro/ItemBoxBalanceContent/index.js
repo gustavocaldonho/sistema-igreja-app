@@ -12,6 +12,7 @@ export default function ItemBoxBalanceContent({
   setShowExtract,
   setSelectedMonth,
   setIndicatorVisible,
+  setBalanceTotal,
 }) {
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
@@ -27,6 +28,7 @@ export default function ItemBoxBalanceContent({
         token
       );
       if (response.status === 200) {
+        calculateTotalRecipe(response.data);
         setResumeBalanceList(Object.entries(response.data).reverse());
       } else {
         throw new Error("Não foi possível carregar o resumo financeiro anual.");
@@ -34,6 +36,13 @@ export default function ItemBoxBalanceContent({
     } catch (error) {
       modalAlert("Ops!", error.message);
     }
+  }
+
+  function calculateTotalRecipe(data) {
+    const total = Object.values(data).reduce((total, monthData) => {
+      return total + monthData.recipe;
+    }, 0);
+    setBalanceTotal(total);
   }
 
   useEffect(() => {
@@ -48,8 +57,6 @@ export default function ItemBoxBalanceContent({
           data={resumebalanceList}
           keyExtractor={([month], index) => `balance-item-${month}-${index}`}
           renderItem={({ item: [month, data], index }) => {
-            // const previousRecipe =
-            //   index > 0 ? resumebalanceList[index - 1][1].recipe : 0;
             return (
               <BoxBalance
                 month={translateMonth(month)}

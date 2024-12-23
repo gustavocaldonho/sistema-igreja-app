@@ -12,6 +12,7 @@ import { ModalContext } from "../../../contexts/modalContext";
 import { getResumeBalanceMonthApi } from "../../../services/financial_api";
 import { AuthContext } from "../../../contexts/auth";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
+import { formatValueFinancial } from "./functions";
 
 export default function Financeiro({}) {
   const { user } = useContext(AuthContext);
@@ -39,6 +40,7 @@ export default function Financeiro({}) {
     { id: 2, label: "FEVEREIRO", value: "february", year: "2024" },
     { id: 1, label: "JANEIRO", value: "january", year: "2024" },
   ]);
+  const [balanceTotal, setBalanceTotal] = useState(0);
 
   async function getResumeBalanceMonth() {
     try {
@@ -82,6 +84,7 @@ export default function Financeiro({}) {
           modalVisible={modalVisible}
           setIndicatorVisible={setIndicatorVisible}
           setShowExtract={setShowExtract}
+          setBalanceTotal={setBalanceTotal}
           setSelectedMonth={(month) =>
             setSelectedOption((prev) => ({ ...prev, month }))
           }
@@ -137,23 +140,36 @@ export default function Financeiro({}) {
           onClose={() => setModalVisible(false)}
           itemClicked={itemFinanceiroClicked}
         />
-      </PageBase>
 
-      {showExtract && (
-        <TouchableOpacity
-          style={styles.buttonAnnualSummary}
-          activeOpacity={0.7}
-          onPress={() => {
-            setIndicatorVisible(true);
-            setTimeout(() => {
-              setShowExtract(false);
-              setIndicatorVisible(false);
-            }, 500);
-          }}
-        >
-          <Text style={styles.textAnnualSummary}>Ver Resumo Anual</Text>
-        </TouchableOpacity>
-      )}
+        {showExtract ? (
+          <TouchableOpacity
+            style={styles.buttonAnnualSummary}
+            activeOpacity={0.7}
+            onPress={() => {
+              setIndicatorVisible(true);
+              setTimeout(() => {
+                setShowExtract(false);
+                setIndicatorVisible(false);
+              }, 500);
+            }}
+          >
+            <Text style={styles.textAnnualSummary}>Ver Resumo Anual</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.boxTotalBalance}>
+            <Text style={styles.textTotalBalance}>Total: </Text>
+            <Text
+              style={[
+                styles.textTotalBalance,
+                balanceTotal >= 0 ? styles.positive : styles.negative,
+                styles.valueTotal,
+              ]}
+            >
+              {formatValueFinancial(balanceTotal)}
+            </Text>
+          </View>
+        )}
+      </PageBase>
     </>
   );
 }

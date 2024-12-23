@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   boxFiltersAndMain: {
-    height: "78%",
+    height: "83%",
     backgroundColor: "#fff",
     borderRadius: 10,
     overflow: "hidden",
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     position: "absolute",
     bottom: 20,
-    left: 30,
+    left: 20,
     backgroundColor: "#287BBF",
     borderRadius: 20,
     justifyContent: "center",
@@ -37,6 +37,30 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#fff",
     fontWeight: "800",
+  },
+  boxTotalBalance: {
+    height: 60,
+    paddingHorizontal: 15,
+    position: "absolute",
+    bottom: 20,
+    left: 20,
+    backgroundColor: "#287BBF",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 5,
+  },
+  textTotalBalance: {
+    fontSize: 20,
+    fontWeight: "900",
+    color: "#fff",
+  },
+  positive: {
+    color: "#B9F6CA",
+  },
+  negative: {
+    color: "#F5C3D1",
   },
 });
 
