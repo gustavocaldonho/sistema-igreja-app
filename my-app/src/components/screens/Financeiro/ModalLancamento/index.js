@@ -140,8 +140,9 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
     }
   };
 
-  const onDelete = () => {
+  const handleDelete = () => {
     modalConfirm("Opa!", "Deseja excluir o saldo selecionado?", deleteBalance);
+    // console.log("excluir");
   };
 
   useEffect(() => {
@@ -257,7 +258,7 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
             {itemClicked.id ? (
               <TouchableOpacity
                 // onPress={deleteBalance}
-                onPress={onDelete}
+                onPress={handleDelete}
                 style={[styles.button, styles.delete]}
               >
                 <Icon name="trash" style={styles.buttonIcon} />
