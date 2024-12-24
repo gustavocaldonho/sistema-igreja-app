@@ -5,6 +5,7 @@ import "react-native-gesture-handler";
 import "@react-native-firebase/app";
 import AuthProvider from "./src/contexts/auth";
 import ModalProvider from "./src/contexts/modalContext";
+import ConfirmModalProvider from "./src/contexts/modalConfirmContext";
 import MyStack from "./src/routes/MyStack";
 import * as Notifications from "expo-notifications";
 import messaging from "@react-native-firebase/messaging";
@@ -134,7 +135,9 @@ export default function App() {
     <NavigationContainer>
       <AuthProvider>
         <ModalProvider>
-          <MyStack />
+          <ConfirmModalProvider>
+            <MyStack />
+          </ConfirmModalProvider>
         </ModalProvider>
       </AuthProvider>
     </NavigationContainer>

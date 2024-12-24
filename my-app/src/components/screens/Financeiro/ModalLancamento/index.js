@@ -19,7 +19,7 @@ import {
   deleteBalanceApi,
 } from "../../../../services/financial_api";
 import { ModalContext } from "../../../../contexts/modalContext";
-import { ConfirmModalContext } from "../../../../contexts/ConfirmModalContext";
+import { ConfirmModalContext } from "../../../../contexts/modalConfirmContext";
 import { AuthContext } from "../../../../contexts/auth";
 import { formatDate, formatMoney, parseFormattedNumber } from "./functions";
 
@@ -142,7 +142,6 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
 
   const handleDelete = () => {
     modalConfirm("Opa!", "Deseja excluir o saldo selecionado?", deleteBalance);
-    // console.log("excluir");
   };
 
   useEffect(() => {
@@ -257,9 +256,9 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
           <View style={[styles.row, styles.rowButton]}>
             {itemClicked.id ? (
               <TouchableOpacity
-                // onPress={deleteBalance}
                 onPress={handleDelete}
                 style={[styles.button, styles.delete]}
+                activeOpacity={0.5}
               >
                 <Icon name="trash" style={styles.buttonIcon} />
                 <Text style={styles.buttonText}>Excluir</Text>
@@ -269,6 +268,7 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
             <TouchableOpacity
               onPress={sendBalance}
               style={[styles.button, styles.save]}
+              activeOpacity={0.5}
             >
               <Icon name="save" style={styles.buttonIcon} />
               <Text style={styles.buttonText}>Salvar</Text>

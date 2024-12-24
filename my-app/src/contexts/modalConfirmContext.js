@@ -42,7 +42,7 @@ export default function ConfirmModalProvider({ children }) {
             <Text style={styles.message}>{modalState.message}</Text>
             <View style={styles.modalButtonContainer}>
               <TouchableOpacity
-                style={styles.button}
+                style={[styles.button, styles.cancelButton]}
                 onPress={() => {
                   modalState.onConfirm?.();
                   hideModal();
@@ -52,13 +52,11 @@ export default function ConfirmModalProvider({ children }) {
                 <Text style={styles.buttonText}>Sim</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.button, styles.cancelButton]}
+                style={styles.button}
                 onPress={hideModal}
                 activeOpacity={0.5}
               >
-                <Text style={[styles.buttonText, styles.cancelButtonText]}>
-                  Não
-                </Text>
+                <Text style={styles.buttonText}>Não</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -99,12 +97,12 @@ const styles = StyleSheet.create({
   },
   modalButtonContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     width: "100%",
   },
   button: {
     paddingVertical: 8,
-    paddingHorizontal: 15,
+    paddingHorizontal: 35,
     backgroundColor: "#339dd7",
     borderRadius: 100,
     marginHorizontal: 10,
@@ -115,8 +113,5 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     backgroundColor: "#f094c0",
-  },
-  cancelButtonText: {
-    color: "#fff",
   },
 });

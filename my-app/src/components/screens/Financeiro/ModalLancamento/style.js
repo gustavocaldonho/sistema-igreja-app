@@ -76,7 +76,8 @@ export const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#6200ea",
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 10,
     flexDirection: "row",
     justifyContent: "center",
