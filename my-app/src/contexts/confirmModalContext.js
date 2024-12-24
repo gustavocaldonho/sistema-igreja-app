@@ -3,7 +3,7 @@ import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 export const ConfirmModalContext = createContext({});
 
-export default function ModalProvider({ children }) {
+export default function ConfirmModalProvider({ children }) {
   const [modalState, setModalState] = useState({
     visible: false,
     title: "",
@@ -16,7 +16,7 @@ export default function ModalProvider({ children }) {
   };
 
   const hideModal = () => {
-    setModalState({ ...modalState, visible: false });
+    setModalState((prevState) => ({ ...prevState, visible: false }));
   };
 
   const modalConfirm = (title, message, onConfirm) => {
@@ -24,7 +24,9 @@ export default function ModalProvider({ children }) {
   };
 
   return (
-    <ModalContext.Provider value={{ showModal, hideModal, modalConfirm }}>
+    <ConfirmModalContext.Provider
+      value={{ showModal, hideModal, modalConfirm }}
+    >
       {children}
       <Modal
         visible={modalState.visible}
@@ -41,7 +43,10 @@ export default function ModalProvider({ children }) {
             <View style={styles.modalButtonContainer}>
               <TouchableOpacity
                 style={styles.button}
-                onPress={modalState.onConfirm}
+                onPress={() => {
+                  modalState.onConfirm?.();
+                  hideModal();
+                }}
                 activeOpacity={0.5}
               >
                 <Text style={styles.buttonText}>Sim</Text>
@@ -59,7 +64,7 @@ export default function ModalProvider({ children }) {
           </View>
         </View>
       </Modal>
-    </ModalContext.Provider>
+    </ConfirmModalContext.Provider>
   );
 }
 
@@ -94,7 +99,7 @@ const styles = StyleSheet.create({
   },
   modalButtonContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     width: "100%",
   },
   button: {
@@ -102,6 +107,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: "#339dd7",
     borderRadius: 100,
+    marginHorizontal: 10,
   },
   buttonText: {
     color: "white",

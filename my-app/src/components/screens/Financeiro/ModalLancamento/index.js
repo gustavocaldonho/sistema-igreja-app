@@ -19,7 +19,7 @@ import {
   deleteBalanceApi,
 } from "../../../../services/financial_api";
 import { ModalContext } from "../../../../contexts/modalContext";
-import { ConfirmModalContext } from "../../../../contexts/confirmModalContext";
+import { ConfirmModalContext } from "../../../../contexts/ConfirmModalContext";
 import { AuthContext } from "../../../../contexts/auth";
 import { formatDate, formatMoney, parseFormattedNumber } from "./functions";
 
