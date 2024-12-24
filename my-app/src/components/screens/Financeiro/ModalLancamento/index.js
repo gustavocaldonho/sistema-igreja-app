@@ -19,6 +19,7 @@ import {
   deleteBalanceApi,
 } from "../../../../services/financial_api";
 import { ModalContext } from "../../../../contexts/modalContext";
+import { ConfirmModalContext } from "../../../../contexts/confirmModalContext";
 import { AuthContext } from "../../../../contexts/auth";
 import { formatDate, formatMoney, parseFormattedNumber } from "./functions";
 
@@ -33,6 +34,7 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
   const inputRef = useRef(null);
 
   const { modalAlert } = useContext(ModalContext);
+  const { modalConfirm } = useContext(ConfirmModalContext);
   const { user } = useContext(AuthContext);
 
   const addBalance = async (data) => {
@@ -136,6 +138,10 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
     } else {
       setShowErrors(true);
     }
+  };
+
+  const onDelete = () => {
+    modalConfirm("Opa!", "Deseja excluir o saldo selecionado?", deleteBalance);
   };
 
   useEffect(() => {
@@ -250,7 +256,8 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
           <View style={[styles.row, styles.rowButton]}>
             {itemClicked.id ? (
               <TouchableOpacity
-                onPress={deleteBalance}
+                // onPress={deleteBalance}
+                onPress={onDelete}
                 style={[styles.button, styles.delete]}
               >
                 <Icon name="trash" style={styles.buttonIcon} />
