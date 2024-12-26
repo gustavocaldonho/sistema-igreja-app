@@ -110,15 +110,17 @@ export default function Financeiro({}) {
             />
           </View>
         </View>
-        <BoxBalance
-          month={""}
-          previousBalance={itemBoxBalanceSelected[0]?.last_month}
-          input={itemBoxBalanceSelected[0]?.input}
-          output={itemBoxBalanceSelected[0]?.output}
-          recipe={itemBoxBalanceSelected[0]?.recipe}
-          setShowExtract={setShowExtract}
-          disableOpacity={true}
-        />
+        <View style={styles.boxBalance}>
+          <BoxBalance
+            month={""}
+            previousBalance={itemBoxBalanceSelected[0]?.last_month}
+            input={itemBoxBalanceSelected[0]?.input}
+            output={itemBoxBalanceSelected[0]?.output}
+            recipe={itemBoxBalanceSelected[0]?.recipe}
+            setShowExtract={setShowExtract}
+            disableOpacity={true}
+          />
+        </View>
       </View>
     );
   };

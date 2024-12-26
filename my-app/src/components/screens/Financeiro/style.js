@@ -4,23 +4,26 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "85%",
-    marginTop: 12,
-    justifyContent: "space-between",
+    marginTop: 10,
     borderRadius: 10,
     overflow: "hidden",
   },
   boxFiltersAndMain: {
-    height: "80%", //##### deixar responsivo
+    height: "80%",
     backgroundColor: "#fff",
     borderRadius: 10,
     overflow: "hidden",
+    justifyContent: "space-between",
   },
   boxFilters: {
-    maxHeight: "10%",
+    height: "10%",
   },
   main: {
-    maxHeight: "90%",
+    height: "90%",
     overflow: "hidden",
+  },
+  boxBalance: {
+    height: "20%",
   },
   buttonAnnualSummary: {
     height: 60,
