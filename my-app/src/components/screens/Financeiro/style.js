@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   boxFiltersAndMain: {
-    height: "81%", //##### deixar responsivo
+    height: "80%", //##### deixar responsivo
     backgroundColor: "#fff",
     borderRadius: 10,
     overflow: "hidden",
