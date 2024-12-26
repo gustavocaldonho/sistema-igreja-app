@@ -75,11 +75,13 @@ export default function Menu({ navigation }) {
               }
             />
           )}
-          <ItemMenu
-            screenName={"Financeiro"}
-            icon={"dollar"}
-            onPress={() => navigation.navigate("Financeiro")}
-          />
+          {user.position === "council member" ? (
+            <ItemMenu
+              screenName={"Financeiro"}
+              icon={"dollar"}
+              onPress={() => navigation.navigate("Financeiro")}
+            />
+          ) : null}
         </View>
         <View style={styles.footer}>
           <Image
