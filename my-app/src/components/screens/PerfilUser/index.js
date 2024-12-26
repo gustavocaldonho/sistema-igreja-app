@@ -9,6 +9,7 @@ import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import OptionsImage from "../../auxiliary/ModalImage";
 import ViewImage from "../../auxiliary/ModalImage/ViewImage";
 import { AuthContext } from "../../../contexts/auth";
+import DizimoContainer from "./DizimoContainer";
 import PersonalDataContainer from "./PersonalDataContainer";
 import ModalUpdateDatasUser from "./PersonalDataContainer/ModalUpdateDatasUser";
 import { getImageProfile } from "../../auxiliary/ModalImage/functions";
@@ -85,6 +86,11 @@ export default function PerfilUser({ navigation, route }) {
               sentUser={{ name, cpf, birthday, phone, community, password }}
               style={[styles.boxInformationsUser, styles.boxShadow]}
               setModalVisible={setModalVisible}
+            />
+
+            <DizimoContainer
+              style={[styles.boxInformationsUser, styles.boxShadow]}
+              styleTitleBox={styles.textTitleBox}
             />
           </ScrollView>
         </BoxLinearGradient>

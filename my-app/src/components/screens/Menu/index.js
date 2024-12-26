@@ -27,11 +27,6 @@ export default function Menu({ navigation }) {
             <Text style={styles.textMenu}>Menu</Text>
           </View>
           <ItemMenu
-            screenName={"Avisos"}
-            icon={"info"}
-            onPress={() => navigation.navigate("Avisos")}
-          />
-          <ItemMenu
             screenName={"Perfil"}
             icon={"user"}
             onPress={() =>
@@ -52,6 +47,17 @@ export default function Menu({ navigation }) {
               onPress={() => navigation.navigate("Users", {})}
             />
           ) : null}
+          <ItemMenu
+            screenName={"Avisos"}
+            icon={"info"}
+            onPress={() => navigation.navigate("Avisos")}
+          />
+          <ItemMenu
+            screenName={"Dízimo"}
+            icon={"heart"}
+            onPress={() => navigation.navigate("Dizimo")}
+          />
+
           {user.position === "parish leader" ? (
             <ItemMenu
               screenName={"Comunidades"}
