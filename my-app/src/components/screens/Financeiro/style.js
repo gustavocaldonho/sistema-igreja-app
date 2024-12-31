@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   boxFiltersAndMain: {
-    height: "80%",
+    height: "82%",
     backgroundColor: "#fff",
     borderRadius: 10,
     overflow: "hidden",
@@ -23,30 +23,19 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   boxBalance: {
-    height: "20%",
+    height: "18%",
   },
-  buttonAnnualSummary: {
-    height: 60,
-    paddingHorizontal: 15,
-    position: "absolute",
-    bottom: 20,
-    left: 20,
-    backgroundColor: "#287BBF",
-    borderRadius: 20,
-    justifyContent: "center",
+  footer: {
+    width: "100%",
+    height: "10%",
+    justifyContent: "space-between",
+    flexDirection: "row",
     alignItems: "center",
+    marginTop: 10,
   },
-  textAnnualSummary: {
-    fontSize: 18,
-    color: "#fff",
-    fontWeight: "800",
-  },
-  boxTotalBalance: {
-    height: 60,
+  buttonFooter: {
+    height: "90%",
     paddingHorizontal: 15,
-    position: "absolute",
-    bottom: 20,
-    left: 20,
     backgroundColor: "#287BBF",
     borderRadius: 20,
     justifyContent: "center",
@@ -54,9 +43,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 5,
   },
-  textTotalBalance: {
-    fontSize: 20,
+  textButtonFooter: {
+    fontSize: 18,
     fontWeight: "900",
+    color: "#fff",
+  },
+  boxButtonAdd: {
+    width: 60,
+    height: 60,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#287BBF",
+  },
+  iconAdd: {
+    fontSize: 20,
     color: "#fff",
   },
   positive: {

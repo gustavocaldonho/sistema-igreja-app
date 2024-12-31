@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, TouchableHighlight } from "react-native";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./style";
 import PageBase from "../PageBase";
@@ -127,50 +128,56 @@ export default function Financeiro({}) {
 
   return (
     <>
-      <PageBase
-        title="Financeiro"
-        signButtonAdd={true}
-        onPressAdd={() => {
-          setModalVisible(true);
-          setItemFinanceiroClicked({});
-        }}
-      >
+      <PageBase title="Financeiro" signButtonAdd={false}>
         <View style={styles.container}>{renderContent()}</View>
+
+        <View style={styles.footer}>
+          {showExtract ? (
+            <TouchableOpacity
+              style={styles.buttonFooter}
+              activeOpacity={0.7}
+              onPress={() => {
+                setIndicatorVisible(true);
+                setTimeout(() => {
+                  setShowExtract(false);
+                  setIndicatorVisible(false);
+                }, 500);
+              }}
+            >
+              <Text style={styles.textButtonFooter}>Ver Resumo Anual</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.buttonFooter}>
+              <Text style={styles.textButtonFooter}>Total: </Text>
+              <Text
+                style={[
+                  styles.textButtonFooter,
+                  balanceTotal >= 0 ? styles.positive : styles.negative,
+                  styles.valueTotal,
+                ]}
+              >
+                {formatValueFinancial(balanceTotal)}
+              </Text>
+            </View>
+          )}
+
+          <TouchableHighlight
+            style={styles.boxButtonAdd}
+            underlayColor={"#358DD4"}
+            onPress={() => {
+              setModalVisible(true);
+              setItemFinanceiroClicked({});
+            }}
+          >
+            <FontAwesome5 name="plus" style={styles.iconAdd} />
+          </TouchableHighlight>
+        </View>
 
         <ModalLancamento
           visible={modalVisible}
           onClose={() => setModalVisible(false)}
           itemClicked={itemFinanceiroClicked}
         />
-
-        {showExtract ? (
-          <TouchableOpacity
-            style={styles.buttonAnnualSummary}
-            activeOpacity={0.7}
-            onPress={() => {
-              setIndicatorVisible(true);
-              setTimeout(() => {
-                setShowExtract(false);
-                setIndicatorVisible(false);
-              }, 500);
-            }}
-          >
-            <Text style={styles.textAnnualSummary}>Ver Resumo Anual</Text>
-          </TouchableOpacity>
-        ) : (
-          <View style={styles.boxTotalBalance}>
-            <Text style={styles.textTotalBalance}>Total: </Text>
-            <Text
-              style={[
-                styles.textTotalBalance,
-                balanceTotal >= 0 ? styles.positive : styles.negative,
-                styles.valueTotal,
-              ]}
-            >
-              {formatValueFinancial(balanceTotal)}
-            </Text>
-          </View>
-        )}
       </PageBase>
     </>
   );
