@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   buttonSignOut: {
-    width: "20%",
+    paddingHorizontal: 10,
     height: 40,
     flexDirection: "row",
     alignItems: "center",

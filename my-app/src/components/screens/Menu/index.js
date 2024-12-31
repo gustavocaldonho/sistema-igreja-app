@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import { StatusBar, View, Text, Image } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { StatusBar, View, Text } from "react-native";
 import styles from "./style";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
 import ItemMenu from "./ItemMenu";
 import { AuthContext } from "../../../contexts/auth";
 import ConfirmModalSignOut from "./ConfirmModalSignOut";
 import Header from "./Header";
+import Footer from "./Footer";
 
 export default function Menu({ navigation }) {
   const { signOut, user } = useContext(AuthContext);
@@ -18,86 +18,75 @@ export default function Menu({ navigation }) {
   };
 
   return (
-    <BoxLinearGradient style={styles.container}>
+    <BoxLinearGradient style={{ flex: 1 }}>
       <StatusBar translucent />
-      <View style={styles.innerContainer}>
+
+      <View style={styles.container}>
         <Header setConfirmModalVisible={setConfirmModalVisible} />
         <View style={styles.main}>
           <View style={styles.boxTitleMenu}>
             <Text style={styles.textMenu}>Menu</Text>
           </View>
-          <ItemMenu
-            screenName={"Perfil"}
-            icon={"user"}
-            onPress={() =>
-              navigation.navigate("PerfilUser", {
-                name: user.name,
-                cpf: user.cpf,
-                birthday: user.birthday,
-                phone: user.phone,
-                community: user.community,
-                password: user.password,
-              })
-            }
-          />
-          {user.position === "council member" ? (
+          <View style={styles.boxItemsMenu}>
             <ItemMenu
-              screenName={"Usuários"}
-              icon={"users"}
-              onPress={() => navigation.navigate("Users", {})}
-            />
-          ) : null}
-          <ItemMenu
-            screenName={"Avisos"}
-            icon={"info"}
-            onPress={() => navigation.navigate("Avisos")}
-          />
-          <ItemMenu
-            screenName={"Dízimo"}
-            icon={"heart"}
-            onPress={() => navigation.navigate("Dizimo")}
-          />
-
-          {user.position === "parish leader" ? (
-            <ItemMenu
-              screenName={"Comunidades"}
-              icon={"church"}
-              onPress={() => navigation.navigate("Comunidades")}
-            />
-          ) : (
-            <ItemMenu
-              screenName={"Comunidade"}
-              icon={"church"}
+              screenName={"Perfil"}
+              icon={"user"}
               onPress={() =>
-                navigation.navigate("PerfilCommunity", {
-                  patron: user.community,
+                navigation.navigate("PerfilUser", {
+                  name: user.name,
+                  cpf: user.cpf,
+                  birthday: user.birthday,
+                  phone: user.phone,
+                  community: user.community,
+                  password: user.password,
                 })
               }
             />
-          )}
-          {user.position === "council member" ? (
+            {user.position === "council member" ? (
+              <ItemMenu
+                screenName={"Usuários"}
+                icon={"users"}
+                onPress={() => navigation.navigate("Users", {})}
+              />
+            ) : null}
             <ItemMenu
-              screenName={"Financeiro"}
-              icon={"dollar"}
-              onPress={() => navigation.navigate("Financeiro")}
+              screenName={"Avisos"}
+              icon={"info"}
+              onPress={() => navigation.navigate("Avisos")}
             />
-          ) : null}
-        </View>
-        <View style={styles.footer}>
-          <Image
-            source={require("../../../images/logo.png")}
-            style={styles.logo}
-          />
-          <Text style={styles.footerTitle}>Defagus Systems</Text>
-          <View style={styles.footerSubTitle}>
-            <Icon
-              name="copyright"
-              color={"#fff"}
-              style={styles.iconCopyright}
+            <ItemMenu
+              screenName={"Dízimo"}
+              icon={"heart"}
+              onPress={() => navigation.navigate("Dizimo")}
             />
-            <Text style={styles.subTitle}>Todos os Direitos Reservados</Text>
+
+            {user.position === "parish leader" ? (
+              <ItemMenu
+                screenName={"Comunidades"}
+                icon={"church"}
+                onPress={() => navigation.navigate("Comunidades")}
+              />
+            ) : (
+              <ItemMenu
+                screenName={"Comunidade"}
+                icon={"church"}
+                onPress={() =>
+                  navigation.navigate("PerfilCommunity", {
+                    patron: user.community,
+                  })
+                }
+              />
+            )}
+            {user.position === "council member" ? (
+              <ItemMenu
+                screenName={"Financeiro"}
+                icon={"dollar"}
+                onPress={() => navigation.navigate("Financeiro")}
+              />
+            ) : null}
           </View>
         </View>
+        <Footer style={styles.footer} />
       </View>
 
       <ConfirmModalSignOut
