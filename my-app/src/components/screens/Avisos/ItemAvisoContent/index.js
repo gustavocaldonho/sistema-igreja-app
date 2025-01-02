@@ -39,8 +39,8 @@ export default function ItemAvisoContent({
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await getTenWarnings(user.community, token, pageNumber); // Use o número da página passada como argumento
 
-      console.log("page: ", pageNumber);
-      console.log(response);
+      // console.log("page: ", pageNumber);
+      // console.log(response);
 
       if (response.status === 200) {
         const newWarnings = response.data;
@@ -56,7 +56,7 @@ export default function ItemAvisoContent({
           setHasMoreWarnings(false); // Não há mais avisos para carregar
         }
       } else {
-        console.log(response);
+        // console.log(response);
         throw new Error("Não foi possível retornar a lista de avisos.");
       }
     } catch (error) {
