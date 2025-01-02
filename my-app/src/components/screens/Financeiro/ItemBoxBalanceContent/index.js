@@ -24,12 +24,12 @@ export default function ItemBoxBalanceContent({
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await getResumeBalancesYearApi(
         user.community,
-        "2024",
+        "2025",
         token
       );
       if (response.status === 200) {
         calculateTotalRecipe(response.data);
-        setResumeBalanceList(Object.entries(response.data).reverse());
+        setResumeBalanceList(Object.entries(response.data));
       } else {
         throw new Error("Não foi possível carregar o resumo financeiro anual.");
       }

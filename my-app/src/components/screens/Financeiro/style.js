@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -9,7 +11,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   boxFiltersAndMain: {
-    height: "82%",
+    height: "80%",
     backgroundColor: "#fff",
     borderRadius: 10,
     overflow: "hidden",
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   boxBalance: {
-    height: "18%",
+    height: "20%",
   },
   footer: {
     width: "100%",
@@ -44,20 +46,20 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   textButtonFooter: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: "900",
     color: "#fff",
   },
   boxButtonAdd: {
-    width: 60,
-    height: 60,
+    width: width * 0.155,
+    height: width * 0.155,
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#287BBF",
   },
   iconAdd: {
-    fontSize: 20,
+    fontSize: width * 0.045,
     color: "#fff",
   },
   positive: {

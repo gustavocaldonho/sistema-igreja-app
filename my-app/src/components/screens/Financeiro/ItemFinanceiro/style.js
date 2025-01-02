@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   boxMain: {
-    width: "65%",
+    width: "60%",
     height: "100%",
     justifyContent: "center",
   },
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     color: "#8F8F8F",
   },
   boxRigth: {
-    width: "35%",
+    width: "40%",
     height: "100%",
   },
   boxValue: {
