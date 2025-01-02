@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -24,22 +26,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   textIndicator: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: "700",
     color: "#858585",
   },
   valueIndicator: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: "500",
     color: "#858585",
   },
   textTotal: {
-    fontSize: 20,
+    fontSize: width * 0.05,
     fontWeight: "900",
     color: "#5C5C5C",
   },
   valueTotal: {
-    fontSize: 20,
+    fontSize: width * 0.05,
     fontWeight: "900",
   },
   positive: {

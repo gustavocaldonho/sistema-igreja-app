@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textTitle: {
-    fontSize: 40,
+    fontSize: width * 0.095,
     color: "#339dd7",
     fontWeight: "500",
     marginBottom: 10,

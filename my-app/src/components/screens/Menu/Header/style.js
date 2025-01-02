@@ -1,10 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 30,
-    paddingTop: 50,
-    paddingBottom: 10,
+    paddingHorizontal: width * 0.075,
+    paddingTop: height * 0.07,
+    paddingBottom: height * 0.015,
     backgroundColor: "rgba(0, 0, 0, 0.2)",
   },
   lineHeader: {
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
     width: "75%",
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: width * 0.025,
   },
   boxImageProfile: {
     width: "18%",
@@ -35,30 +37,30 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textNameUser: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     color: "#fff",
     fontWeight: "bold",
   },
   textPatron: {
-    fontSize: 12,
+    fontSize: width * 0.03,
     color: "#fff",
   },
   buttonSignOut: {
-    paddingHorizontal: 10,
-    height: 40,
+    paddingHorizontal: width * 0.025,
+    height: height * 0.05,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(0, 0, 0, 0.2)",
     borderRadius: 10,
-    gap: 5,
+    gap: width * 0.0125,
   },
   textSignOut: {
-    fontSize: 15,
+    fontSize: width * 0.0375,
     color: "#fff",
   },
   iconSignOut: {
-    fontSize: 20,
+    fontSize: width * 0.05,
     color: "#fff",
   },
 });

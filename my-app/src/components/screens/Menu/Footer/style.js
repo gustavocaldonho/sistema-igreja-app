@@ -1,23 +1,23 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingVertical: 15,
+    paddingVertical: height * 0.02,
     justifyContent: "center",
     alignItems: "center",
-
-    // borderWidth: 1,
   },
   logo: {
     width: 80,
     height: 70,
     alignSelf: "center",
-    marginBottom: 10,
+    marginBottom: height * 0.005,
   },
   footerTitle: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: width * 0.04,
     fontWeight: "600",
     textAlign: "center",
   },
@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 5,
+    gap: width * 0.015,
   },
   subTitle: {
     color: "#fff",
-    fontSize: 12,
+    fontSize: width * 0.03,
     fontStyle: "italic",
   },
   iconCopyright: {
-    fontSize: 10,
+    fontSize: width * 0.025,
   },
 });
 

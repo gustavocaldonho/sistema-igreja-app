@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   formContext: {
@@ -7,44 +9,43 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   boxScrollView: {
-    paddingHorizontal: 20,
+    paddingHorizontal: width * 0.05,
   },
   form: {
     width: "100%",
   },
   formLabel: {
-    color: "#000000",
-    fontWeight: "700",
     color: "#52637a",
-    fontSize: 18,
-    paddingLeft: 20,
+    fontWeight: "700",
+    fontSize: width * 0.045,
+    paddingLeft: width * 0.05,
   },
   button: {
     width: "80%",
     backgroundColor: "#339dd7",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 14,
-    paddingBottom: 14,
+    paddingTop: height * 0.02,
+    paddingBottom: height * 0.02,
     borderRadius: 50,
     marginLeft: "auto",
     marginRight: "auto",
   },
   textButton: {
-    fontSize: 20,
+    fontSize: width * 0.05,
     color: "#ffffff",
     fontWeight: "bold",
   },
   errorMessage: {
-    fontSize: 14,
+    fontSize: width * 0.035,
     color: "red",
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 25,
+    paddingTop: height * 0.001,
+    paddingBottom: height * 0.01,
+    paddingLeft: width * 0.06,
     fontWeight: "bold",
   },
   errorMessagePassword: {
-    paddingBottom: 10,
+    paddingBottom: height * 0.015,
   },
 });
 

@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   modalOverlay: {
@@ -8,10 +10,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalContainer: {
-    width: "80%",
+    width: width * 0.8,
     backgroundColor: "#fff",
-    paddingVertical: 40,
-    paddingHorizontal: 20,
+    paddingVertical: height * 0.05,
+    paddingHorizontal: width * 0.05,
     borderRadius: 15,
     gap: 10,
     alignItems: "center",
@@ -22,9 +24,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalText: {
-    fontSize: 20,
+    fontSize: width * 0.05,
     color: "#339dd7",
-    marginBottom: 20,
+    marginBottom: height * 0.025,
     textAlign: "center",
   },
   modalButtonContainer: {
@@ -34,9 +36,9 @@ const styles = StyleSheet.create({
   },
   modalButton: {
     flex: 1,
-    paddingVertical: 12,
-    marginHorizontal: 5,
-    backgroundColor: "#339dd7",
+    paddingVertical: height * 0.015,
+    marginHorizontal: width * 0.02,
+    backgroundColor: "#f094c0",
     borderRadius: 25,
     alignItems: "center",
     shadowColor: "#000",
@@ -47,10 +49,10 @@ const styles = StyleSheet.create({
   },
   modalButtonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: width * 0.04,
   },
   cancelButton: {
-    backgroundColor: "#f094c0",
+    backgroundColor: "#339dd7",
   },
   cancelButtonText: {
     color: "#fff",

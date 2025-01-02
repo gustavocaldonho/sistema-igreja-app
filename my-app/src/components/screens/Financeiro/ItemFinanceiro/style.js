@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -24,11 +26,11 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   indicatorStatus: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: "900",
   },
   title: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: "700",
     color: "#858585",
   },
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     height: "40%",
   },
   subtitle: {
-    fontSize: 15,
+    fontSize: width * 0.041,
     color: "#8F8F8F",
   },
   boxRigth: {
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
   value: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: "700",
   },
   positive: {
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   date: {
-    fontSize: 14,
+    fontSize: width * 0.033,
     fontWeight: "bold",
     color: "#858585",
   },

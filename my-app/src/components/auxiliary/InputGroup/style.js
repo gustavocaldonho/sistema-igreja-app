@@ -1,10 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
     display: "flex",
     width: "100%",
-    height: 50,
+    height: height * 0.065,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -14,7 +16,7 @@ const styles = StyleSheet.create({
   input: {
     width: "85%",
     height: "100%",
-    fontSize: 20,
+    fontSize: width * 0.05,
     paddingLeft: 20,
     marginRight: "auto",
     marginLeft: "auto",
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
     color: "#adadad",
   },
   iconMoney: {
-    fontSize: 20,
+    fontSize: width * 0.05,
   },
   boxIconRight: {
     paddingLeft: 0,

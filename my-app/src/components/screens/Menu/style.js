@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
@@ -12,13 +14,13 @@ const styles = StyleSheet.create({
   },
   textMenu: {
     color: "#f0f0f0",
-    fontSize: 26,
+    fontSize: width * 0.065,
     fontWeight: "600",
     textAlign: "center",
   },
   boxItemsMenu: {
-    paddingTop: 10,
-    paddingHorizontal: 10,
+    paddingTop: height * 0.015,
+    paddingHorizontal: width * 0.025,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",

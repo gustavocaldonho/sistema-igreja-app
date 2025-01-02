@@ -1,49 +1,50 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
-  // Os campos 'height' de 'boxBackgroundTop' e de 'boxFormLogin' estão dimensionados numericamente. Dessa forma, talvez não fiquem responsivos, isto é, em outros dispositivos a formatação fique incorreta.
   container: {
     flex: 1,
   },
   main: {
-    gap: 40,
-    paddingTop: 60,
+    gap: height * 0.05,
+    paddingTop: height * 0.08,
   },
   boxFormLogin: {
     width: "85%",
     borderRadius: 35,
     alignSelf: "center",
-    paddingTop: 20,
-    paddingBottom: 40,
+    paddingTop: height * 0.03,
+    paddingBottom: height * 0.05,
     backgroundColor: "#ffffff",
   },
   boxFormCadastro: {
     width: "85%",
-    minHeight: "61%",
+    minHeight: height * 0.6,
     borderRadius: 35,
-    paddingVertical: 30,
+    paddingVertical: height * 0.04,
     alignSelf: "center",
     backgroundColor: "#ffffff",
   },
   buttonBack: {
     position: "absolute",
-    top: 50,
+    top: height * 0.06,
     left: 0,
   },
   textButtonBack: {
-    padding: 20,
+    padding: width * 0.05,
   },
   sizeSmallHeader: {
-    fontSize: 37,
+    fontSize: width * 0.1,
   },
   boxShadow: {
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: height * 0.004,
     },
     shadowOpacity: 0.9,
-    shadowRadius: 3.05,
+    shadowRadius: height * 0.0035,
     elevation: 5,
   },
 });

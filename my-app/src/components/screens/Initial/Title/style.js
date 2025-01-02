@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   boxTitle: {
@@ -8,11 +10,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   logo: {
-    width: 140,
-    height: 120,
+    width: width * 0.35,
+    height: width * 0.35 * (120 / 140),
   },
   textTitle: {
-    fontSize: 24,
+    fontSize: width * 0.06,
     fontWeight: "bold",
     color: "#ffffff",
   },
