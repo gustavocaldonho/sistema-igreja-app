@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     gap: 12,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   titleBoxAdvidors: {
     alignSelf: "center",
