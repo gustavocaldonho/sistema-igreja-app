@@ -156,11 +156,11 @@ export default function PerfilCommunity({ navigation, route }) {
                 number={"R$ 0,00"}
                 label={"Dízimo"}
               />
-              <ItemHighlight
+              {/* <ItemHighlight
                 style={styles.boxShadow}
                 number={"R$ 0,00"}
                 label={"Caixa Mortuária"}
-              />
+              /> */}
             </View>
             <View style={[styles.boxInformations]}>
               <Text style={styles.titleBoxAdvidors}>MEMBROS DO CONSELHO</Text>
