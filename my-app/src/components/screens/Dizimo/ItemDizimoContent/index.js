@@ -3,7 +3,7 @@ import { View } from "react-native";
 import ItemDizimo from "../ItemDizimo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getPaymentsDizimo } from "../../../../services/payment_api";
-import { getExpiresDate } from "../functions";
+import { getExpiresDate, sortMonths } from "../functions";
 
 export default function ItemDizimoContent({
   setModalVisible,
@@ -19,7 +19,7 @@ export default function ItemDizimoContent({
       const date = new Date();
       const response = await getPaymentsDizimo(date.getFullYear(), token);
       if (response.status === 200) {
-        setDizimoList(response.data);
+        setDizimoList(sortMonths(response.data, 0));
       } else {
         console.log("Não retornou a lista de meses.");
       }

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text, Pressable } from "react-native";
 import styles from "./style";
 import ModalBase from "../../../../auxiliary/ModalBase";
+import { AuthContext } from "../../../../../contexts/auth";
 
 export default function ModalCompleteRegistry(props) {
+  const { setRegisteredUser } = useContext(AuthContext);
+
   return (
     <ModalBase>
       <Text style={styles.textTitle}>Cadastro Concluído!</Text>
@@ -20,11 +23,12 @@ export default function ModalCompleteRegistry(props) {
       <Pressable
         style={styles.button}
         onPress={() => {
+          setRegisteredUser({ cpf: props.cpf, password: props.password });
           props.setModalVisible(!props.modalVisible);
           props.setRegistryEntry(false);
         }}
       >
-        <Text style={styles.textButton}>OK</Text>
+        <Text style={styles.textButton}>Entrar no App</Text>
       </Pressable>
     </ModalBase>
   );

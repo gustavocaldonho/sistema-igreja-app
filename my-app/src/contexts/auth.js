@@ -8,6 +8,7 @@ import { getImageProfile } from "../components/auxiliary/ModalImage/functions";
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
+  const [registeredUser, setRegisteredUser] = useState({});
   const [registryEntry, setRegistryEntry] = useState(false);
   const [user, setUser] = useState({});
   const [imageProfile, setImageProfile] = useState("");
@@ -79,6 +80,8 @@ function AuthProvider({ children }) {
         setDatasUser,
         imageProfile,
         setImageProfile,
+        registeredUser,
+        setRegisteredUser,
       }}
     >
       {children}

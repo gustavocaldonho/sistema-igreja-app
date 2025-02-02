@@ -4,7 +4,11 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import { getPaymentsDizimo } from "../../../../services/payment_api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { translateMonth, getStatusIcon } from "../../Dizimo/functions";
+import {
+  translateMonth,
+  getStatusIcon,
+  sortMonths,
+} from "../../Dizimo/functions";
 import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 
 const DizimoContainer = ({ style, styleTitleBox }) => {
@@ -18,7 +22,7 @@ const DizimoContainer = ({ style, styleTitleBox }) => {
       const date = new Date();
       const response = await getPaymentsDizimo(date.getFullYear(), token);
       if (response.status === 200) {
-        setDizimoList(response.data);
+        setDizimoList(sortMonths(response.data));
       } else {
         console.log("Não retornou a lista de meses.");
       }

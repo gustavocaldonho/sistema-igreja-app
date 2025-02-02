@@ -26,7 +26,13 @@ export default function FormLogin() {
   const [isRecoveryModalVisible, setRecoveryModalVisible] = useState(false);
 
   const navigation = useNavigation();
-  const { signIn, setRegistryEntry } = useContext(AuthContext);
+  const {
+    signIn,
+    setRegistryEntry,
+    registryEntry,
+    registeredUser,
+    setRegisteredUser,
+  } = useContext(AuthContext);
   const { modalAlert } = useContext(ModalContext);
 
   async function login(data) {
@@ -53,6 +59,7 @@ export default function FormLogin() {
     } finally {
       setShowError(false);
       setVisibleSpinner(false);
+      setRegisteredUser({});
     }
   }
 
@@ -72,6 +79,16 @@ export default function FormLogin() {
     };
     makeLogin();
   }, []);
+
+  // Login automático feito logo após um usuário novo se cadastrar
+  useEffect(() => {
+    if (registeredUser.cpf !== undefined) {
+      login({
+        cpf: desformatCpf(registeredUser.cpf),
+        password: registeredUser.password,
+      });
+    }
+  }, [registryEntry]);
 
   return (
     <View style={styles.formContext}>
@@ -93,26 +110,17 @@ export default function FormLogin() {
           defaultValue={password}
           onChangeText={setPassword}
         />
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => setRecoveryModalVisible(true)}
           activeOpacity={0.4}
         >
           <Text style={styles.forgotPassword}>
             Esqueceu sua senha? Clique aqui.
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            // login({ cpf: "49403669012", password: "Te0101##" });
-            // login({ cpf: "14734570760", password: "Gu2405##" });
-            // login({ cpf: "99991581022", password: "Gi0401##" });
-            // login({ cpf: "53705211072", password: "Jo2908##" });
-            // login({ cpf: "76903821007", password: "Di1406##" });
-            // login({ cpf: "91314128078", password: "Ag1405##" });
-            // login({ cpf: "49824720090", password: "Hu3001##" });
-            // login({ cpf: "88448720059", password: "Ra0101##" });
-            // login({ cpf: "26536306058", password: "Fa0101##" });
             login({ cpf: desformatCpf(cpf), password });
           }}
         >

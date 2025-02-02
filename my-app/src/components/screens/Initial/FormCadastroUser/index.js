@@ -12,7 +12,6 @@ import {
 } from "react-native";
 import styles from "./style";
 import { AuthContext } from "../../../../contexts/auth";
-import { useNavigation } from "@react-navigation/native";
 import {
   checkCpf,
   checkPhone,
@@ -59,8 +58,9 @@ export default function FormCadastroUser({
     user ? user.password : ""
   );
   const [showErrors, setShowErrors] = useState(false);
+
   const { setDatasUser, setRegistryEntry } = useContext(AuthContext);
-  const navigation = useNavigation();
+
   const [patronList, setPatronList] = useState([]);
   const [visibleSpinner, setVisibleSpinner] = useState(false);
   const [visibleIndicator, setVisibleIndicator] = useState(false);

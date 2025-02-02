@@ -72,6 +72,31 @@ export function translateMonth(monthEnglish) {
       return "NOT MONTH";
   }
 }
+
+export function sortMonths(data, order = 1) {
+  const monthOrder = {
+    january: 1,
+    february: 2,
+    march: 3,
+    april: 4,
+    may: 5,
+    june: 6,
+    july: 7,
+    august: 8,
+    september: 9,
+    october: 10,
+    november: 11,
+    december: 12,
+  };
+
+  // 1: crescente, 0: decrescente
+  const orderFactor = order === 0 ? -1 : 1;
+
+  return data.sort(
+    (a, b) => (monthOrder[a.month] - monthOrder[b.month]) * orderFactor
+  );
+}
+
 // export function translateMonth(monthEnglish) {
 //   switch (monthEnglish) {
 //     case "01":
