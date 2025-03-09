@@ -11,7 +11,7 @@ import {
 } from "../../Dizimo/functions";
 import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 
-const DizimoContainer = ({ style, styleTitleBox }) => {
+const DizimoContainer = ({ userCpf, style, styleTitleBox }) => {
   const [dizimoList, setDizimoList] = useState([]);
   const [visibleIndicator, setVisibleIndicator] = useState(false);
 
@@ -20,7 +20,11 @@ const DizimoContainer = ({ style, styleTitleBox }) => {
       setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const date = new Date();
-      const response = await getPaymentsDizimo(date.getFullYear(), token);
+      const response = await getPaymentsDizimo(
+        userCpf,
+        date.getFullYear(),
+        token
+      );
       if (response.status === 200) {
         setDizimoList(sortMonths(response.data));
       } else {

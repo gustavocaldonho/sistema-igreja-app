@@ -4,7 +4,8 @@ import PageBase from "../PageBase";
 import ItemDizimoContent from "./ItemDizimoContent";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 
-export default function Dizimo({ navigation }) {
+export default function Dizimo({ navigation, route }) {
+  const { cpf } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
   const [itemClicked, setItemClicked] = useState("");
   const [visibleIndicator, setVisibleIndicator] = useState(false);
@@ -21,6 +22,7 @@ export default function Dizimo({ navigation }) {
         />
       ) : (
         <ItemDizimoContent
+          cpf={cpf}
           setModalVisible={setModalVisible}
           setItemClicked={setItemClicked}
           setVisibleIndicator={setVisibleIndicator}

@@ -28,7 +28,7 @@
     ],
     "android": {
       "package": "com.gcaldonho.myapp",
-      "versionCode": 9,
+      "versionCode": 10,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

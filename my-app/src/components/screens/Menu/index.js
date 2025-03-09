@@ -57,7 +57,11 @@ export default function Menu({ navigation }) {
             <ItemMenu
               screenName={"Dízimo"}
               icon={"heart"}
-              onPress={() => navigation.navigate("Dizimo")}
+              onPress={() =>
+                navigation.navigate("Dizimo", {
+                  cpf: user.cpf,
+                })
+              }
             />
 
             {user.position === "parish leader" ? (

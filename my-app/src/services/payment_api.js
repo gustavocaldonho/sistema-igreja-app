@@ -22,9 +22,9 @@ export const getCodePaymentDizimo = async (data, token) => {
   }
 };
 
-export const getPaymentsDizimo = async (year, token) => {
+export const getPaymentsDizimo = async (userCpf, year, token) => {
   try {
-    const response = await api.get(`/dizimo_payment/${year}`, {
+    const response = await api.get(`/dizimo_payment/${userCpf}/${year}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,

@@ -6,6 +6,7 @@ import { getPaymentsDizimo } from "../../../../services/payment_api";
 import { getExpiresDate, sortMonths } from "../functions";
 
 export default function ItemDizimoContent({
+  cpf,
   setModalVisible,
   setItemClicked,
   setVisibleIndicator,
@@ -17,7 +18,7 @@ export default function ItemDizimoContent({
       setVisibleIndicator(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const date = new Date();
-      const response = await getPaymentsDizimo(date.getFullYear(), token);
+      const response = await getPaymentsDizimo(cpf, date.getFullYear(), token);
       if (response.status === 200) {
         setDizimoList(sortMonths(response.data, 0));
       } else {

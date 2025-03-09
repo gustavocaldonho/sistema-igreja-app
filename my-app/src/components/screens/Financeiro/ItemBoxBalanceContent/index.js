@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import BoxBalance from "../BoxBalance";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 import { ModalContext } from "../../../../contexts/modalContext";
 import { AuthContext } from "../../../../contexts/auth";
 import { getResumeBalancesYearApi } from "../../../../services/financial_api";
@@ -16,11 +17,11 @@ export default function ItemBoxBalanceContent({
 }) {
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
-
   const [resumebalanceList, setResumeBalanceList] = useState([]);
 
   async function getResumeBalancesYear() {
     try {
+      setIndicatorVisible(true);
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await getResumeBalancesYearApi(
         user.community,
@@ -35,6 +36,8 @@ export default function ItemBoxBalanceContent({
       }
     } catch (error) {
       modalAlert("Ops!", error.message);
+    } finally {
+      setIndicatorVisible(false);
     }
   }
 
@@ -72,7 +75,9 @@ export default function ItemBoxBalanceContent({
             );
           }}
         />
-      ) : null}
+      ) : (
+        <LoadingIndicator />
+      )}
     </View>
   );
 }

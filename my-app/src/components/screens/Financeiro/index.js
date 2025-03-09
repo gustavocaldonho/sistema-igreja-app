@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Text, View, TouchableOpacity, TouchableHighlight } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,7 +12,6 @@ import ItemBoxBalanceContent from "./ItemBoxBalanceContent";
 import { ModalContext } from "../../../contexts/modalContext";
 import { getResumeBalanceMonthApi } from "../../../services/financial_api";
 import { AuthContext } from "../../../contexts/auth";
-import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import { formatValueFinancial } from "./functions";
 
 export default function Financeiro({}) {
@@ -22,7 +21,7 @@ export default function Financeiro({}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [indicatorVisible, setIndicatorVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState({
-    month: "december",
+    month: "january",
     year: "2025",
   });
   const [itemFinanceiroClicked, setItemFinanceiroClicked] = useState({});
@@ -66,19 +65,17 @@ export default function Financeiro({}) {
     }
   }
 
+  // O useEffect abaixo não será executado no primeiro carregamento da tela, só quando houver alteração em selectedOption ou modalVisible.
+  const isMounted = useRef(false);
   useEffect(() => {
-    getResumeBalanceMonth();
+    if (isMounted.current) {
+      getResumeBalanceMonth();
+    } else {
+      isMounted.current = true;
+    }
   }, [selectedOption, modalVisible]);
 
-  useEffect(() => {
-    setIndicatorVisible(true);
-  }, []);
-
   const renderContent = () => {
-    if (indicatorVisible) {
-      return <LoadingIndicator />;
-    }
-
     if (!showExtract) {
       return (
         <ItemBoxBalanceContent
@@ -137,10 +134,8 @@ export default function Financeiro({}) {
               style={styles.buttonFooter}
               activeOpacity={0.7}
               onPress={() => {
-                setIndicatorVisible(true);
                 setTimeout(() => {
                   setShowExtract(false);
-                  setIndicatorVisible(false);
                 }, 500);
               }}
             >

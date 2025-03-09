@@ -89,6 +89,7 @@ export default function PerfilUser({ navigation, route }) {
             />
 
             <DizimoContainer
+              userCpf={cpf}
               style={[styles.boxInformationsUser, styles.boxShadow]}
               styleTitleBox={styles.textTitleBox}
             />

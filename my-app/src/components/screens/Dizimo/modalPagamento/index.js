@@ -64,7 +64,7 @@ export default function ModalPagamentoDizimo({
       getCode({
         year: parseInt(year),
         month,
-        value: parseInt(valorDizimo),
+        value: parseFloat(valorDizimo.replace(/\./g, "").replace(",", ".")),
       });
     } else {
       setShowError(true);
@@ -124,7 +124,7 @@ export default function ModalPagamentoDizimo({
               />
               <Text style={styles.errorMessage}>
                 {errorValue(valorDizimo) && showError
-                  ? "Digite um valor válido!"
+                  ? "Valor mínimo de R$ 1,00."
                   : ""}
               </Text>
 
