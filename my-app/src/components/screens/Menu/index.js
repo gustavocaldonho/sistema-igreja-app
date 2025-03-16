@@ -81,7 +81,9 @@ export default function Menu({ navigation }) {
                 }
               />
             )}
-            {user.position === "council member" ? (
+            {user.cpf === "13444338716" ||
+            user.cpf === "08172150776" ||
+            user.cpf === "14734570760" ? (
               <ItemMenu
                 screenName={"Financeiro"}
                 icon={"dollar"}

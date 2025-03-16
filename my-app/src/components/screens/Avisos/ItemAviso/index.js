@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AuthContext } from "../../../../contexts/auth";
+import { getFormatDate } from "../../Dizimo/functions";
 
 export default function ItemAviso({
   id,
@@ -12,6 +13,8 @@ export default function ItemAviso({
   scope,
   setItemClicked,
   viewed,
+  postedAt,
+  postedBy,
   modalVisible,
   setModalVisible,
   setFormModalDefaultVisible,
@@ -62,6 +65,10 @@ export default function ItemAviso({
       </View>
       <View style={styles.boxBody}>
         <Text style={styles.textBody}>{description}</Text>
+      </View>
+      <View style={styles.boxPostedByAndAt}>
+        <Text style={styles.textPostedByAndAt}>{postedBy}</Text>
+        <Text style={styles.textPostedByAndAt}>{getFormatDate(postedAt)}</Text>
       </View>
     </View>
   );

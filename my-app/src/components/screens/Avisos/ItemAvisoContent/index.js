@@ -100,6 +100,8 @@ export default function ItemAvisoContent({
               title={item.title}
               description={item.description}
               scope={item.scope}
+              postedAt={item.posted_at}
+              postedBy={item.posted_by}
               viewed={false}
               setItemClicked={setItemClicked}
               modalVisible={modalVisible}

@@ -3,7 +3,7 @@ import { View } from "react-native";
 import ItemDizimo from "../ItemDizimo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getPaymentsDizimo } from "../../../../services/payment_api";
-import { getExpiresDate, sortMonths } from "../functions";
+import { sortMonths } from "../functions";
 
 export default function ItemDizimoContent({
   cpf,
@@ -41,7 +41,8 @@ export default function ItemDizimoContent({
           month={d.month}
           year={d.year}
           status={d.status}
-          expiresDate={getExpiresDate(d.payment ? d.payment.expiresDate : null)}
+          paidIn={d.payment ? d.payment.createdAt : null}
+          valuePaid={d.payment ? d.payment.value : null}
           setModalVisible={setModalVisible}
           setItemClicked={setItemClicked}
           key={`dizimo-item-${idx}`}

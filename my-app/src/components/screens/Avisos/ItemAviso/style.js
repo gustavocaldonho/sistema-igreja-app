@@ -3,7 +3,9 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   boxItem: {
     width: "100%",
-    padding: 15,
+    paddingTop: 15,
+    paddingHorizontal: 15,
+    paddingBottom: 10,
     borderRadius: 20,
     backgroundColor: "#fff",
     marginTop: 20,
@@ -38,6 +40,14 @@ const styles = StyleSheet.create({
   textBody: {
     fontSize: 17,
     color: "#339dd7",
+  },
+  boxPostedByAndAt: {
+    paddingTop: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  textPostedByAndAt: {
+    color: "#EE95C2",
   },
   titleNotDisplayed: {
     fontWeight: "bold",

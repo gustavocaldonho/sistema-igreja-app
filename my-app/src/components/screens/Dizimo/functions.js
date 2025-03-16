@@ -6,7 +6,7 @@ export function getYear(data) {
   return data.slice(0, 4);
 }
 
-export function getExpiresDate(data) {
+export function getFormatDate(data) {
   if (data === null) {
     return "(não informado)";
   }
@@ -14,6 +14,52 @@ export function getExpiresDate(data) {
   const month = data.slice(5, 7);
   const day = data.slice(8, 10);
   return `${day}/${month}/${year}`;
+}
+
+export function formatInReal(value) {
+  if (isNaN(value)) {
+    return "error";
+  }
+
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+}
+
+export function getExpiresDate(monthName) {
+  // Mapeia os nomes dos meses para os seus índices (0 para janeiro, 1 para fevereiro, etc.)
+  const months = [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ];
+
+  // Verifica se o mês fornecido é válido
+  const monthIndex = months.indexOf(monthName.toLowerCase());
+  if (monthIndex === -1) {
+    return "[error]";
+  }
+
+  // Cria uma data com o primeiro dia do próximo mês
+  const year = new Date().getFullYear(); // Pega o ano atual
+  const lastDay = new Date(year, monthIndex + 1, 0); // O dia 0 do próximo mês retorna o último dia do mês atual
+
+  // Formata a data como "dd/mm/yyyy"
+  const day = lastDay.getDate().toString().padStart(2, "0"); // Garante que o dia tenha 2 dígitos
+  const month = (lastDay.getMonth() + 1).toString().padStart(2, "0"); // Garante que o mês tenha 2 dígitos
+  const formattedDate = `${day}/${month}/${year}`;
+
+  return formattedDate;
 }
 
 export function getStatus(data) {

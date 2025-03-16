@@ -2,13 +2,21 @@ import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
-import { translateMonth, getStatus, getStatusIcon } from "../functions";
+import {
+  translateMonth,
+  getStatus,
+  getStatusIcon,
+  getFormatDate,
+  formatInReal,
+  getExpiresDate,
+} from "../functions";
 
 export default function ItemDizimo({
   month,
   year,
   status,
-  expiresDate,
+  paidIn,
+  valuePaid,
   setModalVisible,
   setItemClicked,
 }) {
@@ -38,10 +46,20 @@ export default function ItemDizimo({
       </View>
       <View style={styles.boxBottom}>
         <View style={styles.boxObs}>
-          <Text style={styles.textObs}>Disponível até {expiresDate}</Text>
+          {paidIn ? (
+            <Text style={styles.textObs}>Pago em {getFormatDate(paidIn)}</Text>
+          ) : (
+            <Text style={styles.textObs}>
+              Disponível até {getExpiresDate(month)}
+            </Text>
+          )}
         </View>
         <View style={styles.boxStatus}>
-          <Text style={styles.textStatus}>{getStatus(status)}</Text>
+          {paidIn ? (
+            <Text style={styles.textStatus}>{formatInReal(valuePaid)}</Text>
+          ) : (
+            <Text style={styles.textStatus}>{getStatus(status)}</Text>
+          )}
         </View>
       </View>
     </View>
