@@ -27,9 +27,6 @@
       ],
       "expo-font"
     ],
-    "experiments": {
-      "newArchEnabled": true
-    },
     "android": {
       "package": "com.gcaldonho.myapp",
       "versionCode": 11,
