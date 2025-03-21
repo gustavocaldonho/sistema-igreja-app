@@ -13,12 +13,14 @@ import { ModalContext } from "../../../contexts/modalContext";
 import { getResumeBalanceMonthApi } from "../../../services/financial_api";
 import { AuthContext } from "../../../contexts/auth";
 import { formatValueFinancial } from "./functions";
+import ModalCharts from "./ModalCharts";
 
 export default function Financeiro({}) {
   const { user } = useContext(AuthContext);
   const { modalAlert } = useContext(ModalContext);
   const [showExtract, setShowExtract] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalChartsVisible, setModalChartsVisible] = useState(false);
   const [indicatorVisible, setIndicatorVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState({
     month: "january",
@@ -156,22 +158,39 @@ export default function Financeiro({}) {
             </View>
           )}
 
-          <TouchableHighlight
-            style={styles.boxButtonAdd}
-            underlayColor={"#358DD4"}
-            onPress={() => {
-              setModalVisible(true);
-              setItemFinanceiroClicked({});
-            }}
-          >
-            <FontAwesome5 name="plus" style={styles.iconAdd} />
-          </TouchableHighlight>
+          <View style={styles.footerButtonsright}>
+            <TouchableHighlight
+              style={styles.boxButtonAdd}
+              underlayColor={"#358DD4"}
+              onPress={() => {
+                setModalChartsVisible(true);
+              }}
+            >
+              <FontAwesome5 name="chart-line" style={styles.iconChart} />
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              style={styles.boxButtonAdd}
+              underlayColor={"#358DD4"}
+              onPress={() => {
+                setModalVisible(true);
+                setItemFinanceiroClicked({});
+              }}
+            >
+              <FontAwesome5 name="plus" style={styles.iconAdd} />
+            </TouchableHighlight>
+          </View>
         </View>
 
         <ModalLancamento
           visible={modalVisible}
           onClose={() => setModalVisible(false)}
           itemClicked={itemFinanceiroClicked}
+        />
+
+        <ModalCharts
+          visible={modalChartsVisible}
+          onClose={() => setModalChartsVisible(false)}
         />
       </PageBase>
     </>

@@ -35,6 +35,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10,
   },
+  footerButtonsright: {
+    flexDirection: "row",
+    gap: 8,
+  },
   buttonFooter: {
     height: "90%",
     paddingHorizontal: 15,
@@ -60,6 +64,10 @@ const styles = StyleSheet.create({
   },
   iconAdd: {
     fontSize: width * 0.045,
+    color: "#fff",
+  },
+  iconChart: {
+    fontSize: width * 0.06,
     color: "#fff",
   },
   positive: {

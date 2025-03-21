@@ -74,6 +74,8 @@ export default function FormLogin() {
       const data = await AsyncStorage.getItem("Login");
       if (data !== null) {
         const parsedData = JSON.parse(data);
+        setCpf(parsedData.cpf);
+        setPassword(parsedData.password);
         login(parsedData);
       }
     };
