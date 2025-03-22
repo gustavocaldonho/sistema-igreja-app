@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import ItemAvisoContent from "./ItemAvisoContent";
 import ModalWarnings from "./ModalWarnings";
 import PageBase from "../PageBase";
@@ -14,25 +14,8 @@ export default function Avisos({ navigation }) {
   const [formModalDefaultVisible, setFormModalDefaultVisible] = useState(true);
   const [errorToast, setErrorToast] = useState(false);
   const [visibleIndicator, setVisibleIndicator] = useState(false);
+  const [usersViewList, setUsersViewList] = useState([]);
   const { user } = useContext(AuthContext);
-
-  const [peopleList, setPeopleList] = useState([
-    { cpf: "12345678909", name: "João", date: "12:47 - 22.03.25" },
-    { cpf: "12345678911", name: "Marcos", date: "12:47 - 22.03.25" },
-    { cpf: "14734570760", name: "Gustavo", date: "12:47 - 22.03.25" },
-    { cpf: "64390349618", name: "Fernanda", date: "12:47 - 22.03.25" },
-    { cpf: "60969897957", name: "Fernanda", date: "12:47 - 22.03.25" },
-    { cpf: "41694701571", name: "Lucas", date: "12:47 - 22.03.25" },
-    { cpf: "12620728215", name: "Maria", date: "12:47 - 22.03.25" },
-    { cpf: "34650688130", name: "Maria", date: "12:47 - 22.03.25" },
-    { cpf: "62012210414", name: "Lucas", date: "12:47 - 22.03.25" },
-    { cpf: "83140902963", name: "João", date: "12:47 - 22.03.25" },
-    { cpf: "58278885873", name: "Gustavo", date: "12:47 - 22.03.25" },
-    { cpf: "37753275248", name: "Maria", date: "12:47 - 22.03.25" },
-    { cpf: "33259178449", name: "Gustavo", date: "12:47 - 22.03.25" },
-    { cpf: "70250194325", name: "Beatriz", date: "12:47 - 22.03.25" },
-    { cpf: "17159054430", name: "Maria", date: "12:47 - 22.03.25" },
-  ]);
 
   function onPressButtonAdd() {
     setModalVisible(!modalVisible);
@@ -66,6 +49,7 @@ export default function Avisos({ navigation }) {
           setVisibleIndicator={setVisibleIndicator}
           visibleIndicator={visibleIndicator}
           setModalViewsVisible={setModalViewsVisible}
+          setUsersViewList={setUsersViewList}
         />
       )}
 
@@ -82,7 +66,7 @@ export default function Avisos({ navigation }) {
       <ModalViews
         visible={modalViewsVisible}
         setModalViewsVisible={setModalViewsVisible}
-        peopleList={peopleList}
+        usersViewList={usersViewList}
       />
     </PageBase>
   );

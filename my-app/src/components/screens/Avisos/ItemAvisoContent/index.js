@@ -20,6 +20,7 @@ export default function ItemAvisoContent({
   setVisibleIndicator,
   visibleIndicator,
   setModalViewsVisible,
+  setUsersViewList,
 }) {
   const [warningList, setWarningList] = useState([]);
   const [page, setPage] = useState(1); // Página inicial
@@ -41,7 +42,7 @@ export default function ItemAvisoContent({
       const response = await getTenWarnings(user.community, token, pageNumber); // Use o número da página passada como argumento
 
       // console.log("page: ", pageNumber);
-      // console.log(response);
+      // console.log(response.data);
 
       if (response.status === 200) {
         const newWarnings = response.data;
@@ -103,12 +104,13 @@ export default function ItemAvisoContent({
               scope={item.scope}
               postedAt={item.posted_at}
               postedBy={item.posted_by}
-              viewed={false}
+              views={item.views}
               setItemClicked={setItemClicked}
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               setFormModalDefaultVisible={setFormModalDefaultVisible}
               setModalViewsVisible={setModalViewsVisible}
+              setUsersViewList={setUsersViewList}
             />
           )}
           onEndReached={loadMoreWarnings} // Função chamada ao chegar no final

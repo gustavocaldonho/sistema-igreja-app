@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../../../../contexts/auth";
 import { getFormatDate } from "../../Dizimo/functions";
+import { viewWarning } from "../../../../services/warning_api";
 
 export default function ItemAviso({
   id,
@@ -11,23 +13,33 @@ export default function ItemAviso({
   description,
   scope,
   setItemClicked,
-  viewed,
+  views,
   postedAt,
   postedBy,
   modalVisible,
   setModalVisible,
   setFormModalDefaultVisible,
   setModalViewsVisible,
+  setUsersViewList,
 }) {
   const { user } = useContext(AuthContext);
 
-  const list = [
-    { cpf: "12345678909", name: "João" },
-    { cpf: "12345678911", name: "Marcos" },
-    { cpf: "14734570760", name: "Gustavo" },
-  ];
+  const hasNotViewed = !views.some((item) => item.name === user.name);
 
-  const hasNotViewed = !list.some((item) => item.cpf === user.cpf);
+  async function toViewWarning(id) {
+    try {
+      const token = await AsyncStorage.getItem("AccessToken");
+      const response = await viewWarning(id, token);
+    } catch (error) {
+      throw new Error("Não foi possível visulizar o aviso.");
+    }
+  }
+
+  useEffect(() => {
+    if (hasNotViewed) {
+      toViewWarning(id);
+    }
+  }, []);
 
   return (
     <View style={[styles.boxItem, hasNotViewed && styles.notRead]}>
@@ -78,7 +90,10 @@ export default function ItemAviso({
           <TouchableOpacity
             style={styles.innerBoxPostedAtAndAt}
             activeOpacity={0.7}
-            onPress={() => setModalViewsVisible(true)}
+            onPress={() => {
+              setModalViewsVisible(true);
+              setUsersViewList(views);
+            }}
           >
             <Text style={styles.textPostedByAndAt}>{postedBy}</Text>
             <Icon name="info-circle" style={styles.iconInfo} />

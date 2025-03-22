@@ -77,3 +77,17 @@ export const deleteWarning = async (id, token) => {
     return error;
   }
 };
+
+export const viewWarning = async (id, token) => {
+  try {
+    const response = await api.get(`/community/warning/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+};

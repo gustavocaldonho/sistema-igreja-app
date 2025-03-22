@@ -9,11 +9,12 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
+import { formatDateTime } from "./functions";
 
 export default function ModalViews({
   visible,
   setModalViewsVisible,
-  peopleList,
+  usersViewList,
 }) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(100)).current;
@@ -56,7 +57,7 @@ export default function ModalViews({
   const renderPersonItem = ({ item }) => (
     <View style={styles.boxPersonView}>
       <Text style={styles.personViewText}>{item.name}</Text>
-      <Text style={styles.personViewText}>{item.date}</Text>
+      <Text style={styles.personViewText}>{formatDateTime(item.date)}</Text>
     </View>
   );
 
@@ -89,9 +90,9 @@ export default function ModalViews({
 
           <View style={styles.listContent}>
             <FlatList
-              data={peopleList}
+              data={usersViewList.reverse()}
               renderItem={renderPersonItem}
-              keyExtractor={(item) => item.cpf}
+              keyExtractor={(item) => item.name}
               showsVerticalScrollIndicator={true}
             />
           </View>

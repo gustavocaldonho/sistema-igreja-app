@@ -41,8 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     borderBottomWidth: 1,
-    borderColor: "#E0E0E0",
-    borderStyle: "dotted",
+    borderColor: "#EBEBEB",
     paddingHorizontal: 8,
   },
   personViewText: {
