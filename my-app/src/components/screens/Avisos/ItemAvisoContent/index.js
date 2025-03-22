@@ -19,6 +19,7 @@ export default function ItemAvisoContent({
   setFormModalDefaultVisible,
   setVisibleIndicator,
   visibleIndicator,
+  setModalViewsVisible,
 }) {
   const [warningList, setWarningList] = useState([]);
   const [page, setPage] = useState(1); // Página inicial
@@ -107,6 +108,7 @@ export default function ItemAvisoContent({
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               setFormModalDefaultVisible={setFormModalDefaultVisible}
+              setModalViewsVisible={setModalViewsVisible}
             />
           )}
           onEndReached={loadMoreWarnings} // Função chamada ao chegar no final

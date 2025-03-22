@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
   boxTitle: {
     width: "80%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    alignItems: "flex-start",
+    gap: 10,
   },
   textTitle: {
     fontSize: 20,
@@ -49,12 +50,26 @@ const styles = StyleSheet.create({
   textPostedByAndAt: {
     color: "#EE95C2",
   },
+  innerBoxPostedAtAndAt: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
   titleNotDisplayed: {
     fontWeight: "bold",
   },
   notRead: {
     borderWidth: 3,
     borderColor: "#f094c0",
+  },
+  iconNotRead: {
+    fontSize: 15,
+    paddingTop: 5,
+    color: "red",
+  },
+  iconInfo: {
+    fontSize: 15,
+    color: "#f094c0",
   },
   iconNotDisplayed: {
     color: "#f094c0",

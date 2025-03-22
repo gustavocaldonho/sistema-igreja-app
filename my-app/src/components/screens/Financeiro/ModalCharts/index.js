@@ -85,7 +85,7 @@ export default function ModalCharts({ visible, onClose }) {
         </View>
 
         <ScrollView style={styles.content}>
-          <PieChart
+          {/* <PieChart
             data={data}
             width={screenWidth - 20}
             height={220}
@@ -95,7 +95,7 @@ export default function ModalCharts({ visible, onClose }) {
             paddingLeft={15}
             center={[10, 50]}
             absolute
-          />
+          /> */}
         </ScrollView>
       </View>
     </Modal>

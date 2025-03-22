@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import styles from "./style";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { AuthContext } from "../../../../contexts/auth";
 import { getFormatDate } from "../../Dizimo/functions";
 
@@ -18,21 +17,29 @@ export default function ItemAviso({
   modalVisible,
   setModalVisible,
   setFormModalDefaultVisible,
+  setModalViewsVisible,
 }) {
   const { user } = useContext(AuthContext);
 
+  const list = [
+    { cpf: "12345678909", name: "João" },
+    { cpf: "12345678911", name: "Marcos" },
+    { cpf: "14734570760", name: "Gustavo" },
+  ];
+
+  const hasNotViewed = !list.some((item) => item.cpf === user.cpf);
+
   return (
-    // <View style={[styles.boxItem, styles.notRead]}>
-    <View style={[styles.boxItem]}>
+    <View style={[styles.boxItem, hasNotViewed && styles.notRead]}>
       <View style={styles.boxTop}>
         <View style={styles.boxTitle}>
+          {hasNotViewed && <Icon name="circle" style={styles.iconNotRead} />}
           <Text style={[styles.textTitle, styles.titleNotDisplayed]}>
-            {title}
-            {scope !== "private" && scope !== false ? " (Comunidade)" : ""}
+            {title} {scope && scope !== "private" ? " (Comunidade)" : ""}
           </Text>
-          {viewed ? <Icon name="circle" style={styles.iconNotDisplayed} /> : ""}
         </View>
-        {user.position !== "user" ? (
+
+        {user.position !== "user" && (
           <View style={styles.boxIcons}>
             <TouchableOpacity
               onPress={() => {
@@ -59,16 +66,31 @@ export default function ItemAviso({
               />
             </TouchableOpacity>
           </View>
-        ) : (
-          ""
         )}
       </View>
+
       <View style={styles.boxBody}>
         <Text style={styles.textBody}>{description}</Text>
       </View>
+
       <View style={styles.boxPostedByAndAt}>
-        <Text style={styles.textPostedByAndAt}>{postedBy}</Text>
-        <Text style={styles.textPostedByAndAt}>{getFormatDate(postedAt)}</Text>
+        {user.position === "council member" ? (
+          <TouchableOpacity
+            style={styles.innerBoxPostedAtAndAt}
+            activeOpacity={0.7}
+            onPress={() => setModalViewsVisible(true)}
+          >
+            <Text style={styles.textPostedByAndAt}>{postedBy}</Text>
+            <Icon name="info-circle" style={styles.iconInfo} />
+          </TouchableOpacity>
+        ) : (
+          <Text style={styles.textPostedByAndAt}>{postedBy}</Text>
+        )}
+        <View style={styles.innerBoxPostedAtAndAt}>
+          <Text style={styles.textPostedByAndAt}>
+            {getFormatDate(postedAt)}
+          </Text>
+        </View>
       </View>
     </View>
   );
