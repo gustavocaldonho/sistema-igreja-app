@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from "./style";
-import { PieChart } from "react-native-chart-kit";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -84,19 +83,7 @@ export default function ModalCharts({ visible, onClose }) {
           <Text style={styles.title}>Gráficos</Text>
         </View>
 
-        <ScrollView style={styles.content}>
-          {/* <PieChart
-            data={data}
-            width={screenWidth - 20}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="population"
-            backgroundColor="transparent"
-            paddingLeft={15}
-            center={[10, 50]}
-            absolute
-          /> */}
-        </ScrollView>
+        <ScrollView style={styles.content}></ScrollView>
       </View>
     </Modal>
   );
