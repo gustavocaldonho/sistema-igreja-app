@@ -10,59 +10,21 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from "./style";
+import {
+  BarChart,
+  LineChart,
+  PieChart,
+  PopulationPyramid,
+  RadarChart,
+} from "react-native-gifted-charts";
+
+// import Svg, { Circle, Rect } from "react-native-svg";
 
 const screenWidth = Dimensions.get("window").width;
 
+const data = [{ value: 50 }, { value: 80 }, { value: 90 }, { value: 70 }];
+
 export default function ModalCharts({ visible, onClose }) {
-  const chartConfig = {
-    backgroundGradientFrom: "#1E2923",
-    backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: "#08130D",
-    backgroundGradientToOpacity: 0.5,
-    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    strokeWidth: 2,
-    barPercentage: 0.5,
-    useShadowColorFromDataset: false,
-  };
-
-  const data = [
-    {
-      name: "Seoul",
-      population: 21500000,
-      color: "rgba(131, 167, 234, 1)",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15,
-    },
-    {
-      name: "Toronto",
-      population: 2800000,
-      color: "#F00",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15,
-    },
-    {
-      name: "Beijing",
-      population: 527612,
-      color: "red",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15,
-    },
-    {
-      name: "New York",
-      population: 8538000,
-      color: "#ffffff",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15,
-    },
-    {
-      name: "Moscow",
-      population: 11920000,
-      color: "rgb(0, 0, 255)",
-      legendFontColor: "#7F7F7F",
-      legendFontSize: 15,
-    },
-  ];
-
   return (
     <Modal
       visible={visible}
@@ -83,7 +45,29 @@ export default function ModalCharts({ visible, onClose }) {
           <Text style={styles.title}>Gráficos</Text>
         </View>
 
-        <ScrollView style={styles.content}></ScrollView>
+        <ScrollView style={styles.content}>
+          <BarChart data={data} />
+          <PieChart data={data} />
+          {/* <Svg height="50%" width="50%" viewBox="0 0 100 100">
+            <Circle
+              cx="50"
+              cy="50"
+              r="45"
+              stroke="blue"
+              strokeWidth="2.5"
+              fill="green"
+            />
+            <Rect
+              x="15"
+              y="15"
+              width="70"
+              height="70"
+              stroke="red"
+              strokeWidth="2"
+              fill="yellow"
+            />
+          </Svg> */}
+        </ScrollView>
       </View>
     </Modal>
   );
