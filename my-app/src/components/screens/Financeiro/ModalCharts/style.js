@@ -31,4 +31,36 @@ export const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 25,
   },
+  boxTitleMonth: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: "auto",
+    padding: 10,
+    borderRadius: 15,
+    backgroundColor: "#ccc",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    width: "40%",
+  },
+  titleMonth: {
+    fontSize: 20,
+    textTransform: "uppercase",
+  },
+  boxChart: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 20,
+    gap: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+  },
+  titleChart: {
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  textNotDatas: {
+    fontSize: 15,
+    textAlign: "center",
+    marginTop: 20,
+  },
 });

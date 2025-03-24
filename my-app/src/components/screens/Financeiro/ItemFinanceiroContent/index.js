@@ -12,10 +12,11 @@ export default function ItemFinanceiroContent({
   modalVisible,
   setModalVisible,
   setItemFinanceiroClicked,
+  balanceList,
+  setBalanceList,
 }) {
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
-  const [balanceList, setBalanceList] = useState([]);
   const [visibleMsgListEmpty, setVisibleMsgListEmpty] = useState(false);
 
   async function getBalancesList() {

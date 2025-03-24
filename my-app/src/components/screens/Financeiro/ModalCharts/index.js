@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,25 +6,120 @@ import {
   TouchableOpacity,
   StatusBar,
   ScrollView,
-  Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from "./style";
-import {
-  BarChart,
-  LineChart,
-  PieChart,
-  PopulationPyramid,
-  RadarChart,
-} from "react-native-gifted-charts";
+import { BarChart, PieChart } from "react-native-gifted-charts";
+import Legend from "./Legend";
 
-// import Svg, { Circle, Rect } from "react-native-svg";
+const COLORS = [
+  "#FF9800",
+  "#2196F3",
+  "#F44336",
+  "#9C27B0",
+  "#E91E63",
+  "#673AB7",
+  "#00BCD4",
+  "#FF5722",
+  "#795548",
+  "#607D8B",
+  "#3F51B5",
+  "#9E9E9E",
+  "#CDDC39",
+  "#8BC34A",
+  "#FFC107",
+  "#FFEB3B",
+  "#00FF00",
+  "#9C27B0",
+  "#3F51B5",
+  "#FF4081",
+  "#388E3C",
+  "#8E24AA",
+  "#1976D2",
+  "#F57C00",
+  "#4CAF50",
+];
 
-const screenWidth = Dimensions.get("window").width;
+export default function ModalCharts({
+  visible,
+  onClose,
+  balanceList,
+  month,
+  showExtract,
+}) {
+  const [dataChartOut, setDataChartOut] = useState([]);
+  const [dataChartEntry, setDataChartEntry] = useState([]);
+  const [totalData, setTotalData] = useState([]);
 
-const data = [{ value: 50 }, { value: 80 }, { value: 90 }, { value: 70 }];
+  const getChartEntryAndOut = (balanceList) => {
+    const totalEntry = balanceList
+      .filter((item) => item.type === "input")
+      .reduce((sum, item) => sum + item.value, 0);
+    const totalOut = balanceList
+      .filter((item) => item.type === "output")
+      .reduce((sum, item) => sum + item.value, 0);
 
-export default function ModalCharts({ visible, onClose }) {
+    return [totalEntry, totalOut];
+  };
+
+  const getChartEntry = (balanceList, totalEntry) => {
+    const entryData = balanceList
+      .filter((item) => item.type === "input")
+      .map((item, index) => ({
+        value: Number(item.value),
+        text: `${((item.value / totalEntry) * 100).toFixed(0)}%`,
+        caption: item.title.trim(),
+        color: getColor(index),
+      }))
+      .sort((a, b) => b.value - a.value);
+    return entryData;
+  };
+
+  const getChartOut = (balanceList, totalOut) => {
+    const outData = balanceList
+      .filter((item) => item.type === "output")
+      .map((item, index) => ({
+        value: Number(item.value),
+        text: `${((item.value / totalOut) * 100).toFixed(0)}%`,
+        caption: item.title.trim(),
+        color: getColor(index),
+      }))
+      .sort((a, b) => b.value - a.value);
+    return outData;
+  };
+
+  // Função para obter cores de forma cíclica
+  const getColor = (index) => COLORS[index % COLORS.length];
+
+  useEffect(() => {
+    if (balanceList && balanceList.length > 0) {
+      // Filtra entradas e saídas separadamente
+      const totalEntry = getChartEntryAndOut(balanceList)[0];
+      const totalOut = getChartEntryAndOut(balanceList)[1];
+
+      // Geração dos dados do gráfico de entradas
+      const entryData = getChartEntry(balanceList, getColor, totalEntry);
+
+      // Geração dos dados do gráfico de saídas
+      const outData = getChartOut(balanceList, getColor, totalOut);
+
+      setDataChartEntry(entryData);
+      setDataChartOut(outData);
+      setTotalData([
+        {
+          value: totalEntry,
+          label: "Entradas",
+          frontColor: "#56B35B",
+        },
+        {
+          value: totalOut,
+          label: "Saídas",
+          frontColor: "#D93030",
+        },
+      ]);
+    }
+  }, [balanceList]);
+
   return (
     <Modal
       visible={visible}
@@ -46,27 +141,59 @@ export default function ModalCharts({ visible, onClose }) {
         </View>
 
         <ScrollView style={styles.content}>
-          <BarChart data={data} />
-          <PieChart data={data} />
-          {/* <Svg height="50%" width="50%" viewBox="0 0 100 100">
-            <Circle
-              cx="50"
-              cy="50"
-              r="45"
-              stroke="blue"
-              strokeWidth="2.5"
-              fill="green"
-            />
-            <Rect
-              x="15"
-              y="15"
-              width="70"
-              height="70"
-              stroke="red"
-              strokeWidth="2"
-              fill="yellow"
-            />
-          </Svg> */}
+          <View style={styles.boxTitleMonth}>
+            <Text style={styles.titleMonth}>{month}</Text>
+          </View>
+          {balanceList.length !== 0 ? (
+            <View>
+              {/* Gráfico de Controle de Caixa */}
+              <View style={styles.boxChart}>
+                <Text style={styles.titleChart}>Controle de Caixa</Text>
+                <BarChart
+                  data={totalData}
+                  showText={true}
+                  textColor="#fff"
+                  barWidth={60}
+                  showYAxisIndices
+                  showFractionalValue
+                  noOfSections={6}
+                  initialSpacing={60}
+                  spacing={40}
+                  barBorderRadius={10}
+                  yAxisThickness={0}
+                  xAxisThickness={0}
+                  isAnimated
+                  autoCenterTooltip={true}
+                />
+              </View>
+
+              {/* Gráfico de Entradas */}
+              <View style={styles.boxChart}>
+                <Text style={styles.titleChart}>Entradas</Text>
+                <PieChart
+                  data={dataChartEntry}
+                  showTooltip={true}
+                  textColor="#fff"
+                  donut
+                />
+                <Legend data={dataChartEntry} />
+              </View>
+
+              {/* Gráfico de Saídas */}
+              <View style={styles.boxChart}>
+                <Text style={styles.titleChart}>Despesas</Text>
+                <PieChart
+                  data={dataChartOut}
+                  showTooltip={true}
+                  textColor="#fff"
+                  donut
+                />
+                <Legend data={dataChartOut} />
+              </View>
+            </View>
+          ) : (
+            <Text style={styles.textNotDatas}>Sem dados para exibir</Text>
+          )}
         </ScrollView>
       </View>
     </Modal>

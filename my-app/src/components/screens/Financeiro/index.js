@@ -14,6 +14,7 @@ import { getResumeBalanceMonthApi } from "../../../services/financial_api";
 import { AuthContext } from "../../../contexts/auth";
 import { formatValueFinancial } from "./functions";
 import ModalCharts from "./ModalCharts";
+import { translateMonth } from "./ItemBoxBalanceContent/functions";
 
 export default function Financeiro({}) {
   const { user } = useContext(AuthContext);
@@ -43,6 +44,7 @@ export default function Financeiro({}) {
     { id: 1, label: "JANEIRO", value: "january", year: "2025" },
   ]);
   const [balanceTotal, setBalanceTotal] = useState(0);
+  const [balanceList, setBalanceList] = useState([]); //lançamento do extrato
 
   async function getResumeBalanceMonth() {
     try {
@@ -67,7 +69,6 @@ export default function Financeiro({}) {
     }
   }
 
-  // O useEffect abaixo não será executado no primeiro carregamento da tela, só quando houver alteração em selectedOption ou modalVisible.
   const isMounted = useRef(false);
   useEffect(() => {
     if (isMounted.current) {
@@ -107,6 +108,8 @@ export default function Financeiro({}) {
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               setItemFinanceiroClicked={setItemFinanceiroClicked}
+              balanceList={balanceList}
+              setBalanceList={setBalanceList}
             />
           </View>
         </View>
@@ -191,6 +194,9 @@ export default function Financeiro({}) {
         <ModalCharts
           visible={modalChartsVisible}
           onClose={() => setModalChartsVisible(false)}
+          balanceList={balanceList}
+          month={translateMonth(selectedOption.month)}
+          showExtract={showExtract}
         />
       </PageBase>
     </>
