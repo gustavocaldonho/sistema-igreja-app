@@ -60,8 +60,6 @@ export const getMe = async (token) => {
 };
 
 export const updateUser = async (data, token) => {
-  console.log("data: ", data);
-
   try {
     const response = await api.put(
       "/me",

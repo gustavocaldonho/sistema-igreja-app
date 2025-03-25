@@ -27,7 +27,7 @@ function AuthProvider({ children }) {
         // position: "council member",
         password: password,
       });
-      console.log("setDatasUser (auth):", response.data);
+      // console.log("setDatasUser (auth):", response.data);
     } catch (error) {
       console.log(error);
     }

@@ -8,8 +8,8 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#ccc"
+      "resizeMode": "contain",
+      "backgroundColor": "#fffffff"
     },
     "notification": {
       "icon": "./assets/icon-notification.png"

@@ -15,7 +15,7 @@ import Legend from "./Legend";
 const COLORS = [
   "#FF9800",
   "#2196F3",
-  "#F44336",
+  "#5656A2",
   "#9C27B0",
   "#E91E63",
   "#673AB7",
@@ -186,12 +186,7 @@ export default function ModalCharts({
   }, [visible]);
 
   return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      transparent={false}
-      presentationStyle="fullScreen"
-    >
+    <Modal visible={visible} animationType="slide" transparent={true}>
       <StatusBar
         translucent
         barStyle="light-content"

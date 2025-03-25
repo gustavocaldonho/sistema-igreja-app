@@ -163,7 +163,7 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
   }, [visible]);
 
   return (
-    <Modal visible={visible} animationType="slide" transparent={false}>
+    <Modal visible={visible} animationType="slide" transparent={true}>
       <StatusBar
         translucent
         barStyle="light-content"
