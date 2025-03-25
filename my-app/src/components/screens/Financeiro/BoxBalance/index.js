@@ -27,7 +27,9 @@ export default function BoxBalance({
             setShowExtract(true);
             setSelectedMonth(valueMonth);
             setIndicatorVisible(false);
-          }, 100);
+
+            // console.log("month (boxBalance): ", valueMonth);
+          }, 500);
         }}
         disabled={disableOpacity}
       >

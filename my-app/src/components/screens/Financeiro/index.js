@@ -73,6 +73,8 @@ export default function Financeiro({}) {
 
   const isMounted = useRef(false);
   useEffect(() => {
+    // console.log("month (Financeiro - index): ", selectedOption.month);
+
     if (isMounted.current) {
       getResumeBalanceMonth();
     } else {
