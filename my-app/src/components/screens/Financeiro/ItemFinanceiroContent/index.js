@@ -12,8 +12,8 @@ export default function ItemFinanceiroContent({
   modalVisible,
   setModalVisible,
   setItemFinanceiroClicked,
-  balanceList,
-  setBalanceList,
+  balanceMonthList,
+  setBalanceMonthList,
 }) {
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
@@ -30,7 +30,7 @@ export default function ItemFinanceiroContent({
       );
       if (response.status === 200) {
         const finances = response.data.finances || [];
-        setBalanceList(finances);
+        setBalanceMonthList(finances);
         setVisibleMsgListEmpty(finances.length === 0);
       } else {
         throw new Error("Não foi possível carregar o extrato mensal.");
@@ -46,9 +46,9 @@ export default function ItemFinanceiroContent({
 
   return (
     <View>
-      {balanceList.length !== 0 ? (
+      {balanceMonthList.length !== 0 ? (
         <FlatList
-          data={balanceList}
+          data={balanceMonthList}
           keyExtractor={(item, index) => `financial-item-${index}`}
           renderItem={({ item, index }) => (
             <ItemFinanceiro

@@ -14,10 +14,11 @@ export default function ItemBoxBalanceContent({
   setSelectedMonth,
   setIndicatorVisible,
   setBalanceTotal,
+  resumebalanceYearList,
+  setResumeBalanceYearList,
 }) {
   const { modalAlert } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
-  const [resumebalanceList, setResumeBalanceList] = useState([]);
 
   async function getResumeBalancesYear() {
     try {
@@ -30,7 +31,9 @@ export default function ItemBoxBalanceContent({
       );
       if (response.status === 200) {
         calculateTotalRecipe(response.data);
-        setResumeBalanceList(Object.entries(response.data));
+        setResumeBalanceYearList(Object.entries(response.data));
+
+        // console.log("response.data", response.data);
       } else {
         throw new Error("Não foi possível carregar o resumo financeiro anual.");
       }
@@ -54,10 +57,10 @@ export default function ItemBoxBalanceContent({
 
   return (
     <View>
-      {resumebalanceList.length !== 0 ? (
+      {resumebalanceYearList.length !== 0 ? (
         <FlatList
           style={styles.container}
-          data={resumebalanceList}
+          data={resumebalanceYearList}
           keyExtractor={([month], index) => `balance-item-${month}-${index}`}
           renderItem={({ item: [month, data], index }) => {
             return (

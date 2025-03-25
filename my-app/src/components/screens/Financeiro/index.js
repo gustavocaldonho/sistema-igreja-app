@@ -44,8 +44,10 @@ export default function Financeiro({}) {
     { id: 1, label: "JANEIRO", value: "january", year: "2025" },
   ]);
   const [balanceTotal, setBalanceTotal] = useState(0);
-  const [balanceList, setBalanceList] = useState([]); //lançamento do extrato
+  const [balanceMonthList, setBalanceMonthList] = useState([]); //lançamentos do extrato
+  const [resumebalanceYearList, setResumeBalanceYearList] = useState([]); //resumo anual
 
+  // Para setar os dados no BoxBalance do mês selecionado
   async function getResumeBalanceMonth() {
     try {
       const token = await AsyncStorage.getItem("AccessToken");
@@ -89,6 +91,8 @@ export default function Financeiro({}) {
           setSelectedMonth={(month) =>
             setSelectedOption((prev) => ({ ...prev, month }))
           }
+          resumebalanceYearList={resumebalanceYearList}
+          setResumeBalanceYearList={setResumeBalanceYearList}
         />
       );
     }
@@ -108,8 +112,8 @@ export default function Financeiro({}) {
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               setItemFinanceiroClicked={setItemFinanceiroClicked}
-              balanceList={balanceList}
-              setBalanceList={setBalanceList}
+              balanceMonthList={balanceMonthList}
+              setBalanceMonthList={setBalanceMonthList}
             />
           </View>
         </View>
@@ -194,9 +198,11 @@ export default function Financeiro({}) {
         <ModalCharts
           visible={modalChartsVisible}
           onClose={() => setModalChartsVisible(false)}
-          balanceList={balanceList}
+          balanceMonthList={balanceMonthList}
           month={translateMonth(selectedOption.month)}
+          year={selectedOption.year}
           showExtract={showExtract}
+          resumeBalanceYearList={resumebalanceYearList}
         />
       </PageBase>
     </>
