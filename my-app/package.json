@@ -49,5 +49,21 @@
   "devDependencies": {
     "@babel/core": "^7.25.7"
   },
-  "private": true
+  "private": true,
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false,
+        "exclude": [
+          "@react-native-vector-icons/fontawesome5",
+          "buffer",
+          "react-native-mask-input",
+          "react-native-select-dropdown",
+          "react-native-loading-spinner-overlay",
+          "@react-native-community/blur",
+          "@react-native-community/checkbox"
+        ]
+      }
+    }
+  }
 }
