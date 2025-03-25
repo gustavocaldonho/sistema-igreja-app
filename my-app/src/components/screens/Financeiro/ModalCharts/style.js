@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const heightScreen = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
   modalContainer: {
@@ -57,10 +59,17 @@ export const styles = StyleSheet.create({
   titleChart: {
     fontSize: 22,
     fontWeight: "bold",
+    alignSelf: "center",
+  },
+  titleChartResumeYear: {
+    marginTop: 10,
   },
   textNotDatas: {
     fontSize: 15,
     textAlign: "center",
     marginTop: 20,
+  },
+  boxChartResumeYear: {
+    height: heightScreen * 0.9,
   },
 });

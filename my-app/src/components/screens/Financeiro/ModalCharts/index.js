@@ -151,6 +151,15 @@ export default function ModalCharts({
     return maxValue;
   };
 
+  const getYAxisLabelTexts = (maxValue) => {
+    const stepValue = maxValue / 5;
+    const yAxisLabelTexts = [];
+    for (let i = 0; i <= 5; i++) {
+      yAxisLabelTexts.push(((stepValue * i) / 1000).toFixed(0) + "k");
+    }
+    return yAxisLabelTexts;
+  };
+
   // Função para obter cores de forma cíclica
   const getColor = (index) => COLORS[index % COLORS.length];
 
@@ -216,9 +225,7 @@ export default function ModalCharts({
                       showText={true}
                       textColor="#fff"
                       barWidth={60}
-                      showYAxisIndices
-                      showFractionalValue
-                      noOfSections={6}
+                      noOfSections={5}
                       initialSpacing={60}
                       spacing={40}
                       barBorderRadius={10}
@@ -262,22 +269,26 @@ export default function ModalCharts({
               )}
             </View>
           ) : (
-            <View>
-              <View style={styles.boxTitleMonth}>
-                <Text style={styles.titleMonth}>{year}</Text>
-              </View>
+            <ScrollView style={styles.boxChartResumeYear}>
+              <Text style={[styles.titleChart, styles.titleChartResumeYear]}>
+                Entradas & Saídas ({year})
+              </Text>
 
               {/* Gráfico Resumo Anual */}
               <BarChart
                 data={resumeYearData}
-                barWidth={16}
+                barWidth={15}
                 initialSpacing={10}
                 spacing={14}
                 barBorderRadius={4}
                 yAxisThickness={0}
                 xAxisType={"dashed"}
                 xAxisColor={"lightgray"}
-                yAxisTextStyle={{ color: "lightgray" }}
+                yAxisTextStyle={{
+                  color: "gray",
+                  fontSize: 15,
+                }}
+                yAxisLabelTexts={getYAxisLabelTexts(maxValueOnResumeYearData)}
                 stepValue={maxValueOnResumeYearData / 5}
                 maxValue={maxValueOnResumeYearData}
                 noOfSections={10}
@@ -288,7 +299,7 @@ export default function ModalCharts({
                 horizontal
                 isAnimated
               />
-            </View>
+            </ScrollView>
           )}
         </ScrollView>
       </View>
