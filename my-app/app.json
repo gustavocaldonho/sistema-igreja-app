@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#fffffff"
+      "backgroundColor": "#ccc"
     },
     "notification": {
       "icon": "./assets/icon-notification.png"
@@ -22,10 +22,9 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
+          "photosPermission": "Permite o acesso às suas fotos para compartilhamento."
         }
-      ],
-      "expo-font"
+      ]
     ],
     "android": {
       "package": "com.gcaldonho.myapp",
