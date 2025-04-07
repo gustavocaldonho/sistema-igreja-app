@@ -24,7 +24,8 @@
         {
           "photosPermission": "Permite o acesso às suas fotos para compartilhamento."
         }
-      ]
+      ],
+      "expo-font"
     ],
     "android": {
       "package": "com.gcaldonho.myapp",
