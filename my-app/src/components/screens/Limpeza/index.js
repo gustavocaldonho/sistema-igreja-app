@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View, Text } from "react-native";
 import PageBase from "../PageBase";
 import ItemCleaning from "./ItemCleaning";
 import BoxFilters from "./BoxFilters";
@@ -30,35 +30,48 @@ export default function Limpeza({ navigation }) {
 
   return (
     <PageBase title={"Limpeza"}>
-      {/* {visibleIndicator ? <LoadingIndicator /> : ""}
+      <View style={styles.content}>
+        {/* {visibleIndicator ? <LoadingIndicator /> : ""}
       <ItemUserContent
         navigation={navigation}
         setVisibleIndicator={setVisibleIndicator}
       /> */}
 
-      <BoxFilters
-        options={monthList}
-        selectedValue={selectedOption}
-        onValueChange={(value) => setSelectedOption(value)}
-      />
+        <BoxFilters
+          options={monthList}
+          selectedValue={selectedOption}
+          onValueChange={(value) => setSelectedOption(value)}
+        />
 
-      <ScrollView style={styles.main}>
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-        <ItemCleaning />
-      </ScrollView>
+        <ScrollView style={styles.main}>
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+          <ItemCleaning />
+        </ScrollView>
+
+        <View style={styles.footer}>
+          <View style={styles.boxValueTotal}>
+            <Text style={styles.textValueTotal}>Total: </Text>
+            <Text style={styles.textValueTotal}>R$ 1.860,00</Text>
+          </View>
+          <View style={styles.boxValueTotal}>
+            <Text style={styles.textValueTotal}>Pagos: </Text>
+            <Text style={styles.textValueTotal}>20</Text>
+          </View>
+        </View>
+      </View>
     </PageBase>
   );
 }
