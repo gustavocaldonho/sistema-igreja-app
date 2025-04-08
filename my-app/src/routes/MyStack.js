@@ -11,6 +11,7 @@ import Users from "../components/screens/Users";
 import PerfilUser from "../components/screens/PerfilUser";
 import PerfilCommunity from "../components/screens/PerfilCommunity";
 import Financeiro from "../components/screens/Financeiro";
+import Limpeza from "../components/screens/Limpeza";
 
 const Stack = createStackNavigator();
 
@@ -66,6 +67,11 @@ export default function MyStack() {
       <Stack.Screen
         name="Financeiro"
         component={Financeiro}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Limpeza"
+        component={Limpeza}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
