@@ -31,6 +31,7 @@ const DizimoContainer = ({ userCpf, style, styleTitleBox }) => {
         console.log("Não retornou a lista de meses.");
       }
       setVisibleIndicator(false);
+      console.log("Lista de meses: ", response.data);
     } catch (error) {
       console.log(`Falha na requisição. ${error}`);
     }
@@ -64,7 +65,11 @@ const DizimoContainer = ({ userCpf, style, styleTitleBox }) => {
       {visibleIndicator ? <LoadingIndicator color="#339dd7" /> : ""}
       <View style={styles.innerContainer}>
         {dizimoList.map((d, idx) => (
-          <ItemDizimoProfileUser month={d.month} status={d.status} key={idx} />
+          <ItemDizimoProfileUser
+            month={d.month}
+            status={d.payment ? d.payment.status : "ACTIVE"} //temporario
+            key={idx}
+          />
         ))}
       </View>
     </View>

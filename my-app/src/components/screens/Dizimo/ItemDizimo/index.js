@@ -27,7 +27,7 @@ export default function ItemDizimo({
           <Text style={styles.textMonth}>{translateMonth(month)[0]}</Text>
         </View>
         <View style={styles.boxPayButton}>
-          {status !== "active" ? (
+          {status !== "ACTIVE" ? (
             <View style={styles.boxIconStatus}>
               <Icon name={getStatusIcon(status)} style={styles.icon} />
             </View>
@@ -46,7 +46,7 @@ export default function ItemDizimo({
       </View>
       <View style={styles.boxBottom}>
         <View style={styles.boxObs}>
-          {paidIn ? (
+          {status === "COMPLETED" ? (
             <Text style={styles.textObs}>Pago em {getFormatDate(paidIn)}</Text>
           ) : (
             <Text style={styles.textObs}>
@@ -55,7 +55,7 @@ export default function ItemDizimo({
           )}
         </View>
         <View style={styles.boxStatus}>
-          {paidIn ? (
+          {status === "COMPLETED" ? (
             <Text style={styles.textStatus}>{formatInReal(valuePaid)}</Text>
           ) : (
             <Text style={styles.textStatus}>{getStatus(status)}</Text>

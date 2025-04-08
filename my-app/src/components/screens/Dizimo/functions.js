@@ -64,11 +64,11 @@ export function getExpiresDate(monthName) {
 
 export function getStatus(data) {
   switch (data) {
-    case "active":
+    case "ACTIVE":
       return "PENDENTE";
-    case "expired":
+    case "EXPIRED":
       return "NÃO PAGO";
-    case "paid":
+    case "COMPLETED":
       return "PAGO";
     default:
       return "STATUS";
@@ -77,11 +77,11 @@ export function getStatus(data) {
 
 export function getStatusIcon(status) {
   switch (status) {
-    case "active":
+    case "ACTIVE":
       return "exclamation"; //pendente
-    case "expired":
+    case "EXPIRED":
       return "remove"; //não pago
-    case "paid":
+    case "COMPLETED":
       return "heart"; //pago
     default:
       return "minus";
