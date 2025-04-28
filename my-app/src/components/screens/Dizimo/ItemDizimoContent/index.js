@@ -56,7 +56,7 @@ export default function ItemDizimoContent({
         <ItemDizimo
           month={d.month}
           year={d.year}
-          status={d.payment ? d.payment.status : "ACTIVE"} //temporario
+          status={d.status}
           paidIn={d.payment ? d.payment.createdAt : null}
           valuePaid={d.payment ? d.payment.value : null}
           setModalVisible={setModalVisible}
