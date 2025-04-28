@@ -46,7 +46,7 @@ export default function ItemDizimo({
       </View>
       <View style={styles.boxBottom}>
         <View style={styles.boxObs}>
-          {paidIn ? (
+          {status === "paid" ? (
             <Text style={styles.textObs}>Pago em {getFormatDate(paidIn)}</Text>
           ) : (
             <Text style={styles.textObs}>
@@ -55,7 +55,7 @@ export default function ItemDizimo({
           )}
         </View>
         <View style={styles.boxStatus}>
-          {paidIn ? (
+          {status === "paid" ? (
             <Text style={styles.textStatus}>{formatInReal(valuePaid)}</Text>
           ) : (
             <Text style={styles.textStatus}>{getStatus(status)}</Text>

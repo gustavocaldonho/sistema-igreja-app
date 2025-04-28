@@ -31,6 +31,7 @@ const DizimoContainer = ({ userCpf, style, styleTitleBox }) => {
         console.log("Não retornou a lista de meses.");
       }
       setVisibleIndicator(false);
+      console.log("Lista de meses: ", response.data);
     } catch (error) {
       console.log(`Falha na requisição. ${error}`);
     }

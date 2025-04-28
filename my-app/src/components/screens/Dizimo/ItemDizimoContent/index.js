@@ -10,6 +10,7 @@ export default function ItemDizimoContent({
   setModalVisible,
   setItemClicked,
   setVisibleIndicator,
+  setTotalDizimo,
 }) {
   const [dizimoList, setDizimoList] = useState([]);
 
@@ -25,14 +26,29 @@ export default function ItemDizimoContent({
         console.log("Não retornou a lista de meses.");
       }
       setVisibleIndicator(false);
+      // console.log("Lista de meses: ", response.data);
     } catch (error) {
       console.log(`Falha na requisição. ${error}`);
     }
   }
 
+  function getTotalDizimo() {
+    let total = 0;
+    dizimoList.forEach((d) => {
+      if (d.payment && d.status === "paid") {
+        total += d.payment.value;
+      }
+    });
+    return total;
+  }
+
   useEffect(() => {
     getPaymentsDizimoForm();
   }, []);
+
+  useEffect(() => {
+    setTotalDizimo(getTotalDizimo());
+  }, [dizimoList]);
 
   return (
     <View>
