@@ -41,7 +41,7 @@ export default function ItemCleaningContent({
         token
       );
 
-      console.log(response.data);
+      // console.log(response.data);
 
       if (response.status === 200) {
         const newCleaningItems = response.data;
