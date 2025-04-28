@@ -25,7 +25,6 @@ const CheckInput = ({
         throw new Error("Não foi possível atualizar o item.");
       } else {
         setPayedState((prev) => !prev);
-        if (!payed) console.log("Checked");
         updateItemsChecked(!payed ? 1 : -1);
       }
     } catch (error) {

@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     height: "80%",
     borderRadius: 10,
     backgroundColor: "#fff",
+    overflow: "hidden",
   },
   footer: {
     height: "10%",
