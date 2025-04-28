@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   main: {
-    maxHeight: "80%",
+    height: "80%",
     borderRadius: 10,
     backgroundColor: "#fff",
   },
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   textValueTotal: {
-    fontSize: width * 0.05,
+    fontSize: width * 0.04,
     fontWeight: "900",
     color: "#fff",
   },

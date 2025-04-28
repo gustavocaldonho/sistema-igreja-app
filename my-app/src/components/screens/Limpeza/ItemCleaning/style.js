@@ -17,10 +17,14 @@ const styles = StyleSheet.create({
     width: "10%",
     justifyContent: "center",
     alignItems: "center",
+    minHeight: 25,
   },
   textName: {
     fontSize: 16,
     color: "#000",
+  },
+  backgroundChecked: {
+    backgroundColor: "#DEEBF7",
   },
 });
 
