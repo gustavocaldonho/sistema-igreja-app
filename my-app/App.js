@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { PermissionsAndroid, Platform, Alert, Linking } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import "@react-native-firebase/app";
+import {
+  getMessaging,
+  getToken,
+  getInitialNotification,
+  onNotificationOpenedApp,
+  onMessage,
+  setBackgroundMessageHandler,
+} from "@react-native-firebase/messaging";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Notifications from "expo-notifications";
 import AuthProvider from "./src/contexts/auth";
 import ModalProvider from "./src/contexts/modalContext";
 import ConfirmModalProvider from "./src/contexts/modalConfirmContext";
 import MyStack from "./src/routes/MyStack";
-import * as Notifications from "expo-notifications";
-import messaging from "@react-native-firebase/messaging";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const setupNotificationChannel = async () => {
   await Notifications.setNotificationChannelAsync("default", {
@@ -72,7 +79,8 @@ export default function App() {
 
         if (permissionGranted) {
           try {
-            const token = await messaging().getToken();
+            const messaging = getMessaging();
+            const token = await getToken(messaging);
             const existingToken = await AsyncStorage.getItem("FCMToken");
             if (token && token !== existingToken) {
               await AsyncStorage.setItem("FCMToken", token);
@@ -89,36 +97,37 @@ export default function App() {
 
         await setupNotificationChannel();
 
-        messaging()
-          .getInitialNotification()
-          .then((remoteMessage) => {
-            if (remoteMessage) {
-              console.log(
-                "Notificação causou a abertura do app a partir do estado quit:",
-                remoteMessage.notification
-              );
-            }
-          });
+        const messaging = getMessaging();
 
-        messaging().onNotificationOpenedApp((remoteMessage) => {
+        const initialNotification = await getInitialNotification(messaging);
+        if (initialNotification) {
+          console.log(
+            "Notificação causou a abertura do app a partir do estado quit:",
+            initialNotification.notification
+          );
+        }
+
+        onNotificationOpenedApp(messaging, (remoteMessage) => {
           console.log(
             "Notificação causou a abertura do app a partir do estado background:",
             remoteMessage.notification
           );
         });
 
-        messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+        setBackgroundMessageHandler(messaging, async (remoteMessage) => {
           console.log("Mensagem recebida em segundo plano:", remoteMessage);
         });
 
-        messaging().onMessage(async (remoteMessage) => {
+        onMessage(messaging, async (remoteMessage) => {
           await Notifications.scheduleNotificationAsync({
             content: {
-              title: remoteMessage.notification.title || "New Notification",
-              body: remoteMessage.notification.body || "You have a new message",
+              title: remoteMessage.notification?.title || "Nova Notificação",
+              body:
+                remoteMessage.notification?.body ||
+                "Você recebeu uma nova mensagem",
             },
             android: {
-              icon: "./assets/icon-notification.png",
+              icon: "./assets/icon-notification.png", // Certifique-se que o ícone existe!
             },
             trigger: null,
           });
