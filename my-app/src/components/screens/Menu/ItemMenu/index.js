@@ -13,7 +13,7 @@ export default function ItemMenu({ screenName, onPress, icon }) {
         onPress={onPress}
         style={styles.boxOption}
       >
-        {["cross", "church"].includes(icon) ? (
+        {["cross", "church", "broom"].includes(icon) ? (
           <FontAwesome5 name={icon} style={styles.icon} />
         ) : (
           <Icon name={icon} style={styles.icon} />

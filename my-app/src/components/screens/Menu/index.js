@@ -90,6 +90,16 @@ export default function Menu({ navigation }) {
                 onPress={() => navigation.navigate("Financeiro")}
               />
             ) : null}
+
+            {user.cpf === "13444338716" ||
+            user.cpf === "08172150776" ||
+            user.cpf === "14734570760" ? (
+              <ItemMenu
+                screenName={"Limpeza"}
+                icon={"broom"}
+                onPress={() => navigation.navigate("Limpeza")}
+              />
+            ) : null}
           </View>
         </View>
         <Footer style={styles.footer} />
