@@ -22,7 +22,8 @@
       "bundleIdentifier": "com.gcaldonho.myapp",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
-      }
+      },
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "plugins": [
       [
