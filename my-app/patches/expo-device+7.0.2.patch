@@ -1,0 +1,11 @@
+diff --git a/node_modules/expo-device/ios/UIDevice.swift b/node_modules/expo-device/ios/UIDevice.swift
+index 6866b89..63d010e 100644
+--- a/node_modules/expo-device/ios/UIDevice.swift
++++ b/node_modules/expo-device/ios/UIDevice.swift
+@@ -1,4 +1,6 @@
+ import UIKit
++import TargetConditionals
++
+ 
+ struct ExpoDeviceType {
+   let modelName: String
