@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 20,
-    paddingTop: 50,
+    paddingTop: 80,
     alignItems: "center",
     gap: 20,
   },
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
     top: 15,
     padding: 10,
     left: 10,
-    paddingVertical: 10,
+    paddingVertical: 60,
     paddingHorizontal: 10,
   },
   iconClose: {

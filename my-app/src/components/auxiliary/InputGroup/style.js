@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Platform } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -26,9 +26,15 @@ const styles = StyleSheet.create({
   },
   inputPicker: {
     paddingLeft: 5,
+    height: Platform.OS === "ios" ? 50 : 40,
+    justifyContent: "center",
+    overflow: "hidden",
   },
   labelPicker: {
     // color: "#adadad",
+    fontSize: 15,
+    // color: "#000",
+    // backgroundColor: "#f6f6f6",
   },
   boxIcon: {
     height: "100%",

@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   boxButtonBack: {
-    position: "absolute",
-    top: 0,
+    // position: "absolute",
+    // top: 0,
   },
   boxIconCamera: {
     minWidth: 45,

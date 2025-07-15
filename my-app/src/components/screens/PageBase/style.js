@@ -21,12 +21,15 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     paddingHorizontal: 15,
-    // paddingBottom: 100,
   },
   boxHeader: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+  },
+  buttonBack: {
+    position: "absolute",
+    left: 10,
   },
   textTitle: {
     fontSize: width * 0.095,

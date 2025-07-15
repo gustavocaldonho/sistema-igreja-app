@@ -16,10 +16,10 @@ export default function ButtonBack({ color, style }) {
 }
 
 const styles = StyleSheet.create({
-  boxIcon: {
-    position: "absolute",
-    left: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-  },
+boxIcon: {
+  left: 10,
+  width: 45,
+  paddingVertical: 10,
+  paddingHorizontal: 10,
+},
 });
