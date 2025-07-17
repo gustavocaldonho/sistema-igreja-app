@@ -58,7 +58,7 @@ export const handleImagePicker = async (
   } else {
     const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ["images", "videos", "livePhotos"],
       base64: false,
       aspect: [4, 4],
       quality: 0.5,
@@ -79,7 +79,7 @@ export const handleImagePicker = async (
 
       try {
         const size = parseFloat(assets[0].fileSize) / 1024; //KB
-        if (size > 500) {
+        if (size > 1000) {
           setLoadingImage(false);
           throw new Error(
             "Sua imagem é muito grande. Escolha um arquivo de até 500 KB."

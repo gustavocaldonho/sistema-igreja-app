@@ -84,7 +84,9 @@ export default function OptionsImage({
                       style={styles.optionButton}
                       onPress={() => {
                         setVisibleOptionsImage(false);
-                        setViewImageVisible(true);
+                        setTimeout(() => {
+                          setViewImageVisible(true);
+                        }, 300);
                       }}
                     >
                       <Text style={styles.optionText}>Ver foto</Text>
@@ -102,7 +104,9 @@ export default function OptionsImage({
                   style={styles.optionButton}
                   onPress={() => {
                     setVisibleOptionsImage(false);
-                    handleImagePicker(patron, cpf, setLoadingImage, setImage);
+                    setTimeout(() => {
+                      handleImagePicker(patron, cpf, setLoadingImage, setImage);
+                    }, 300);
                   }}
                 >
                   <Text style={styles.optionText}>Escolher nova foto</Text>
