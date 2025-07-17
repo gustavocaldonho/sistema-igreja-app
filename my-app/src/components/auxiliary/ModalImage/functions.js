@@ -58,7 +58,7 @@ export const handleImagePicker = async (
   } else {
     const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      mediaTypes: ["images", "videos", "livePhotos"],
+      mediaTypes: ["images"],
       base64: false,
       aspect: [4, 4],
       quality: 0.5,
