@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: Platform.OS === "ios" ? 85 : 10,
     alignItems: "center",
     gap: 20,
   },
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     top: 15,
     padding: 10,
     left: 10,
-    paddingVertical: 60,
     paddingHorizontal: 10,
+    paddingTop: Platform.OS === "ios" ? 70 : 0,
   },
   iconClose: {
     color: "#fff",
