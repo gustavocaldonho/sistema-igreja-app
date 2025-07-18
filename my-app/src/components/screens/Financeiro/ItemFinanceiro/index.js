@@ -26,7 +26,9 @@ export default function ItemFinanceiro({
       type,
       id,
     });
-    setModalVisible(true);
+    setTimeout(() => {
+      setModalVisible(true);
+    }, 300);
   };
 
   return (

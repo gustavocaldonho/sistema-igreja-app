@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     backgroundColor: "#E0E0E0",
+    height: width * 0.12,
   },
   labelPicker: {
     fontSize: width * 0.045,

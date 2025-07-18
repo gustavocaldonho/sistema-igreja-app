@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Platform, StatusBar } from "react-native";
 
 const heightScreen = Dimensions.get("window").height;
 
@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: "#339dd7",
-    paddingTop: 10,
+    paddingTop: 0,
+    paddingTop: Platform.OS === "android" ? 0 : 50,
   },
   header: {
     flexDirection: "row",

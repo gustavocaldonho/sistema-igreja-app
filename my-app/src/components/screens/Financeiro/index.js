@@ -182,8 +182,10 @@ export default function Financeiro({}) {
               style={styles.boxButtonAdd}
               underlayColor={"#358DD4"}
               onPress={() => {
-                setModalVisible(true);
-                setItemFinanceiroClicked({});
+                setTimeout(() => {
+                  setModalVisible(true);
+                  setItemFinanceiroClicked({});
+                }, 100);
               }}
             >
               <FontAwesome5 name="plus" style={styles.iconAdd} />
@@ -193,7 +195,7 @@ export default function Financeiro({}) {
 
         <ModalLancamento
           visible={modalVisible}
-          onClose={() => setModalVisible(false)}
+          onClose={() => setTimeout(() => {setModalVisible(false)}, 500)}
           itemClicked={itemFinanceiroClicked}
         />
 

@@ -7,6 +7,7 @@ import {
   StatusBar,
   ScrollView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { styles } from "./style";
 import { BarChart, PieChart } from "react-native-gifted-charts";

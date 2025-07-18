@@ -43,15 +43,16 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
       const response = await addBalanceApi(data, user.community, token);
 
       if (response.status === 201) {
-        modalAlert("Sucesso!", "Saldo Adicionado.");
+        resetInput();
+        onClose();
+        setTimeout(() => {
+          modalAlert("Sucesso!", "Saldo Adicionado.");
+        }, 1500);
       } else {
         throw new Error("Não foi possível adicionar o saldo ao extrato.");
       }
     } catch (error) {
       modalAlert("Ops!", error.message);
-    } finally {
-      onClose();
-      resetInput();
     }
   };
 
@@ -60,15 +61,16 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await updateBalanceApi(data, user.community, token);
       if (response.status === 204) {
-        modalAlert("Sucesso!", "Saldo Atualizado.");
+        resetInput();
+        onClose();
+        setTimeout(() => {
+          modalAlert("Sucesso!", "Saldo Atualizado.");
+        }, 1500);
       } else {
         throw new Error("Não foi possível atualizar o saldo.");
       }
     } catch (error) {
       modalAlert("Ops!", error.message);
-    } finally {
-      onClose();
-      resetInput();
     }
   };
 
@@ -81,15 +83,16 @@ export default function ModalLancamento({ visible, onClose, itemClicked }) {
         token
       );
       if (response.status === 204) {
-        modalAlert("Sucesso!", "Saldo Excluído.");
+        resetInput();
+        onClose();
+        setTimeout(() => {
+          modalAlert("Sucesso!", "Saldo Excluído.");
+        }, 1500);
       } else {
         throw new Error("Não foi possível excluir o saldo.");
       }
     } catch (error) {
       modalAlert("Ops!", error.message);
-    } finally {
-      onClose();
-      resetInput();
     }
   };
 

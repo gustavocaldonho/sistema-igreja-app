@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     backgroundColor: "#E0E0E0",
+    overflow: "hidden",
   },
   labelPicker: {
     fontSize: width * 0.045,

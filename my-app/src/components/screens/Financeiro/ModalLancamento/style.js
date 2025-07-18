@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: "#339dd7",
-    paddingTop: 10,
+    paddingTop: Platform.OS === "android" ? 0 : 50,
   },
   header: {
     flexDirection: "row",
