@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderColor: "#339dd7",
     marginBottom: 10,
+    overflow: "hidden",
   },
   input: {
     width: "100%",
