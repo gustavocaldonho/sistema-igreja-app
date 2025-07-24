@@ -52,7 +52,9 @@ const deactivateAccount = () => {
           console.log("Conta desativada com sucesso.");
         }
       } catch (error) {
-        console.error("Erro ao desativar a conta:", error);
+        setTimeout(() => {
+            showModal("Opa!", "Erro ao desativar a conta. Tente novamente mais tarde.");  
+          }, 1000);
       }
     }
   );
@@ -124,9 +126,11 @@ const deactivateAccount = () => {
               styleTitleBox={styles.textTitleBox}
             />
 
-            <TouchableOpacity style={styles.buttonDisable} activeOpacity={0.6} onPress={() => deactivateAccount() }>
-              <Text style={styles.textDisable}>Desativar Conta</Text>
-            </TouchableOpacity>
+            {user.cpf === cpf && (
+              <TouchableOpacity style={styles.buttonDisable} activeOpacity={0.6} onPress={() => deactivateAccount() }>
+                <Text style={styles.textDisable}>Desativar Conta</Text>
+              </TouchableOpacity>
+            )}
 
           </ScrollView>
         </BoxLinearGradient>
