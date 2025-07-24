@@ -53,7 +53,7 @@ const deactivateAccount = () => {
         }
       } catch (error) {
         setTimeout(() => {
-            showModal("Opa!", "Erro ao desativar a conta. Tente novamente mais tarde.");  
+            showModal("Opa!", "Erro ao desativar a conta. Tente novamente mais tarde.");
           }, 1000);
       }
     }
