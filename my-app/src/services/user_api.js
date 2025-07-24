@@ -113,27 +113,18 @@ export const getUserByCpf = async (cpf, token) => {
   }
 };
 
-export const disableUser = (data) => {
-  api
-    .post(
-      "/endpoint",
-      {
-        cpf: data.cpf,
-        token: data.token,
+export const disableUser = async (token) => {
+  try {
+    const response = await api.delete("/me/deactivate", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then(function (response) {
-      // console.log(response);
-      return response;
-    })
-    .catch(function (error) {
-      console.log(error);
     });
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const getCouncils = async (community, token) => {

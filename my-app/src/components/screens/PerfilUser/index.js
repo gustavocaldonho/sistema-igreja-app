@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ButtonBack from "../../auxiliary/ButtonBack";
 import BoxLinearGradient from "../../screens/PageBase/BoxLinearGradient";
@@ -9,13 +10,16 @@ import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import OptionsImage from "../../auxiliary/ModalImage";
 import ViewImage from "../../auxiliary/ModalImage/ViewImage";
 import { AuthContext } from "../../../contexts/auth";
+import { ConfirmModalContext } from "../../../contexts/modalConfirmContext";
+import { ModalContext } from "../../../contexts/modalContext";
 import DizimoContainer from "./DizimoContainer";
 import PersonalDataContainer from "./PersonalDataContainer";
 import ModalUpdateDatasUser from "./PersonalDataContainer/ModalUpdateDatasUser";
 import { getImageProfile } from "../../auxiliary/ModalImage/functions";
+import { disableUser } from "../../../services/user_api";
 
 export default function PerfilUser({ navigation, route }) {
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
   const { password } = route.params;
   const data = password ? user : route.params;
   const { name, cpf, birthday, phone, community } = data;
@@ -26,7 +30,33 @@ export default function PerfilUser({ navigation, route }) {
   const [visibleOptionsImage, setVisibleOptionsImage] = useState(false);
   const [viewImageVisible, setViewImageVisible] = useState(false);
 
+  const { modalConfirm } = useContext(ConfirmModalContext);
+  const { showModal } = useContext(ModalContext); //modal alert
+
   const isCurrentUser = Boolean(password);
+
+const deactivateAccount = () => {
+  modalConfirm(
+    "Desativar Conta",
+    "Você tem certeza que deseja desativar sua conta?",
+    async () => {
+      try {
+        const token = await AsyncStorage.getItem("AccessToken");
+        const response = await disableUser(token);
+
+        if(response.status === 204) {
+          signOut();
+          setTimeout(() => {
+            showModal("Conta Desativada", "Sua conta foi desativada com sucesso.")
+          }, 1000);
+          console.log("Conta desativada com sucesso.");
+        }
+      } catch (error) {
+        console.error("Erro ao desativar a conta:", error);
+      }
+    }
+  );
+};
 
   useEffect(() => {
     if (!isCurrentUser) {
@@ -93,6 +123,11 @@ export default function PerfilUser({ navigation, route }) {
               style={[styles.boxInformationsUser, styles.boxShadow]}
               styleTitleBox={styles.textTitleBox}
             />
+
+            <TouchableOpacity style={styles.buttonDisable} activeOpacity={0.6} onPress={() => deactivateAccount() }>
+              <Text style={styles.textDisable}>Desativar Conta</Text>
+            </TouchableOpacity>
+
           </ScrollView>
         </BoxLinearGradient>
       )}
