@@ -21,7 +21,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.gcaldonho.myapp",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSPhotoLibraryUsageDescription": "O aplicativo e-Igreja permite que você selecione uma foto da sua galeria para usá-la como imagem de perfil na sua conta."
       },
       "googleServicesFile": "./GoogleService-Info.plist"
     },
@@ -29,7 +30,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Permite o acesso às suas fotos para compartilhamento."
+          "photosPermission": "O aplicativo e-Igreja permite que você selecione uma foto da sua galeria para usá-la como imagem de perfil na sua conta."
         }
       ],
       "expo-font"
