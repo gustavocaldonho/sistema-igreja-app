@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
   },
   textDisable: {
-    fontSize: 10,
+    fontSize: 12,
     color: "#fff",
   },
 

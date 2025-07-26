@@ -37,8 +37,8 @@ export default function PerfilUser({ navigation, route }) {
 
 const deactivateAccount = () => {
   modalConfirm(
-    "Desativar Conta",
-    "Você tem certeza que deseja desativar sua conta?",
+    "Excluir Conta",
+    "Você tem certeza que deseja apagar todos os seus dados?",
     async () => {
       try {
         const token = await AsyncStorage.getItem("AccessToken");
@@ -47,13 +47,13 @@ const deactivateAccount = () => {
         if(response.status === 204) {
           signOut();
           setTimeout(() => {
-            showModal("Conta Desativada", "Sua conta foi desativada com sucesso.")
+            showModal("Conta Excluída", "Sua conta foi excluída com sucesso.")
           }, 1000);
-          console.log("Conta desativada com sucesso.");
+          console.log("Conta excluída com sucesso.");
         }
       } catch (error) {
         setTimeout(() => {
-            showModal("Opa!", "Erro ao desativar a conta. Tente novamente mais tarde.");
+            showModal("Opa!", "Erro ao excluir a conta. Tente novamente mais tarde.");
           }, 1000);
       }
     }
@@ -128,7 +128,7 @@ const deactivateAccount = () => {
 
             {user.cpf === cpf && (
               <TouchableOpacity style={styles.buttonDisable} activeOpacity={0.6} onPress={() => deactivateAccount() }>
-                <Text style={styles.textDisable}>Desativar Conta</Text>
+                <Text style={styles.textDisable}>Excluir Conta</Text>
               </TouchableOpacity>
             )}
 
