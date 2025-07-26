@@ -1,7 +1,6 @@
 import api from "./api";
 
 export const signupUser = async (data) => {
-  console.log("Data to be sent:", data);
   try {
     const response = await api.post(
       "/signup",

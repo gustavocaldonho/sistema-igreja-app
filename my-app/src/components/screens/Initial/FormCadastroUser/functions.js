@@ -39,13 +39,13 @@ export function generatePasswordDefault(name, phone) {
 }
 
 export function formatDateBR(data) {
-  if (!data) return "00/00/0000";
+  if (!data) return null;
   const [year, month, day] = data.split("-");
   return `${day}/${month}/${year}`;
 }
 
 export function formatDateUSA(data) {
-  if (!data) return "0000-00-00";
+  if (!data) return null;
   const [day, month, year] = data.split("/");
   return `${year}-${month}-${day}`;
 }

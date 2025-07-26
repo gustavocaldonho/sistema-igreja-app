@@ -102,13 +102,10 @@ export default function FormCadastroUser({
     getPatrons();
   }, []);
 
-  // 656.743.550-02
   async function addUser(item) {
     try {
       setVisibleSpinner(true);
       const response = await signupUser(item);
-      console.log(response);
-
       if (response.status === 201) {
         setModalSuccessVisible(!modalSuccessVisible);
       } else {
