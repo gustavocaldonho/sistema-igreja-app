@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#ccc"
+      "backgroundColor": "#cccccc"
     },
     "notification": {
       "icon": "./assets/icon-notification.png"
