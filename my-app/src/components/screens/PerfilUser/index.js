@@ -114,11 +114,13 @@ const deactivateAccount = () => {
           </View>
 
           <ScrollView>
-            <PersonalDataContainer
-              sentUser={{ name, cpf, birthday, phone, community, password }}
-              style={[styles.boxInformationsUser, styles.boxShadow]}
-              setModalVisible={setModalVisible}
-            />
+            {user.cpf === cpf && (
+              <PersonalDataContainer
+                sentUser={{ name, cpf, birthday, phone, community, password }}
+                style={[styles.boxInformationsUser, styles.boxShadow]}
+                setModalVisible={setModalVisible}
+              />
+            )}
 
             <DizimoContainer
               userCpf={cpf}
