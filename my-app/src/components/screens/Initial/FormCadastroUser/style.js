@@ -44,6 +44,13 @@ const styles = StyleSheet.create({
     paddingLeft: width * 0.06,
     fontWeight: "bold",
   },
+  infoMessage: {
+    fontSize: width * 0.035,
+    color: "#adadad",
+    paddingTop: height * 0.001,
+    paddingBottom: height * 0.01,
+    paddingLeft: width * 0.06,
+  },
   errorMessagePassword: {
     paddingBottom: height * 0.015,
   },

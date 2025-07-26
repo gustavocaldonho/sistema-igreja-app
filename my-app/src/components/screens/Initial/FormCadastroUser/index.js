@@ -102,10 +102,13 @@ export default function FormCadastroUser({
     getPatrons();
   }, []);
 
+  // 656.743.550-02
   async function addUser(item) {
     try {
       setVisibleSpinner(true);
       const response = await signupUser(item);
+      console.log(response);
+
       if (response.status === 201) {
         setModalSuccessVisible(!modalSuccessVisible);
       } else {
@@ -168,7 +171,7 @@ export default function FormCadastroUser({
       !checkText(name) &&
       !checkCpf(cpf) &&
       !checkPhone(phone) &&
-      !checkDataNasc(dataNasc) &&
+      // !checkDataNasc(dataNasc) &&
       !checkText(community)
     ) {
       if (!user) {
@@ -178,7 +181,7 @@ export default function FormCadastroUser({
           phone: desformatPhone(phone),
           birthday: formatDateUSA(dataNasc),
           community,
-          password: generatePasswordDefault(name, dataNasc),
+          password: generatePasswordDefault(name, phone),
         });
       } else if (!checkPassword(password, passwordConfirmation)) {
         updateDatasUser({
@@ -207,7 +210,7 @@ export default function FormCadastroUser({
       {modalSuccessVisible ? (
         <ModalCompleteRegistry
           cpf={cpf}
-          password={generatePasswordDefault(name, dataNasc)}
+          password={generatePasswordDefault(name, phone)}
           modalVisible={modalSuccessVisible}
           setModalVisible={setModalSuccessVisible}
           setRegistryEntry={setRegistryEntry}
@@ -266,10 +269,8 @@ export default function FormCadastroUser({
               setDataNasc(text);
             }}
           />
-          <Text style={styles.errorMessage}>
-            {checkDataNasc(dataNasc) && showErrors
-              ? "Data de Nascimento Inválida!"
-              : ""}
+          <Text style={styles.infoMessage}>
+            (Campo Opcional)
           </Text>
 
           <InputGroupSelect

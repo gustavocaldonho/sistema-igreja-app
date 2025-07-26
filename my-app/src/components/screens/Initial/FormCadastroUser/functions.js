@@ -30,21 +30,22 @@ export function checkPassword(textPassword, textPasswordConfirmation) {
   }
 }
 
-export function generatePasswordDefault(name, birthday) {
+export function generatePasswordDefault(name, phone) {
   return (
     name.substring(0, 2) +
-    birthday.substring(0, 2) +
-    birthday.substring(3, 5) +
+    phone.substring(11, 15) +
     "##"
   );
 }
 
 export function formatDateBR(data) {
+  if (!data) return "00/00/0000";
   const [year, month, day] = data.split("-");
   return `${day}/${month}/${year}`;
 }
 
 export function formatDateUSA(data) {
+  if (!data) return "0000-00-00";
   const [day, month, year] = data.split("/");
   return `${year}-${month}-${day}`;
 }
