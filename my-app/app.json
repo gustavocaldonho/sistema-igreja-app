@@ -2,7 +2,7 @@
   "expo": {
     "name": "e-Igreja",
     "slug": "my-app",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -37,7 +37,7 @@
     ],
     "android": {
       "package": "com.gcaldonho.myapp",
-      "versionCode": 13,
+      "versionCode": 14,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
