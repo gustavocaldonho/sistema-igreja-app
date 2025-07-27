@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
   },
   labelPicker: {
     fontSize: width * 0.045,
+    justifyContent: "center",
+    textAlign: "center",
+    color: "#000",
   },
 });
 

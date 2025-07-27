@@ -89,13 +89,7 @@ export default function FormCadastroUser({
   }
 
   function getItemsSelectCommunity(dataList) {
-    if (!dataList || dataList.length === 0) {
-      return [{ label: "Sua Comunidade", value: "" }];
-    }
-
-    return [{ label: "Sua Comunidade", value: "" }].concat(
-      dataList.map((d) => ({ label: d, value: d }))
-    );
+    return dataList.map((d) => ({ label: d, value: d }));
   }
 
   useEffect(() => {

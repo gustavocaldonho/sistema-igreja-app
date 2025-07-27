@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     height: Platform.OS === "ios" ? 50 : 40,
     justifyContent: "center",
-    overflow: "hidden",
   },
   labelPicker: {
     // color: "#adadad",
