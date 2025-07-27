@@ -107,7 +107,9 @@ export default function FormCadastroUser({
       setVisibleSpinner(true);
       const response = await signupUser(item);
       if (response.status === 201) {
-        setModalSuccessVisible(!modalSuccessVisible);
+        setTimeout(() => {
+          setModalSuccessVisible(!modalSuccessVisible);
+        }, 1000);
       } else {
         throw new Error(
           "Não foi possível adicionar o usuário. Verifique suas informações e tente novamente."
@@ -116,7 +118,9 @@ export default function FormCadastroUser({
       console.log(response);
       console.log("(add): ", item);
     } catch (error) {
-      modalAlert("Ops!", error.message);
+      setTimeout(() => {
+        modalAlert("Ops!", error.message);
+      }, 1000);
       console.log(error);
     } finally {
       setVisibleSpinner(false);
@@ -135,10 +139,12 @@ export default function FormCadastroUser({
           String(response.data.access_token)
         );
         await setDatasUser(response.data.access_token, newDatas.password);
-        modalAlert(
-          "Atualização Concluída!",
+        setTimeout(() => {
+          modalAlert(
+          "Atualização Concluída",
           "Guarde bem seus dados e fique a vontade para atualizá-los quando quiser."
         );
+        }, 1000);
         setModalVisible(false);
       } else {
         throw new Error(
