@@ -34,7 +34,8 @@
           "photosPermission": "O aplicativo e-Igreja permite que você selecione uma foto da sua galeria para usá-la como imagem de perfil na sua conta."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "./plugins/with-modular-firebase"
     ],
     "android": {
       "package": "com.gcaldonho.myapp",
