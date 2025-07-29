@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Platform } from "react-native";
-import RNPickerSelect from "react-native-picker-select";
+import { View } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import styles from "./style";
 
 export default function BoxFilters({
@@ -11,26 +11,22 @@ export default function BoxFilters({
 }) {
   return (
     <View style={[styles.container, style]}>
-      <RNPickerSelect
-        value={`${selectedValue.month}|${selectedValue.year}`}
+      <Picker
+        selectedValue={`${selectedValue.month}|${selectedValue.year}`}
         onValueChange={(value) => {
-          if (value) {
-            const [month, year] = value.split("|");
-            onValueChange({ month, year });
-          }
+          const [month, year] = value.split("|");
+          onValueChange({ month, year });
         }}
-        items={options.map((option) => ({
-          label: `${option.label} / ${option.year}`,
-          value: `${option.value}|${option.year}`,
-        }))}
-        style={{
-          inputIOS: styles.labelPicker,
-          inputAndroid: styles.labelPicker,
-        }}
-        placeholder={{ label: "Selecione um mês", value: null }}
-        useNativeAndroidPickerStyle={false}
-        doneText="Confirmar"
-      />
+      >
+        {options.map((option, index) => (
+          <Picker.Item
+            style={styles.labelPicker}
+            key={index}
+            label={`${option.label} / ${option.year}`}
+            value={`${option.value}|${option.year}`}
+          />
+        ))}
+      </Picker>
     </View>
   );
 }

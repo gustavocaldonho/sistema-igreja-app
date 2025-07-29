@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Platform, Text } from "react-native";
-import RNPickerSelect from "react-native-picker-select";
+import { View } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import styles from "../style";
 
@@ -16,27 +16,20 @@ const InputGroupSelect = ({
         <FontAwesome5 name={iconName} size={20} style={styles.icon} />
       </View>
       <View style={[styles.input, styles.inputPicker]}>
-        <RNPickerSelect
+        <Picker
+          style={styles.labelPicker}
+          selectedValue={selectedValue}
           onValueChange={onValueChange}
-          value={selectedValue}
-          items={options}
-          placeholder={{ label: "Selecione sua Comunidade...", value: "" }}
-          useNativeAndroidPickerStyle={false}
-          doneText="Confirmar"
-          style={{
-            inputIOS: styles.labelPicker,
-            inputAndroid: styles.labelPicker,
-            placeholder: { color: "#999" },
-          }}
-          Icon={() => (
-            <FontAwesome5
-              name="chevron-down"
-              size={14}
-              color="#999"
-              style={{ marginRight: 10 }}
+        >
+          {options.map((option, index) => (
+            <Picker.Item
+              style={[styles.labelPicker]}
+              key={index}
+              label={option.label}
+              value={option.value}
             />
-          )}
-        />
+          ))}
+        </Picker>
       </View>
     </View>
   );
