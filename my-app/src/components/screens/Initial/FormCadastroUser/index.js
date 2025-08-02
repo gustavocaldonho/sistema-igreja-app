@@ -74,6 +74,7 @@ export default function FormCadastroUser({
       const response = await getCommunitiesWithoutToken();
       if (response.status === 200) {
         setPatronList(response.data);
+        setCommunity(response.data[0] || "");
       } else {
         throw new Error(
           "Não foi possível carregar a lista de comunidades. Volte mais tarde."
