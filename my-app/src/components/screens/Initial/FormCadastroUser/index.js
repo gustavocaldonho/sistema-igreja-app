@@ -33,6 +33,8 @@ import { signupUser, updateUser } from "../../../../services/user_api";
 import ModalCompleteRegistry from "./ModalCompleteRegistry";
 import { ModalContext } from "../../../../contexts/modalContext";
 
+import ModalSelectCommunityIOS from "./ModalSelectCommunityIOS";
+
 import InputGroupName from "../../../auxiliary/InputGroup/InputGroupName";
 import InputGroupCpf from "../../../auxiliary/InputGroup/InputGroupCpf";
 import InputGroupPhone from "../../../auxiliary/InputGroup/InputGroupPhone";
@@ -65,6 +67,7 @@ export default function FormCadastroUser({
   const [visibleSpinner, setVisibleSpinner] = useState(false);
   const [visibleIndicator, setVisibleIndicator] = useState(false);
   const [modalSuccessVisible, setModalSuccessVisible] = useState(false);
+  const [modalSelectCommunityIOSVisible, setModalSelectCommunityIOSVisible] = useState(false);
 
   const { modalAlert } = useContext(ModalContext);
 
@@ -222,6 +225,18 @@ export default function FormCadastroUser({
         ""
       )}
 
+      {(modalSelectCommunityIOSVisible && Platform.OS === 'ios') && (
+        <ModalSelectCommunityIOS 
+          visible={modalSelectCommunityIOSVisible} 
+          setVisible={setModalSelectCommunityIOSVisible}
+          options={getItemsSelectCommunity(patronList)}
+          selectedValue={community}
+          onValueChange={(text) => {
+            setCommunity(text);
+            }}
+        />
+      )}
+
       <Spinner visible={visibleSpinner} />
       <ScrollView style={styles.boxScrollView}>
         <Pressable style={styles.form} onPress={Keyboard.dismiss}>
@@ -276,14 +291,18 @@ export default function FormCadastroUser({
             (Campo Opcional)
           </Text>
 
-          <InputGroupSelect
-            iconName="church"
-            options={getItemsSelectCommunity(patronList)}
-            selectedValue={community}
-            onValueChange={(text) => {
-              setCommunity(text);
-            }}
-          />
+          <Pressable onPress={() => {
+            setModalSelectCommunityIOSVisible(true);
+          }}>
+            <InputGroupSelect
+              iconName="church"
+              options={getItemsSelectCommunity(patronList)}
+              selectedValue={community}
+              onValueChange={(text) => {
+                setCommunity(text);
+              }}
+            />
+          </Pressable>
           <Text style={styles.errorMessage}>
             {checkText(community) && showErrors
               ? "Selecione uma Comunidade!"
