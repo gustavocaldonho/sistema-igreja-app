@@ -18,6 +18,7 @@
       "**/*"
     ],
     "ios": {
+      "icon": "./assets/icon-ios.png",
       "supportsTablet": true,
       "buildNumber": "2",
       "bundleIdentifier": "com.gcaldonho.myapp",
