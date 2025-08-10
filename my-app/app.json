@@ -22,11 +22,17 @@
       "supportsTablet": true,
       "buildNumber": "3",
       "bundleIdentifier": "com.gcaldonho.myapp",
+      "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "NSPhotoLibraryUsageDescription": "O aplicativo e-Igreja permite que você selecione uma foto da sua galeria para usá-la como imagem de perfil na sua conta."
+        "NSPhotoLibraryUsageDescription": "O aplicativo e-Igreja permite que você selecione uma foto da sua galeria para usá-la como imagem de perfil na sua conta.",
+        "NSUserTrackingUsageDescription": "Este aplicativo deseja enviar notificações para manter você informado.",
+        "UIBackgroundModes": ["fetch", "remote-notification"],
+        "FirebaseAppDelegateProxyEnabled": false
       },
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "entitlements": {
+        "aps-environment": "production"
+      }
     },
     "plugins": [
       [
@@ -36,7 +42,14 @@
         }
       ],
       "expo-font",
-      "./plugins/with-modular-firebase"
+      "./plugins/with-modular-firebase",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon-notification.png",
+          "color": "#ffffff"
+        }
+      ]
     ],
     "android": {
       "package": "com.gcaldonho.myapp",
