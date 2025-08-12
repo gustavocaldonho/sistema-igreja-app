@@ -63,7 +63,10 @@
         "android.permission.RECEIVE_BOOT_COMPLETED",
         "android.permission.POST_NOTIFICATIONS",
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "notification": {
+        "color": "#ffffff"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
