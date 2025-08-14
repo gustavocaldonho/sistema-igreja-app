@@ -28,6 +28,7 @@ export default function Dizimo({ navigation, route }) {
         <View style={{ flex: 1 }}>
           <ItemDizimoContent
             cpf={cpf}
+            visibleIndicator={visibleIndicator}
             setModalVisible={setModalVisible}
             setItemClicked={setItemClicked}
             setVisibleIndicator={setVisibleIndicator}

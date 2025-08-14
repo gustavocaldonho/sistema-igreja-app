@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import ItemDizimo from "../ItemDizimo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getPaymentsDizimo } from "../../../../services/payment_api";
 import { sortMonths } from "../functions";
+import { FlatList } from "react-native-gesture-handler";
 
 export default function ItemDizimoContent({
   cpf,
@@ -11,6 +12,7 @@ export default function ItemDizimoContent({
   setItemClicked,
   setVisibleIndicator,
   setTotalDizimo,
+  visibleIndicator
 }) {
   const [dizimoList, setDizimoList] = useState([]);
 
@@ -26,7 +28,6 @@ export default function ItemDizimoContent({
         console.log("Não retornou a lista de meses.");
       }
       setVisibleIndicator(false);
-      // console.log("Lista de meses: ", response.data);
     } catch (error) {
       console.log(`Falha na requisição. ${error}`);
     }
@@ -52,18 +53,43 @@ export default function ItemDizimoContent({
 
   return (
     <View>
-      {dizimoList.map((d, idx) => (
-        <ItemDizimo
-          month={d.month}
-          year={d.year}
-          status={d.status}
-          paidIn={d.payment ? d.payment.createdAt : null}
-          valuePaid={d.payment ? d.payment.value : null}
-          setModalVisible={setModalVisible}
-          setItemClicked={setItemClicked}
-          key={`dizimo-item-${idx}`}
-        />
-      ))}
+      {dizimoList.length !== 0 ? (
+        <FlatList 
+          showsVerticalScrollIndicator={false}
+          data={dizimoList}
+          keyExtractor={(item, idx) => `dizimo-item-${idx}`}
+          renderItem={({item}) => (
+          <ItemDizimo
+            month={item.month}
+            year={item.year}
+            status={item.status}
+            paidIn={item.payment ? item.payment.createdAt : null}
+            valuePaid={item.payment ? item.payment.value : null}
+            setModalVisible={setModalVisible}
+            setItemClicked={setItemClicked}
+          />
+          )}/>
+      ) : !visibleIndicator ? (
+        <Text style={styles.msgContentEmpty}>
+          Não foi possível listar os meses do Dízimo.
+        </Text>
+      ) : (
+        ""
+      )}
+
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  msgContentEmpty: {
+    color: "#fff",
+    alignSelf: "center",
+    marginTop: 20,
+  },
+  footer: {
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
