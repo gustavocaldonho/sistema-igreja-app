@@ -41,14 +41,21 @@ export default function ItemAvisoContent({
       const token = await AsyncStorage.getItem("AccessToken");
       const response = await getTenWarnings(user.community, token, pageNumber); // Use o número da página passada como argumento
 
-      // console.log("page: ", pageNumber);
-      // console.log(response.data);
-
       if (response.status === 200) {
         const newWarnings = response.data;
 
         if (newWarnings.length > 0) {
-          setWarningList((prevWarnings) => [...prevWarnings, ...newWarnings]); // Adiciona novos avisos à lista
+          // Adiciona novos avisos à lista e filtra conforme a posição do user e o escopo do aviso;
+          setWarningList((prevWarnings) => 
+            [
+              ...prevWarnings, 
+              ...newWarnings
+            ].filter(
+              (item) => 
+                item.scope === "public" || 
+                (item.scope === "private" && user.position !== "user")
+            )
+          );
 
           // Se o número de avisos retornados for menor que 10, significa que é a última página
           if (newWarnings.length < 10) {
@@ -58,7 +65,6 @@ export default function ItemAvisoContent({
           setHasMoreWarnings(false); // Não há mais avisos para carregar
         }
       } else {
-        // console.log(response);
         throw new Error("Não foi possível retornar a lista de avisos.");
       }
     } catch (error) {
@@ -69,10 +75,6 @@ export default function ItemAvisoContent({
     }
   }
 
-  useEffect(() => {
-    getWarningList(1); // Carrega a primeira página ao iniciar
-  }, []);
-
   // Função chamada quando o usuário chega ao fim da lista
   const loadMoreWarnings = () => {
     if (hasMoreWarnings && !loadingMore) {
@@ -81,7 +83,7 @@ export default function ItemAvisoContent({
       getWarningList(nextPage); // Passa a próxima página diretamente
     }
   };
-
+  
   const renderFooter = () => {
     return (
       <View style={styles.footer}>
@@ -90,6 +92,10 @@ export default function ItemAvisoContent({
     );
   };
 
+  useEffect(() => {
+    getWarningList(1); // Carrega a primeira página ao iniciar
+  }, []);
+
   return (
     <View>
       {warningList.length !== 0 ? (
@@ -97,7 +103,7 @@ export default function ItemAvisoContent({
           data={warningList}
           keyExtractor={(item, index) => `warning-item-${index}`}
           renderItem={({ item }) => (
-            <ItemAviso
+              <ItemAviso
               id={item.id}
               title={item.title}
               description={item.description}
