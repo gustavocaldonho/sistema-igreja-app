@@ -54,11 +54,14 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginRight: 10,
     fontWeight: "700",
+    margin: 0,
+    paddingVertical: 10,
   },
   input: {
     minWidth: 50,
     fontSize: 25,
     fontWeight: "700",
+    padding: 0,
   },
 });
 
