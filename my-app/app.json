@@ -2,7 +2,7 @@
   "expo": {
     "name": "e-Igreja",
     "slug": "my-app",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -20,7 +20,7 @@
     "ios": {
       "icon": "./assets/icon-ios.png",
       "supportsTablet": true,
-      "buildNumber": "4",
+      "buildNumber": "5",
       "bundleIdentifier": "com.gcaldonho.myapp",
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
@@ -65,7 +65,7 @@
     ],
     "android": {
       "package": "com.gcaldonho.myapp",
-      "versionCode": 15,
+      "versionCode": 17,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
