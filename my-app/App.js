@@ -9,10 +9,11 @@ import AuthProvider from "./src/contexts/auth";
 import ModalProvider from "./src/contexts/modalContext";
 import ConfirmModalProvider from "./src/contexts/modalConfirmContext";
 import MyStack from "./src/routes/MyStack";
-import firebaseConfig from './firebaseConfig';
+import firebaseConfig from "./firebaseConfig";
+import { requestTrackingPermission } from "react-native-tracking-transparency";
 
 export default function App() {
-  // Solicita permissão para notificações no Android e iOS
+  // Solicita permissão para notificações
   const requestUserPermission = async () => {
     if (Platform.OS === "android") {
       if (Platform.Version >= 33) {
@@ -33,9 +34,8 @@ export default function App() {
           return false;
         }
       }
-      return true; // Android versões abaixo 33 não precisam solicitar
+      return true;
     } else {
-      // iOS: solicita permissão detalhada
       try {
         const authStatus = await messaging().requestPermission({
           alert: true,
@@ -58,12 +58,24 @@ export default function App() {
   useEffect(() => {
     const initializeApp = async () => {
       try {
+        // Inicializa Firebase
         if (!firebase.apps.length) {
           await firebase.initializeApp(firebaseConfig);
         }
 
+        // Solicita permissão de rastreamento (iOS ATT)
+        if (Platform.OS === "ios") {
+          try {
+            const trackingStatus = await requestTrackingPermission();
+            console.log("Permissão de rastreamento (ATT):", trackingStatus);
+          } catch (err) {
+            console.warn("Erro ao solicitar permissão ATT:", err);
+          }
+        }
+
+        // Permissão de notificações
         const permissionGranted = await requestUserPermission();
-        console.log("Permissão de Notificação concedida: ", permissionGranted);
+        console.log("Permissão de Notificação concedida:", permissionGranted);
 
         if (permissionGranted) {
           const token = await messaging().getToken();
@@ -80,8 +92,7 @@ export default function App() {
           console.log("Permissão negada, token removido.");
         }
 
-        // Eventos de notificação
-
+        // 🔹 Eventos de notificação
         const initialNotification = await messaging().getInitialNotification();
         if (initialNotification) {
           console.log(

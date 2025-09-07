@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:758919411198:ios:3dac8210b3bf13c06ebcaf</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Usamos seu identificador para melhorar sua experiência no app.</string>
 </dict>
 </plist>
