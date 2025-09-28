@@ -5,8 +5,8 @@ import BoxFilters from "./BoxFilters";
 import styles from "./style";
 import ItemCleaningContent from "./ItemCleaningContent.js";
 import LoadingIndicator from "../../auxiliary/LoadingIndicator";
-import { formatMoney } from "../Financeiro/ModalLancamento/functions.js";
 import { getCurrentMonthAndYear } from "./functions.js";
+import InputUnitValue from "./InputUnitValue/index.js";
 
 export default function Limpeza({ navigation }) {
   const [selectedOption, setSelectedOption] = useState(
@@ -28,6 +28,7 @@ export default function Limpeza({ navigation }) {
     totalItems: 0,
     payedItems: 0,
   });
+  const [unitValue, setUnitValue] = useState("20,00");
 
   const updateItemsChecked = (value) => {
     setTotalItemsChecked((prevState) => ({
@@ -45,6 +46,15 @@ export default function Limpeza({ navigation }) {
           onValueChange={(value) => setSelectedOption(value)}
         />
 
+        <View style={styles.boxUnitValue}>
+          <Text style={styles.textUnitValue}>Valor Unitário</Text>
+          <InputUnitValue
+            placeholder={unitValue}
+            value={unitValue}
+            onChangeText={setUnitValue}
+          />
+        </View>
+
         <View style={styles.main}>
           {visibleIndicatorMain && <LoadingIndicator color="#339dd7" />}
           <ItemCleaningContent
@@ -59,7 +69,8 @@ export default function Limpeza({ navigation }) {
           <View style={styles.boxValueTotal}>
             <Text style={styles.textValueTotal}>Total: </Text>
             <Text style={styles.textValueTotal}>
-              R$ {formatMoney(totalItemsChecked.payedItems * 20)}
+              0
+              {/* R$ {formatMoney(totalItemsChecked.payedItems * (parseFloat(unitValue.replace(/\./g, "").replace(",", ".")) || 0))} */}
             </Text>
           </View>
           <View style={styles.boxValueTotal}>

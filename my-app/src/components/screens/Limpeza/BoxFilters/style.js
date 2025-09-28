@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#E0E0E0",
     height: width * 0.12,
+    overflow: "hidden",
   },
   labelPicker: {
     fontSize: width * 0.045,

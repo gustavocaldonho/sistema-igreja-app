@@ -8,8 +8,19 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: "space-between",
   },
+  boxUnitValue:{
+    height: "6%",
+    width: "100%",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10
+  },
   main: {
-    height: "80%",
+    height: "74%",
     borderRadius: 10,
     backgroundColor: "#fff",
     overflow: "hidden",
@@ -37,6 +48,11 @@ const styles = StyleSheet.create({
     fontSize: width * 0.04,
     fontWeight: "900",
     color: "#fff",
+  },
+  textUnitValue:{
+    fontSize: 18,
+    color: "#287BBF",
+    fontWeight: "800",
   },
 });
 
