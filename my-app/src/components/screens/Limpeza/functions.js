@@ -23,10 +23,17 @@ export function getCurrentMonthAndYear() {
 
 export function countCleaningItems(items) {
   const totalItems = items.length;
-  const payedItems = items.filter((item) => item.payed).length;
 
-  return { totalItems, payedItems };
+  const checkedItems = items.filter((item) => item.value > 0).length;
+
+  const valueTotal = items.reduce((soma, item) => {
+    const valor = parseInt(item.value)/100 || 0;
+    return soma + valor;
+  }, 0);
+
+  return { totalItems, checkedItems, valueTotal };
 }
+
 
 export function sortCleaningItems(list) {
   return list.sort((a, b) => {
@@ -36,3 +43,29 @@ export function sortCleaningItems(list) {
     return a.name.localeCompare(b.name); // Se setor for igual, ordena pelo nome
   });
 }
+
+export function converterParaCentavos(valorString) {
+  if (typeof valorString !== "string") {
+    console.error("Erro: o valor precisa ser uma string.");
+    return null;
+  }
+
+  // Remove espaços, símbolo de moeda e outros caracteres não numéricos (exceto vírgula, ponto e sinal)
+  let valorLimpo = valorString.trim().replace(/[^\d,.-]/g, "");
+
+  // Substitui vírgula por ponto para padronizar o formato decimal
+  valorLimpo = valorLimpo.replace(",", ".");
+
+  // Converte para número
+  const numero = parseFloat(valorLimpo);
+
+  // Valida se é um número
+  if (isNaN(numero)) {
+    console.error("Erro: valor inválido para conversão:", valorString);
+    return null;
+  }
+
+  // Converte para centavos e retorna inteiro
+  return Math.round(numero * 100);
+}
+

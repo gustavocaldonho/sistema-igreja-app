@@ -17,6 +17,7 @@ export default function ItemCleaningContent({
   setVisibleIndicatorMain,
   setTotalItemsChecked,
   updateItemsChecked,
+  unitValue,
 }) {
   const [cleaningItemsList, setCleaningItemsList] = useState([]);
   const [page, setPage] = useState(1); // Página inicial
@@ -113,10 +114,12 @@ export default function ItemCleaningContent({
             <ItemCleaning
               id={item.id}
               name={item.name}
-              payed={item.payed}
+              payed={item.value != null ? true : false}
               month={item.month}
               setor={item.setor}
+              value={item.value}
               updateItemsChecked={updateItemsChecked}
+              unitValue={unitValue}
             />
           )}
           // onEndReached={loadMoreCleaningItems} // Função chamada ao chegar no final

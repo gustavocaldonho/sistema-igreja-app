@@ -8,16 +8,16 @@ export const getCleaningItems = async (month, year, token) => {
         Authorization: token,
       },
     });
+    console.log('response ', response.data);
     return response;
   } catch (error) {
     return error;
   }
 };
 
-export const updateCleaningItem = async (id, payed, token) => {
+export const updateCleaningItem = async (id, unitValue, token) => {
   try {
-    let newPayed = payed ? 1 : 0;
-    const response = await api.put(`/clean/${id}/${newPayed}/`, {
+    const response = await api.put(`/clean/${id}/${unitValue}/`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,

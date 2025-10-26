@@ -41,13 +41,13 @@ const InputGroupValorDizimo = forwardRef(
 
 const styles = StyleSheet.create({
   container: {
-    width: "70%",
-    marginTop: 10,
-    alignSelf: "center",
+    // width: "70%",
+    // marginTop: 10,
+    // alignSelf: "center",
     flexDirection: "row",
     paddingBottom: 5,
     justifyContent: "center",
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
     borderBottomWidth: 2,
   },
   iconMoney: {

@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10
   },
+  boxUnitValueLeft: {
+    flexDirection: "row",
+    gap: 5,
+  },
   main: {
     height: "74%",
     borderRadius: 10,
@@ -53,6 +57,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#287BBF",
     fontWeight: "800",
+  },
+  icon:{
+    fontSize: 25,
+    color: "#287BBF",
   },
 });
 
