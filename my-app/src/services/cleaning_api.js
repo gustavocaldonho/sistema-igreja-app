@@ -8,7 +8,6 @@ export const getCleaningItems = async (month, year, token) => {
         Authorization: token,
       },
     });
-    console.log('response ', response.data);
     return response;
   } catch (error) {
     return error;

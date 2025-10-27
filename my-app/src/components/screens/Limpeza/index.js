@@ -14,9 +14,8 @@ import LoadingIndicator from "../../auxiliary/LoadingIndicator";
 import { getCurrentMonthAndYear } from "./functions.js";
 import ModalInputValueUnit from "./ModalInputValueUnit/index.js";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { converterParaCentavos } from "./functions.js";
+import { converterDeCentavosParaReais } from "./functions.js";
 import { formatInReal } from "../Dizimo/functions.js";
-
 
 export default function Limpeza({ navigation }) {
   const [selectedOption, setSelectedOption] = useState(
@@ -42,73 +41,76 @@ export default function Limpeza({ navigation }) {
   const [unitValue, setUnitValue] = useState("20,00");
   const [modalInputUnitValueVisible, setModalInputUnitValueVisible] =
     useState(false);
-  const unitValueRef = useRef(null); 
+  const unitValueRef = useRef(null);
 
-  const updateItemsChecked = (value) => {
+  const updateItemsChecked = (value, checkedItems) => {
     setTotalItemsChecked((prevState) => ({
       ...prevState,
       valueTotal: prevState.valueTotal + value,
-
+      checkedItems: prevState.checkedItems + checkedItems,
     }));
   };
 
   return (
     <PageBase title={"Limpeza"}>
-      {modalInputUnitValueVisible ? (
-        <ModalInputValueUnit
-          inputRef={unitValueRef}
-          unitValue={unitValue}
-          setUnitValue={setUnitValue}
-          setModalInputUnitValueVisible={setModalInputUnitValueVisible}
-          modalInputUnitValueVisible={modalInputUnitValueVisible}
+      <View style={styles.content}>
+        <BoxFilters
+          options={monthList}
+          selectedValue={selectedOption}
+          onValueChange={(value) => setSelectedOption(value)}
         />
-      ) : (
-        <View style={styles.content}>
-          <BoxFilters
-            options={monthList}
-            selectedValue={selectedOption}
-            onValueChange={(value) => setSelectedOption(value)}
-          />
 
-          <TouchableOpacity
-            style={styles.boxUnitValue}
-            activeOpacity={0.8}
-            onPress={() =>
-              setModalInputUnitValueVisible(!modalInputUnitValueVisible)
-            }
-          >
-            <View style={styles.boxUnitValueLeft}>
-              <Icon name={"pencil-square-o"} style={styles.icon} />
-              <Text style={styles.textUnitValue}>Valor Unitário</Text>
-            </View>
-            <Text style={styles.textUnitValue}>{unitValue}</Text>
-          </TouchableOpacity>
-
-          <View style={styles.main}>
-            {visibleIndicatorMain && <LoadingIndicator color="#339dd7" />}
-            <ItemCleaningContent
-              selectedOption={selectedOption}
-              setVisibleIndicatorMain={setVisibleIndicatorMain}
-              setTotalItemsChecked={setTotalItemsChecked}
-              updateItemsChecked={updateItemsChecked}
-              unitValue={converterParaCentavos(unitValue)}
-            />
+        <TouchableOpacity
+          style={styles.boxUnitValue}
+          activeOpacity={0.8}
+          onPress={() =>
+            setModalInputUnitValueVisible(!modalInputUnitValueVisible)
+          }
+        >
+          <View style={styles.boxUnitValueLeft}>
+            <Icon name={"pencil-square-o"} style={styles.icon} />
+            <Text style={styles.textUnitValue}>Valor Unitário</Text>
           </View>
+          <Text style={styles.textUnitValue}>{unitValue}</Text>
+        </TouchableOpacity>
 
-          <View style={styles.footer}>
-            <View style={styles.boxValueTotal}>
-              <Text style={styles.textValueTotal}>Total: </Text>
-              <Text style={styles.textValueTotal}>{formatInReal(totalItemsChecked.valueTotal)}</Text>
-            </View>
-            <View style={styles.boxValueTotal}>
-              <Text style={styles.textValueTotal}>Pagos: </Text>
-              <Text style={styles.textValueTotal}>
-                {totalItemsChecked.checkedItems}/{totalItemsChecked.totalItems}
-              </Text>
-            </View>
+        <View style={styles.main}>
+          {visibleIndicatorMain && <LoadingIndicator color="#339dd7" />}
+          <ItemCleaningContent
+            selectedOption={selectedOption}
+            setVisibleIndicatorMain={setVisibleIndicatorMain}
+            setTotalItemsChecked={setTotalItemsChecked}
+            updateItemsChecked={updateItemsChecked}
+            unitValue={converterDeCentavosParaReais(unitValue)}
+          />
+        </View>
+
+        <View style={styles.footer}>
+          <View style={styles.boxValueTotal}>
+            <Text style={styles.textValueTotal}>Total: </Text>
+            <Text style={styles.textValueTotal}>
+              {/* value é salvo em centavos, por isso divide por 100 */}
+              {formatInReal(totalItemsChecked.valueTotal/100)}
+            </Text>
+          </View>
+          <View style={styles.boxValueTotal}>
+            <Text style={styles.textValueTotal}>Pagos: </Text>
+            <Text style={styles.textValueTotal}>
+              {totalItemsChecked.checkedItems}/{totalItemsChecked.totalItems}
+            </Text>
           </View>
         </View>
-      )}
+
+                {modalInputUnitValueVisible && (
+          <ModalInputValueUnit
+            inputRef={unitValueRef}
+            unitValue={unitValue}
+            setUnitValue={setUnitValue}
+            setModalInputUnitValueVisible={setModalInputUnitValueVisible}
+            modalInputUnitValueVisible={modalInputUnitValueVisible}
+          />
+        )}
+      </View>
     </PageBase>
   );
 }

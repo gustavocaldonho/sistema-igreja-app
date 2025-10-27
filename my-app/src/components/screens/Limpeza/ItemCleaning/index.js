@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import styles from "./style";
 import CheckInput from "../CheckInput";
 import LoadingIndicator from "../../../auxiliary/LoadingIndicator";
 import { formatInReal } from "../../Dizimo/functions";
-import { converterParaCentavos } from "../functions";
 
 export default function ItemCleaning({
   id,
@@ -18,12 +17,13 @@ export default function ItemCleaning({
 }) {
   const [payedState, setPayedState] = useState(payed);
   const [loadingCheckInput, setLoadingCheckInput] = useState(false);
+  const [valuePayed, setValuePayed] = useState(value?? 0);
 
   return (
     <View style={[styles.content, payedState && styles.backgroundChecked]}>
       <View style={styles.boxName}>
         <Text style={styles.textName}>
-          {setor} - {name} - {formatInReal(converterParaCentavos((value/10000).toString()))}
+          {setor} - {name} - {formatInReal(valuePayed/100)}
         </Text>
       </View>
 
@@ -40,6 +40,8 @@ export default function ItemCleaning({
             setLoadingCheckInput={setLoadingCheckInput}
             updateItemsChecked={updateItemsChecked}
             unitValue={unitValue}
+            valuePayed={valuePayed}
+            setValuePayed={setValuePayed}
           />
         )}
       </View>

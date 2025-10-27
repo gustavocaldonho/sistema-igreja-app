@@ -5,6 +5,7 @@ import styles from "./style";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ModalContext } from "../../../../contexts/modalContext";
 import { updateCleaningItem } from "../../../../services/cleaning_api";
+import { formatInReal } from "../../Dizimo/functions";
 
 const CheckInput = ({
   idItem,
@@ -15,30 +16,32 @@ const CheckInput = ({
   setLoadingCheckInput,
   updateItemsChecked,
   unitValue,
+  valuePayed,
+  setValuePayed,
 }) => {
   const { modalAlert } = useContext(ModalContext);
 
   async function toggleChecked() {
     try {
-      // Quando é desmarcado o checked, zera o pagamento da pessoa
-      if (payed) {
-        unitValue = 100; //api nao está aceitando zero -> corrigir (lembrar de trocar para zero)
-
-        updateCleaningItem(
-          //reduzir 1 de checkedItems
-          //diminuir o valor do item de valueTotal
-        )
-      }
       setLoadingCheckInput(true);
       const token = await AsyncStorage.getItem("AccessToken");
-      const response = await updateCleaningItem(idItem, unitValue, token);
-      // console.log(`id: ${idItem}, unitValue: ${unitValue}, token: ${token}`)
-      // console.log('response ', response);
+      // Define o novo valor a ser enviado (0 se desmarcar, unitValue se marcar)
+      const newValue = payed ? 0 : unitValue;
+      const response = await updateCleaningItem(idItem, newValue, token);
       if (response.status !== 200) {
         throw new Error("Não foi possível atualizar o item.");
+      }
+      // Atualiza o estado visual
+      setPayedState((prev) => !prev);
+      // Atualiza os totais locais e o texto de valor exibido
+      if (payed) {
+        // Estava marcado → agora desmarca
+        updateItemsChecked(-valuePayed, -1);
+        setValuePayed(0);
       } else {
-        setPayedState((prev) => !prev);
-        // updateItemsChecked(unitValue);
+        // Estava desmarcado → agora marca
+        updateItemsChecked(unitValue, +1);
+        setValuePayed(unitValue);
       }
     } catch (error) {
       modalAlert("Ops!", error.message);

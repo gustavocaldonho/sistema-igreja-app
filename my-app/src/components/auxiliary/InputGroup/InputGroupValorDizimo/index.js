@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
 const InputGroupValorDizimo = forwardRef(
-  ({ placeholder, value, onChangeText, style }, ref) => {
+  ({ placeholder, value, onChangeText, style}, ref) => {
     const formatMoney = (input) => {
       const numericValue = input.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
       // Divide o valor por 100 para considerar os centavos

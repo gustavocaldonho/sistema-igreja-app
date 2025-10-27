@@ -114,7 +114,7 @@ export default function ItemCleaningContent({
             <ItemCleaning
               id={item.id}
               name={item.name}
-              payed={item.value != null ? true : false}
+              payed={item.value === null || item.value === 0 ? false : true}
               month={item.month}
               setor={item.setor}
               value={item.value}

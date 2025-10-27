@@ -27,7 +27,7 @@ export function countCleaningItems(items) {
   const checkedItems = items.filter((item) => item.value > 0).length;
 
   const valueTotal = items.reduce((soma, item) => {
-    const valor = parseInt(item.value)/100 || 0;
+    const valor = parseInt(item.value) || 0;
     return soma + valor;
   }, 0);
 
@@ -44,28 +44,29 @@ export function sortCleaningItems(list) {
   });
 }
 
-export function converterParaCentavos(valorString) {
+export function converterDeCentavosParaReais(valorString) {
   if (typeof valorString !== "string") {
     console.error("Erro: o valor precisa ser uma string.");
     return null;
   }
 
-  // Remove espaços, símbolo de moeda e outros caracteres não numéricos (exceto vírgula, ponto e sinal)
+  // Remove espaços e símbolo de moeda
   let valorLimpo = valorString.trim().replace(/[^\d,.-]/g, "");
 
-  // Substitui vírgula por ponto para padronizar o formato decimal
-  valorLimpo = valorLimpo.replace(",", ".");
+  // Remove pontos de milhar
+  valorLimpo = valorLimpo.replace(/\./g, "");
 
-  // Converte para número
+  // Substitui vírgula por ponto
+  valorLimpo = valorLimpo.replace(",", ".");
+``
   const numero = parseFloat(valorLimpo);
 
-  // Valida se é um número
   if (isNaN(numero)) {
-    console.error("Erro: valor inválido para conversão:", valorString);
+    console.error("Erro: valor inválido:", valorString);
     return null;
   }
 
-  // Converte para centavos e retorna inteiro
   return Math.round(numero * 100);
 }
+
 
