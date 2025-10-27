@@ -12,7 +12,7 @@ export default function ItemDizimoContent({
   setItemClicked,
   setVisibleIndicator,
   setTotalDizimo,
-  visibleIndicator
+  visibleIndicator,
 }) {
   const [dizimoList, setDizimoList] = useState([]);
 
@@ -54,21 +54,23 @@ export default function ItemDizimoContent({
   return (
     <View>
       {dizimoList.length !== 0 ? (
-        <FlatList 
+        <FlatList
+          contentContainerStyle={styles.flatilistContainer}
           showsVerticalScrollIndicator={false}
           data={dizimoList}
           keyExtractor={(item, idx) => `dizimo-item-${idx}`}
-          renderItem={({item}) => (
-          <ItemDizimo
-            month={item.month}
-            year={item.year}
-            status={item.status}
-            paidIn={item.payment ? item.payment.createdAt : null}
-            valuePaid={item.payment ? item.payment.value : null}
-            setModalVisible={setModalVisible}
-            setItemClicked={setItemClicked}
-          />
-          )}/>
+          renderItem={({ item }) => (
+            <ItemDizimo
+              month={item.month}
+              year={item.year}
+              status={item.status}
+              paidIn={item.payment ? item.payment.createdAt : null}
+              valuePaid={item.payment ? item.payment.value : null}
+              setModalVisible={setModalVisible}
+              setItemClicked={setItemClicked}
+            />
+          )}
+        />
       ) : !visibleIndicator ? (
         <Text style={styles.msgContentEmpty}>
           Não foi possível listar os meses do Dízimo.
@@ -76,7 +78,6 @@ export default function ItemDizimoContent({
       ) : (
         ""
       )}
-
     </View>
   );
 }
@@ -91,5 +92,8 @@ const styles = StyleSheet.create({
     height: 100,
     justifyContent: "center",
     alignItems: "center",
+  },
+  flatilistContainer: {
+    paddingBottom: 100,
   },
 });

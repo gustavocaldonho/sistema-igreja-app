@@ -46,13 +46,10 @@ export default function ItemAvisoContent({
 
         if (newWarnings.length > 0) {
           // Adiciona novos avisos à lista e filtra conforme a posição do user e o escopo do aviso;
-          setWarningList((prevWarnings) => 
-            [
-              ...prevWarnings, 
-              ...newWarnings
-            ].filter(
-              (item) => 
-                item.scope === "public" || 
+          setWarningList((prevWarnings) =>
+            [...prevWarnings, ...newWarnings].filter(
+              (item) =>
+                item.scope === "public" ||
                 (item.scope === "private" && user.position !== "user")
             )
           );
@@ -83,7 +80,7 @@ export default function ItemAvisoContent({
       getWarningList(nextPage); // Passa a próxima página diretamente
     }
   };
-  
+
   const renderFooter = () => {
     return (
       <View style={styles.footer}>
@@ -100,10 +97,11 @@ export default function ItemAvisoContent({
     <View>
       {warningList.length !== 0 ? (
         <FlatList
+          contentContainerStyle={styles.flatilistContainer}
           data={warningList}
           keyExtractor={(item, index) => `warning-item-${index}`}
           renderItem={({ item }) => (
-              <ItemAviso
+            <ItemAviso
               id={item.id}
               title={item.title}
               description={item.description}
@@ -145,5 +143,8 @@ const styles = StyleSheet.create({
     height: 100,
     justifyContent: "center",
     alignItems: "center",
+  },
+  flatilistContainer: {
+    paddingBottom: 100,
   },
 });
